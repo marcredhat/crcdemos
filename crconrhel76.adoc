@@ -3,11 +3,13 @@
 Red Hat CodeReady Containers brings a minimal OpenShift 4.1 or newer cluster to your local computer
 (see https://code-ready.github.io/crc/)
 
+
 The instructions below cover 
 
 installing CodeReady containers on a RHEL 7.6 server and 
 
 configuring SSH tunneling / port forwarding to access the OpenShift console from your laptop.
+
 
 
 [root@dell-r730-019 ~]# cat /etc/redhat-release
@@ -132,12 +134,17 @@ eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testin
 == Accessing the OpenShift console from your laptop using SSH tunneling / port forwarding
 
 
-On my laptop,
+On your laptop, /etc/hosts example:
 127.0.0.1       localhost console-openshift-console.apps-crc.testing oauth-openshift.apps-crc.testing
 
 sudo ssh marc@dell-r730-019.... -L 443:console-openshift-console.apps-crc.testing:443
 
+
+You can now access the OpenShift console from your laptop at  
 https://console-openshift-console.apps-crc.testing
+
+
+Enjoy!
 
 
 
