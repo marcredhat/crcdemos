@@ -13,30 +13,50 @@ Red Hat Enterprise Linux Server release 7.6 (Maipo)
 ----
 
 == Install virtualization packages
+
 su -c 'yum install qemu-kvm libvirt NetworkManager'
+
 sudo systemctl start libvirtd
+
 sudo systemctl enable libvirtd
 
 == Add user
+
 adduser marc
+
 passwd marc
+
 usermod -aG wheel marc
 
 == Install Go
+
 cd /home/marc
+
 wget https://dl.google.com/go/go1.12.9.linux-amd64.tar.gz
+
 tar -xzf go1.12.9.linux-amd64.tar.gz
-Add to .bashrc
+
+Add to .bashrc:
+
 export GOROOT=/home/marc/go
+
 export GOPATH=/home/marc/work
+
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
+
 == Install CodeReady Containers
+
 su marc
+
 cd /home/marc
+
 git clone https://github.com/code-ready/crc.git
+
 cd crc
+
 make
+
 
 [marc@dell-r730-019 crc]$ crc setup
 
