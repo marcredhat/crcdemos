@@ -77,7 +77,7 @@ INFO Writing Network Manager config for crc
 INFO Writing dnsmasq config for crc
 INFO Unpacking bundle from the CRC binary
 WARN CRC bundle is not embedded in the binary, see 'crc help' for more details.
----
+----
 
 
 
