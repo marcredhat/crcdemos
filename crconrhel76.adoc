@@ -11,6 +11,7 @@ The instructions below cover
 - configuring SSH tunneling / port forwarding to access the OpenShift console from your laptop.
 
 
+
 [root@dell-r730-019 ~]# cat /etc/redhat-release
 
 ----
