@@ -81,9 +81,14 @@ WARN CRC bundle is not embedded in the binary, see 'crc help' for more details.
 
 
 
-== Download CodeReady Containers bundle (crc_libvirt_4.1.9.crcbundle in my case)
+== Download CodeReady Containers bundle 
 
-== Install CodeReady Containers. You'll need your pull secret from https://cloud.redhat.com/openshift/install/metal/user-provisioned
+(crc_libvirt_4.1.9.crcbundle in my case)
+
+
+== Install CodeReady Containers
+
+You'll need your pull secret from https://cloud.redhat.com/openshift/install/metal/user-provisioned
 
 
 
