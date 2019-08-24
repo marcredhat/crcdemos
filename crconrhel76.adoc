@@ -1,6 +1,6 @@
 
 == Red Hat CodeReady Containers on RHEL 7.6 - Lab guide - Draft
-Red Hat CodeReady Containers brings a minimal OpenShift 4.1 or newer cluster to your local computer.
+Red Hat CodeReady Containers brings a minimal OpenShift 4.1 or newer cluster to your local computer
 (see https://code-ready.github.io/crc/)
 
 The instructions below cover installing CodeReady containers on a RHEL 7.6 server and 
@@ -60,6 +60,7 @@ make
 
 [marc@dell-r730-019 crc]$ crc setup
 
+
 ----
 INFO Caching oc binary
 INFO Setting up virtualization
@@ -77,6 +78,8 @@ INFO Writing dnsmasq config for crc
 INFO Unpacking bundle from the CRC binary
 WARN CRC bundle is not embedded in the binary, see 'crc help' for more details.
 ---
+
+
 
 == Download CodeReady Containers bundle (crc_libvirt_4.1.9.crcbundle in my case)
 
