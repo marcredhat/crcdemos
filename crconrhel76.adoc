@@ -12,6 +12,7 @@ The instructions below cover
 
 
 
+
 [root@dell-r730-019 ~]# cat /etc/redhat-release
 
 ----
