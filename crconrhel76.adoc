@@ -3,8 +3,12 @@
 Red Hat CodeReady Containers brings a minimal OpenShift 4.1 or newer cluster to your local computer
 (see https://code-ready.github.io/crc/)
 
-The instructions below cover installing CodeReady containers on a RHEL 7.6 server and 
-configure SSH tunneling / port forwarding to access the OpenShift console from your laptop.
+The instructions below cover 
+
+installing CodeReady containers on a RHEL 7.6 server and 
+
+configuring SSH tunneling / port forwarding to access the OpenShift console from your laptop.
+
 
 [root@dell-r730-019 ~]# cat /etc/redhat-release
 
