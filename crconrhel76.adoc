@@ -1,0 +1,108 @@
+
+== Red Hat CodeReady Containers on RHEL 7.6 - Lab guide - Draft
+Red Hat CodeReady Containers brings a minimal OpenShift 4.1 or newer cluster to your local computer.
+(see https://code-ready.github.io/crc/)
+
+The instructions below cover installing CodeReady containers on a RHEL 7.6 server and 
+configure SSH tunneling / port forwarding to access the OpenShift console from your laptop.
+
+[root@dell-r730-019 ~]# cat /etc/redhat-release
+
+----
+Red Hat Enterprise Linux Server release 7.6 (Maipo)
+----
+
+== Install virtualization packages
+su -c 'yum install qemu-kvm libvirt NetworkManager'
+sudo systemctl start libvirtd
+sudo systemctl enable libvirtd
+
+== Add user
+adduser marc
+passwd marc
+usermod -aG wheel marc
+
+== Install Go
+cd /home/marc
+wget https://dl.google.com/go/go1.12.9.linux-amd64.tar.gz
+tar -xzf go1.12.9.linux-amd64.tar.gz
+Add to .bashrc
+export GOROOT=/home/marc/go
+export GOPATH=/home/marc/work
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+== Install CodeReady Containers
+su marc
+cd /home/marc
+git clone https://github.com/code-ready/crc.git
+cd crc
+make
+
+[marc@dell-r730-019 crc]$ crc setup
+
+----
+INFO Caching oc binary
+INFO Setting up virtualization
+INFO Setting up KVM
+INFO Installing libvirt service and dependencies
+INFO Adding user to libvirt group
+INFO Enabling libvirt
+INFO Starting libvirt service
+INFO Installing crc-driver-libvirt
+INFO Removing older system-wide crc-driver-libvirt
+INFO Setting up libvirt 'crc' network
+INFO Starting libvirt 'crc' network
+INFO Writing Network Manager config for crc
+INFO Writing dnsmasq config for crc
+INFO Unpacking bundle from the CRC binary
+WARN CRC bundle is not embedded in the binary, see 'crc help' for more details.
+---
+
+== Download CodeReady Containers bundle (crc_libvirt_4.1.9.crcbundle in my case)
+
+== Install CodeReady Containers. You'll need your pull secret from https://cloud.redhat.com/openshift/install/metal/user-provisioned
+[marc@dell-r730-019 crc]$ crc start -b crc_libvirt_4.1.9.crcbundle
+
+----
+INFO Checking if oc binary is cached
+INFO Checking if Virtualization is enabled
+INFO Checking if KVM is enabled
+INFO Checking if libvirt is installed
+INFO Checking if user is part of libvirt group
+INFO Checking if libvirt is enabled
+INFO Checking if libvirt daemon is running
+INFO Checking if crc-driver-libvirt is installed
+INFO Checking if libvirt 'crc' network is available
+INFO Checking if libvirt 'crc' network is active
+INFO Checking if /etc/NetworkManager/conf.d/crc-nm-dnsmasq.conf exists
+INFO Checking if /etc/NetworkManager/dnsmasq.d/crc.conf exists
+INFO Checking if CRC bundle is cached in '$HOME/.cr
+INFO Creating VM ...
+INFO Verifying validity of the cluster certificates ...
+INFO Check internal and public dns query ...
+INFO Copying kubeconfig file to instance dir ...
+INFO Adding user's pull secret and cluster ID ...
+INFO Starting OpenShift cluster ... [waiting 3m]
+INFO To access the cluster using 'oc', run 'eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443'
+INFO Access the OpenShift web-console here: https://console-openshift-console.apps-crc.testing
+INFO Login to the console with user: kubeadmin, password: <password>
+CodeReady Containers instance is running
+----
+
+
+cd /home/marc/crc
+eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443'
+
+
+== Accessing the OpenShift console from your laptop using SSH tunneling / port forwarding
+
+
+On my laptop,
+127.0.0.1       localhost console-openshift-console.apps-crc.testing oauth-openshift.apps-crc.testing
+
+sudo ssh marc@dell-r730-019.... -L 443:console-openshift-console.apps-crc.testing:443
+
+https://console-openshift-console.apps-crc.testing
+
+
+
