@@ -129,7 +129,9 @@ CodeReady Containers instance is running
 
 
 cd /home/marc/crc
-eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443'
+
+
+eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
 
 
 == Accessing the OpenShift console from your laptop using SSH tunneling / port forwarding
