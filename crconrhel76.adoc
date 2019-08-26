@@ -194,6 +194,16 @@ oc adm policy add-scc-to-user anyuid -z tekton-pipelines-controller
 
 oc apply --filename https://storage.googleapis.com/tekton-releases/latest/release.yaml
 
+You should see:
+
+[marc@dell-r730-019 crc]$ oc get pods
+
+----
+NAME                                           READY   STATUS    RESTARTS   AGE
+tekton-pipelines-controller-55c6b5b9f6-hcxb2   1/1     Running   0          26s
+tekton-pipelines-webhook-6794d5bcc8-bqcc5      1/1     Running   0          26s
+----
+
 
 Enjoy!
 
