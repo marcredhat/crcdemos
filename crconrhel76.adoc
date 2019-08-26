@@ -1,6 +1,7 @@
  
 == Red Hat CodeReady Containers (Minishift equivalent for OpenShift 4.1 or newer)
-Draft lab guide showing how to set up CodeReady Containers, deploy apps and Tekton Pipelines, configure persistent storage and more
+
+== Draft lab guide showing how to set up CodeReady Containers, deploy apps and Tekton Pipelines, configure persistent storage and more
 
 Red Hat CodeReady Containers brings a minimal OpenShift 4.1 or newer cluster to your local computer
 (see https://code-ready.github.io/crc/)
