@@ -158,13 +158,13 @@ oc new-app quay.io/thoraxe/mapit
 
 oc expose service mapit
 
-sudo ssh marc@dell-r730-019... -L 80:mapit-app-management.apps-crc.testing:80
 
 On your laptop, add mapit-app-management.apps-crc.testing to /etc/hosts. 
 
 Example:
 127.0.0.1	localhost marc.rhel8 console-openshift-console.apps-crc.testing oauth-openshift.apps-crc.testing mapit-app-management.apps-crc.testing
 
+On your laptop, sudo ssh marc@dell-r730-019... -L 80:mapit-app-management.apps-crc.testing:80
 
 On your laptop, browse to http://mapit-app-management.apps-crc.testing
 
