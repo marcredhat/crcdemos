@@ -206,13 +206,26 @@ tekton-pipelines-webhook-6794d5bcc8-bqcc5      1/1     Running   0          26s
 
 == Set up Tekton demos
 git clone https://github.com/marcredhat/openshift-pipelines-examples 
+
 (fork of https://github.com/siamaksade/openshift-pipelines-examples with minor fix https://github.com/siamaksade/openshift-pipelines-examples/issues/1)
 
 cd openshift-pipelines-examples
 
 Follow the instructions at https://github.com/marcredhat/openshift-pipelines-examples 
 
+You should see:
 
-
+----
+[marc@dell-r730-019 openshift-pipelines-examples]$ oc get pods
+NAME                                                           READY   STATUS      RESTARTS   AGE
+mapit-build-pipelinerun-jgbtj-build-app-lnfbh-pod-5cdefc       0/5     Completed   0          3m21s
+mapit-build-pipelinerun-jgbtj-build-image-tbsd5-pod-415e23     0/6     Completed   0          2m16s
+mapit-deploy-pipelinerun-bwxgr-analyse-code-sxw9n-pod-2bd948   0/4     Completed   0          2m9s
+mapit-deploy-pipelinerun-bwxgr-build-app-kvpxt-pod-0ed8c1      0/5     Completed   0          3m11s
+mapit-deploy-pipelinerun-bwxgr-build-image-8d6ss-pod-06cd2a    0/6     Completed   0          99s
+mapit-deploy-pipelinerun-bwxgr-deploy-t7jwb-pod-a1000a         0/1     Completed   0          39s
+mapit-spring-1-deploy                                          1/1     Running     0          26s
+mapit-spring-1-m56sl                                           1/1     Running     0          16s
+----
 
 
