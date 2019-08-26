@@ -208,6 +208,10 @@ tekton-pipelines-webhook-6794d5bcc8-bqcc5      1/1     Running   0          26s
 git clone https://github.com/marcredhat/openshift-pipelines-examples 
 (fork of https://github.com/siamaksade/openshift-pipelines-examples with minor fix https://github.com/siamaksade/openshift-pipelines-examples/issues/1)
 
+cd openshift-pipelines-examples
+
+Follow the instructions at https://github.com/marcredhat/openshift-pipelines-examples 
+
 
 
 
