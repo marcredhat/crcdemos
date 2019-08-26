@@ -229,3 +229,47 @@ mapit-spring-1-m56sl                                           1/1     Running  
 ----
 
 
+[marc@dell-r730-019 openshift-pipelines-examples]$ oc describe pipelinerun
+
+----
+Events:
+  Type    Reason     Age    From                 Message
+  ----    ------     ----   ----                 -------
+  Normal  Succeeded  2m45s  pipeline-controller  All Tasks have completed executing
+----
+
+[marc@dell-r730-019 openshift-pipelines-examples]$ tkn task ls
+
+----
+NAME               AGE
+buildah            10 minutes ago
+mvn-build          8 minutes ago
+openshift-client   10 minutes ago
+static-analysis    8 minutes ago
+----
+
+
+"oc get ev" comes in handy if you want to see the various steps in detail.
+
+[marc@dell-r730-019 openshift-pipelines-examples]$ oc get route
+
+----
+NAME           HOST/PORT                                     PATH   SERVICES       PORT       TERMINATION   WILDCARD
+mapit-spring   mapit-spring-pipeline-demo.apps-crc.testing          mapit-spring   8080-tcp                 None
+----
+
+On your laptop, add mapit-spring-pipeline-demo.apps-crc.testing to /etc/hosts. 
+
+Example:
+127.0.0.1	localhost marc.rhel8 console-openshift-console.apps-crc.testing oauth-openshift.apps-crc.testing mapit-app-management.apps-crc.testing mapit-spring-pipeline-demo.apps-crc.testing
+
+On your laptop, sudo ssh marc@dell-r730-019... -L 80:mapit-spring-pipeline-demo.apps-crc.testing:80
+
+On your laptop, browse to http://mapit-spring-pipeline-demo.apps-crc.testing
+
+
+
+
+
+
+
