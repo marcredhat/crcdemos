@@ -150,6 +150,38 @@ You can now access the OpenShift console from your laptop at
 https://console-openshift-console.apps-crc.testing
 
 
+== Deploy an app and access it from your laptop using SSH tunneling / port forwarding
+
+oc new-project app-management
+
+oc new-app quay.io/thoraxe/mapit
+
+oc expose service mapit
+
+sudo ssh marc@dell-r730-019... -L 80:mapit-app-management.apps-crc.testing:80
+
+On your laptop, add mapit-app-management.apps-crc.testing to /etc/hosts. 
+
+Example:
+127.0.0.1	localhost marc.rhel8 console-openshift-console.apps-crc.testing oauth-openshift.apps-crc.testing mapit-app-management.apps-crc.testing
+
+
+On your laptop, browse to http://mapit-app-management.apps-crc.testing
+
+== Test persistent storage
+set volume dc/mapit --add --name=mapit-storage -t pvc --claim-mode=ReadWriteOnce --claim-size=1Gi --claim-name=mapit-storage --mount-path=/app-storage
+
+oc rsh mapit-... cat /app-storage/hello.txt
+
+Now, to verify that persistent storage really works, delete your pod:
+
+oc delete pod mapit-... && oc get pod
+
+After some time, your new pod will be ready and running. Find its name, and again check the file:
+
+oc rsh mapit... cat /app-storage/hello.txt
+
+
 Enjoy!
 
 
