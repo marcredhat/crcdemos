@@ -182,6 +182,19 @@ After some time, your new pod will be ready and running. Find its name, and agai
 oc rsh mapit... cat /app-storage/hello.txt
 
 
+== Install Tekton Pipelines
+
+cd /home/marc/crc
+
+eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
+
+oc new-project tekton-pipelines
+
+oc adm policy add-scc-to-user anyuid -z tekton-pipelines-controller
+
+oc apply --filename https://storage.googleapis.com/tekton-releases/latest/release.yaml
+
+
 Enjoy!
 
 
