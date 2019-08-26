@@ -218,8 +218,9 @@ Follow the instructions at https://github.com/marcredhat/openshift-pipelines-exa
 
 You should see:
 
-----
 [marc@dell-r730-019 openshift-pipelines-examples]$ oc get pods
+
+----
 NAME                                                           READY   STATUS      RESTARTS   AGE
 mapit-build-pipelinerun-jgbtj-build-app-lnfbh-pod-5cdefc       0/5     Completed   0          3m21s
 mapit-build-pipelinerun-jgbtj-build-image-tbsd5-pod-415e23     0/6     Completed   0          2m16s
