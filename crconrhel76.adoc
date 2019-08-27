@@ -9,7 +9,7 @@ Red Hat CodeReady Containers brings a minimal OpenShift 4.1 or newer cluster to 
 
 The instructions below cover 
 
-- installing Red Hat CodeReady Containers on a RHEL 7.6 server and 
+- installing Red Hat CodeReady Containers on a *physical* RHEL 7.6 server and 
 
 - configuring SSH tunneling / port forwarding to access the OpenShift console from your laptop.
 
@@ -66,6 +66,13 @@ git clone https://github.com/code-ready/crc.git
 cd crc
 
 make
+
+
+*Set the memory available to CRC according to what you have on your physical server*
+
+I'm on a physical server with around 100G of memory so I allocate 80G to CRC as follows:
+
+[marc@dell-r730-019 ansible]$ crc config set  memory 81920
 
 
 [marc@dell-r730-019 crc]$ crc setup
