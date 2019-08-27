@@ -199,10 +199,10 @@ jupyterhub   jupyterhub-open-data-hub-user1.apps-crc.testing          jupyterhub
 ----
 
 
-On your laptop, change your /etc/hosts:
+On your laptop, add jupyterhub-open-data-hub-user1.apps-crc.testing to your /etc/hosts. Example:
 
 ----
-127.0.0.1	localhost marc.rhel8 console-openshift-console.apps-crc.testing oauth-openshift.apps-crc.testing mapit-app-management.apps-crc.testing mapit-spring-pipeline-demo.apps-crc.testing jupyterhub-open-data-hub-user1.apps-crc.testing *jupyterhub-open-data-hub-user1.apps-crc.testing*
+127.0.0.1	localhost marc.rhel8 console-openshift-console.apps-crc.testing oauth-openshift.apps-crc.testing mapit-app-management.apps-crc.testing mapit-spring-pipeline-demo.apps-crc.testing jupyterhub-open-data-hub-user1.apps-crc.testing jupyterhub-open-data-hub-user1.apps-crc.testing
 ----
 
 On your laptop, sudo ssh marc@dell-r730-019 -L 443:jupyterhub-open-data-hub-user1.apps-crc.testing:443
