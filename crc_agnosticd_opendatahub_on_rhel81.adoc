@@ -160,12 +160,14 @@ sudo pip3 install kubernetes
 
 sudo pip3 install openshift
 
-export WORKLOAD="ocp4-workload-open-data-hub"
-
-[marc@dell-r730-019 ansible]$ cat inventory
-127.0.0.1 ansible_connection=local
 
 == Deploy OpenDataHub
+
+[marc@dell-r730-019 ansible]$ cat inventory
+
+----
+127.0.0.1 ansible_connection=local
+----
 
 export WORKLOAD="ocp4-workload-open-data-hub"
 
