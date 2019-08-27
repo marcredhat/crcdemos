@@ -144,7 +144,7 @@ INFO To access the cluster using 'oc', run 'eval $(crc oc-env) && oc login -u ku
 
 cd /home/marc/crc
 
-eval $(crc oc-env) && oc login -u kubeadmin -p 78UVa-zNj5W-YB62Z-ggxGZ https://api.crc.testing:6443
+eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
 
 oc get projects
 
