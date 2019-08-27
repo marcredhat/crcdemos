@@ -143,3 +143,27 @@ eval $(crc oc-env) && oc login -u kubeadmin -p 78UVa-zNj5W-YB62Z-ggxGZ https://a
 oc get projects
 
 
+== Install the Ansible Agnostic Deployer
+
+cd /home/marc
+
+git clone https://github.com/redhat-cop/agnosticd.git
+
+cd agnosticd/ansible
+
+
+sudo python -m pip install --upgrade --trusted-host files.pythonhosted.org -r requirements.txt
+
+sudo python3 -m pip install --upgrade --trusted-host files.pythonhosted.org -r requirements.txt
+
+sudo pip3 install kubernetes
+
+sudo pip3 install openshift
+
+export WORKLOAD="ocp4-workload-open-data-hub"
+
+[marc@dell-r730-019 ansible]$ cat inventory
+127.0.0.1 ansible_connection=local
+
+export WORKLOAD="ocp4-workload-open-data-hub"
+ansible-playbook -i inventory  ./configs/ocp-workloads/ocp-workload.yml -e"ocp_workload=${WORKLOAD}" -e"ACTION=create" -e"user_count=1" -e"ocp_username=kubeadmin" -e"ansible_become_pass=AccentureLab" -e"silent=False"
