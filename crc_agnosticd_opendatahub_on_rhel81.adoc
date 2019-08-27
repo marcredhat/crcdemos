@@ -134,3 +134,12 @@ You'll need your pull secret from https://cloud.redhat.com/openshift/install/met
 ----
 INFO To access the cluster using 'oc', run 'eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443' ******INFO Access the OpenShift web-console here: https://console-openshift-console.apps-crc.testing ********************************************************INFO Login to the console with user: kubeadmin, password: 78UVa-zNj5W-YB62Z-ggxGZ *********************************************************************CodeReady Containers instance is running
 ----
+
+
+cd /home/marc/crc
+
+eval $(crc oc-env) && oc login -u kubeadmin -p 78UVa-zNj5W-YB62Z-ggxGZ https://api.crc.testing:6443
+
+oc get projects
+
+
