@@ -18,7 +18,7 @@ The instructions below cover
 
 - installing Red Hat CodeReady Containers on a RHEL 8.1 *physical* server and
 
-- configuring SSH tunneling / port forwarding to access the OpenShift console from your laptop.
+- configuring SSH tunneling / port forwarding to access the OpenShift console, OpenDataHub etc from your laptop.
 
 
 
