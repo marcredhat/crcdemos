@@ -172,3 +172,40 @@ sudo pip3 install openshift
 export WORKLOAD="ocp4-workload-open-data-hub"
 
 ansible-playbook -i inventory  ./configs/ocp-workloads/ocp-workload.yml -e"ocp_workload=${WORKLOAD}" -e"ACTION=create" -e"user_count=1" -e"ocp_username=kubeadmin" -e"ansible_become_pass=<password>" -e"silent=False"
+
+== Test OpenDataHub
+
+[marc@dell-r730-019 ansible]$ oc project open-data-hub-user1
+
+[marc@dell-r730-019 crc]$ oc get pods
+
+----
+NAME                                                         READY   STATUS      RESTARTS   AGE
+jupyterhub-1-7q4zs                                           1/1     Running     0          49m
+jupyterhub-1-deploy                                          0/1     Completed   0          49m
+jupyterhub-db-1-deploy                                       0/1     Completed   0          49m
+jupyterhub-db-1-rttgz                                        1/1     Running     1          49m
+jupyterhub-nb-c455c922-2d4e64-2d4d66-2db463-2d066ac236166f   1/1     Running     0          28m
+opendatahub-operator-86c5cb8b4b-l5cg6                        1/1     Running     0          50m
+spark-operator-6b46b4d97-8mv92                               1/1     Running     0          49m
+----
+
+
+[marc@dell-r730-019 crc]$ oc get route
+
+----
+NAME         HOST/PORT                                         PATH   SERVICES     PORT       TERMINATION     WILDCARD
+jupyterhub   jupyterhub-open-data-hub-user1.apps-crc.testing          jupyterhub   8080-tcp   edge/Redirect   None
+----
+
+
+On your laptop, change your /etc/hosts:
+
+----
+127.0.0.1	localhost marc.rhel8 console-openshift-console.apps-crc.testing oauth-openshift.apps-crc.testing mapit-app-management.apps-crc.testing mapit-spring-pipeline-demo.apps-crc.testing jupyterhub-open-data-hub-user1.apps-crc.testing *jupyterhub-open-data-hub-user1.apps-crc.testing*
+----
+
+On your laptop, sudo ssh marc@dell-r730-019 -L 443:jupyterhub-open-data-hub-user1.apps-crc.testing:443
+
+You can now browse to https://jupyterhub-open-data-hub-user1.apps-crc.testing
+
