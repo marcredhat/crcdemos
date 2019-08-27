@@ -54,6 +54,7 @@ export GOPATH=/home/marc/work
 
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
+source .bashrc
 
 == Install CodeReady Containers
 
