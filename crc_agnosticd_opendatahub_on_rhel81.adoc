@@ -165,5 +165,8 @@ export WORKLOAD="ocp4-workload-open-data-hub"
 [marc@dell-r730-019 ansible]$ cat inventory
 127.0.0.1 ansible_connection=local
 
+== Deploy OpenDataHub
+
 export WORKLOAD="ocp4-workload-open-data-hub"
-ansible-playbook -i inventory  ./configs/ocp-workloads/ocp-workload.yml -e"ocp_workload=${WORKLOAD}" -e"ACTION=create" -e"user_count=1" -e"ocp_username=kubeadmin" -e"ansible_become_pass=AccentureLab" -e"silent=False"
+
+ansible-playbook -i inventory  ./configs/ocp-workloads/ocp-workload.yml -e"ocp_workload=${WORKLOAD}" -e"ACTION=create" -e"user_count=1" -e"ocp_username=kubeadmin" -e"ansible_become_pass=<password>" -e"silent=False"
