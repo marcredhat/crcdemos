@@ -1,0 +1,130 @@
+
+
+== Red Hat CodeReady Containers (Minishift equivalent for OpenShift 4.1 or newer)
+
+== Draft lab guide showing how to set up CodeReady Containers, deploy apps and Tekton Pipelines, configure persistent storage and more
+
+Red Hat CodeReady Containers brings a minimal OpenShift 4.1 or newer cluster to your local computer
+(see https://code-ready.github.io/crc/)
+
+
+The instructions below cover
+
+- installing Red Hat CodeReady Containers on a RHEL 8.1 *physical* server and
+
+- configuring SSH tunneling / port forwarding to access the OpenShift console from your laptop.
+
+
+
+
+[marc@dell-r730-019 ~]$ cat /etc/redhat-release
+
+----
+Red Hat Enterprise Linux release 8.1 Beta (Ootpa)
+----
+
+== Install packages
+
+su -c 'dnf -y install git wget tar qemu-kvm libvirt NetworkManager jq'
+
+sudo systemctl start libvirtd
+
+sudo systemctl enable libvirtd
+
+
+== Install Python
+
+See https://developers.redhat.com/blog/2019/05/07/what-no-python-in-red-hat-enterprise-linux-8/
+
+yum install @python36
+
+yum install @python27
+
+When you install either (or both) you can easily make 
+/usr/bin/python point to the right place using alternatives --config python
+
+[root@dell-r730-019 ~]#  alternatives --config python
+
+----
+There are 3 programs which provide 'python'.
+
+  Selection    Command
+*+ 1           /usr/libexec/no-python
+   2           /usr/bin/python2
+   3           /usr/bin/python3
+----
+Choose 3 
+
+[marc@dell-r730-019 ansible]$ python -V
+
+----
+
+Python 3.6.8
+
+----
+
+
+== Add user
+
+adduser marc
+
+passwd marc
+
+usermod -aG wheel marc
+
+== Install Go
+
+cd /home/marc
+
+wget https://dl.google.com/go/go1.12.9.linux-amd64.tar.gz
+
+tar -xzf go1.12.9.linux-amd64.tar.gz
+
+Add to .bashrc:
+
+export GOROOT=/home/marc/go
+
+export GOPATH=/home/marc/work
+
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+source .bashrc
+
+== Install CodeReady Containers
+
+su marc
+
+cd /home/marc
+
+git clone https://github.com/code-ready/crc.git
+
+cd crc
+
+make
+
+Set the memory available to CRC according to what you have on your physical server
+
+I’m on a physical server with around 100G of memory so I allocate 80G to CRC as follows:
+
+[marc@dell-r730-019 ansible]$ crc config set memory 81920
+
+[marc@dell-r730-019 crc]$ crc setup
+
+
+
+== Download CodeReady Containers bundle
+
+(crc_libvirt_4.1.11.crcbundle in my case)
+
+
+== Install CodeReady Containers
+
+You'll need your pull secret from https://cloud.redhat.com/openshift/install/metal/user-provisioned
+
+
+
+[marc@dell-r730-019 crc]$ crc start -b crc_libvirt_4.1.11.crcbundle
+
+----
+INFO To access the cluster using 'oc', run 'eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443' ******INFO Access the OpenShift web-console here: https://console-openshift-console.apps-crc.testing ********************************************************INFO Login to the console with user: kubeadmin, password: 78UVa-zNj5W-YB62Z-ggxGZ *********************************************************************CodeReady Containers instance is running
+----
