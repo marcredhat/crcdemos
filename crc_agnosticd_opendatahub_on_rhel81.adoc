@@ -2,10 +2,16 @@
 
 == Red Hat CodeReady Containers (Minishift equivalent for OpenShift 4.1 or newer)
 
-== Draft lab guide showing how to set up CodeReady Containers, deploy apps and Tekton Pipelines, configure persistent storage and more
+== Draft lab guide showing how to set up CodeReady Containers, Ansible Agnostic Deployer and OpenDataHub on a RHEL 8.1 physical server
 
 Red Hat CodeReady Containers brings a minimal OpenShift 4.1 or newer cluster to your local computer
 (see https://code-ready.github.io/crc/)
+
+Ansible Agnostic Deployer, AKA AAD, AKA AgnosticD, is a fully automated 2 Phase deployer for building and deploying everything from basic infrastructure to fully configured running application environments running on either public Cloud Providers or OpenShift clusters.
+
+AgnosticD is not an OpenShift Deployer, though it can and does that, it is however also a deployer that just happens to be used to deploy a lot of OpenShift and OpenShift workloads, amongst other things.
+
+See https://github.com/redhat-cop/agnosticd
 
 
 The instructions below cover
