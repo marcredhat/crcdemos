@@ -92,11 +92,13 @@ tar -xzf go1.12.9.linux-amd64.tar.gz
 
 Add to .bashrc:
 
+----
 export GOROOT=/home/marc/go
 
 export GOPATH=/home/marc/work
 
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+----
 
 source .bashrc
 
