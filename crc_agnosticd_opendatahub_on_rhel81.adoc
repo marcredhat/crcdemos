@@ -215,3 +215,264 @@ On your laptop, sudo ssh marc@dell-r730-019 -L 443:jupyterhub-open-data-hub-user
 
 You can now browse to https://jupyterhub-open-data-hub-user1.apps-crc.testing
 
+
+
+== Install RedHat Process Automation
+
+See https://github.com/kiegroup/kie-cloud-operator/blob/master/README.md
+
+su marc
+
+== Install dep
+go get -u github.com/golang/dep/cmd/dep
+
+== Install operator-sdk
+
+go get -d github.com/operator-framework/operator-sdk # This will download the git repository and not install it
+
+cd $GOPATH/src/github.com/operator-framework/operator-sdk
+
+git checkout master
+
+make tidy
+
+make install
+
+
+== Install KIE Cloud Operator
+
+cd $GOPATH/src/github.com/
+
+mkdir kiegroup
+
+cd kiegroup
+
+git clone  https://github.com/kiegroup/kie-cloud-operator.git
+
+cd kie-cloud-operator
+
+make
+
+----
+Now building operator:
+
+INFO[0020] Building OCI image quay.io/kiegroup/kie-cloud-operator:1.2
+Error: failed to output build image quay.io/kiegroup/kie-cloud-operator:1.2: (failed to exec []string{"docker", "build", "-f", "build/Dockerfile", "-t", "quay.io/kiegroup/kie-cloud-operator:1.2", "."}: exec: "docker": executable file not found in $PATH)
+Usage:
+  operator-sdk build <image> [flags]
+
+Flags:
+      --go-build-args string      Extra Go build arguments as one string such as "-ldflags -X=main.xyz=abc"
+  -h, --help                      help for build
+      --image-build-args string   Extra image build arguments as one string such as "--build-arg https_proxy=$https_proxy"
+      --image-builder string      Tool to build OCI images. One of: [docker, podman, buildah] (default "docker")
+
+Global Flags:
+      --verbose   Enable verbose logging
+----
+
+Note the error above as docker is not present on RHEL 8.1; we'll fix it using podman:
+
+sudo dnf -y install podman
+
+operator-sdk build quay.io/kiegroup/kie-cloud-operator:1.2 --image-builder podman --verbose
+
+marc@dell-r730-019 kie-cloud-operator]$ operator-sdk build quay.io/kiegroup/kie-cloud-operator:1.2 --image-builder podman
+
+----
+INFO[0000] Building OCI image quay.io/kiegroup/kie-cloud-operator:1.2
+STEP 1: FROM registry.access.redhat.com/ubi8-minimal
+STEP 2: COPY build/_output/bin/kie-cloud-operator /usr/local/bin/kie-cloud-operator
+1bb522e2df3a55c95dd687680654fcf7edbb08d645aa4de68c0d2af7ace14a79
+STEP 3: COPY build/_output/bin/console-cr-form /usr/local/bin/console-cr-form
+df1862f4dbbc84234663f4898b7a0ada8351d967540468ba0bb7e8c059affc0d
+STEP 4: COPY build/bin /usr/local/bin
+edda3e9faa5fe374ea9d68a4a56f42580710ba2c83b974a45078128741366b85
+STEP 5: RUN  /usr/local/bin/user_setup
++ chmod ug+rwx /root
++ chmod g=u /etc/passwd
++ rm /usr/local/bin/user_setup
+7a71663c38f36deb5ac600117700f16f8f1b8ba2947f3d74dd0680971f16dd3e
+STEP 6: ENTRYPOINT ["/usr/local/bin/entrypoint"]
+188fb6fe55c9d37d4d905ccd70b0279b3e7d2603233e95365a97f69b10b26009
+STEP 7: USER 1001
+STEP 8: COMMIT quay.io/kiegroup/kie-cloud-operator:1.2
+f204f979105997bce784bd4e7a4aebe9e7db680bcc8ebf1759fa63804093835f
+INFO[0011] Operator build complete.
+----
+
+[marc@dell-r730-019 kie-cloud-operator]$ podman login quay.io
+----
+Username: <you quay.io username>
+Password:
+Login Succeeded!
+----
+
+podman push kie-cloud-operator:1.2 quay.io/marcf5/kie-cloud-operator:1.2.0
+
+== Install Operator Courier (used to build, validate and push Operator artifacts)
+
+pip3 install operator-courier
+
+[marc@dell-r730-019 kie-cloud-operator]$ sudo pip3 install operator-courier
+
+----
+.........
+Installing collected packages: validators, semver, operator-courier
+  Running setup.py install for validators ... done
+Successfully installed operator-courier-2.1.7 semver-2.8.1 validators-0.14.0
+----
+
+AUTH_TOKEN=$(curl -sH "Content-Type: application/json" -XPOST https://quay.io/cnr/api/v1/users/login -d '
+{
+    "user": {
+        "username": "'"${QUAY_USERNAME}"'",
+        "password": "'"${QUAY_PASSWORD}"'"
+    }
+}' | jq -r '.token')
+
+Using this auth token,
+
+[marc@dell-r730-019 kie-cloud-operator]$ operator-courier push deploy/catalog_resources/courier/bundle_dir/1.2.0 marcf5 kiecloud-operator 1.2.0 "basic b....Q=="
+
+
+cd /home/marc/crc
+
+eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
+
+oc new-project processautomation
+
+marc@dell-r730-019 kie-cloud-operator]$ cd $GOPATH/src/github.com/kiegroup/kie-cloud-operator/
+[marc@dell-r730-019 kie-cloud-operator]$ pwd
+/home/marc/work/src/github.com/kiegroup/kie-cloud-operator
+
+Remember to replace registryNamespace with your quay namespace. The name, display name and publisher of the operator are the only other attributes that may be modified.
+
+[marc@dell-r730-019 kie-cloud-operator]$ more  deploy/catalog_resources/courier/kiecloud-operatorsource.yaml
+
+----
+apiVersion: operators.coreos.com/v1
+kind: OperatorSource
+metadata:
+  name: kiecloud-operators
+  namespace: openshift-marketplace
+spec:
+  type: appregistry
+  endpoint: https://quay.io/cnr
+  registryNamespace: marcf5
+  displayName: "KIE Cloud Operators - Marc"
+  publisher: "Red Hat"
+----
+
+oc create -f deploy/catalog_resources/courier/kiecloud-operatorsource.yaml
+
+
+It will take a few minutes for the operator to become visible under the OperatorHub section of the OpenShift console Catalog.
+
+[marc@dell-r730-019 kie-cloud-operator]$ oc get ev --all-namespaces
+
+----
+NAMESPACE               LAST SEEN   TYPE      REASON              OBJECT                                     MESSAGE
+openshift-marketplace   12m         Normal    Scheduled           pod/kiecloud-operators-6d744cf8d5-wz7pf    Successfully assigned openshift-marketplace/kiecloud-operators-6d744cf8d5-wz7pf to crc-56mmj-master-0
+openshift-marketplace   10m         Normal    Pulled              pod/kiecloud-operators-6d744cf8d5-wz7pf    Container image "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:74b6aa28ef940f29f7eb6260fdbf18742efa3c89911942212e99e0179cdcc892" already present on machine
+openshift-marketplace   10m         Normal    Created             pod/kiecloud-operators-6d744cf8d5-wz7pf    Created container kiecloud-operators
+openshift-marketplace   10m         Normal    Started             pod/kiecloud-operators-6d744cf8d5-wz7pf    Started container kiecloud-operators
+openshift-marketplace   7m32s       Warning   BackOff             pod/kiecloud-operators-6d744cf8d5-wz7pf    Back-off restarting failed container
+openshift-marketplace   12m         Normal    SuccessfulCreate    replicaset/kiecloud-operators-6d744cf8d5   Created pod: kiecloud-operators-6d744cf8d5-wz7pf
+openshift-marketplace   12m         Normal    ScalingReplicaSet   deployment/kiecloud-operators              Scaled up replica set kiecloud-operators-6d744cf8d5 to 1
+----
+
+Use the OLM console to subscribe to the Kie Cloud Operator Catalog Source within your namespace. Once subscribed, use the console to Create KieApp or create one manually as seen below.
+
+[marc@dell-r730-019 kie-cloud-operator]$ more  deploy/catalog_resources/redhat/1.2.0/businessautomation-operator.1.2.0.clusterserviceversion.yaml
+
+----
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  name: businessautomation-operator.1.2.0
+
+  namespace: processautomation
+----
+
+[marc@dell-r730-019 kie-cloud-operator]$ oc create -f deploy/catalog_resources/redhat/1.2.0/businessautomation-operator.1.2.0.clusterserviceversion.yaml
+
+----
+clusterserviceversion.operators.coreos.com/businessautomation-operator.1.2.0 created
+----
+
+[marc@dell-r730-019 ~]$ eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
+Login successful.
+
+====
+You have access to 51 projects, the list has been suppressed. You can list all projects with 'oc projects'
+====
+
+[marc@dell-r730-019 ~]$ oc project openshift-marketplace
+
+Now using project "openshift-marketplace" on server "https://api.crc.testing:6443".
+
+[marc@dell-r730-019 ~]$ oc get pods
+
+----
+NAME                                                     READY   STATUS    RESTARTS   AGE
+business-automation-operator-5b65d958cc-jmqdt            1/1     Running   0          7m22s
+certified-operators-7bbb75bc89-tq9j8                     1/1     Running   0          8h
+community-operators-84b686f994-ddfnb                     1/1     Running   0          8h
+console-cr-form                                          2/2     Running   0          6m56s
+installed-redhat-openshift-marketplace-849d7646f-5rrp5   1/1     Running   0          7m43s
+marketplace-operator-7df66dbf67-r5bnr                    1/1     Running   0          4d11h
+redhat-operators-857458566c-l879k                        1/1     Running   0          8h
+----
+
+[marc@dell-r730-019 ~]$ oc get route
+
+----
+NAME                          HOST/PORT                                                            PATH   SERVICES                 PORT    TERMINATION            WILDCARD
+console-cr-form               console-cr-form-openshift-marketplace.apps-crc.testing                      console-cr-form          <all>   reencrypt              None
+rhpam-trial-kieserver         rhpam-trial-kieserver-openshift-marketplace.apps-crc.testing                rhpam-trial-kieserver    https   passthrough/Redirect   None
+rhpam-trial-kieserver-http    rhpam-trial-kieserver-http-openshift-marketplace.apps-crc.testing           rhpam-trial-kieserver    http                           None
+rhpam-trial-rhpamcentr        rhpam-trial-rhpamcentr-openshift-marketplace.apps-crc.testing               rhpam-trial-rhpamcentr   https   passthrough/Redirect   None
+rhpam-trial-rhpamcentr-http   rhpam-trial-rhpamcentr-http-openshift-marketplace.apps-crc.testing          rhpam-trial-rhpamcentr   http                           None
+----
+
+Add console-cr-form-openshift-marketplace.apps-crc.testing to /etc/hosts
+
+Go to https://console-cr-form-openshift-marketplace.apps-crc.testing/
+
+
+== Deploy Red Hat Process Automation demo app 
+
+See https://developers.redhat.com/products/rhpam/hello-world#fndtn-process-automation-manager-on-openshift
+
+
+eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
+
+With the “oc” client connected to an OpenShift instance:
+
+Create a new project:
+oc new-project rhpam7-trial
+
+Import the Process Automation Manager Image Streams into the project:
+
+oc create -f https://raw.githubusercontent.com/jboss-container-images/rhpam-7-openshift-image/7.1.0.GA/rhpam71-image-streams.yaml
+Patch the ImageStreams:
+
+oc patch is/rhpam71-businesscentral-openshift --type='json' -p '[{"op": "replace", "path": "/spec/tags/0/from/name", "value": "registry.access.redhat.com/rhpam-7/rhpam71-businesscentral-openshift:1.0"}]'
+oc patch is/rhpam71-kieserver-openshift --type='json' -p '[{"op": "replace", "path": "/spec/tags/0/from/name", "value": "registry.access.redhat.com/rhpam-7/rhpam71-kieserver-openshift:1.0"}]'
+Import the Process Automation Manager "Trial Ephemeral" template:
+
+oc create -f https://raw.githubusercontent.com/jboss-container-images/rhpam-7-openshift-image/7.1.0.GA/templates/rhpam71-trial-ephemeral.yaml
+Create the application the Business Central and Process Server components:
+
+oc new-app --template=rhpam71-trial-ephemeral -p APPLICATION_NAME="rhpam7" -p IMAGE_STREAM_NAMESPACE="rhpam7-trial" -p KIE_ADMIN_USER="pamAdmin" -p KIE_SERVER_CONTROLLER_USER="kieserver" -p KIE_SERVER_USER="kieserver" -p DEFAULT_PASSWORD=redhatpam1\!
+Open the OpenShift console at https://{openshift_host}:8443/console and open the “rhpam7-trial” project. Go the “Overview” page and wait until both the Business Central and Process Server pods are up and running.
+
+Go to “Applications -> Routes”.  Click on the “Hostname” of “rhpam7-trial-rhpamcentr”, which should open the Business Central login screen.
+
+On your laptop, sudo ssh marc@dell-r730-019.dsal.lab.eng.rdu2.redhat.com -L 8888:rhpam7-rhpamcentr-rhpam7-trial.apps-crc.testing:80
+
+Go to http://rhpam7-rhpamcentr-rhpam7-trial.apps-crc.testing:8888
+
+Login to Business Central with username “pamAdmin” and password “redhatpam1!”.
+
