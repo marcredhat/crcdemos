@@ -343,8 +343,12 @@ eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testin
 oc new-project processautomation
 
 marc@dell-r730-019 kie-cloud-operator]$ cd $GOPATH/src/github.com/kiegroup/kie-cloud-operator/
-[marc@dell-r730-019 kie-cloud-operator]$ pwd
+
+marc@dell-r730-019 kie-cloud-operator]$ pwd
+
+----
 /home/marc/work/src/github.com/kiegroup/kie-cloud-operator
+----
 
 Remember to replace registryNamespace with your quay namespace. The name, display name and publisher of the operator are the only other attributes that may be modified.
 
