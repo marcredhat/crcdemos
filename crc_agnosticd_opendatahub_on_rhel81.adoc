@@ -476,4 +476,4 @@ Go to http://rhpam7-rhpamcentr-rhpam7-trial.apps-crc.testing:8888
 
 Login to Business Central with username “pamAdmin” and password “redhatpam1!”.
 
-See image:images/redhatprocessautomation1[title="Red Hat Process Automation Manager - Marc demo"] 
+See image:images/redhatprocessautomation1.png[title="Red Hat Process Automation Manager - Marc demo"] 
