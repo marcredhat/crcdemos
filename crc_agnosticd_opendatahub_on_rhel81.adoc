@@ -488,7 +488,7 @@ Click on "Try Samples"
 
 image:images/importsample.png[title="Red Hat Process Automation Manager - Marc demo - Try Samples"]
 
-Import a sample (OptaCloud resource allocation optimization in my example below)
+Import a sample (OptaCloud resource allocation optimization in my example)
 
 Result
 
