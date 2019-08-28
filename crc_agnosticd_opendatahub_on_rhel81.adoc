@@ -436,7 +436,7 @@ rhpam-trial-rhpamcentr        rhpam-trial-rhpamcentr-openshift-marketplace.apps-
 rhpam-trial-rhpamcentr-http   rhpam-trial-rhpamcentr-http-openshift-marketplace.apps-crc.testing          rhpam-trial-rhpamcentr   http                           None
 ----
 
-Add console-cr-form-openshift-marketplace.apps-crc.testing to /etc/hosts
+On your laptop, add console-cr-form-openshift-marketplace.apps-crc.testing to /etc/hosts (pointing it to 127.0.0.1)
 
 Go to https://console-cr-form-openshift-marketplace.apps-crc.testing/
 
@@ -456,21 +456,42 @@ oc new-project rhpam7-trial
 Import the Process Automation Manager Image Streams into the project:
 
 oc create -f https://raw.githubusercontent.com/jboss-container-images/rhpam-7-openshift-image/7.1.0.GA/rhpam71-image-streams.yaml
+
 Patch the ImageStreams:
 
 oc patch is/rhpam71-businesscentral-openshift --type='json' -p '[{"op": "replace", "path": "/spec/tags/0/from/name", "value": "registry.access.redhat.com/rhpam-7/rhpam71-businesscentral-openshift:1.0"}]'
+
 oc patch is/rhpam71-kieserver-openshift --type='json' -p '[{"op": "replace", "path": "/spec/tags/0/from/name", "value": "registry.access.redhat.com/rhpam-7/rhpam71-kieserver-openshift:1.0"}]'
+
 Import the Process Automation Manager "Trial Ephemeral" template:
 
 oc create -f https://raw.githubusercontent.com/jboss-container-images/rhpam-7-openshift-image/7.1.0.GA/templates/rhpam71-trial-ephemeral.yaml
+
 Create the application the Business Central and Process Server components:
 
 oc new-app --template=rhpam71-trial-ephemeral -p APPLICATION_NAME="rhpam7" -p IMAGE_STREAM_NAMESPACE="rhpam7-trial" -p KIE_ADMIN_USER="pamAdmin" -p KIE_SERVER_CONTROLLER_USER="kieserver" -p KIE_SERVER_USER="kieserver" -p DEFAULT_PASSWORD=redhatpam1\!
-Open the OpenShift console at https://{openshift_host}:8443/console and open the “rhpam7-trial” project. Go the “Overview” page and wait until both the Business Central and Process Server pods are up and running.
 
-Go to “Applications -> Routes”.  Click on the “Hostname” of “rhpam7-trial-rhpamcentr”, which should open the Business Central login screen.
+oc get pods
 
-On your laptop, sudo ssh marc@dell-r730-019.dsal.lab.eng.rdu2.redhat.com -L 8888:rhpam7-rhpamcentr-rhpam7-trial.apps-crc.testing:80
+----
+NAME                         READY   STATUS      RESTARTS   AGE
+rhpam7-kieserver-1-deploy    0/1     Completed   0          55m
+rhpam7-kieserver-1-z7ft2     1/1     Running     0          55m
+rhpam7-rhpamcentr-1-deploy   0/1     Completed   0          55m
+rhpam7-rhpamcentr-1-t4z74    1/1     Running     0          55m
+----
+
+oc get routes
+
+----
+NAME                HOST/PORT                                         PATH   SERVICES            PORT    TERMINATION   WILDCARD
+rhpam7-kieserver    rhpam7-kieserver-rhpam7-trial.apps-crc.testing           rhpam7-kieserver    <all>                 None
+rhpam7-rhpamcentr   rhpam7-rhpamcentr-rhpam7-trial.apps-crc.testing          rhpam7-rhpamcentr   http                  None
+----
+
+On your laptop, add rhpam7-rhpamcentr-rhpam7-trial.apps-crc.testing to /etc/hosts (pointing it to 127.0.0.1)
+
+On your laptop, sudo ssh marc@dell-r730-019 -L 8888:rhpam7-rhpamcentr-rhpam7-trial.apps-crc.testing:80
 
 Go to http://rhpam7-rhpamcentr-rhpam7-trial.apps-crc.testing:8888
 
