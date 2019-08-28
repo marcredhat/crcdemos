@@ -382,35 +382,12 @@ openshift-marketplace   12m         Normal    SuccessfulCreate    replicaset/kie
 openshift-marketplace   12m         Normal    ScalingReplicaSet   deployment/kiecloud-operators              Scaled up replica set kiecloud-operators-6d744cf8d5 to 1
 ----
 
-Use the OLM console to subscribe to the Kie Cloud Operator Catalog Source within your namespace. Once subscribed, use the console to Create KieApp or create one manually as seen below.
-
-[marc@dell-r730-019 kie-cloud-operator]$ more  deploy/catalog_resources/redhat/1.2.0/businessautomation-operator.1.2.0.clusterserviceversion.yaml
-
-----
-apiVersion: operators.coreos.com/v1alpha1
-kind: ClusterServiceVersion
-metadata:
-  name: businessautomation-operator.1.2.0
-
-  namespace: processautomation
-----
-
-[marc@dell-r730-019 kie-cloud-operator]$ oc create -f deploy/catalog_resources/redhat/1.2.0/businessautomation-operator.1.2.0.clusterserviceversion.yaml
-
-----
-clusterserviceversion.operators.coreos.com/businessautomation-operator.1.2.0 created
-----
-
-[marc@dell-r730-019 ~]$ eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
-Login successful.
-
-====
-You have access to 51 projects, the list has been suppressed. You can list all projects with 'oc projects'
-====
 
 [marc@dell-r730-019 ~]$ oc project openshift-marketplace
 
+----
 Now using project "openshift-marketplace" on server "https://api.crc.testing:6443".
+----
 
 [marc@dell-r730-019 ~]$ oc get pods
 
