@@ -650,7 +650,6 @@ mysql                            ClusterIP   172.30.243.141   <none>        3306
 ----
 
 
-
 oc exec -i -c kafka my-cluster-kafka-0 -- curl -X POST \
     -H "Accept:application/json" \
     -H "Content-Type:application/json" \
@@ -677,8 +676,6 @@ EOF
 
 
 oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
-
-[marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
 
 ----
 Defaulting container name to kafka.
