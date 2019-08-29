@@ -767,4 +767,102 @@ Use 'oc describe pod/my-cluster-kafka-0 -n cdc' to see all of the containers in 
 ----
 
 
+== Install Tekton Pipelines
+
+Install Tekton CLI; ensure you get the latest release.
+
+----
+wget https://github.com/tektoncd/cli/releases/download/v0.2.2/tkn_0.2.2_Linux_x86_64.tar.gz
+
+tar -xvzf tkn_0.2.2_Linux_x86_64.tar.gz
+
+sudo cp  ./tkn /usr/local/bin/
+----
+
+cd /home/marc/crc
+
+eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
+
+oc new-project tekton-pipelines
+
+oc adm policy add-scc-to-user anyuid -z tekton-pipelines-controller
+
+oc apply --filename https://storage.googleapis.com/tekton-releases/latest/release.yaml
+
+You should see:
+
+[marc@dell-r730-019 crc]$ oc get pods
+
+----
+NAME                                           READY   STATUS    RESTARTS   AGE
+tekton-pipelines-controller-55c6b5b9f6-hcxb2   1/1     Running   0          26s
+tekton-pipelines-webhook-6794d5bcc8-bqcc5      1/1     Running   0          26s
+----
+
+== Set up Tekton demos
+git clone https://github.com/marcredhat/openshift-pipelines-examples 
+
+(fork of https://github.com/siamaksade/openshift-pipelines-examples with minor fix for https://github.com/siamaksade/openshift-pipelines-examples/issues/1)
+
+cd openshift-pipelines-examples
+
+Follow the instructions at https://github.com/marcredhat/openshift-pipelines-examples 
+
+You should see:
+
+[marc@dell-r730-019 openshift-pipelines-examples]$ oc get pods
+
+----
+NAME                                                           READY   STATUS      RESTARTS   AGE
+mapit-build-pipelinerun-jgbtj-build-app-lnfbh-pod-5cdefc       0/5     Completed   0          3m21s
+mapit-build-pipelinerun-jgbtj-build-image-tbsd5-pod-415e23     0/6     Completed   0          2m16s
+mapit-deploy-pipelinerun-bwxgr-analyse-code-sxw9n-pod-2bd948   0/4     Completed   0          2m9s
+mapit-deploy-pipelinerun-bwxgr-build-app-kvpxt-pod-0ed8c1      0/5     Completed   0          3m11s
+mapit-deploy-pipelinerun-bwxgr-build-image-8d6ss-pod-06cd2a    0/6     Completed   0          99s
+mapit-deploy-pipelinerun-bwxgr-deploy-t7jwb-pod-a1000a         0/1     Completed   0          39s
+mapit-spring-1-deploy                                          1/1     Running     0          26s
+mapit-spring-1-m56sl                                           1/1     Running     0          16s
+----
+
+
+[marc@dell-r730-019 openshift-pipelines-examples]$ oc describe pipelinerun
+
+----
+Events:
+  Type    Reason     Age    From                 Message
+  ----    ------     ----   ----                 -------
+  Normal  Succeeded  2m45s  pipeline-controller  All Tasks have completed executing
+----
+
+[marc@dell-r730-019 openshift-pipelines-examples]$ tkn task ls
+
+----
+NAME               AGE
+buildah            10 minutes ago
+mvn-build          8 minutes ago
+openshift-client   10 minutes ago
+static-analysis    8 minutes ago
+----
+
+
+"oc get ev" comes in handy if you want to see the various steps in detail.
+
+[marc@dell-r730-019 openshift-pipelines-examples]$ oc get route
+
+----
+NAME           HOST/PORT                                     PATH   SERVICES       PORT       TERMINATION   WILDCARD
+mapit-spring   mapit-spring-pipeline-demo.apps-crc.testing          mapit-spring   8080-tcp                 None
+----
+
+On your laptop, add mapit-spring-pipeline-demo.apps-crc.testing to /etc/hosts. 
+
+Example:
+127.0.0.1	localhost marc.rhel8 console-openshift-console.apps-crc.testing oauth-openshift.apps-crc.testing mapit-app-management.apps-crc.testing mapit-spring-pipeline-demo.apps-crc.testing
+
+On your laptop, sudo ssh marc@dell-r730-019... -L 80:mapit-spring-pipeline-demo.apps-crc.testing:80
+
+On your laptop, browse to http://mapit-spring-pipeline-demo.apps-crc.testing
+
+
+
 
