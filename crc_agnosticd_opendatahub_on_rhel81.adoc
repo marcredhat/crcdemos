@@ -597,7 +597,7 @@ done && \
 oc start-build my-connect-cluster-connect --from-dir=. --follow
 
 
-If you run into an "build was deleted before it started" error, just rerun the last 3 commands above (mkdir ... oc start-build).
+If you run into "build was deleted before it started" error, just rerun the last 3 commands above (mkdir ... oc start-build).
 
 
 [marc@dell-r730-019 plugins]$ oc get pods
