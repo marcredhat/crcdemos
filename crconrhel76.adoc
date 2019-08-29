@@ -197,6 +197,16 @@ oc rsh mapit... cat /app-storage/hello.txt
 
 == Install Tekton Pipelines
 
+Install Tekton CLI; ensure you get the latest release.
+
+----
+wget https://github.com/tektoncd/cli/releases/download/v0.2.2/tkn_0.2.2_Linux_x86_64.tar.gz
+
+tar -xvzf tkn_0.2.2_Linux_x86_64.tar.gz
+
+sudo cp  ./tkn /usr/local/bin/
+----
+
 cd /home/marc/crc
 
 eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
