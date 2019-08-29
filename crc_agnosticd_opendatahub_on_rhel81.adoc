@@ -684,7 +684,9 @@ EOF
 ----
 
 
+----
 oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+----
 
 ----
 Defaulting container name to kafka.
