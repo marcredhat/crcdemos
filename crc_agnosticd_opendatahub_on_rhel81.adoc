@@ -697,7 +697,10 @@ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
     --property print.key=true \
     --topic dbserver1.inventory.customers
 
-[marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh  --bootstrap-server my-cluster-kafka-bootstrap:9092     --from-beginning     --property print.key=true     --topic dbserver1.inventory.customers
+
+[marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
+--bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning \
+--property print.key=true     --topic dbserver1.inventory.customers
 
 ----
     Defaulting container name to kafka.
@@ -706,17 +709,19 @@ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
 ----
 
 
-    oc exec -it $(oc get pods -o custom-columns=NAME:.metadata.name --no-headers -l app=mysql) \
+oc exec -it $(oc get pods -o custom-columns=NAME:.metadata.name --no-headers -l app=mysql) \
     -- bash -c 'mysql -u $MYSQL_USER -p$MYSQL_PASSWORD inventory'
 
-    mysql> UPDATE customers SET email="m@redhat.com" WHERE ID = 1001;
+
+mysql> UPDATE customers SET email="m@redhat.com" WHERE ID = 1001;
 
 ----
   Query OK, 1 row affected (0.01 sec)
   Rows matched: 1  Changed: 1  Warnings: 0
 ----
 
-  [marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
+
+[marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
 --bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning --property print.key=true \
 --topic dbserver1.inventory.customers | grep m@redhat.com
 
