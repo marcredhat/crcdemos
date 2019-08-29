@@ -668,6 +668,11 @@ mysql                            ClusterIP   172.30.243.141   <none>        3306
 ----
 
 
+In the command below, use the results of the previous commands.
+
+For example, replace database.hostname with the result of "oc get svc | grep mysql".
+
+
 ----
 oc exec -i -c kafka my-cluster-kafka-0 -- curl -X POST \
     -H "Accept:application/json" \
