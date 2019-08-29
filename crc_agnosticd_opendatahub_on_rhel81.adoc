@@ -623,6 +623,7 @@ mysql-2-gnrzg                                 1/1     Running     0          31s
 
 == Register the Debezium MySQL connector to run against the deployed MySQL instance:
 
+
 [marc@dell-r730-019 plugins]$ oc get pods | grep kafka
 
 ----
@@ -631,11 +632,15 @@ my-cluster-kafka-1                            2/2     Running     0          18m
 my-cluster-kafka-2                            2/2     Running     0          18m
 ----
 
+
+
 [marc@dell-r730-019 plugins]$ oc get svc | grep connect-api
 
 ----
 my-connect-cluster-connect-api   ClusterIP   172.30.175.102   <none>        8083/TCP                     13m
 ----
+
+
 
 [marc@dell-r730-019 plugins]$ oc get svc | grep bootstrap
 
@@ -643,11 +648,15 @@ my-connect-cluster-connect-api   ClusterIP   172.30.175.102   <none>        8083
 my-cluster-kafka-bootstrap       ClusterIP   172.30.179.106   <none>        9091/TCP,9092/TCP,9093/TCP   32m
 ----
 
+
+
 [marc@dell-r730-019 plugins]$ oc get svc | grep mysql
 
 ----
 mysql                            ClusterIP   172.30.243.141   <none>        3306/TCP,33060/TCP           29m
 ----
+
+
 
 oc exec -i -c kafka my-cluster-kafka-0 -- curl -X POST \
     -H "Accept:application/json" \
@@ -692,9 +701,8 @@ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
     --topic dbserver1.inventory.customers
 
 
-[marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
---bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning \
---property print.key=true --topic dbserver1.inventory.customers
+
+[marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning --property print.key=true --topic dbserver1.inventory.customers
 
 ----
     Defaulting container name to kafka.
@@ -703,8 +711,7 @@ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
 ----
 
 
-oc exec -it $(oc get pods -o custom-columns=NAME:.metadata.name --no-headers -l app=mysql) \
-    -- bash -c 'mysql -u $MYSQL_USER -p$MYSQL_PASSWORD inventory'
+oc exec -it $(oc get pods -o custom-columns=NAME:.metadata.name --no-headers -l app=mysql) -- bash -c 'mysql -u $MYSQL_USER -p$MYSQL_PASSWORD inventory'
 
 
 mysql> UPDATE customers SET email="m@redhat.com" WHERE ID = 1001;
@@ -715,9 +722,7 @@ mysql> UPDATE customers SET email="m@redhat.com" WHERE ID = 1001;
 ----
 
 
-[marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
---bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning --property print.key=true \
---topic dbserver1.inventory.customers | grep m@redhat.com
+[marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning --property print.key=true --topic dbserver1.inventory.customers | grep m@redhat.com
 
 ----
 Defaulting container name to kafka.
