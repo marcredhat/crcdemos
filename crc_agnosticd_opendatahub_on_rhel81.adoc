@@ -251,7 +251,37 @@ git checkout master
 
 make tidy
 
+make
+
 make install
+
+
+[marc@dell-r730-019 operator-sdk]$ operator-sdk
+
+
+----
+An SDK for building operators with ease
+
+Usage:
+  operator-sdk [command]
+
+Available Commands:
+  add         Adds a controller or resource to the project
+  alpha       Run an alpha subcommand
+  build       Compiles code and builds artifacts
+  completion  Generators for shell completions
+  generate    Invokes specific generator
+  help        Help about any command
+  migrate     Adds source code to an operator
+  new         Creates a new operator application
+  olm-catalog Invokes a olm-catalog command
+  print-deps  Print Golang packages and versions required to run the operator
+  run         Runs a generic operator
+  scorecard   Run scorecard tests
+  test        Tests the operator
+  up          Launches the operator
+  version     Prints the version of operator-sdk
+----
 
 
 == Install KIE Cloud Operator
