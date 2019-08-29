@@ -523,6 +523,8 @@ export KUBECONFIG=/home/marc/.crc/cache/crc_libvirt_4.1.11/kubeconfig
 
 oc login -u system:admin
 
+oc project cdc
+
 oc delete  -f install/cluster-operator && oc delete -f examples/templates/cluster-operator
 
 sed -i 's/namespace: .*/namespace: cdc/' install/cluster-operator/*RoleBinding*.yaml
