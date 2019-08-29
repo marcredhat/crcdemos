@@ -238,6 +238,13 @@ Follow the instructions at https://github.com/marcredhat/openshift-pipelines-exa
 
 You should see:
 
+[marc@dell-r730-019 openshift-pipelines-examples]$ oc project
+
+----
+Using project "pipeline-demo" on server "https://api.crc.testing:6443"
+----
+
+
 [marc@dell-r730-019 openshift-pipelines-examples]$ oc get pods
 
 ----
