@@ -583,9 +583,11 @@ export DEBEZIUM_VERSION=0.10.0.Beta4
 
 mkdir -p plugins && cd plugins && \
 
+----
 for PLUGIN in {mongodb,mysql,postgres}; do \
     curl http://central.maven.org/maven2/io/debezium/debezium-connector-$PLUGIN/$DEBEZIUM_VERSION/debezium-connector-$PLUGIN-$DEBEZIUM_VERSION-plugin.tar.gz | tar xz; \
 done && \
+----
 
 oc start-build my-connect-cluster-connect --from-dir=. --follow
 
@@ -657,7 +659,7 @@ mysql                            ClusterIP   172.30.243.141   <none>        3306
 ----
 
 
-
+----
 oc exec -i -c kafka my-cluster-kafka-0 -- curl -X POST \
     -H "Accept:application/json" \
     -H "Content-Type:application/json" \
@@ -679,6 +681,7 @@ oc exec -i -c kafka my-cluster-kafka-0 -- curl -X POST \
     }
 }
 EOF
+----
 
 
 oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
@@ -703,6 +706,7 @@ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
     --topic dbserver1.inventory.customers
 ----
 
+
 ----
 [marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning --property print.key=true --topic dbserver1.inventory.customers
 ----
@@ -715,7 +719,9 @@ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
 ----
 
 
+----
 oc exec -it $(oc get pods -o custom-columns=NAME:.metadata.name --no-headers -l app=mysql) -- bash -c 'mysql -u $MYSQL_USER -p$MYSQL_PASSWORD inventory'
+----
 
 
 mysql> UPDATE customers SET email="m@redhat.com" WHERE ID = 1001;
@@ -726,7 +732,10 @@ mysql> UPDATE customers SET email="m@redhat.com" WHERE ID = 1001;
 ----
 
 
+----
 [marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning --property print.key=true --topic dbserver1.inventory.customers | grep m@redhat.com
+----
+
 
 ----
 Defaulting container name to kafka.
