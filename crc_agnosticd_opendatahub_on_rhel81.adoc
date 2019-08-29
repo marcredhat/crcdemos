@@ -694,15 +694,19 @@ connect-cluster-status
 dbserver1.inventory.customers
 ----
 
+
+----
 oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
     --bootstrap-server my-cluster-kafka-bootstrap:9092 \
     --from-beginning \
     --property print.key=true \
     --topic dbserver1.inventory.customers
+----
 
-
-
+----
 [marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning --property print.key=true --topic dbserver1.inventory.customers
+----
+
 
 ----
     Defaulting container name to kafka.
