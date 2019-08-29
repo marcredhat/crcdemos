@@ -2,7 +2,7 @@
 
 == Red Hat CodeReady Containers (Minishift equivalent for OpenShift 4.1 or newer)
 
-== Draft lab guide showing how to set up CodeReady Containers, OpenShift 4.1, Ansible Agnostic Deployer, OpenDataHub, Process Automation Manager on a RHEL 8.1 physical server
+== Draft lab guide showing how to set up CodeReady Containers, OpenShift 4.1, Ansible Agnostic Deployer, OpenDataHub, Process Automation Manager, Change Data Capture with Debezium and Kafka on a RHEL 8.1 physical server
 
 *Red Hat CodeReady Containers* brings a minimal OpenShift 4.1 or newer cluster to your local computer
 (see https://code-ready.github.io/crc/)
@@ -495,6 +495,227 @@ Result
 image:images/result.png[title="Red Hat Process Automation Manager - Marc demo - Result"]
 
 
+
+== Install Change Data Capture solution (Debezium)
+
+See https://debezium.io/docs/openshift/
+
+ssh marc@dell-r730-019
+
+export KUBECONFIG=/home/marc/.kube/config
+
+eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
+
+oc new-project cdc
+
+== Install  operators and templates for  Kafka broker and Kafka Connect
+
+export STRIMZI_VERSION=0.13.0
+
+git clone -b $STRIMZI_VERSION https://github.com/strimzi/strimzi-kafka-operator
+
+cd strimzi-kafka-operator
+
+
+export KUBECONFIG=/home/marc/.crc/cache/crc_libvirt_4.1.11/kubeconfig
+
+(see https://github.com/code-ready/crc/issues/119)
+
+oc login -u system:admin
+
+oc delete  -f install/cluster-operator && oc delete -f examples/templates/cluster-operator
+
+sed -i 's/namespace: .*/namespace: cdc/' install/cluster-operator/*RoleBinding*.yaml
+
+oc create -f install/cluster-operator && oc create -f examples/templates/cluster-operator
+
+
+== Deploy Kafka broker and Kafka Connect clusters
+
+Deploy an ephemeral single instance Kafka broker
+
+wget https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/master/examples/templates/cluster-operator/ephemeral-template.yaml
+
+export CLUSTER_NAME=broker
+
+export ZOOKEEPER_NODE_COUNT=1
+
+export KAFKA_NODE_COUNT=1
+
+export KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+
+export KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=1
+
+oc process -f ephemeral-template.yaml | oc create -f -
+
+Deploy a single instance of Kafka Connect with no plug-in installed
+
+wget https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/master/examples/templates/cluster-operator/connect-s2i-template.yaml
+
+export CLUSTER_NAME=debezium
+
+export KAFKA_CONNECT_BOOTSTRAP_SERVERS=broker-kafka-bootstrap:9092
+
+export KAFKA_CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=1
+
+export KAFKA_CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=1
+
+export KAFKA_CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=1
+
+export KAFKA_CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE=false
+
+export KAFKA_CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE=false
+
+oc process -f connect-s2i-template.yaml | oc create -f -
+
+
+[marc@dell-r730-019 plugins]$ oc get buildconfig
+
+----
+NAME                         TYPE     FROM     LATEST
+my-connect-cluster-connect   Source   Binary   1
+----
+
+
+== Create a Kafka Connect image with  Debezium connectors installed
+
+export DEBEZIUM_VERSION=0.10.0.Beta4
+
+mkdir -p plugins && cd plugins && \
+
+for PLUGIN in {mongodb,mysql,postgres}; do \
+    curl http://central.maven.org/maven2/io/debezium/debezium-connector-$PLUGIN/$DEBEZIUM_VERSION/debezium-connector-$PLUGIN-$DEBEZIUM_VERSION-plugin.tar.gz | tar xz; \
+done && \
+
+oc start-build my-connect-cluster-connect --from-dir=. --follow
+
+[marc@dell-r730-019 plugins]$ oc get pods
+
+----
+NAME                                          READY   STATUS      RESTARTS   AGE
+my-cluster-entity-operator-74f5d76bb9-kqfg8   3/3     Running     0          12m
+my-cluster-kafka-0                            2/2     Running     0          12m
+my-cluster-kafka-1                            2/2     Running     0          12m
+my-cluster-kafka-2                            2/2     Running     0          12m
+my-cluster-zookeeper-0                        2/2     Running     0          13m
+my-cluster-zookeeper-1                        2/2     Running     0          13m
+my-cluster-zookeeper-2                        2/2     Running     0          13m
+my-connect-cluster-connect-1-build            0/1     Completed   0          8m35s
+my-connect-cluster-connect-2-2nm8b            1/1     Running     0          92s
+my-connect-cluster-connect-2-build            0/1     Init:0/2    0          5m20s
+my-connect-cluster-connect-2-deploy           0/1     Completed   0          102s
+my-connect-cluster-connect-3-build            0/1     Completed   0          2m35s
+strimzi-cluster-operator-7ff64d4b7-rwkgx      1/1     Running     0          17m
+----
+
+== Deploy pre-populated MySQL
+oc new-app --name=mysql debezium/example-mysql:0.10
+
+# Configure credentials for the database
+oc set env dc/mysql MYSQL_ROOT_PASSWORD=debezium  MYSQL_USER=mysqluser MYSQL_PASSWORD=mysqlpw
+
+[marc@dell-r730-019 plugins]$ oc get pods | grep mysql
+
+----
+mysql-2-deploy                                0/1     Completed   0          40s
+mysql-2-gnrzg                                 1/1     Running     0          31s
+----
+
+== Register the Debezium MySQL connector to run against the deployed MySQL instance:
+
+[marc@dell-r730-019 plugins]$ oc get pods | grep kafka
+my-cluster-kafka-0                            2/2     Running     0          18m
+my-cluster-kafka-1                            2/2     Running     0          18m
+my-cluster-kafka-2                            2/2     Running     0          18m
+
+[marc@dell-r730-019 plugins]$ oc get svc | grep connect-api
+my-connect-cluster-connect-api   ClusterIP   172.30.175.102   <none>        8083/TCP                     13m
+
+[marc@dell-r730-019 plugins]$ oc get svc | grep bootstrap
+my-cluster-kafka-bootstrap       ClusterIP   172.30.179.106   <none>        9091/TCP,9092/TCP,9093/TCP   32m
+
+[marc@dell-r730-019 plugins]$ oc get svc | grep mysql
+mysql                            ClusterIP   172.30.243.141   <none>        3306/TCP,33060/TCP           29m
+
+
+
+
+oc exec -i -c kafka my-cluster-kafka-0 -- curl -X POST \
+    -H "Accept:application/json" \
+    -H "Content-Type:application/json" \
+    http://my-connect-cluster-connect-api:8083/connectors -d @- <<'EOF'
+
+{
+    "name": "inventory-connector-Marc-2",
+    "config": {
+        "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+        "tasks.max": "1",
+        "database.hostname": "172.30.243.141",
+        "database.port": "3306",
+        "database.user": "debezium",
+        "database.password": "dbz",
+        "database.server.id": "184054",
+        "database.server.name": "dbserver1",
+        "database.whitelist": "inventory",
+        "database.history.kafka.bootstrap.servers": "my-cluster-kafka-bootstrap:9092",
+        "database.history.kafka.topic": "schema-changes.inventory"
+    }
+}
+EOF
+
+
+
+oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+
+[marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+
+----
+Defaulting container name to kafka.
+Use 'oc describe pod/my-cluster-kafka-0 -n cdc' to see all of the containers in this pod.
+__consumer_offsets
+all
+connect-cluster-configs
+connect-cluster-offsets
+connect-cluster-status
+dbserver1.inventory.customers
+----
+
+oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
+    --bootstrap-server my-cluster-kafka-bootstrap:9092 \
+    --from-beginning \
+    --property print.key=true \
+    --topic dbserver1.inventory.customers
+
+[marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh  --bootstrap-server my-cluster-kafka-bootstrap:9092     --from-beginning     --property print.key=true     --topic dbserver1.inventory.customers
+
+----
+    Defaulting container name to kafka.
+    Use 'oc describe pod/my-cluster-kafka-0 -n cdc' to see all of the containers in this pod.
+    {"schema":{"type":"struct","fields":[{"type":"int32","optional":false,"field":"id"}],"optional":false,"name":"dbserver1.inventory.customers.Key"},"payload":{"id":1001}}	{"schema":{"type":"struct","fields":[{"type":"struct","fields":[{"type":"int32","optional":false,"field":"id"},{"type":"string","optional":false,"field":"first_name"},{"type":"string","optional":false,"field":"last_name"},{"type":"string","optional":false,"field":"email"}],"optional":true,"name":"dbserver1.inventory.customers.Value","field":"before"},{"type":"struct","fields":[{"type":"int32","optional":false,"field":"id"},{"type":"string","optional":false,"field":"first_name"},{"type":"string","optional":false,"field":"last_name"},{"type":"string","optional":false,"field":"email"}],"optional":true,"name":"dbserver1.inventory.customers.Value","field":"after"},{"type":"struct","fields":[{"type":"string","optional":false,"field":"version"},{"type":"string","optional":false,"field":"connector"},{"type":"string","optional":false,"field":"name"},{"type":"int64","optional":false,"field":"ts_ms"},{"type":"string","optional":true,"name":"io.debezium.data.Enum","version":1,"parameters":{"allowed":"true,last,false"},"default":"false","field":"snapshot"},{"type":"string","optional":false,"field":"db"},{"type":"string","optional":true,"field":"table"},{"type":"int64","optional":false,"field":"server_id"},{"type":"string","optional":true,"field":"gtid"},{"type":"string","optional":false,"field":"file"},{"type":"int64","optional":false,"field":"pos"},{"type":"int32","optional":false,"field":"row"},{"type":"int64","optional":true,"field":"thread"},{"type":"string","optional":true,"field":"query"}],"optional":false,"name":"io.debezium.connector.mysql.Source","field":"source"},{"type":"string","optional":false,"field":"op"},{"type":"int64","optional":true,"field":"ts_ms"}],"optional":false,"name":"dbserver1.inventory.customers.Envelope"},"payload":{"before":null,"after":{"id":1001,"first_name":"Sally","last_name":"Thomas","email":"sally.thomas@acme.com"},"source":{"version":"0.10.0.Beta4","connector":"mysql","name":"dbserver1","ts_ms":0,"snapshot":"true","db":"inventory","table":"customers","server_id":0,"gtid":null,"file":"mysql-bin.000003","pos":154,"row":0,"thread":null,"query":null},"op":"c","ts_ms":1567049090139}}
+----
+
+
+    oc exec -it $(oc get pods -o custom-columns=NAME:.metadata.name --no-headers -l app=mysql) \
+    -- bash -c 'mysql -u $MYSQL_USER -p$MYSQL_PASSWORD inventory'
+
+    mysql> UPDATE customers SET email="m@redhat.com" WHERE ID = 1001;
+
+----
+  Query OK, 1 row affected (0.01 sec)
+  Rows matched: 1  Changed: 1  Warnings: 0
+----
+
+  [marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh     --bootstrap-server my-cluster-kafka-bootstrap:9092     --from-beginning     --property print.key=true     --topic dbserver1.inventory.customers | grep m@redhat.com
+
+----
+Defaulting container name to kafka.
+Use 'oc describe pod/my-cluster-kafka-0 -n cdc' to see all of the containers in this pod.
+........
+"payload":{
+"before":{"id":1001,"first_name":"Sally","last_name":"Thomas","email":"sally.thomas@example.com"},
+"after":{"id":1001,"first_name":"Sally","last_name":"Thomas","email":"m@redhat.com"},
+"source":{"version":"0.10.0.Beta4","connector":"mysql","name":"dbserver1","ts_ms":1567049975000,"snapshot":"false","db":"inventory","table":"customers","server_id":223344,"gtid":null,"file":"mysql-bin.000003","pos":724,"row":0,"thread":18,"query":null},"op":"u","ts_ms":1567049975494}}
+----
 
 
 
