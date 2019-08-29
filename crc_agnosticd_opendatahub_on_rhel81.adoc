@@ -496,7 +496,7 @@ image:images/result.png[title="Red Hat Process Automation Manager - Marc demo - 
 
 
 
-== Install Change Data Capture solution (Debezium)
+== Install Change Data Capture solution (Debezium, Kafka, AMQ Streams/Strimzi)
 
 See https://debezium.io/docs/openshift/
 
@@ -624,19 +624,30 @@ mysql-2-gnrzg                                 1/1     Running     0          31s
 == Register the Debezium MySQL connector to run against the deployed MySQL instance:
 
 [marc@dell-r730-019 plugins]$ oc get pods | grep kafka
+
+----
 my-cluster-kafka-0                            2/2     Running     0          18m
 my-cluster-kafka-1                            2/2     Running     0          18m
 my-cluster-kafka-2                            2/2     Running     0          18m
+----
 
 [marc@dell-r730-019 plugins]$ oc get svc | grep connect-api
+
+----
 my-connect-cluster-connect-api   ClusterIP   172.30.175.102   <none>        8083/TCP                     13m
+----
 
 [marc@dell-r730-019 plugins]$ oc get svc | grep bootstrap
+
+----
 my-cluster-kafka-bootstrap       ClusterIP   172.30.179.106   <none>        9091/TCP,9092/TCP,9093/TCP   32m
+----
 
 [marc@dell-r730-019 plugins]$ oc get svc | grep mysql
-mysql                            ClusterIP   172.30.243.141   <none>        3306/TCP,33060/TCP           29m
 
+----
+mysql                            ClusterIP   172.30.243.141   <none>        3306/TCP,33060/TCP           29m
+----
 
 
 
@@ -705,7 +716,9 @@ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
   Rows matched: 1  Changed: 1  Warnings: 0
 ----
 
-  [marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh     --bootstrap-server my-cluster-kafka-bootstrap:9092     --from-beginning     --property print.key=true     --topic dbserver1.inventory.customers | grep m@redhat.com
+  [marc@dell-r730-019 plugins]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
+--bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning --property print.key=true \
+--topic dbserver1.inventory.customers | grep m@redhat.com
 
 ----
 Defaulting container name to kafka.
