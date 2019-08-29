@@ -527,7 +527,10 @@ oc project cdc
 
 oc delete  -f install/cluster-operator && oc delete -f examples/templates/cluster-operator
 
+
+----
 sed -i 's/namespace: .*/namespace: cdc/' install/cluster-operator/*RoleBinding*.yaml
+----
 
 oc create -f install/cluster-operator && oc create -f examples/templates/cluster-operator
 
