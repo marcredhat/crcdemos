@@ -2,7 +2,7 @@
 
 == Red Hat CodeReady Containers (Minishift equivalent for OpenShift 4.1 or newer)
 
-== Draft lab guide showing how to set up CodeReady Containers, OpenShift 4.1, Ansible Agnostic Deployer, OpenDataHub, Process Automation Manager, Change Data Capture with Debezium and Kafka on a RHEL 8.1 physical server
+== Draft lab guide showing how to set up CodeReady Containers, OpenShift 4.1, Ansible Agnostic Deployer, OpenDataHub, Process Automation Manager, Change Data Capture with Debezium and Kafka, Tekton Pipelines on a RHEL 8.1 physical server
 
 *Red Hat CodeReady Containers* brings a minimal OpenShift 4.1 or newer cluster to your local computer
 (see https://code-ready.github.io/crc/)
@@ -809,6 +809,13 @@ cd openshift-pipelines-examples
 Follow the instructions at https://github.com/marcredhat/openshift-pipelines-examples 
 
 You should see:
+
+[marc@dell-r730-019 openshift-pipelines-examples]$ oc project
+
+----
+Using project "pipeline-demo" on server "https://api.crc.testing:6443"
+----
+
 
 [marc@dell-r730-019 openshift-pipelines-examples]$ oc get pods
 
