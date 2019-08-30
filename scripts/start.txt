@@ -69,3 +69,11 @@ cat inventory
 #We are only deploying one Open Data Hub project, so we set user_count to 1.
 ansible-playbook -i inventory ./configs/ocp-workloads/ocp-workload.yml -e"ocp_workload=${WORKLOAD}" -e"ACTION=create" -e"user_count=1" -e"ocp_username=kubeadmin" -e"ansible_become_pass=a" -e"silent=False"
 
+
+Step 8 - Use your new Data & AI Platform for the Hybrid Cloud
+
+oc project open-data-hub-user1
+
+oc get pods
+
+oc get route 
