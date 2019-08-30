@@ -1,5 +1,5 @@
 
-cd /home/$DEMOUSER
+
 
 wget https://dl.google.com/go/go1.12.9.linux-amd64.tar.gz
 
