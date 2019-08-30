@@ -1,7 +1,4 @@
 
-rm -rf tmp
-mkdir tmp
-cd tmp
 
 
 ./prereqs.sh
