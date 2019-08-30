@@ -44,4 +44,7 @@ cp ./crc /usr/bin
 eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
 oc get projects
 
-Step 4
+
+Step 6 - Set up Ansible Agnostic Deployer 
+
+
