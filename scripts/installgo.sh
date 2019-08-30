@@ -1,4 +1,4 @@
-export HOME=/home/marc
+export HOME=/home/demo
 
 cd $HOME
 
