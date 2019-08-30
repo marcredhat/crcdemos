@@ -1,5 +1,5 @@
-adduser demo
+adduser demo2
 
-passwd demo
+passwd demo2
 
-usermod -aG wheel demo
+usermod -aG wheel demo2
