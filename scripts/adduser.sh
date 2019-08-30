@@ -1,5 +1,5 @@
-adduser marc
+adduser demo
 
-passwd marc
+passwd demo
 
-usermod -aG wheel marc
+usermod -aG wheel demo
