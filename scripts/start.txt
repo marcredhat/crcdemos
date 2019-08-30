@@ -62,6 +62,8 @@ Step 7 - Deploy OpenDataHub using the Ansible Agnostic Deployer
 su demouser
 cd /home/demouser/agnosticd/ansible
 
+export WORKLOAD="ocp4-workload-open-data-hub"
+
 cat inventory
 
 #We are only deploying one Open Data Hub project, so we set user_count to 1.
