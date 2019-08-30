@@ -1,7 +1,4 @@
 
-rm -rf tmp
-mkdir tmp
-cd tmp
 export DEMOUSER=demo14
 git clone https://github.com/marcredhat/crcdemos.git
 cd crcdemos/scripts
