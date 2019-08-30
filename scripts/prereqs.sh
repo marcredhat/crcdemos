@@ -13,4 +13,7 @@ yum install @python27
 
 #When you install either (or both) you can easily make /usr/bin/python point to the right place using alternatives --config python
 
+#select the option corresponding to /usr/bin/python3
 alternatives --config python
+
+python -V
