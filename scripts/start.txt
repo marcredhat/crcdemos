@@ -41,7 +41,7 @@ Step 5 - Start CodeReady Containers
 ./crc start
 
 sudo cp /home/demouser/.crc/bin/oc  /usr/bin
-sudo cp ./crc /usr/bin
+sudo cp /home/demouser/crc-linux-1.0.0-beta.3-amd64/crc /usr/bin
 
 oc login -u kubeadmin -p 78UVa-zNj5W-YB62Z-ggxGZ https://api.crc.testing:6443
 oc get projects
