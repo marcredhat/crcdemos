@@ -141,8 +141,6 @@ I’m on a physical server with around 100G of memory so I allocate 80G to CRC a
 
 Download from https://github.com/code-ready/crc/releases
 
-(I'm using https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.0.0-beta.3/crc_virtualbox_4.1.11.crcbundle)
-
 
 == Install CodeReady Containers
 
