@@ -47,6 +47,14 @@ oc login -u kubeadmin -p 78UVa-zNj5W-YB62Z-ggxGZ https://api.crc.testing:6443
 oc get projects
 
 
-Step 6 - Set up Ansible Agnostic Deployer 
+Step 6 - Set up Ansible Agnostic Deployer - prereqs
+su demouser
+cd /home/demouser
+git clone https://github.com/redhat-cop/agnosticd.git
+cd agnosticd/ansible
+sudo python -m pip install --upgrade --trusted-host files.pythonhosted.org -r requirements.txt
+sudo python3 -m pip install --upgrade --trusted-host files.pythonhosted.org -r requirements.txt
+sudo pip3 install kubernetes
+sudo pip3 install openshift
 
 
