@@ -1,6 +1,6 @@
-export HOME=/home/$USER
+export HOME=/home/$DEMOUSER
 
-cd $HOME
+cd $DEMOUSER
 
 wget https://dl.google.com/go/go1.12.9.linux-amd64.tar.gz
 
@@ -16,6 +16,6 @@ echo "export PATH=$HOME/work/bin:$HOME/go/bin:$PATH"  >> $HOME/.bashrc
 
 source .bashrc
 
-su $USER
+su $DEMOUSER
 
 go
