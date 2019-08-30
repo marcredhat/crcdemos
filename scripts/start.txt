@@ -1,12 +1,12 @@
-Step 1
-export DEMOUSER=user555
+Step 1 - Install prereqs and add user
+export DEMOUSER=demouser
 git clone https://github.com/marcredhat/crcdemos.git
 cd crcdemos/scripts/
 chmod +x *.sh
 ./1.sh
 
 
-Step 2
+Step 2 - Install Go
 su $DEMOUSER
 cd /home/$DEMOUSER
 wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/scripts/2.sh
@@ -14,16 +14,7 @@ chmod +x *.sh
 ./2.sh
 
 
-Step 3
-git clone https://github.com/code-ready/crc.git
-cd crc
-make
-#Set the memory available to CRC according to what you have on your physical server
-#I’m on a physical server with around 40G of memory so I allocate 40G to CRC as follows:
-crc config set memory 40000
-crc setup
-
-Step 4
+Step 3 - Install CodeReady Containers
 wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.0.0-beta.3/crc-linux-amd64.tar.xz
 tar -xvf crc-linux-amd64.tar.xz
 cd crc-linux-1.0.0-beta.3-amd64/
@@ -38,4 +29,4 @@ cp ./crc /usr/bin
 eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
 oc get projects
 
-Step 5
+Step 4
