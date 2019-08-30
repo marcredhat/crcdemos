@@ -1,6 +1,4 @@
-export USER=demo3
 
-su $USER
 
 cd /home/$USER
 
