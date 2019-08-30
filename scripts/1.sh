@@ -11,11 +11,10 @@ chmod +x *.sh
 
 
 su $DEMOUSER -c "cd /home/$DEMOUSER"
-su $DEMOUSER -c "git clone https://github.com/marcredhat/crcdemos.git"
-su $DEMOUSER -c "cd crcdemos/scripts"
+su $DEMOUSER -c "wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/scripts/installgo.sh"
+
 su $DEMOUSER -c "chmod +x *.sh"
 
-su $DEMOUSER -c "cd /home/$DEMOUSER"
-su $DEMOUSER -c "wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/scripts/installgo.sh"
+su $DEMOUSER -c "./installgo.sh"
 su $DEMOUSER -c "source /home/$DEMOUSER/.bashrc"
 su $DEMOUSER -c "go"
