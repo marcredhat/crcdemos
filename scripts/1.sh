@@ -1,4 +1,4 @@
-export DEMOUSER=user102
+
 rm -rf tmp
 mkdir tmp
 cd tmp
