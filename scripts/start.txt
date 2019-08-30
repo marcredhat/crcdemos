@@ -47,7 +47,7 @@ oc login -u kubeadmin -p 78UVa-zNj5W-YB62Z-ggxGZ https://api.crc.testing:6443
 oc get projects
 
 
-Step 6 - Set up Ansible Agnostic Deployer - prereqs
+Step 6 - Set up Ansible Agnostic Deployer
 su demouser
 cd /home/demouser
 git clone https://github.com/redhat-cop/agnosticd.git
@@ -58,3 +58,10 @@ sudo pip3 install kubernetes
 sudo pip3 install openshift
 
 
+Step 7 - Deploy OpenDataHub using the Ansible Agnostic Deployer
+su demouser
+cd /home/demouser/agnosticd/ansible
+
+cat inventory
+#We are only deploying one Open Data Hub project, so we set user_count to 1.
+sudo ansible-playbook -i inventory ./configs/ocp-workloads/ocp-workload.yml -e"ocp_workload=${WORKLOAD}" -e"ACTION=create" -e"user_count=1" -e"ocp_username=kubeadmin" -e"ansible_become_pass=a" -e"silent=False"
