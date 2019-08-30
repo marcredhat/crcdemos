@@ -192,7 +192,59 @@ cp ./crc /usr/bin
 
 eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
 
-oc get projects
+
+[root@dell-per640-04 crc-linux-1.0.0-beta.3-amd64]# oc get projects
+
+----
+NAME                                                    DISPLAY NAME   STATUS
+default                                                                Active
+kube-public                                                            Active
+kube-system                                                            Active
+openshift                                                              Active
+openshift-apiserver                                                    Active
+openshift-apiserver-operator                                           Active
+openshift-authentication                                               Active
+openshift-authentication-operator                                      Active
+openshift-cloud-credential-operator                                    Active
+openshift-cluster-machine-approver                                     Active
+openshift-cluster-node-tuning-operator                                 Active
+openshift-cluster-samples-operator                                     Active
+openshift-cluster-storage-operator                                     Active
+openshift-cluster-version                                              Active
+openshift-config                                                       Active
+openshift-config-managed                                               Active
+openshift-console                                                      Active
+openshift-console-operator                                             Active
+openshift-controller-manager                                           Active
+openshift-controller-manager-operator                                  Active
+openshift-dns                                                          Active
+openshift-dns-operator                                                 Active
+openshift-etcd                                                         Active
+openshift-image-registry                                               Active
+openshift-infra                                                        Active
+openshift-ingress                                                      Active
+openshift-ingress-operator                                             Active
+openshift-kube-apiserver                                               Active
+openshift-kube-apiserver-operator                                      Active
+openshift-kube-controller-manager                                      Active
+openshift-kube-controller-manager-operator                             Active
+openshift-kube-scheduler                                               Active
+openshift-kube-scheduler-operator                                      Active
+openshift-machine-api                                                  Active
+openshift-machine-config-operator                                      Active
+openshift-marketplace                                                  Active
+openshift-monitoring                                                   Active
+openshift-multus                                                       Active
+openshift-network-operator                                             Active
+openshift-node                                                         Active
+openshift-operator-lifecycle-manager                                   Active
+openshift-operators                                                    Active
+openshift-sdn                                                          Active
+openshift-service-ca                                                   Active
+openshift-service-ca-operator                                          Active
+openshift-service-catalog-apiserver-operator                           Active
+openshift-service-catalog-controller-manager-operator                  Active
+----
 
 
 == Install the Ansible Agnostic Deployer
