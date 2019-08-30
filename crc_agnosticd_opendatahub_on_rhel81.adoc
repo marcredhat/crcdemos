@@ -313,9 +313,15 @@ ocp4-workload-open-data-hub : wait for rook-ceph-mon/osd a to get to status of r
 
 == Test OpenDataHub
 
-[marc@dell-r730-019 ansible]$ oc project open-data-hub-user1
+sudo cp /root/.kube/config /home/<user>/.kubeconfig
 
-[marc@dell-r730-019 crc]$ oc get pods
+export KUBECONFIG=/home/<user>/.kubeconfig
+
+sudo chmod a+rwx  /home/<user>/.kubeconfig
+
+oc project open-data-hub-user1
+
+oc get pods
 
 ----
 NAME                                                         READY   STATUS      RESTARTS   AGE
