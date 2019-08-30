@@ -115,25 +115,66 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 source .bashrc
 
+
 == Install CodeReady Containers
 
-su marc
+wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.0.0-beta.3/crc-linux-amd64.tar.xz
 
-cd /home/marc
+tar -xvf crc-linux-amd64.tar.xz
 
-git clone https://github.com/code-ready/crc.git
+cd crc-linux-1.0.0-beta.3-amd64/
 
-cd crc
-
-make
 
 Set the memory available to CRC according to what you have on your physical server
 
 I’m on a physical server with around 100G of memory so I allocate 80G to CRC as follows:
 
-[marc@dell-r730-019 ansible]$ crc config set memory 81920
+./crc config set memory 81920
 
-[marc@dell-r730-019 crc]$ crc setup
+
+
+[root@dell-per640-04 crc-linux-1.0.0-beta.3-amd64]# ./crc setup
+
+----
+INFO Checking if NetworkManager is installed
+INFO Checking if NetworkManager service is running
+INFO Caching oc binary
+INFO Setting up virtualization
+INFO Setting up KVM
+INFO Installing libvirt service and dependencies
+INFO Adding user to libvirt group
+INFO Enabling libvirt
+INFO Starting libvirt service
+INFO Installing crc-driver-libvirt
+INFO Removing older system-wide crc-driver-libvirt
+INFO Setting up libvirt 'crc' network
+INFO Starting libvirt 'crc' network
+INFO Writing Network Manager config for crc
+INFO Writing dnsmasq config for crc
+INFO Unpacking bundle from the CRC binary
+----
+
+[root@dell-per640-04 crc-linux-1.0.0-beta.3-amd64]# ./crc start
+
+---
+INFO Checking if NetworkManager is installed
+INFO Checking if NetworkManager service is running
+INFO Checking if oc binary is cached
+INFO Checking if Virtualization is enabled
+INFO Checking if KVM is enabled
+INFO Checking if libvirt is installed
+INFO Checking if user is part of libvirt group
+INFO Checking if libvirt is enabled
+INFO Checking if libvirt daemon is running
+INFO Checking if crc-driver-libvirt is installed
+INFO Checking if libvirt 'crc' network is available
+INFO Checking if libvirt 'crc' network is active
+INFO Checking if /etc/NetworkManager/conf.d/crc-nm-dnsmasq.conf exists
+INFO Checking if /etc/NetworkManager/dnsmasq.d/crc.conf exists
+INFO Checking if CRC bundle is cached in '$HOME/.crc'
+? Image pull secret [? for help]
+----
+
 
 
 
