@@ -12,7 +12,7 @@ echo "export GOROOT=$HOME/go" >> $HOME/.bashrc
 
 echo "export GOPATH=$HOME/work" >> $HOME/.bashrc
 
-echo "export PATH=$GOPATH/bin:$GOROOT/bin:$PATH"  >> $HOME/.bashrc
+echo "export PATH=$HOME/work/bin:$HOME/go/bin:$PATH"  >> $HOME/.bashrc
 
 source .bashrc
 
