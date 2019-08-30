@@ -283,6 +283,34 @@ We are only deploying one Open Data Hub project, so we set user_count to 1.
 sudo ansible-playbook -i inventory  ./configs/ocp-workloads/ocp-workload.yml -e"ocp_workload=${WORKLOAD}" -e"ACTION=create" -e"user_count=1" -e"ocp_username=kubeadmin" -e"ansible_become_pass=<password>" -e"silent=False"
 
 
+----
+PLAY RECAP ********************************************************************************************************************************************
+127.0.0.1                  : ok=42   changed=18   unreachable=0    failed=0    skipped=1    rescued=1    ignored=0
+
+Friday 30 August 2019  03:47:30 -0400 (0:00:00.015)       0:04:03.377 *********
+===============================================================================
+ocp4-workload-open-data-hub : wait for deploy rook-ceph-rgw-my-store ------------------------------------------------------------------------- 153.90s
+ocp4-workload-open-data-hub : wait for deploy ------------------------------------------------------------------------------------------------- 34.09s
+ocp4-workload-open-data-hub : get route for jupyterhub ---------------------------------------------------------------------------------------- 33.67s
+ocp4-workload-open-data-hub : Curling ODH resources -------------------------------------------------------------------------------------------- 5.35s
+ocp4-workload-open-data-hub : Curling Rook resources ------------------------------------------------------------------------------------------- 4.54s
+ocp4-workload-open-data-hub : apply scc.yaml, operator.yaml ------------------------------------------------------------------------------------ 1.47s
+ocp4-workload-open-data-hub : apply toolbox.yaml object.yaml ----------------------------------------------------------------------------------- 1.04s
+ocp4-workload-open-data-hub : create temp directory -------------------------------------------------------------------------------------------- 0.74s
+ocp4-workload-open-data-hub : Apply opendatahub_v1alpha1_opendatahub_crd.yaml ------------------------------------------------------------------ 0.74s
+ocp4-workload-open-data-hub : new-obtain {{ item }} secrets ------------------------------------------------------------------------------------ 0.68s
+ocp4-workload-open-data-hub : Applying cluster.yaml -------------------------------------------------------------------------------------------- 0.67s
+ocp4-workload-open-data-hub : apply role.yaml -------------------------------------------------------------------------------------------------- 0.60s
+ocp4-workload-open-data-hub : create the Project ----------------------------------------------------------------------------------------------- 0.58s
+ocp4-workload-open-data-hub : create ODH Custom Resource object -------------------------------------------------------------------------------- 0.55s
+ocp4-workload-open-data-hub : modify and apply rook object-user.yaml for {{ item }} ------------------------------------------------------------ 0.53s
+ocp4-workload-open-data-hub : apply service_account.yaml --------------------------------------------------------------------------------------- 0.53s
+ocp4-workload-open-data-hub : apply ODH custom resource object customization ------------------------------------------------------------------- 0.53s
+ocp4-workload-open-data-hub : apply operator.yaml ---------------------------------------------------------------------------------------------- 0.53s
+ocp4-workload-open-data-hub : apply role_binding.yaml ------------------------------------------------------------------------------------------ 0.52s
+ocp4-workload-open-data-hub : wait for rook-ceph-mon/osd a to get to status of running --------------------------------------------------------- 0.49s
+----
+
 == Test OpenDataHub
 
 [marc@dell-r730-019 ansible]$ oc project open-data-hub-user1
