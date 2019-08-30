@@ -129,8 +129,9 @@ Set the memory available to CRC according to what you have on your physical serv
 
 I’m on a physical server with around 100G of memory so I allocate 80G to CRC as follows:
 
+----
 ./crc config set memory 81920
-
+----
 
 
 [root@dell-per640-04 crc-linux-1.0.0-beta.3-amd64]# ./crc setup
@@ -154,9 +155,10 @@ INFO Writing dnsmasq config for crc
 INFO Unpacking bundle from the CRC binary
 ----
 
+
 [root@dell-per640-04 crc-linux-1.0.0-beta.3-amd64]# ./crc start
 
----
+----
 INFO Checking if NetworkManager is installed
 INFO Checking if NetworkManager service is running
 INFO Checking if oc binary is cached
@@ -175,25 +177,7 @@ INFO Checking if CRC bundle is cached in '$HOME/.crc'
 ? Image pull secret [? for help]
 ----
 
-
-
-
-== Download CodeReady Containers bundle
-
-Download from https://github.com/code-ready/crc/releases
-
-
-== Install CodeReady Containers
-
 You'll need your pull secret from https://cloud.redhat.com/openshift/install/metal/user-provisioned
-
-
-
-[marc@dell-r730-019 crc]$ crc start -b crc_libvirt_4.1.11.crcbundle
-
-----
-INFO To access the cluster using 'oc', run 'eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443' ******INFO Access the OpenShift web-console here: https://console-openshift-console.apps-crc.testing ********************************************************INFO Login to the console with user: kubeadmin, password: 78UVa-zNj5W-YB62Z-ggxGZ *********************************************************************CodeReady Containers instance is running
-----
 
 
 cd /home/marc/crc
