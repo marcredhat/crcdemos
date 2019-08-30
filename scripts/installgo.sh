@@ -1,4 +1,4 @@
-export HOME=/home/demo
+export HOME=/home/demo2
 
 cd $HOME
 
@@ -16,6 +16,6 @@ echo "export PATH=$GOPATH/bin:$GOROOT/bin:$PATH"  >> $HOME/.bashrc
 
 source .bashrc
 
-su demo
+su demo2
 
 go
