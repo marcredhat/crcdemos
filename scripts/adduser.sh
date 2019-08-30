@@ -1,5 +1,5 @@
-adduser $USER
+adduser $DEMOUSER
 
-passwd $USER
+passwd $DEMOUSER
 
-usermod -aG wheel $USER
+usermod -aG wheel $DEMOUSER
