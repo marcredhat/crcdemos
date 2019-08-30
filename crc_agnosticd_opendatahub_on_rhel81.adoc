@@ -156,6 +156,9 @@ INFO Unpacking bundle from the CRC binary
 ----
 
 
+You'll need your pull secret from https://cloud.redhat.com/openshift/install/metal/user-provisioned
+
+
 [root@dell-per640-04 crc-linux-1.0.0-beta.3-amd64]# ./crc start
 
 ----
@@ -177,10 +180,11 @@ INFO Checking if CRC bundle is cached in '$HOME/.crc'
 ? Image pull secret [? for help]
 ----
 
-You'll need your pull secret from https://cloud.redhat.com/openshift/install/metal/user-provisioned
 
-
-cd /home/marc/crc
+----
+INFO To access the cluster using 'oc', run 'eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443' ******INFO Access the OpenShift web-console here: https://console-openshift-console.apps-crc.testing ********************************************************
+INFO Login to the console with user: kubeadmin, password: <password>
+----
 
 eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
 
