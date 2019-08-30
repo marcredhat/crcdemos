@@ -1,5 +1,5 @@
-adduser demo3
+adduser $USER
 
-passwd demo3
+passwd $USER
 
-usermod -aG wheel demo3
+usermod -aG wheel $USER
