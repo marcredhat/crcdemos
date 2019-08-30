@@ -1,4 +1,4 @@
-export HOME=/home/demo2
+export HOME=/home/demo3
 
 cd $HOME
 
@@ -16,6 +16,6 @@ echo "export PATH=$HOME/work/bin:$HOME/go/bin:$PATH"  >> $HOME/.bashrc
 
 source .bashrc
 
-su demo2
+su demo3
 
 go
