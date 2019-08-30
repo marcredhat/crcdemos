@@ -16,4 +16,6 @@ echo "export PATH=$GOPATH/bin:$GOROOT/bin:$PATH"  >> $HOME/.bashrc
 
 source .bashrc
 
+su demo
+
 go
