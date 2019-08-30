@@ -2,10 +2,11 @@
 sudo subscription-manager register --user  <user>
 sudo subscription-manager list --available | more
 sudo subscription-manager attach --pool <pool>
-
-Step 1 - Install prereqs and add user
 sudo dnf -y update && dnf -y upgrade
 sudo dnf -y install git
+
+
+Step 1 - Install prereqs and add user
 export DEMOUSER=demouser
 git clone https://github.com/marcredhat/crcdemos.git
 cd crcdemos/scripts/
