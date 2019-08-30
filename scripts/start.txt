@@ -16,14 +16,13 @@ chmod +x *.sh
 
 Step 3
 git clone https://github.com/code-ready/crc.git
-
 cd crc
-
 make
-
 #Set the memory available to CRC according to what you have on your physical server
-
 #I’m on a physical server with around 40G of memory so I allocate 40G to CRC as follows:
-
 crc config set memory 40000
 crc setup
+
+Step 4
+wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.0.0-beta.3/crc_virtualbox_4.1.11.crcbundle
+crc start -b crc_libvirt_4.1.11.crcbundle
