@@ -13,4 +13,6 @@ echo "export GOPATH=$HOME/work" >> $HOME/.bashrc
 
 echo "export PATH=$HOME/work/bin:$HOME/go/bin:$PATH"  >> $HOME/.bashrc
 
+source $HOME/.bashrc
+
 go
