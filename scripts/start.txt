@@ -24,5 +24,18 @@ crc config set memory 40000
 crc setup
 
 Step 4
-wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.0.0-beta.3/crc_virtualbox_4.1.11.crcbundle
-crc start -b crc_libvirt_4.1.11.crcbundle
+wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.0.0-beta.3/crc-linux-amd64.tar.xz
+tar -xvf crc-linux-amd64.tar.xz
+cd crc-linux-1.0.0-beta.3-amd64/
+#Set the memory available to CRC according to what you have on your physical server
+#I’m on a physical server with around 100G of memory so I allocate 80G to CRC as follows:
+
+./crc config set memory 81920
+./crc setup
+./crc start
+cp /root/.crc/bin/oc /usr/bin/
+cp ./crc /usr/bin
+eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
+oc get projects
+
+Step 5
