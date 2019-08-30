@@ -21,10 +21,12 @@ wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/scripts/2.sh
 chmod +x *.sh
 ./2.sh
 
+Step 3 - Test Go installation
 source .bashrc
+go
 
 
-Step 3 - Install CodeReady Containers
+Step 4 - Set up CodeReady Containers
 wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.0.0-beta.3/crc-linux-amd64.tar.xz
 tar -xvf crc-linux-amd64.tar.xz
 cd crc-linux-1.0.0-beta.3-amd64/
@@ -33,6 +35,9 @@ cd crc-linux-1.0.0-beta.3-amd64/
 
 ./crc config set memory 81920
 ./crc setup
+
+
+Step 5 - Start CodeReady Containers
 ./crc start
 cp /root/.crc/bin/oc /usr/bin/
 cp ./crc /usr/bin
