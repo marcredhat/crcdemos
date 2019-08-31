@@ -83,7 +83,7 @@ Step 9 - Change Data Capture solution with Debezium and Kafka / AMQ Streams / St
 
 * Follow the detailed the instruction at bit.ly/marcredhat
 
-eval $(crc oc-env) && oc login -u kubeadmin -p 78UVa-zNj5W-YB62Z-ggxGZ https://api.crc.testing:6443
+eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
 Login successful.
 You have access to 55 projects, the list has been suppressed. You can list all projects with 'oc projects'
 Using project "cdc".
@@ -103,7 +103,7 @@ oc exec -i -c kafka my-cluster-kafka-0 -- curl -X POST \
     -H "Content-Type:application/json" \
     http://my-connect-cluster-connect-api:8083/connectors -d @- <<'EOF'
 {
-    "name": "inventory-connector-Marc",
+    "name": "inventory-connector-Marc-demos",
     "config": {
         "connector.class": "io.debezium.connector.mysql.MySqlConnector",
         "tasks.max": "1",
