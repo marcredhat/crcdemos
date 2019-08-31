@@ -81,7 +81,7 @@ oc get route
 
 Step 9 - Change Data Capture solution with Debezium and Kafka / AMQ Streams / Strimzi
 
-* Follow the detailed the instruction at bit.ly/marcredhat
+* Follow the detailed instructions at bit.ly/marcredhat
 
 eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
 Login successful.
