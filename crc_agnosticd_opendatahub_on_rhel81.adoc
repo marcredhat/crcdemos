@@ -542,7 +542,18 @@ catalogsource.operators.coreos.com/operatorhubio-catalog created
 To be able to deploy Red Hat Process Automation Manager using operators, you must subscribe to the Business Automation operator in OpenShift. If the operator is not available in the catalog, you must download and install it.
 
 ----
-oc create -f https://raw.githubusercontent.com/kiegroup/kie-cloud-operator/1.0.1/deploy/catalog_resources/redhat/catalog-source.yaml
+wget https://raw.githubusercontent.com/kiegroup/kie-cloud-operator/1.0.1/deploy/catalog_resources/redhat/catalog-source.yaml
+----
+
+
+Replace all 3 occurences of "operator-lifecycle-manager" with "olm" 
+
+
+oc create -f catalog-source.yaml
+
+----
+configmap/ba-resources created
+catalogsource.operators.coreos.com/ba-resources created
 ----
 
 
