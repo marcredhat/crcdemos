@@ -121,13 +121,15 @@ oc exec -i -c kafka my-cluster-kafka-0 -- curl -X POST \
 EOF
 
 
-* Update the Customers table by setting email = TEST@redhat.com for ID = 1001
+* Update the Customers table by setting email = email3@redhat.com for ID = 1001
+
+(Previous addresses were email1@redhat.com and email2@redhat.com)
 
 
 oc exec -it $(oc get pods -o custom-columns=NAME:.metadata.name --no-headers -l app=mysql) -- bash -c 'mysql -u $MYSQL_USER -p$MYSQL_PASSWORD inventory'
 
 mysql>
-mysql> UPDATE customers SET email="TEST@redhat.com" WHERE ID = 1001;
+mysql> UPDATE customers SET email="email3@redhat.com" WHERE ID = 1001;
 Query OK, 1 row affected (0.00 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
@@ -145,27 +147,33 @@ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --boo
   "id": 1001,
   "first_name": "Sally",
   "last_name": "Thomas",
-  "email": "sally.thomas@acme.com"
+  "email": "email1@acme.com"
 }
 {
   "id": 1001,
   "first_name": "Sally",
   "last_name": "Thomas",
-  "email": "m@redhat.com"
+  "email": "email2@redhat.com"
 }
 
 
 
 After (current email address for customer ID = 1001)
 
-[demouser@hpe-dl380gen9-01 ~]$ oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning --property print.key=true --topic dbserver1.inventory.customers  | awk '/schema/' | jq  '.payload.after | select(.id==1001)' | jq .
+oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning --property print.key=true --topic dbserver1.inventory.customers  | awk '/schema/' | jq  '.payload.after | select(.id==1001)' | jq .
 
 ............................
 {
   "id": 1001,
   "first_name": "Sally",
   "last_name": "Thomas",
-  "email": "TEST@redhat.com"
+  "email": "email2@redhat.com"
+}
+{
+  "id": 1001,
+  "first_name": "Sally",
+  "last_name": "Thomas",
+  "email": "email3@redhat.com"
 }
 
 
