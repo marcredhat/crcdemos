@@ -77,3 +77,80 @@ oc project open-data-hub-user1
 oc get pods
 
 oc get route 
+
+
+Step 9 - Change Data Capture solution with Debezium and Kafka / AMQ Streams / Strimzi
+
+Follow the detailed the instruction at bit.ly/marcredhat
+
+eval $(crc oc-env) && oc login -u kubeadmin -p 78UVa-zNj5W-YB62Z-ggxGZ https://api.crc.testing:6443
+
+----
+Login successful.
+You have access to 55 projects, the list has been suppressed. You can list all projects with 'oc projects'
+Using project "cdc".
+----
+
+Write down the ClusterIP for MySQL, we'll use when creating the Debezium connector
+
+oc get svc | grep  mysql
+
+----
+mysql                            ClusterIP   172.30.225.22    <none>        3306/TCP,33060/TCP           12h
+-----
+
+Create the Debezium connector
+
+oc exec -i -c kafka my-cluster-kafka-0 -- curl -X POST \
+    -H "Accept:application/json" \
+    -H "Content-Type:application/json" \
+    http://my-connect-cluster-connect-api:8083/connectors -d @- <<'EOF'
+{
+    "name": "inventory-connector-Marc",
+    "config": {
+        "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+        "tasks.max": "1",
+        "database.hostname": "172.30.225.22",
+        "database.port": "3306",
+        "database.user": "debezium",
+        "database.password": "dbz",
+        "database.server.id": "184054",
+        "database.server.name": "dbserver1",
+        "database.whitelist": "inventory",
+        "database.history.kafka.bootstrap.servers": "my-cluster-kafka-bootstrap:9092",
+        "database.history.kafka.topic": "schema-changes.inventory"
+    }
+}
+EOF
+
+Update the Customers table by setting email = m@redhat.com
+
+----
+oc exec -it $(oc get pods -o custom-columns=NAME:.metadata.name --no-headers -l app=mysql) -- bash -c 'mysql -u $MYSQL_USER -p$MYSQL_PASSWORD inventory'
+
+mysql>
+mysql> UPDATE customers SET email="m@redhat.com" WHERE ID = 1001;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> exit
+----
+
+Check that Debezium sent the correct before and after values
+
+----
+oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
+> --bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning \
+> --property print.key=true --topic dbserver1.inventory.customers \
+> | grep m@redhat.com
+Defaulting container name to kafka.
+----
+
+----
+....{"type":"int64","optional":true,"field":"ts_ms"}],"optional":false,"name":"dbserver1.inventory.customers.Envelope"},"payload":
+
+{"before":{"id":1001,"first_name":"Sally","last_name":"Thomas","email":"sally.thomas@acme.com"},
+"after":{"id":1001,"first_name":"Sally","last_name":"Thomas","email":"m@redhat.com"},"source":
+
+{"version":"0.10.0.Beta4","connector":"mysql","name":"dbserver1","ts_ms":1567272562000,"snapshot":"false","db":"inventory","table":"customers","server_id":223344,"gtid":null,"file":"mysql-bin.000003","pos":364,"row":0,"thread":11,"query":null},"op":"u","ts_ms":1567272562539}}
+----
