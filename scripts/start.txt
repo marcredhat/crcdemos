@@ -137,10 +137,10 @@ mysql> exit
 * Check that Debezium sent the correct before and after values
 
 oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh \
-> --bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning \
-> --property print.key=true --topic dbserver1.inventory.customers \
-> | grep m@redhat.com
-Defaulting container name to kafka.
+--bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning \
+--property print.key=true --topic dbserver1.inventory.customers \
+| grep m@redhat.com
+
 ....{"type":"int64","optional":true,"field":"ts_ms"}],"optional":false,"name":"dbserver1.inventory.customers.Envelope"},"payload":
 
 {"before":{"id":1001,"first_name":"Sally","last_name":"Thomas","email":"sally.thomas@acme.com"},
