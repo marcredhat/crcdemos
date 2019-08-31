@@ -644,16 +644,13 @@ packageserver-5fd86dbdcf-tjmmx                  1/1     Running   0          7h4
 ----
 
 
-[marc@dell-r730-019 ~]$ oc get route
+[demouser@hpe-dl380gen9-01 kie-cloud-operator]$ oc get route
 
 ----
-NAME                          HOST/PORT                                                            PATH   SERVICES                 PORT    TERMINATION            WILDCARD
-console-cr-form               console-cr-form-openshift-marketplace.apps-crc.testing                      console-cr-form          <all>   reencrypt              None
-rhpam-trial-kieserver         rhpam-trial-kieserver-openshift-marketplace.apps-crc.testing                rhpam-trial-kieserver    https   passthrough/Redirect   None
-rhpam-trial-kieserver-http    rhpam-trial-kieserver-http-openshift-marketplace.apps-crc.testing           rhpam-trial-kieserver    http                           None
-rhpam-trial-rhpamcentr        rhpam-trial-rhpamcentr-openshift-marketplace.apps-crc.testing               rhpam-trial-rhpamcentr   https   passthrough/Redirect   None
-rhpam-trial-rhpamcentr-http   rhpam-trial-rhpamcentr-http-openshift-marketplace.apps-crc.testing          rhpam-trial-rhpamcentr   http                           None
+NAME              HOST/PORT                                                               PATH   SERVICES          PORT    TERMINATION   WILDCARD
+console-cr-form   console-cr-form-openshift-operator-lifecycle-manager.apps-crc.testing          console-cr-form   <all>   reencrypt     None
 ----
+
 
 On your laptop, add console-cr-form-openshift-marketplace.apps-crc.testing to /etc/hosts (pointing it to 127.0.0.1)
 
