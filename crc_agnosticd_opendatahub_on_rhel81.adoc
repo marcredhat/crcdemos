@@ -610,25 +610,39 @@ openshift-marketplace   12m         Normal    SuccessfulCreate    replicaset/kie
 openshift-marketplace   12m         Normal    ScalingReplicaSet   deployment/kiecloud-operators              Scaled up replica set kiecloud-operators-6d744cf8d5 to 1
 ----
 
+[demouser@hpe-dl380gen9-01 kie-cloud-operator]$ oc project openshift-marketplace
 
-[marc@dell-r730-019 ~]$ oc project openshift-marketplace
-
-----
 Now using project "openshift-marketplace" on server "https://api.crc.testing:6443".
+
+[demouser@hpe-dl380gen9-01 kie-cloud-operator]$ oc get pods
+
+----
+NAME                                                              READY   STATUS    RESTARTS   AGE
+certified-operators-848fc9c865-t5pxm                              1/1     Running   0          7h42m
+community-operators-74bb5488dc-t5hzv                              1/1     Running   0          7h43m
+installed-redhat-openshift-operator-lifecycle-manager-6ffbngpvf   1/1     Running   0          9m32s
+marketplace-operator-7df66dbf67-r5bnr                             1/1     Running   0          7d9h
+redhat-operators-5ffcc8d787-mph42                                 1/1     Running   0          7h42m
 ----
 
-[marc@dell-r730-019 ~]$ oc get pods
+
+[demouser@hpe-dl380gen9-01 kie-cloud-operator]$ oc project openshift-operator-lifecycle-manager
+
+Now using project "openshift-operator-lifecycle-manager" on server "https://api.crc.testing:6443".
+
+[demouser@hpe-dl380gen9-01 kie-cloud-operator]$ oc get pods
 
 ----
-NAME                                                     READY   STATUS    RESTARTS   AGE
-business-automation-operator-5b65d958cc-jmqdt            1/1     Running   0          7m22s
-certified-operators-7bbb75bc89-tq9j8                     1/1     Running   0          8h
-community-operators-84b686f994-ddfnb                     1/1     Running   0          8h
-console-cr-form                                          2/2     Running   0          6m56s
-installed-redhat-openshift-marketplace-849d7646f-5rrp5   1/1     Running   0          7m43s
-marketplace-operator-7df66dbf67-r5bnr                    1/1     Running   0          4d11h
-redhat-operators-857458566c-l879k                        1/1     Running   0          8h
+NAME                                            READY   STATUS    RESTARTS   AGE
+business-automation-operator-7549546494-2t5x2   1/1     Running   0          9m24s
+catalog-operator-64556ffff5-fgs6l               1/1     Running   0          7d9h
+console-cr-form                                 2/2     Running   0          8m58s
+olm-operator-6ff7dbf564-xbnr4                   1/1     Running   0          7d9h
+olm-operators-9625p                             1/1     Running   0          7d9h
+packageserver-5fd86dbdcf-9r774                  1/1     Running   0          7h43m
+packageserver-5fd86dbdcf-tjmmx                  1/1     Running   0          7h43m
 ----
+
 
 [marc@dell-r730-019 ~]$ oc get route
 
