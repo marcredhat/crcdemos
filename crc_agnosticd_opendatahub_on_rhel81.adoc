@@ -480,8 +480,6 @@ podman push kie-cloud-operator:1.2 quay.io/marcf5/kie-cloud-operator:1.2.0
 
 == Install Operator Courier (used to build, validate and push Operator artifacts)
 
-pip3 install operator-courier
-
 [marc@dell-r730-019 kie-cloud-operator]$ sudo pip3 install operator-courier
 
 ----
