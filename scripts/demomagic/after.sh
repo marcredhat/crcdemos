@@ -1,0 +1,1 @@
+oc exec -it my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --from-beginning --property print.key=true --topic dbserver1.inventory.customers  | awk '/schema/' | jq  '.payload.after | select(.id==1001)' | jq .
