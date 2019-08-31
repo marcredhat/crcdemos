@@ -1,4 +1,6 @@
- 
+== Obsolete => go to crc_agnosticd_opendatahub_on_rhel81.adoc	
+
+
 == Red Hat CodeReady Containers (Minishift equivalent for OpenShift 4.1 or newer)
 
 == Draft lab guide showing how to set up CodeReady Containers, deploy apps and Tekton Pipelines, configure persistent storage and more
