@@ -506,6 +506,39 @@ cd /home/marc/crc
 
 eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
 
+*Install Operator Lifecycle Manager*
+See https://github.com/operator-framework/operator-lifecycle-manager/releases
+
+[demouser@hpe-dl380gen9-01 ~]$ oc apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.11.0/crds.yaml
+
+----
+customresourcedefinition.apiextensions.k8s.io/clusterserviceversions.operators.coreos.com configured
+customresourcedefinition.apiextensions.k8s.io/installplans.operators.coreos.com configured
+customresourcedefinition.apiextensions.k8s.io/subscriptions.operators.coreos.com configured
+customresourcedefinition.apiextensions.k8s.io/catalogsources.operators.coreos.com configured
+customresourcedefinition.apiextensions.k8s.io/operatorgroups.operators.coreos.com configured
+----
+
+
+[demouser@hpe-dl380gen9-01 ~]$ oc apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.11.0/olm.yaml
+
+----
+namespace/olm created
+namespace/operators created
+clusterrole.rbac.authorization.k8s.io/system:controller:operator-lifecycle-manager configured
+serviceaccount/olm-operator-serviceaccount created
+clusterrolebinding.rbac.authorization.k8s.io/olm-operator-binding-olm created
+deployment.apps/olm-operator created
+deployment.apps/catalog-operator created
+clusterrole.rbac.authorization.k8s.io/aggregate-olm-edit configured
+clusterrole.rbac.authorization.k8s.io/aggregate-olm-view configured
+operatorgroup.operators.coreos.com/global-operators created
+operatorgroup.operators.coreos.com/olm-operators created
+clusterserviceversion.operators.coreos.com/packageserver created
+catalogsource.operators.coreos.com/operatorhubio-catalog created
+----
+
+
 oc new-project processautomation
 
 marc@dell-r730-019 kie-cloud-operator]$ cd $GOPATH/src/github.com/kiegroup/kie-cloud-operator/
