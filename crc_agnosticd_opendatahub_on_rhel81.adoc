@@ -16,6 +16,7 @@
 
 - Tekton Pipelines 
 
+*Youtube playlist at https://www.youtube.com/playlist?list=PLg1pvyPzFye2UtQjZTSjoXhFdqkGK6exw*
 
 *Red Hat CodeReady Containers* brings a minimal OpenShift 4.1 or newer cluster to your local computer
 (see https://code-ready.github.io/crc/)
