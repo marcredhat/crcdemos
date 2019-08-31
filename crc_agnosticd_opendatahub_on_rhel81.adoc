@@ -548,13 +548,20 @@ wget https://raw.githubusercontent.com/kiegroup/kie-cloud-operator/1.0.1/deploy/
 
 Replace all 3 occurences of "operator-lifecycle-manager" with "olm" 
 
-
 oc create -f catalog-source.yaml
 
 ----
 configmap/ba-resources created
 catalogsource.operators.coreos.com/ba-resources created
 ----
+
+image:images/businessautomation1.png[title="Red Hat Process Automation Manager - 1"]
+
+image:images/businessautomation2.png[title="Red Hat Process Automation Manager - 2"]
+
+image:images/businessautomation3.png[title="Red Hat Process Automation Manager - 3"]
+
+image:images/businessautomation4.png[title="Red Hat Process Automation Manager - 4"]
 
 
 oc new-project processautomation
