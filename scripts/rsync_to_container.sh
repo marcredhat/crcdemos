@@ -2,6 +2,7 @@ poddeploy=$(oc get pods | grep mapit-deploy-pipelinerun | cut -d " " -f 1)
 echo $poddeploy
 containersourcecopy=$(oc get pod ${poddeploy} -o jsonpath='{.spec.containers[*].name}'|  cut -d " " -f 5)
 echo $containersourcecopy
+oc set  volume pod/${poddeploy} --add --name=camelsap --claim-name=sapdata --type pvc --claim-size=1G --mount-path /workspace
 oc rsync /root/podmancamelsap/podmancamelsap ${poddeploy}:/workspace -c $containersourcecopy
 
 #oc logs mapit-build-pipelinerun-fszzj-build-app-q9kfg-pod-a35205 -c step-build
