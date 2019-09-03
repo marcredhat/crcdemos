@@ -18,3 +18,5 @@ chmod +x *.sh
 #oc rsync /root/podmancamelsap/podmancamelsap pod/mapit-deploy-pipelinerun-bl7km-build-app-6lfrm-pod-b1cd7b:/workspace -c step-source-copy-mapit-git-rjtqk
 
 #oc rsh -c step-source-copy-mapit-git-rjtqk  mapit-deploy-pipelinerun-bl7km-build-app-6lfrm-pod-b1cd7b 
+
+#oc logs mapit-build-pipelinerun-ldpkg-build-app-5tgcq-pod-6f9228 -c step-build
