@@ -14,3 +14,7 @@ chmod +x *.sh
 #edit createpipeline.sh with new project name
 ./createpipeline.sh
 ./rsync_to_container.sh
+
+#oc rsync /root/podmancamelsap/podmancamelsap pod/mapit-deploy-pipelinerun-bl7km-build-app-6lfrm-pod-b1cd7b:/workspace -c step-source-copy-mapit-git-rjtqk
+
+#oc rsh -c step-source-copy-mapit-git-rjtqk  mapit-deploy-pipelinerun-bl7km-build-app-6lfrm-pod-b1cd7b 
