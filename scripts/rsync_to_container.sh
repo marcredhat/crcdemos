@@ -4,6 +4,8 @@ containersourcecopy=$(oc get pod ${poddeploy} -o jsonpath='{.spec.containers[*].
 echo $containersourcecopy
 oc rsync /root/podmancamelsap/podmancamelsap ${poddeploy}:/workspace -c $containersourcecopy
 
+#oc logs mapit-build-pipelinerun-fszzj-build-app-q9kfg-pod-a35205 -c step-build
+
 #oc rsh -c step-source-copy-mapit-git-sp4b4 pod/mapit-deploy-pipelinerun-zq7z8-build-app-cjx2v-pod-f02535
 #oc rsync /root/podmancamelsap/podmancamelsap pod/mapit-deploy-pipelinerun-zq7z8-build-app-cjx2v-pod-f02535:/workspace -c step-source-copy-mapit-git-sp4b4
 
