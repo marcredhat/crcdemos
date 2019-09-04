@@ -1,4 +1,4 @@
-oc new-project marc
+oc new-project marc2
 
 # create service account
 
