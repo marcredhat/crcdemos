@@ -1,4 +1,4 @@
-oc new-project test-pipeline-demo
+oc new-project marc
 
 # create service account
 
