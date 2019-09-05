@@ -1,0 +1,139 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: "2019-09-05T18:38:23Z"
+  generation: 1
+  labels:
+    app: 3scale-gateway
+  name: apicast
+  namespace: 3scale
+  resourceVersion: "365211"
+  selfLink: /apis/apps.openshift.io/v1/namespaces/3scalegateway/deploymentconfigs/apicast
+  uid: 5774af73-d00c-11e9-9a41-0a580a80009c
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    deploymentconfig: apicast
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        prometheus.io/port: "9421"
+        prometheus.io/scrape: "true"
+      creationTimestamp: null
+      labels:
+        app: 3scale-gateway
+        deploymentconfig: apicast
+    spec:
+      containers:
+      - env:
+        - name: THREESCALE_PORTAL_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: apicast-configuration-url-secret
+        - name: THREESCALE_CONFIG_FILE
+        - name: THREESCALE_DEPLOYMENT_ENV
+          value: production
+        - name: RESOLVER
+          value: 8.8.8.8
+        - name: APICAST_SERVICES_LIST
+        - name: APICAST_CONFIGURATION_LOADER
+          value: boot
+        - name: APICAST_LOG_LEVEL
+        - name: APICAST_PATH_ROUTING
+          value: "false"
+        - name: APICAST_RESPONSE_CODES
+          value: "false"
+        - name: APICAST_CONFIGURATION_CACHE
+        - name: REDIS_URL
+        - name: APICAST_MANAGEMENT_API
+          value: status
+        - name: OPENSSL_VERIFY
+          value: "false"
+        image: registry.redhat.io/3scale-amp26/apicast-gateway
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 30
+          httpGet:
+            path: /status/live
+            port: management
+            scheme: HTTP
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 100
+        name: apicast
+        ports:
+        - containerPort: 8080
+          name: proxy
+          protocol: TCP
+        - containerPort: 8090
+          name: management
+          protocol: TCP
+        - containerPort: 9421
+          name: metrics
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /status/ready
+            port: management
+            scheme: HTTP
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "1"
+            memory: 128Mi
+          requests:
+            cpu: 500m
+            memory: 64Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+  - type: ConfigChange
+status:
+  availableReplicas: 0
+  conditions:
+  - lastTransitionTime: "2019-09-05T18:38:24Z"
+    lastUpdateTime: "2019-09-05T18:38:24Z"
+    message: Deployment config does not have minimum availability.
+    status: "False"
+    type: Available
+  - lastTransitionTime: "2019-09-05T18:38:24Z"
+    lastUpdateTime: "2019-09-05T18:38:24Z"
+    message: replication controller "apicast-1" is waiting for pod "apicast-1-deploy"
+      to run
+    status: Unknown
+    type: Progressing
+  details:
+    causes:
+    - type: ConfigChange
+    message: config change
+  latestVersion: 1
+  observedGeneration: 1
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1
