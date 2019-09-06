@@ -8,7 +8,7 @@ metadata:
   labels:
     app: 3scale-gateway
   name: apicast
-  namespace: 3scale
+  namespace: 3scalegateway
   resourceVersion: "365211"
   selfLink: /apis/apps.openshift.io/v1/namespaces/3scalegateway/deploymentconfigs/apicast
   uid: 5774af73-d00c-11e9-9a41-0a580a80009c
