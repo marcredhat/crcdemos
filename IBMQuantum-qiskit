@@ -2,10 +2,13 @@
 # Experiment with IBM's Qiskit open-source framework for working with  quantum computers
 # on OpenShift 4.1 / CodeReady Containers 
 
-# This quickstart includes Qiskit Aqua (library of cross-domain quantum algorithms upon which applications for 
+# This quickstart includes Qiskit Aqua 
+# (library of cross-domain quantum algorithms upon which applications for 
 # near-term quantum computing can be built). 
-# Aqua is designed to be extensible, and employs a pluggable framework # where quantum algorithms can easily be added. 
-# It currently allows the user to experiment on chemistry, AI, optimization and finance applications for near-term # quantum computers).
+
+# Aqua is designed to be extensible, and employs a pluggable framework where quantum algorithms can easily be added. 
+# It currently allows the user to experiment on chemistry, AI, optimization and finance applications 
+# for near-term quantum computers.
 
 # See bit.ly/marcredhat and bit.ly/marcredhatplaylist for step-by-step instructions
 # on installing Open Data Hub on CodeReady Containers/OpenShift 4.1
