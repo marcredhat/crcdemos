@@ -17,7 +17,7 @@
 
 # Install a pip package in the current Jupyter kernel
 import sys
-!{sys.executable} -m pip install numpy qiskit qiskit-aer matplotlib 
+!{sys.executable} -m pip install numpy qiskit matplotlib 
 import numpy as np
 from qiskit import *
 %matplotlib inline
