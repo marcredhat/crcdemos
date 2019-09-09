@@ -1,6 +1,6 @@
 
 # Experiment with IBM's Qiskit open-source framework for working with  quantum computers
-# on OpenShift 4.1 / CodeReady Containers 
+# on OpenShift 4.1 / OpenDataHub / CodeReady Containers 
 
 # This quickstart includes Qiskit Aqua 
 # (library of cross-domain quantum algorithms upon which applications for 
