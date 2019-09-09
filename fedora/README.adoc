@@ -1,0 +1,110 @@
+== Red Hat CodeReady Containers (Minishift equivalent for OpenShift 4.1 or newer)
+
+== Draft lab guide showing how to set up the following on a Fedora 30 physical server:
+
+- CodeReady Containers / OpenShift 4.1
+
+- Ansible Agnostic Deployer
+
+- OpenDataHub
+
+- Process Automation Manager
+
+- Change Data Capture with Debezium and Kafka
+
+- Tekton Pipelines
+
+
+*Youtube playlist at https://www.youtube.com/playlist?list=PLg1pvyPzFye2UtQjZTSjoXhFdqkGK6exw*
+The videos also include Fuse/Camel/SAP, 3scale API management and much more.
+
+
+*Red Hat CodeReady Containers* brings a minimal OpenShift 4.1 or newer cluster to your local computer
+(see https://code-ready.github.io/crc/)
+
+*Ansible Agnostic Deployer* aka AgnosticD, is a fully automated 2 Phase deployer for building and deploying everything from basic infrastructure to fully configured running application environments running on either public Cloud Providers or OpenShift clusters.
+
+AgnosticD is not an OpenShift Deployer, though it can and does that, it is however also a deployer that just happens to be used to deploy a lot of OpenShift and OpenShift workloads, amongst other things. See https://github.com/redhat-cop/agnosticd
+
+*Open Data Hub* is a machine-learning-as-a-service platform built on Red Hat's Kubernetes-based OpenShift® Container Platform, Ceph Object Storage, and Kafka/Strimzi integrating a collection of open source projects. See https://opendatahub.io/
+
+
+
+
+The instructions below cover
+
+- installing Red Hat CodeReady Containers on a Fedora 30  *physical* server
+
+- using Ansible Agnostic Deployer to deploy OpenDataHub on OpenShift 4.1
+
+- configuring SSH tunneling / port forwarding to access the OpenShift console, OpenDataHub etc from your laptop.
+
+
+
+[marc@fedora30 ~]$ cat /etc/fedora-release
+
+----
+Fedora release 30 (Thirty)
+----
+
+
+
+== Install packages
+
+dnf config-manager --set-enabled fedora
+
+su -c 'dnf -y install git wget tar qemu-kvm libvirt NetworkManager jq'
+
+sudo systemctl start libvirtd
+
+sudo systemctl enable libvirtd
+
+
+== Check Python is installed
+See https://developer.fedoraproject.org/tech/languages/python/multiple-pythons.html
+[marc@fedora30 ~]$ sudo python3 --version
+[sudo] password for marc:
+Python 3.7.4
+
+Create a Python virtual environments; we will use it later when we set up Ansible Agnostic Deployer.
+python3 -m venv agnosticd 
+
+
+
+== Add user
+
+sudo adduser demouser
+
+sudo passwd demouser
+
+sudo usermod -aG wheel demouser
+
+== Install Go
+
+su demouser
+
+cd /home/demouser
+
+wget https://dl.google.com/go/go1.12.9.linux-amd64.tar.gz
+
+tar -xzf go1.12.9.linux-amd64.tar.gz
+
+Add to .bashrc:
+
+----
+export GOROOT=/home/demouser/go
+
+export GOPATH=/home/demouser/work
+
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+----
+
+source .bashrc
+
+go
+
+== Install CodeReady Containers
+
+wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.0.0-beta.3/crc-linux-amd64.tar.xz
+or
+https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.0.0-beta.3/crc_virtualbox_4.1.11.crcbundle
