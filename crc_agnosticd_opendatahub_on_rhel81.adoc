@@ -2,7 +2,7 @@
 
 == Red Hat CodeReady Containers (Minishift equivalent for OpenShift 4.1 or newer)
 
-== Draft lab guide showing how to set up 
+== Draft lab guide showing how to set up the following on a RHEL 8.1 physical server:
 
 - CodeReady Containers / OpenShift 4.1
 
