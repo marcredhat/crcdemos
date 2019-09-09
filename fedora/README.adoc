@@ -62,9 +62,12 @@ sudo systemctl enable libvirtd
 
 == Check Python is installed
 See https://developer.fedoraproject.org/tech/languages/python/multiple-pythons.html
-[marc@fedora30 ~]$  python3 --version
-[sudo] password for marc:
+
+python3 --version
+
+----
 Python 3.7.4
+----
 
 Create a Python virtual environment; we will use it later when we set up Ansible Agnostic Deployer.
 
