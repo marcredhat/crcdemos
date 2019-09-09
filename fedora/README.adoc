@@ -184,3 +184,175 @@ INFO Login to the console with user: kubeadmin, password: <password>
 ----
 
 
+sudo cp /home/demouser/.crc/bin/oc /usr/bin
+
+----
+eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
+----
+
+If you get "Error from server (InternalError): Internal error occurred: unexpected response: 503" when running
+the above command, try again a bit later.
+
+oc get projects
+
+----
+NAME                                                    DISPLAY NAME   STATUS
+default                                                                Active
+kube-public                                                            Active
+kube-system                                                            Active
+openshift                                                              Active
+openshift-apiserver                                                    Active
+openshift-apiserver-operator                                           Active
+openshift-authentication                                               Active
+openshift-authentication-operator                                      Active
+openshift-cloud-credential-operator                                    Active
+openshift-cluster-machine-approver                                     Active
+openshift-cluster-node-tuning-operator                                 Active
+openshift-cluster-samples-operator                                     Active
+openshift-cluster-storage-operator                                     Active
+openshift-cluster-version                                              Active
+openshift-config                                                       Active
+openshift-config-managed                                               Active
+openshift-console                                                      Active
+openshift-console-operator                                             Active
+openshift-controller-manager                                           Active
+openshift-controller-manager-operator                                  Active
+openshift-dns                                                          Active
+openshift-dns-operator                                                 Active
+openshift-etcd                                                         Active
+openshift-image-registry                                               Active
+openshift-infra                                                        Active
+openshift-ingress                                                      Active
+openshift-ingress-operator                                             Active
+openshift-kube-apiserver                                               Active
+openshift-kube-apiserver-operator                                      Active
+openshift-kube-controller-manager                                      Active
+openshift-kube-controller-manager-operator                             Active
+openshift-kube-scheduler                                               Active
+openshift-kube-scheduler-operator                                      Active
+openshift-machine-api                                                  Active
+openshift-machine-config-operator                                      Active
+openshift-marketplace                                                  Active
+openshift-monitoring                                                   Active
+openshift-multus                                                       Active
+openshift-network-operator                                             Active
+openshift-node                                                         Active
+openshift-operator-lifecycle-manager                                   Active
+openshift-operators                                                    Active
+openshift-sdn                                                          Active
+openshift-service-ca                                                   Active
+openshift-service-ca-operator                                          Active
+openshift-service-catalog-apiserver-operator                           Active
+openshift-service-catalog-controller-manager-operator                  Active
+----
+
+
+== Install the Ansible Agnostic Deployer
+
+cd /home/demouser
+
+git clone https://github.com/redhat-cop/agnosticd.git
+
+cd agnosticd/ansible
+
+python -m pip install --upgrade --trusted-host files.pythonhosted.org -r requirements.txt
+
+python3 -m pip install --upgrade --trusted-host files.pythonhosted.org -r requirements.txt
+
+pip3 install kubernetes
+
+pip3 install openshift
+
+pip install kubernetes
+
+pip install openshift
+
+
+== Deploy OpenDataHub
+
+cat inventory
+
+----
+127.0.0.1 ansible_connection=local
+----
+
+export WORKLOAD="ocp4-workload-open-data-hub"
+
+sudo cp /usr/local/bin/ansible-playbook /usr/bin/ansible-playbook
+
+[demouser@fedora30 ansible]$ sudo mkdir /root/.kube/
+[demouser@fedora30 ansible]$ sudo cp /home/demouser/.kube/config /root/.kube/config
+
+We are only deploying one Open Data Hub project, so we set user_count to 1.
+
+eval $(crc oc-env) && oc login -u kubeadmin -p 78UVa-zNj5W-YB62Z-ggxGZ https://api.crc.testing:6443
+
+
+ansible-playbook -i inventory  ./configs/ocp-workloads/ocp-workload.yml -e"ocp_workload=${WORKLOAD}" -e"ACTION=create" -e"user_count=1" -e"ocp_username=kubeadmin" -e"ansible_become_pass=<password>" -e"silent=False"
+
+sudo ansible-playbook -i inventory  ./configs/ocp-workloads/ocp-workload.yml -e"ocp_workload=${WORKLOAD}" -e"ACTION=create" -e"user_count=1" -e"ocp_username=kubeadmin" -e"ansible_become_pass=a" -e"silent=False"
+
+----
+PLAY RECAP ********************************************************************************************************************************************
+127.0.0.1                  : ok=42   changed=18   unreachable=0    failed=0    skipped=1    rescued=1    ignored=0
+
+Friday 30 August 2019  03:47:30 -0400 (0:00:00.015)       0:04:03.377 *********
+===============================================================================
+ocp4-workload-open-data-hub : wait for deploy rook-ceph-rgw-my-store ------------------------------------------------------------------------- 153.90s
+ocp4-workload-open-data-hub : wait for deploy ------------------------------------------------------------------------------------------------- 34.09s
+ocp4-workload-open-data-hub : get route for jupyterhub ---------------------------------------------------------------------------------------- 33.67s
+ocp4-workload-open-data-hub : Curling ODH resources -------------------------------------------------------------------------------------------- 5.35s
+ocp4-workload-open-data-hub : Curling Rook resources ------------------------------------------------------------------------------------------- 4.54s
+ocp4-workload-open-data-hub : apply scc.yaml, operator.yaml ------------------------------------------------------------------------------------ 1.47s
+ocp4-workload-open-data-hub : apply toolbox.yaml object.yaml ----------------------------------------------------------------------------------- 1.04s
+ocp4-workload-open-data-hub : create temp directory -------------------------------------------------------------------------------------------- 0.74s
+ocp4-workload-open-data-hub : Apply opendatahub_v1alpha1_opendatahub_crd.yaml ------------------------------------------------------------------ 0.74s
+ocp4-workload-open-data-hub : new-obtain {{ item }} secrets ------------------------------------------------------------------------------------ 0.68s
+ocp4-workload-open-data-hub : Applying cluster.yaml -------------------------------------------------------------------------------------------- 0.67s
+ocp4-workload-open-data-hub : apply role.yaml -------------------------------------------------------------------------------------------------- 0.60s
+ocp4-workload-open-data-hub : create the Project ----------------------------------------------------------------------------------------------- 0.58s
+ocp4-workload-open-data-hub : create ODH Custom Resource object -------------------------------------------------------------------------------- 0.55s
+ocp4-workload-open-data-hub : modify and apply rook object-user.yaml for {{ item }} ------------------------------------------------------------ 0.53s
+ocp4-workload-open-data-hub : apply service_account.yaml --------------------------------------------------------------------------------------- 0.53s
+ocp4-workload-open-data-hub : apply ODH custom resource object customization ------------------------------------------------------------------- 0.53s
+ocp4-workload-open-data-hub : apply operator.yaml ---------------------------------------------------------------------------------------------- 0.53s
+ocp4-workload-open-data-hub : apply role_binding.yaml ------------------------------------------------------------------------------------------ 0.52s
+ocp4-workload-open-data-hub : wait for rook-ceph-mon/osd a to get to status of running --------------------------------------------------------- 0.49s
+----
+
+== Test OpenDataHub
+
+oc project open-data-hub-user1
+
+oc get pods
+
+----
+NAME                                                         READY   STATUS      RESTARTS   AGE
+jupyterhub-1-7q4zs                                           1/1     Running     0          49m
+jupyterhub-1-deploy                                          0/1     Completed   0          49m
+jupyterhub-db-1-deploy                                       0/1     Completed   0          49m
+jupyterhub-db-1-rttgz                                        1/1     Running     1          49m
+jupyterhub-nb-c455c922-2d4e64-2d4d66-2db463-2d066ac236166f   1/1     Running     0          28m
+opendatahub-operator-86c5cb8b4b-l5cg6                        1/1     Running     0          50m
+spark-operator-6b46b4d97-8mv92                               1/1     Running     0          49m
+----
+
+
+[marc@dell-r730-019 crc]$ oc get route
+
+----
+NAME         HOST/PORT                                         PATH   SERVICES     PORT       TERMINATION     WILDCARD
+jupyterhub   jupyterhub-open-data-hub-user1.apps-crc.testing          jupyterhub   8080-tcp   edge/Redirect   None
+----
+
+
+On your laptop, add jupyterhub-open-data-hub-user1.apps-crc.testing to your /etc/hosts. Example:
+
+----
+127.0.0.1	localhost marc.rhel8 console-openshift-console.apps-crc.testing oauth-openshift.apps-crc.testing mapit-app-management.apps-crc.testing mapit-spring-pipeline-demo.apps-crc.testing jupyterhub-open-data-hub-user1.apps-crc.testing jupyterhub-open-data-hub-user1.apps-crc.testing
+----
+
+On your laptop, sudo ssh marc@fedora30 -L 443:jupyterhub-open-data-hub-user1.apps-crc.testing:443
+
+You can now browse to https://jupyterhub-open-data-hub-user1.apps-crc.testing
+
