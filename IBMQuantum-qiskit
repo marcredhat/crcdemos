@@ -32,21 +32,4 @@ circ.cx(0, 1)
 # the qubits in a GHZ state.
 circ.cx(0, 2)
 
-
 circ.draw()
-
-----
-Installing collected packages: ply, jsonschema, networkx, scipy, marshmallow, marshmallow-polyfield, mpmath, sympy, qiskit-terra, qiskit-aer, websockets, nest-asyncio, ntlm-auth, pycparser, cffi, asn1crypto, cryptography, requests-ntlm, qiskit-ibmq-provider, qiskit-ignis, h5py, pyscf, fastdtw, pytz, pandas, more-itertools, pyasn1, pyOpenSSL, ndg-httpsclient, inflection, quandl, joblib, scikit-learn, docloud, docplex, dlx, cvxopt, qiskit-aqua, qiskit
-----
-
-Qiskit is an open-source framework for working with noisy quantum computers at the level of pulses, circuits, and algorithms.
-
-This module contains a provider that allows accessing the https://www.ibm.com/quantum-computing/network/overview quantum devices and simulators.
-qiskit-ibmq-provider
-qiskit-ignis - Ignis, which provides tools for quantum hardware verification, noise characterization, and error correction.
-qiskit-aqua - Qiskit Aqua contains a library of cross-domain quantum algorithms upon which applications for near-term quantum computing can be built. Aqua is designed to be extensible, and employs a pluggable framework where quantum algorithms can easily be added. It currently allows the user to experiment on chemistry, AI, optimization and finance applications for near-term quantum computers.
-
-
-
-
-
