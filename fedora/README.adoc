@@ -53,7 +53,7 @@ Fedora release 30 (Thirty)
 
 dnf config-manager --set-enabled fedora
 
-su -c 'dnf -y install git wget tar qemu-kvm libvirt NetworkManager jq'
+su -c 'dnf -y install git wget tar qemu-kvm libvirt NetworkManager jq libselinux-python'
 
 sudo systemctl start libvirtd
 
