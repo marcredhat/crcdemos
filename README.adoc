@@ -33,6 +33,7 @@ AgnosticD is not an OpenShift Deployer, though it can and does that, it is howev
 The instructions below cover
 
 - installing Red Hat CodeReady Containers on a RHEL 8.1 *physical* server 
+(You can also use Fedora 30, please https://github.com/marcredhat/crcdemos/blob/master/fedora/README.adoc)
 
 - using Ansible Agnostic Deployer to deploy OpenDataHub on OpenShift 4.1
 
