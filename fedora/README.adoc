@@ -355,3 +355,11 @@ On your laptop, sudo ssh marc@fedora30 -L 443:jupyterhub-open-data-hub-user1.app
 
 You can now browse to https://jupyterhub-open-data-hub-user1.apps-crc.testing
 
+
+For details and videos on how to deploy many more solutions on OpenShift 4.1 / CodeReady Containers, please refer to
+
+----
+https://bit.ly/marcredhat
+and
+https://bit.ly/marcredhatplaylist
+----
