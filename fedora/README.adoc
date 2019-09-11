@@ -112,9 +112,6 @@ go
 == Install CodeReady Containers
 
 wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.0.0-beta.3/crc-linux-amd64.tar.xz
-or
-https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.0.0-beta.3/crc_virtualbox_4.1.11.crcbundle
-
 
 tar -xvf crc-linux-amd64.tar.xz
 
