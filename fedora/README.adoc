@@ -356,7 +356,18 @@ On your laptop, sudo ssh marc@fedora30 -L 443:jupyterhub-open-data-hub-user1.app
 You can now browse to https://jupyterhub-open-data-hub-user1.apps-crc.testing
 
 
-For details and videos on how to deploy many more solutions on OpenShift 4.1 / CodeReady Containers, please refer to
+Now that we have Open Data Hub ready, let's deploy something interesting on it.
+
+Here is a an example  with IBM's Qiskit open-source framework for quantum computing
+
+----
+Video no. 9 at  https://lnkd.in/g9gmhQQ 
+
+Github repo at https://lnkd.in/gS7Mcc9
+----
+
+
+For *details and videos on how to deploy many more solutions on OpenShift 4.1 / CodeReady Containers*, please refer to
 
 ----
 https://bit.ly/marcredhat
