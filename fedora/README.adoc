@@ -300,9 +300,6 @@ export WORKLOAD="ocp4-workload-open-data-hub"
 
 sudo cp /usr/local/bin/ansible-playbook /usr/bin/ansible-playbook
 
-sudo mkdir /root/.kube/
-
-sudo cp /home/demouser/.kube/config /root/.kube/config
 ----
 
 
