@@ -141,7 +141,9 @@ crc config set memory 81920
 ----
 
 
+----
 crc setup
+----
 
 ----
 INFO Checking if NetworkManager is installed
@@ -166,7 +168,9 @@ INFO Unpacking bundle from the CRC binary
 You'll need your pull secret from https://cloud.redhat.com/openshift/install/metal/user-provisioned
 
 
+----
 crc start
+----
 
 ----
 INFO Checking if NetworkManager is installed
