@@ -51,6 +51,8 @@ Fedora release 30 (Thirty)
 
 == Install packages
 
+
+----
 dnf config-manager --set-enabled fedora
 
 su -c 'dnf -y install git wget tar qemu-kvm libvirt NetworkManager jq libselinux-python'
@@ -58,6 +60,7 @@ su -c 'dnf -y install git wget tar qemu-kvm libvirt NetworkManager jq libselinux
 sudo systemctl start libvirtd
 
 sudo systemctl enable libvirtd
+----
 
 
 == Check Python is installed
@@ -78,12 +81,14 @@ python3 -m venv agnosticd
 
 == Add user
 
+
+----
 sudo adduser demouser
 
 sudo passwd demouser
 
 sudo usermod -aG wheel demouser
-
+----
 
 == Install Go
 
@@ -111,6 +116,11 @@ go
 
 == Install CodeReady Containers
 
+----
+su demouser
+
+cd /home/demouser
+
 wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.0.0-beta.3/crc-linux-amd64.tar.xz
 
 tar -xvf crc-linux-amd64.tar.xz
@@ -118,10 +128,13 @@ tar -xvf crc-linux-amd64.tar.xz
 cd crc-linux-1.0.0-beta.3-amd64/
 
 sudo cp ./crc /usr/bin
+----
+
 
 Set the memory available to CRC according to what you have on your physical server
 
 I’m on a physical server with around 100G of memory so I allocate 80G to CRC as follows:
+
 
 ----
 crc config set memory 81920
