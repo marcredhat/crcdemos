@@ -263,6 +263,10 @@ openshift-service-catalog-controller-manager-operator                  Active
 
 == Install the Ansible Agnostic Deployer
 
+
+----
+su demouser
+
 cd /home/demouser
 
 git clone https://github.com/redhat-cop/agnosticd.git
@@ -280,6 +284,7 @@ pip3 install openshift
 pip install kubernetes
 
 pip install openshift
+----
 
 
 == Deploy OpenDataHub
@@ -290,20 +295,24 @@ cat inventory
 127.0.0.1 ansible_connection=local
 ----
 
+----
 export WORKLOAD="ocp4-workload-open-data-hub"
 
 sudo cp /usr/local/bin/ansible-playbook /usr/bin/ansible-playbook
 
-[demouser@fedora30 ansible]$ sudo mkdir /root/.kube/
-[demouser@fedora30 ansible]$ sudo cp /home/demouser/.kube/config /root/.kube/config
+sudo mkdir /root/.kube/
+
+sudo cp /home/demouser/.kube/config /root/.kube/config
+----
+
 
 We are only deploying one Open Data Hub project, so we set user_count to 1.
 
+----
 eval $(crc oc-env) && oc login -u kubeadmin -p 78UVa-zNj5W-YB62Z-ggxGZ https://api.crc.testing:6443
 
-
 ansible-playbook -i inventory  ./configs/ocp-workloads/ocp-workload.yml -e"ocp_workload=${WORKLOAD}" -e"ACTION=create" -e"user_count=1" -e"ocp_username=kubeadmin" -e"ansible_become_pass=<password>" -e"silent=False"
-
+----
 
 ----
 PLAY RECAP ********************************************************************************************************************************************
