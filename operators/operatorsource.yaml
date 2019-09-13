@@ -9,3 +9,5 @@ spec:
   registryNamespace: marcf5
   displayName: "Marc - Community Operators"
   publisher: "Marc"
+  authorizationToken:
+    secretName: marcmarketplacesecret
