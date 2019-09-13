@@ -43,7 +43,7 @@ sudo buildah bud  -t local/netperf .
 sudo podman push local/netperf quay.io/marcf5/netperf
 
 
-# deploy the RBAC definition for the controller and a Deployment that will run it:
+#Deploy the RBAC definition for the controller and a Deployment that will run it:
 cd netperf-operator
 
 oc create -f deploy/rbac.yaml
