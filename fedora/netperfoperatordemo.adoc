@@ -34,7 +34,7 @@ export IMAGE=quay.io/marcf5/netperf-operator:v0.0.1
 
 [demouser@fedora30 netperf-operator]$ mv Dockerfile Dockerfile.bak
 
-[demouser@fedora30 netperf-operator]$ cp Dockerfile.incontainer Dockerfile
+[demouser@fedora30 netperf-operator]$ wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/Dockerfile
 
 sudo podman login quay.io
 
