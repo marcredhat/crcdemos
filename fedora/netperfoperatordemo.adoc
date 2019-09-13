@@ -1,0 +1,137 @@
+Let's deploy a simple (but awesome) netperf operator from https://github.com/piontec/netperf-operator
+
+See also Lukasz Piatkowski's blog at https://www.tailored.cloud/kubernetes/write-a-kubernetes-controller-operator-sdk/
+
+There are many great quick starts for OpenShift 4.1; I chose to deploy netperf on CodeReady Containers for its simplicity.
+
+
+
+eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
+
+
+oc new-project  marcnetperf
+
+su demouser
+
+cd /home/demouser
+
+mkdir $GOPATH/src/github.com/piontec
+
+cd $GOPATH/src/github.com/piontec
+
+git clone https://github.com/piontec/netperf-operator.git
+
+cd netperf-operator
+
+dep ensure
+
+oc create -f deploy/crd.yaml
+
+export IMAGE=quay.io/marcf5/netperf-operator:v0.0.1
+
+[demouser@fedora30 netperf-operator]$ cd ..
+
+[demouser@fedora30 piontec]$ pwd
+/home/demouser/work/src/github.com/piontec
+
+cp netperf-operator/Dockerfile .
+
+sudo podman login quay.io
+
+sudo buildah bud  -t local/netperf .
+
+sudo podman push local/netperf quay.io/marcf5/netperf
+
+
+# deploy the RBAC definition for the controller and a Deployment that will run it:
+cd netperf-operator
+
+oc create -f deploy/rbac.yaml
+
+oc create -f deploy/operator.yaml
+
+[demouser@fedora30 netperf-operator]$ oc get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+netperf-operator-c9c6f5b6b-npv6p   1/1     Running   0          14s
+
+[demouser@fedora30 netperf-operator]$ cp deploy/rbac.yaml deploy/role.yaml
+[demouser@fedora30 netperf-operator]$ operator-sdk olm-catalog gen-csv --csv-version 0.0.1
+INFO[0000] Generating CSV manifest version 0.0.1
+.....
+INFO[0000] Created deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.clusterserviceversion.yaml
+INFO[0000] Created deploy/olm-catalog/netperf-operator/netperf-operator.package.yaml
+
+
+#Create an OperatorGroup that specifies the namespaces that the Operator will target.
+cat <<EOF | oc apply -f -
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: netperf-operator
+  namespace: marcnetperf
+spec:
+  targetNamespaces:
+  - marcnetperf
+EOF
+
+
+
+The Operator Lifecycle Manager will not watch this namespace because it is not configured with an OperatorGroup. 
+Create an OperatorGroup as follows:
+
+cat <<EOF | oc apply -f -
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: example
+  namespace: marcnetperf
+spec: {}
+EOF
+
+#Replace "placeholder" with your namespace (marcnetperf in this example) in
+#deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.clusterserviceversion.yaml
+
+
+#Make sure you don't have other operatorgroups in the same project.
+oc apply -f deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.clusterserviceversion.yaml
+
+#Create the a Netperf custom resource; this will create netperf client and server pods
+
+cat <<EOF | oc apply -f -
+apiVersion: "app.example.com/v1alpha1"
+kind: "Netperf"
+metadata:
+  name: "example"
+spec:
+  serverNode:
+  clientNode:
+EOF
+
+
+[demouser@fedora30 netperf-operator]$ oc get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+netperf-client-52fdfc072182        1/1     Running   0          18s
+netperf-operator-c9c6f5b6b-dj8f8   1/1     Running   0          11m
+netperf-server-52fdfc072182        1/1     Running   0          29s
+
+
+[demouser@fedora30 netperf-operator]$ oc debug netperf-client-52fdfc072182
+Starting pod/netperf-client-52fdfc072182-debug, command was: netperf -H 10.128.0.252
+
+Pod IP: 10.128.0.254
+If you don't see a command prompt, try pressing enter.
+~
+~ $ netperf -H 10.128.0.252
+MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 10.128.0.252 (10.128.) port 0 AF_INET
+
+Recv   Send    Send
+Socket Socket  Message  Elapsed
+Size   Size    Size     Time     Throughput
+bytes  bytes   bytes    secs.    10^6bits/sec
+
+ 87380  16384  16384    10.00    3399.19
+~ $
+
+
+Other references:
+https://docs.openshift.com/container-platform/4.1/applications/operator_sdk/osdk-getting-started.html#building-memcached-operator-using-osdk_osdk-getting-started
