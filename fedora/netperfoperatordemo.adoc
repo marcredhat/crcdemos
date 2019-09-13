@@ -1,3 +1,6 @@
+
+== Install Netperf Operator on CodeReady Containers / OpenShift 4.1
+
 Let's deploy a simple (but awesome) netperf operator from https://github.com/piontec/netperf-operator
 
 See also Lukasz Piatkowski's blog at https://www.tailored.cloud/kubernetes/write-a-kubernetes-controller-operator-sdk/
@@ -48,6 +51,7 @@ cd netperf-operator
 
 oc create -f deploy/rbac.yaml
 
+#Edit deploy/operator.yaml to use quay.io/repository/marcf5/netperf
 oc create -f deploy/operator.yaml
 
 [demouser@fedora30 netperf-operator]$ oc get pods
