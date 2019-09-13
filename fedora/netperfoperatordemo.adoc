@@ -78,6 +78,13 @@ netperf-operator-c9c6f5b6b-npv6p   1/1     Running   0          14s
 
 ----
 [demouser@fedora30 netperf-operator]$ cp deploy/rbac.yaml deploy/role.yaml
+cd deploy/
+mkdir crds
+cp *.yaml crds/
+cd ..
+cp deploy/crds/rbac.yaml deploy/crds/role.yaml
+cp deploy/rbac.yaml deploy/role.yaml
+
 [demouser@fedora30 netperf-operator]$ operator-sdk olm-catalog gen-csv --csv-version 0.0.1
 ----
 
