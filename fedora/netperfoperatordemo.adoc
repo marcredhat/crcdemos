@@ -32,12 +32,9 @@ oc create -f deploy/crd.yaml
 
 export IMAGE=quay.io/marcf5/netperf-operator:v0.0.1
 
-[demouser@fedora30 netperf-operator]$ cd ..
+[demouser@fedora30 netperf-operator]$ mv Dockerfile Dockerfile.bak
 
-[demouser@fedora30 piontec]$ pwd
-/home/demouser/work/src/github.com/piontec
-
-cp netperf-operator/Dockerfile .
+[demouser@fedora30 netperf-operator]$ cp Dockerfile.incontainer Dockerfile
 
 sudo podman login quay.io
 
