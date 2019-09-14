@@ -99,7 +99,7 @@ spec:
 EOF
 ----
 
-
+----
 #Create the a Netperf custom resource; this will create netperf client and server pods
 
 cat <<EOF | oc apply -f -
@@ -161,12 +161,13 @@ INFO[0000] Created deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0
 INFO[0000] Created deploy/olm-catalog/netperf-operator/netperf-operator.package.yaml
 ----
 
+----
 #Replace "placeholder" with your namespace (marcnetperf in this example) in
 #deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.clusterserviceversion.yaml
 
 #Make sure you don't have other operatorgroups in the same project.
 oc apply -f deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.clusterserviceversion.yaml
-
+----
 
 
 Other references:
