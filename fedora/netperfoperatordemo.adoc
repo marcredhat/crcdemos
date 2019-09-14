@@ -127,9 +127,19 @@ EOF
 ----
 
 
+[demouser@fedora30 deploy]$ oc describe Netperf crcexample
+
 ----
-oc describe Netperf crcexample
+Name:         crcexample
+Namespace:    crcnetperf
+....
+Status:
+  Client Pod:          netperf-client-52fdfc072182
+  Server Pod:          netperf-server-52fdfc072182
+  Speed Bits Per Sec:  2959.27
+  Status:              Done
 ----
+
 
 ----
 [demouser@fedora30 netperf-operator]$ oc get pods
