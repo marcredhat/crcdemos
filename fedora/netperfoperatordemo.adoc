@@ -156,6 +156,11 @@ cd ..
 cp deploy/crds/rbac.yaml deploy/crds/role.yaml
 cp deploy/rbac.yaml deploy/role.yaml
 
+----
+oc create sa netperf-operator
+oc policy add-role-to-user cluster-admin -z netperf-operator
+----
+
 [demouser@fedora30 netperf-operator]$ operator-sdk olm-catalog gen-csv --csv-version 0.0.1
 ----
 
