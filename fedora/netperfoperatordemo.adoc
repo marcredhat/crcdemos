@@ -13,7 +13,7 @@ eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testin
 ----
 
 ----
-oc new-project  marcnetperf
+oc new-project  crcnetperf
 
 su demouser
 
@@ -92,10 +92,10 @@ apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
   name: netperf-operator
-  namespace: marcnetperf
+  namespace: crcnetperf
 spec:
   targetNamespaces:
-  - marcnetperf
+  - crcnetperf
 EOF
 ----
 
@@ -106,11 +106,16 @@ cat <<EOF | oc apply -f -
 apiVersion: "app.example.com/v1alpha1"
 kind: "Netperf"
 metadata:
-  name: "example"
+  name: "crcexample"
 spec:
   serverNode:
   clientNode:
 EOF
+----
+
+
+----
+oc describe Netperf crcexample
 ----
 
 ----
