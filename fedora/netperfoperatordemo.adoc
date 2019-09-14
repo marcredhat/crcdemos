@@ -182,5 +182,8 @@ oc apply -f deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.cl
 ----
 
 
+image:images/netperfoperatorinstalled.png[title="Netperf Operator installed in OpenShift 4.1 / CodeReady Containers"] 
+
+
 Other references:
 https://docs.openshift.com/container-platform/4.1/applications/operator_sdk/osdk-getting-started.html#building-memcached-operator-using-osdk_osdk-getting-started
