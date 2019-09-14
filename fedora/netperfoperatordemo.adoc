@@ -21,9 +21,9 @@ cd /home/demouser
 ----
 
 ----
-mkdir $GOPATH/src/github.com/piontec
+mkdir $GOPATH/src/github.com/crcnetperf
 
-cd $GOPATH/src/github.com/piontec
+cd $GOPATH/src/github.com/crcnetperf
 
 git clone https://github.com/piontec/netperf-operator.git
 
