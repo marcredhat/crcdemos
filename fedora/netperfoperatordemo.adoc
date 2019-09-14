@@ -168,7 +168,11 @@ bytes  bytes   bytes    secs.    10^6bits/sec
 ~ $
 ----
 
+== Make the Netperf Operator available in the OpenShift Operator Catalog
 
+A ClusterServiceVersion (CSV) is a YAML manifest created from Operator metadata that assists the Operator Lifecycle Manager (OLM) in running the Operator in a cluster. It is the metadata that accompanies an Operator container image, used to populate user interfaces with information like its logo, description, and version. It is also a source of technical information needed to run the Operator, like the RBAC rules it requires and which Custom Resources (CRs) it manages or depends on.
+
+See more at https://docs.openshift.com/container-platform/4.1/applications/operators/olm-understanding-olm.html#olm-csv_olm-understanding-olm
 
 ----
 [demouser@fedora30 netperf-operator]$ cp deploy/rbac.yaml deploy/role.yaml
