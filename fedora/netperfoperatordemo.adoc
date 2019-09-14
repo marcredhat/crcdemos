@@ -175,7 +175,8 @@ A ClusterServiceVersion (CSV) is a YAML manifest created from Operator metadata 
 See more at https://docs.openshift.com/container-platform/4.1/applications/operators/olm-understanding-olm.html#olm-csv_olm-understanding-olm
 
 ----
-[demouser@fedora30 netperf-operator]$ cp deploy/rbac.yaml deploy/role.yaml
+cd $GOPATH/src/github.com/crcnetperf/netperf-operator
+cp deploy/rbac.yaml deploy/role.yaml
 cd deploy/
 mkdir crds
 cp *.yaml crds/
