@@ -33,13 +33,15 @@ dep ensure
 ----
 
 ----
-oc create -f deploy/crd.yaml
 
 export IMAGE=quay.io/marcf5/netperf-operator:v0.0.1
 
-[demouser@fedora30 netperf-operator]$ mv Dockerfile Dockerfile.bak
+mv Dockerfile Dockerfile.bak
 
-[demouser@fedora30 netperf-operator]$ wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/Dockerfile
+wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/Dockerfile.latest
+
+mv Dockerfile.latest Dockerfile
+
 
 sudo podman login quay.io
 
@@ -49,8 +51,10 @@ sudo podman push local/netperf quay.io/marcf5/netperf
 ----
 
 ----
-#Deploy the RBAC definition for the controller and a Deployment that will run it:
+#Deploy the CRD and RBAC definition for the controller and a Deployment that will run it:
 cd netperf-operator
+
+oc create -f deploy/crd.yaml
 
 oc create -f deploy/rbac.yaml
 
@@ -65,7 +69,10 @@ oc create secret docker-registry staging-secret \
 oc create -f secret.yaml
 
 #Edit deploy/operator.yaml to use quay.io/repository/marcf5/netperf and add the pull secret created above
-#See mine at https://github.com/marcredhat/crcdemos/blob/master/fedora/operator.yaml
+#See mine at https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/operator.yaml
+
+wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/operator.yaml
+
 oc create -f deploy/operator.yaml
 ----
 
@@ -76,26 +83,9 @@ NAME                               READY   STATUS    RESTARTS   AGE
 netperf-operator-c9c6f5b6b-npv6p   1/1     Running   0          14s
 ----
 
-----
-[demouser@fedora30 netperf-operator]$ cp deploy/rbac.yaml deploy/role.yaml
-cd deploy/
-mkdir crds
-cp *.yaml crds/
-cd ..
-cp deploy/crds/rbac.yaml deploy/crds/role.yaml
-cp deploy/rbac.yaml deploy/role.yaml
-
-[demouser@fedora30 netperf-operator]$ operator-sdk olm-catalog gen-csv --csv-version 0.0.1
-----
 
 ----
-INFO[0000] Generating CSV manifest version 0.0.1
-.....
-INFO[0000] Created deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.clusterserviceversion.yaml
-INFO[0000] Created deploy/olm-catalog/netperf-operator/netperf-operator.package.yaml
-----
-
-----
+#The Operator Lifecycle Manager will not watch this namespace because it is not configured with an OperatorGroup. 
 #Create an OperatorGroup that specifies the namespaces that the Operator will target.
 cat <<EOF | oc apply -f -
 apiVersion: operators.coreos.com/v1
@@ -109,28 +99,6 @@ spec:
 EOF
 ----
 
-
-The Operator Lifecycle Manager will not watch this namespace because it is not configured with an OperatorGroup. 
-Create an OperatorGroup as follows:
-
-
-----
-cat <<EOF | oc apply -f -
-apiVersion: operators.coreos.com/v1
-kind: OperatorGroup
-metadata:
-  name: example
-  namespace: marcnetperf
-spec: {}
-EOF
-----
-
-----
-#Replace "placeholder" with your namespace (marcnetperf in this example) in
-#deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.clusterserviceversion.yaml
-
-#Make sure you don't have other operatorgroups in the same project.
-oc apply -f deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.clusterserviceversion.yaml
 
 #Create the a Netperf custom resource; this will create netperf client and server pods
 
@@ -171,6 +139,35 @@ bytes  bytes   bytes    secs.    10^6bits/sec
  87380  16384  16384    10.00    3399.19
 ~ $
 ----
+
+
+
+----
+[demouser@fedora30 netperf-operator]$ cp deploy/rbac.yaml deploy/role.yaml
+cd deploy/
+mkdir crds
+cp *.yaml crds/
+cd ..
+cp deploy/crds/rbac.yaml deploy/crds/role.yaml
+cp deploy/rbac.yaml deploy/role.yaml
+
+[demouser@fedora30 netperf-operator]$ operator-sdk olm-catalog gen-csv --csv-version 0.0.1
+----
+
+----
+INFO[0000] Generating CSV manifest version 0.0.1
+.....
+INFO[0000] Created deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.clusterserviceversion.yaml
+INFO[0000] Created deploy/olm-catalog/netperf-operator/netperf-operator.package.yaml
+----
+
+#Replace "placeholder" with your namespace (marcnetperf in this example) in
+#deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.clusterserviceversion.yaml
+
+#Make sure you don't have other operatorgroups in the same project.
+oc apply -f deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.clusterserviceversion.yaml
+
+
 
 Other references:
 https://docs.openshift.com/container-platform/4.1/applications/operator_sdk/osdk-getting-started.html#building-memcached-operator-using-osdk_osdk-getting-started
