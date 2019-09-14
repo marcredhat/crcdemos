@@ -167,7 +167,7 @@ INFO[0000] Created deploy/olm-catalog/netperf-operator/netperf-operator.package.
 ----
 
 ----
-#Replace "placeholder" with your namespace (marcnetperf in this example) in
+#Replace "placeholder" with your namespace (crcnetperf in this example) in
 #deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.clusterserviceversion.yaml
 
 #Make sure you don't have other operatorgroups in the same project.
