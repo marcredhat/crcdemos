@@ -155,6 +155,8 @@ cp *.yaml crds/
 cd ..
 cp deploy/crds/rbac.yaml deploy/crds/role.yaml
 cp deploy/rbac.yaml deploy/role.yaml
+----
+
 
 ----
 oc create sa netperf-operator
