@@ -87,6 +87,15 @@ NAME                               READY   STATUS    RESTARTS   AGE
 netperf-operator-c9c6f5b6b-npv6p   1/1     Running   0          14s
 ----
 
+[demouser@fedora30 deploy]$ oc describe pod | grep quay
+
+----
+    Image:         quay.io/marcf5/netperf
+    Image ID:      quay.io/marcf5/netperf@sha256:2ca2159c990b4cb2e47a6be8fc114beee02b52bd86f092e3490ae670232d7964
+  Normal  Pulling    20m   kubelet, crc-56mmj-master-0  Pulling image "quay.io/marcf5/netperf"
+  Normal  Pulled     20m   kubelet, crc-56mmj-master-0  Successfully pulled image "quay.io/marcf5/netperf"
+----
+
 
 ----
 #The Operator Lifecycle Manager will not watch this namespace because it is not configured with an OperatorGroup. 
