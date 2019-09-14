@@ -7,6 +7,8 @@ See also Lukasz Piatkowski's blog at https://www.tailored.cloud/kubernetes/write
 
 There are many great quick starts for OpenShift 4.1; I chose to deploy netperf on CodeReady Containers for its simplicity.
 
+We'll use podman, buildah, quay and ubi8-minimal.
+
 
 ----
 eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
