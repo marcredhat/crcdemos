@@ -165,19 +165,19 @@ oc policy add-role-to-user cluster-admin -z netperf-operator
 
 [demouser@fedora30 netperf-operator]$ operator-sdk olm-catalog gen-csv --csv-version 0.0.1
 ----
-
-----
 INFO[0000] Generating CSV manifest version 0.0.1
 .....
 INFO[0000] Created deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.clusterserviceversion.yaml
 INFO[0000] Created deploy/olm-catalog/netperf-operator/netperf-operator.package.yaml
 ----
 
-----
+
 #Replace "placeholder" with your namespace (crcnetperf in this example) in
 #deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.clusterserviceversion.yaml
 
 #Make sure you don't have other operatorgroups in the same project.
+
+----
 oc apply -f deploy/olm-catalog/netperf-operator/0.0.1/netperf-operator.v0.0.1.clusterserviceversion.yaml
 ----
 
