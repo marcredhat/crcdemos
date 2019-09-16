@@ -29,13 +29,21 @@ ansible 2.8.4
 ----
 
 Step 2 - Modify run-locally-linux.sh to:
+
 - accept 2.8 version to use "oc cluster-info"
+
 - login to CRC as kubeadmin
+
+
 My run-locally-linux.sh is at https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/rhoar/run-locally-linux.sh
 
 
 Step 3 - Ensure that you are connect to CRC
-eval $(crc oc-env) && oc login -u kubeadmin -p 78UVa-zNj5W-YB62Z-ggxGZ https://api.crc.testing:6443
+
+
+----
+eval $(crc oc-env) && oc login -u kubeadmin -p <CRC password> https://api.crc.testing:6443
+----
 
 
 Step 4 - Create the following OpenShift projects
