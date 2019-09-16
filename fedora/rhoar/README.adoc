@@ -37,7 +37,9 @@ ansible 2.8.4
 
 Step 3 - Modify run-locally-linux.sh to:
 
-- accept 2.8 version to use "oc cluster-info"
+- accept 2.8 version 
+
+- use "oc cluster-info"
 
 - login to CRC as kubeadmin
 
