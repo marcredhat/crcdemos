@@ -37,7 +37,7 @@ ansible 2.8.4
 
 Step 3 - Modify run-locally-linux.sh to:
 
-- accept 2.8 version 
+- accept Ansible version 2.8 
 
 - use "oc cluster-info"
 
