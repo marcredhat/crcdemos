@@ -100,7 +100,7 @@ My inventory file is:
 ----
 [seed-hosts]
 localhost
------
+----
 
 Step 8 - Install Galaxy requirements
 
