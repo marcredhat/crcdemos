@@ -6,7 +6,7 @@ I made a few changes to
 https://github.com/rhoar-qcon-2018/rhoar-kubernetes-qcon-2018/blob/master/README.adoc
 so that it runs on  CodeReady Containers / OpenShift 4.1+
 
-I'm running CRC on a RHEL 8.1 or Fedora 30 physical servers, using SSH tunneling/port forwarding to connect from my laptop to the OpenShift console and deployed apps.
+I'm running CRC on RHEL 8.1 or Fedora 30 physical servers, using SSH tunneling/port forwarding to connect from my laptop to the OpenShift console and deployed apps.
 
 
 For step-by-step instructions and videos on installing CRC and various solutions on top of CRC,
