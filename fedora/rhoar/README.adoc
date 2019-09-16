@@ -234,11 +234,14 @@ Browse to http://nexus-labs-ci-cd.apps-crc.testing
 To connect to the OpenShift 4.1 console:
 
 ----
-sudo ssh root@hpe-sl4545g7-01.hpe2.lab.eng.bos.redhat.com -L 443:console-openshift-console.apps-crc.testing:443
+sudo ssh root@<Fedora 30 server with CRC> -L 443:console-openshift-console.apps-crc.testing:443
 
 Browse to https://console-openshift-console.apps-crc.testing
 ----
 
 
-Noticed the following the Sonarqube error:
-[1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+I ran into the following the Sonarqube error:
+
+----
+max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+----
