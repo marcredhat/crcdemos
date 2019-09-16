@@ -1,0 +1,198 @@
+
+== Reactive Microservices on CodeReady Containers (CRC) / OpenShift 4.1+
+using Red Hat OpenShift Application Runtimes
+
+I made a few changes to
+https://github.com/rhoar-qcon-2018/rhoar-kubernetes-qcon-2018/blob/master/README.adoc
+so that it runs on  CodeReady Containers / OpenShift 4.1+
+
+I'm running CRC on a Fedora 30 physical server, using SSH tunneling/port forwarding to connect from my laptop to the OpenShift console and deployed apps.
+
+Step 1)
+
+git clone https://github.com/rhoar-qcon-2018/rhoar-kubernetes-qcon-2018.git --recurse-submodules
+
+[demouser@fedora30 infrastructure-as-code]$ pwd
+/home/demouser/rhoar/rhoar-kubernetes-qcon-2018/infrastructure-as-code
+
+Step 1 - Check Ansible version
+
+[demouser@fedora30 infrastructure-as-code]$ ansible --version
+
+----
+ansible 2.8.4
+  config file = None
+  configured module search path = ['/home/demouser/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python3.7/site-packages/ansible
+  executable location = /usr/local/bin/ansible
+  python version = 3.7.4 (default, Jul  9 2019, 16:32:37) [GCC 9.1.1 20190503 (Red Hat 9.1.1-1)]
+----
+
+Step 2 - Modify run-locally-linux.sh to:
+- accept 2.8 version to use "oc cluster-info"
+- login to CRC as kubeadmin
+My run-locally-linux.sh is at https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/rhoar/run-locally-linux.sh
+
+
+Step 3 - Ensure that you are connect to CRC
+eval $(crc oc-env) && oc login -u kubeadmin -p 78UVa-zNj5W-YB62Z-ggxGZ https://api.crc.testing:6443
+
+
+Step 4 - Create the following OpenShift projects
+
+oc new-project labs-ci-cd
+oc new-project labs-dev
+
+
+Step 5 - Install openshift-applier
+See https://github.com/redhat-cop/openshift-applier/blob/master/playbooks/README.md
+
+Comment out version: v3.9.0 as shown below.
+
+[demouser@fedora30 infrastructure-as-code]$ cat requirements.yml
+
+----
+# This is the Ansible Galaxy requirements file to pull in the correct roles
+# to support the operation of CASL provisioning/runs.
+
+# From 'openshift-applier'
+- src: https://github.com/redhat-cop/openshift-applier
+  scm: git
+  #version: v3.9.0
+  name: openshift-applier
+----
+
+[demouser@fedora30 infrastructure-as-code]$ ansible-galaxy install -r requirements.yml --roles-path=roles
+
+
+Step 6 - Run the openshift-cluster-seed.yml playbook
+[demouser@fedora30 openshift-applier]$ ansible-playbook -i inventory playbooks/openshift-cluster-seed.yml -e client=oc --connection=local
+
+My inventory file is:
+[demouser@fedora30 openshift-applier]$ cat inventory
+
+----
+[seed-hosts]
+localhost
+-----
+
+Step 7 - Install Galaxy requirements
+
+[demouser@fedora30 infrastructure-as-code]$ ansible-galaxy install -r galaxy_requirements.yml
+- extracting labs-ci-cd to /home/demouser/.ansible/roles/labs-ci-cd
+- labs-ci-cd (master) was installed successfully
+
+
+Step 8 - Set env variables
+
+export OPENSHIFT_USERNAME='kubeadmin'
+export OPENSHIFT_PASSWORD='<CRC password>'
+export RED_HAT_DEVELOPERS_USERNAME='<RH username>'
+export RED_HAT_DEVELOPERS_PASSWORD='<RH password>'
+
+
+Step 9 - Change projects-and-policies.yml to use the correct templates
+[demouser@fedora30 host_vars]$ pwd
+/home/demouser/rhoar/rhoar-kubernetes-qcon-2018/infrastructure-as-code/inventory/host_vars
+
+Mine is at https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/rhoar/projects-and-policies.yml
+
+
+Step 10 - Deploy!
+
+/home/demouser/rhoar/rhoar-kubernetes-qcon-2018/infrastructure-as-code
+[demouser@fedora30 infrastructure-as-code]$ ./run-locally-linux.sh
+
+----
+....
+OpenShift CLI tool installed and accessbile
+ansible 2.8.4
+Ansible version is acceptable
+Authentication required for https://api.crc.testing:6443 (openshift)
+Username: kubeadmin
+Password:
+....
+----
+
+
+11) Tests
+[demouser@fedora30 infrastructure-as-code]$ oc project
+Using project "labs-ci-cd" on server "https://api.crc.testing:6443".
+[demouser@fedora30 infrastructure-as-code]$ oc get all
+
+----
+NAME                                DESIRED   CURRENT   READY   AGE
+replicationcontroller/nexus-1       1         1         1       125m
+replicationcontroller/sonardb-1     0         0         0       125m
+replicationcontroller/sonarqube-1   2         2         0       47m
+
+NAME                TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/nexus       ClusterIP   172.30.42.155   <none>        8081/TCP   125m
+service/sonardb     ClusterIP   172.30.161.1    <none>        5432/TCP   125m
+service/sonarqube   ClusterIP   172.30.75.46    <none>        9000/TCP   125m
+
+NAME                                           REVISION   DESIRED   CURRENT   TRIGGERED BY
+deploymentconfig.apps.openshift.io/nexus       1          1         1         config,image(nexus:latest)
+deploymentconfig.apps.openshift.io/sonardb     1          1         0         config,image(postgresql:9.6)
+deploymentconfig.apps.openshift.io/sonarqube   1          2         2         config,image(sonarqube-openshift:latest)
+
+NAME                                                        TYPE              FROM         LATEST
+buildconfig.build.openshift.io/adjective-service-pipeline   JenkinsPipeline   Git@master   2
+buildconfig.build.openshift.io/kafka-service-pipeline       JenkinsPipeline   Git@master   1
+buildconfig.build.openshift.io/noun-service-pipeline        JenkinsPipeline   Git@master   1
+buildconfig.build.openshift.io/sonarqube-openshift          Docker            Git@master   2
+buildconfig.build.openshift.io/ui-service-pipeline          JenkinsPipeline   Git@master   1
+
+NAME                                                    TYPE              FROM          STATUS     STARTED       DURATION
+build.build.openshift.io/sonarqube-openshift-1          Docker            Git@b6a4396   Complete   2 hours ago   9m0s
+build.build.openshift.io/noun-service-pipeline-1        JenkinsPipeline   Git@master    New
+build.build.openshift.io/adjective-service-pipeline-1   JenkinsPipeline   Git@master    New
+build.build.openshift.io/ui-service-pipeline-1          JenkinsPipeline   Git@master    New
+build.build.openshift.io/kafka-service-pipeline-1       JenkinsPipeline   Git@master    New
+build.build.openshift.io/sonarqube-openshift-2          Docker            Git@b6a4396   Complete   2 hours ago   13m34s
+build.build.openshift.io/adjective-service-pipeline-2   JenkinsPipeline   Git@master    New
+
+NAME                                                        IMAGE REPOSITORY                                                                                TAGS     UPDATED
+imagestream.image.openshift.io/adjective-service            default-route-openshift-image-registry.apps-crc.testing/labs-ci-cd/adjective-service
+imagestream.image.openshift.io/kafka-service                default-route-openshift-image-registry.apps-crc.testing/labs-ci-cd/kafka-service
+imagestream.image.openshift.io/nexus                        default-route-openshift-image-registry.apps-crc.testing/labs-ci-cd/nexus                        latest   2 hours ago
+imagestream.image.openshift.io/noun-service                 default-route-openshift-image-registry.apps-crc.testing/labs-ci-cd/noun-service
+imagestream.image.openshift.io/redhat-openjdk18-openshift   default-route-openshift-image-registry.apps-crc.testing/labs-ci-cd/redhat-openjdk18-openshift   1.1      2 hours ago
+imagestream.image.openshift.io/sonarqube                    default-route-openshift-image-registry.apps-crc.testing/labs-ci-cd/sonarqube                    latest   2 hours ago
+imagestream.image.openshift.io/sonarqube-openshift          default-route-openshift-image-registry.apps-crc.testing/labs-ci-cd/sonarqube-openshift          latest   2 hours ago
+imagestream.image.openshift.io/ui-service                   default-route-openshift-image-registry.apps-crc.testing/labs-ci-cd/ui-service
+
+NAME                                 HOST/PORT                               PATH   SERVICES    PORT       TERMINATION   WILDCARD
+route.route.openshift.io/nexus       nexus-labs-ci-cd.apps-crc.testing              nexus       8081                     None
+route.route.openshift.io/sonarqube   sonarqube-labs-ci-cd.apps-crc.testing          sonarqube   9000-tcp   edge          None
+----
+
+12) Connect to the OpenShift console and to Nexus from your laptop
+
+[demouser@fedora30 infrastructure-as-code]$ oc project
+
+----
+Using project "labs-ci-cd" on server "https://api.crc.testing:6443".
+----
+
+
+[demouser@fedora30 infrastructure-as-code]$ oc get route
+
+----
+NAME        HOST/PORT                               PATH   SERVICES    PORT       TERMINATION   WILDCARD
+nexus       nexus-labs-ci-cd.apps-crc.testing              nexus       8081                     None
+----
+
+
+sudo ssh root@<Fedora 30 server with CRC> -L 80:nexus-labs-ci-cd.apps-crc.testing:80
+
+Browse to http://nexus-labs-ci-cd.apps-crc.testing
+
+sudo ssh root@hpe-sl4545g7-01.hpe2.lab.eng.bos.redhat.com -L 443:console-openshift-console.apps-crc.testing:443
+
+Browse to https://console-openshift-console.apps-crc.testing
+
+
+
+Noticed the following the Sonarqube error:
+[1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
