@@ -134,9 +134,17 @@ Mine is at https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/r
 
 Step 11 - Deploy on CRC!
 
+
+----
 cd /home/demouser/rhoar/rhoar-kubernetes-qcon-2018/infrastructure-as-code
 
-[demouser@fedora30 infrastructure-as-code]$ ./run-locally-linux.sh
+wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/rhoar/ansible-deploy-labs-on-crc.sh
+
+sudo chmod +x ./ansible-deploy-labs-on-crc.sh
+
+./ansible-deploy-labs-on-crc.sh
+----
+
 
 ----
 ....
