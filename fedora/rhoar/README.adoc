@@ -9,14 +9,14 @@ so that it runs on  CodeReady Containers / OpenShift 4.1+
 I'm running CRC on a RHEL 8.1 or Fedora 30 physical servers, using SSH tunneling/port forwarding to connect from my laptop to the OpenShift console and deployed apps.
 
 
-(
 For step-by-step instructions and videos on installing CRC and various solutions on top of CRC,
 please see 
 ----
 bit.ly/marcredhat
 bit.ly/marcredhatplaylist 
 ----
-)
+
+
 
 Step 1 - git clone https://github.com/rhoar-qcon-2018/rhoar-kubernetes-qcon-2018.git --recurse-submodules
 
