@@ -153,7 +153,11 @@ Password:
 Step 12 - Check what got deployed
 
 [demouser@fedora30 infrastructure-as-code]$ oc project
+
+----
 Using project "labs-ci-cd" on server "https://api.crc.testing:6443".
+----
+
 
 [demouser@fedora30 infrastructure-as-code]$ oc get all
 
@@ -244,4 +248,11 @@ I ran into the following the Sonarqube error:
 
 ----
 max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+----
+
+Fixed by setting vm.max_map_count = 300000 in /etc/sysctl.conf
+
+----
+[root@fedora30 ~]# cat /etc/sysctl.conf
+vm.max_map_count = 300000
 ----
