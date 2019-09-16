@@ -8,14 +8,13 @@ so that it runs on  CodeReady Containers / OpenShift 4.1+
 
 I'm running CRC on a Fedora 30 physical server, using SSH tunneling/port forwarding to connect from my laptop to the OpenShift console and deployed apps.
 
-Step 1)
-
-git clone https://github.com/rhoar-qcon-2018/rhoar-kubernetes-qcon-2018.git --recurse-submodules
+Step 1 - git clone https://github.com/rhoar-qcon-2018/rhoar-kubernetes-qcon-2018.git --recurse-submodules
 
 [demouser@fedora30 infrastructure-as-code]$ pwd
 /home/demouser/rhoar/rhoar-kubernetes-qcon-2018/infrastructure-as-code
 
-Step 1 - Check Ansible version
+
+Step 2 - Check Ansible version
 
 [demouser@fedora30 infrastructure-as-code]$ ansible --version
 
@@ -28,7 +27,7 @@ ansible 2.8.4
   python version = 3.7.4 (default, Jul  9 2019, 16:32:37) [GCC 9.1.1 20190503 (Red Hat 9.1.1-1)]
 ----
 
-Step 2 - Modify run-locally-linux.sh to:
+Step 3 - Modify run-locally-linux.sh to:
 
 - accept 2.8 version to use "oc cluster-info"
 
@@ -38,7 +37,7 @@ Step 2 - Modify run-locally-linux.sh to:
 My run-locally-linux.sh is at https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/rhoar/run-locally-linux.sh
 
 
-Step 3 - Ensure that you are connect to CRC
+Step 4 - Ensure that you are connect to CRC
 
 
 ----
@@ -46,13 +45,15 @@ eval $(crc oc-env) && oc login -u kubeadmin -p <CRC password> https://api.crc.te
 ----
 
 
-Step 4 - Create the following OpenShift projects
+Step 5 - Create the following OpenShift projects
 
+----
 oc new-project labs-ci-cd
 oc new-project labs-dev
+----
 
+Step 6 - Install openshift-applier
 
-Step 5 - Install openshift-applier
 See https://github.com/redhat-cop/openshift-applier/blob/master/playbooks/README.md
 
 Comment out version: v3.9.0 as shown below.
@@ -70,13 +71,20 @@ Comment out version: v3.9.0 as shown below.
   name: openshift-applier
 ----
 
+Install the requirements
+
+----
 [demouser@fedora30 infrastructure-as-code]$ ansible-galaxy install -r requirements.yml --roles-path=roles
+----
 
+Step 7 - Run the openshift-cluster-seed.yml playbook
 
-Step 6 - Run the openshift-cluster-seed.yml playbook
+----
 [demouser@fedora30 openshift-applier]$ ansible-playbook -i inventory playbooks/openshift-cluster-seed.yml -e client=oc --connection=local
+----
 
 My inventory file is:
+
 [demouser@fedora30 openshift-applier]$ cat inventory
 
 ----
@@ -84,29 +92,37 @@ My inventory file is:
 localhost
 -----
 
-Step 7 - Install Galaxy requirements
+Step 8 - Install Galaxy requirements
+
 
 [demouser@fedora30 infrastructure-as-code]$ ansible-galaxy install -r galaxy_requirements.yml
-- extracting labs-ci-cd to /home/demouser/.ansible/roles/labs-ci-cd
-- labs-ci-cd (master) was installed successfully
 
+----
+extracting labs-ci-cd to /home/demouser/.ansible/roles/labs-ci-cd
+labs-ci-cd (master) was installed successfully
+----
 
-Step 8 - Set env variables
+Step 9 - Set env variables
 
+----
 export OPENSHIFT_USERNAME='kubeadmin'
 export OPENSHIFT_PASSWORD='<CRC password>'
 export RED_HAT_DEVELOPERS_USERNAME='<RH username>'
 export RED_HAT_DEVELOPERS_PASSWORD='<RH password>'
+----
 
+Step 10 - Change projects-and-policies.yml to use the correct templates
 
-Step 9 - Change projects-and-policies.yml to use the correct templates
 [demouser@fedora30 host_vars]$ pwd
+
+----
 /home/demouser/rhoar/rhoar-kubernetes-qcon-2018/infrastructure-as-code/inventory/host_vars
+----
 
 Mine is at https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/rhoar/projects-and-policies.yml
 
 
-Step 10 - Deploy!
+Step 11 - Deploy on CRC!
 
 /home/demouser/rhoar/rhoar-kubernetes-qcon-2018/infrastructure-as-code
 [demouser@fedora30 infrastructure-as-code]$ ./run-locally-linux.sh
@@ -123,9 +139,11 @@ Password:
 ----
 
 
-11) Tests
+Step 12 - Check what got deployed
+
 [demouser@fedora30 infrastructure-as-code]$ oc project
 Using project "labs-ci-cd" on server "https://api.crc.testing:6443".
+
 [demouser@fedora30 infrastructure-as-code]$ oc get all
 
 ----
@@ -175,7 +193,8 @@ route.route.openshift.io/nexus       nexus-labs-ci-cd.apps-crc.testing          
 route.route.openshift.io/sonarqube   sonarqube-labs-ci-cd.apps-crc.testing          sonarqube   9000-tcp   edge          None
 ----
 
-12) Connect to the OpenShift console and to Nexus from your laptop
+
+Step 13 - Connect to the OpenShift console and to Nexus from your laptop
 
 [demouser@fedora30 infrastructure-as-code]$ oc project
 
@@ -192,14 +211,22 @@ nexus       nexus-labs-ci-cd.apps-crc.testing              nexus       8081     
 ----
 
 
+To connect to Nexus:
+
+----
 sudo ssh root@<Fedora 30 server with CRC> -L 80:nexus-labs-ci-cd.apps-crc.testing:80
 
 Browse to http://nexus-labs-ci-cd.apps-crc.testing
+----
 
+
+To connect to the OpenShift 4.1 console:
+
+----
 sudo ssh root@hpe-sl4545g7-01.hpe2.lab.eng.bos.redhat.com -L 443:console-openshift-console.apps-crc.testing:443
 
 Browse to https://console-openshift-console.apps-crc.testing
-
+----
 
 
 Noticed the following the Sonarqube error:
