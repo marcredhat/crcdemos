@@ -1,6 +1,6 @@
 
 == Reactive Microservices on CodeReady Containers (CRC) / OpenShift 4.1+
-using Red Hat OpenShift Application Runtimes
+== using Red Hat OpenShift Application Runtimes
 
 I made a few changes to
 https://github.com/rhoar-qcon-2018/rhoar-kubernetes-qcon-2018/blob/master/README.adoc
