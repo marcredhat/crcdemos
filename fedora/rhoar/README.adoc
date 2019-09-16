@@ -20,8 +20,6 @@ bit.ly/marcredhatplaylist
 
 Step 1 - git clone https://github.com/rhoar-qcon-2018/rhoar-kubernetes-qcon-2018.git --recurse-submodules
 
-[demouser@fedora30 infrastructure-as-code]$ pwd
-/home/demouser/rhoar/rhoar-kubernetes-qcon-2018/infrastructure-as-code
 
 
 Step 2 - Check Ansible version
