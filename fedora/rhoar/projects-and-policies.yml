@@ -1,0 +1,27 @@
+---
+ansible_connection: local
+openshift_cluster_content:
+## Create OpenShift Projects/Namespaces
+- object: projectrequest
+  content:
+  - name: ci-cd
+    #template: "https://raw.githubusercontent.com/redhat-cop/cluster-lifecycle/v3.9.0/files/projectrequest/template.yml"
+    template: https://raw.githubusercontent.com/redhat-cop/cluster-lifecycle/master/files/projectrequest/template.yml
+    #template_action: create
+    params: "{{ playbook_dir }}/params/projectrequests/ci-cd"
+    tags:
+    - projects
+  - name: dev
+    #template: "https://raw.githubusercontent.com/redhat-cop/cluster-lifecycle/v3.9.0/files/projectrequest/template.yml"
+    template: https://raw.githubusercontent.com/redhat-cop/cluster-lifecycle/master/files/projectrequest/template.yml
+    #template_action: create
+    params: "{{ playbook_dir }}/params/projectrequests/dev"
+    tags:
+    - projects
+  - name: test
+    #template: "https://raw.githubusercontent.com/redhat-cop/cluster-lifecycle/v3.9.0/files/projectrequest/template.yml"
+    template: https://raw.githubusercontent.com/redhat-cop/cluster-lifecycle/master/files/projectrequest/template.yml
+    #template_action: create
+    params: "{{ playbook_dir }}/params/projectrequests/test"
+    tags:
+    - projects
