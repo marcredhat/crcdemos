@@ -67,4 +67,3 @@ Then, sudo ssh root@<CRC server> -L 443:console-openshift-console.apps-crc.testi
 Browse to https://ansible-tower-web-svc-tower35.apps-crc.testing
 
 
-image:images/tower.png[title="Ansible Tower 3.5.2 on CodeReady Containers / OpenShift 4.1"]
