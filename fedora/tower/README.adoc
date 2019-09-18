@@ -15,7 +15,7 @@ eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testin
 ----
 
 ----
-oc new-project tower
+oc new-project tower35
 ----
 
 cat postgres-nfs-pvc
