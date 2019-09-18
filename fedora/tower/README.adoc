@@ -11,7 +11,7 @@ bit.ly/marcredhatplaylist
 ----
 
 ----
-eval $(crc oc-env) && oc login -u kubeadmin -p 78UVa-zNj5W-YB62Z-ggxGZ https://api.crc.testing:6443
+eval $(crc oc-env) && oc login -u kubeadmin -p <password> https://api.crc.testing:6443
 ----
 
 ----
@@ -58,11 +58,16 @@ podman pull registry.access.redhat.com/rhscl/postgresql-96-rhel7
 ----
 
 ----
-./setup_openshift.sh -e openshift_host=https://api.crc.testing:6443 -e openshift_project=tower35 -e openshift_user=kubeadmin -e openshift_password=78UVa-zNj5W-YB62Z-ggxGZ  -e admin_password=admin -e secret_key=mysecret -e pg_username=postgresuser -e pg_password=postgrespwd -e rabbitmq_password=rabbitpwd -e rabbitmq_erlang_cookie=rabbiterlangpwd -e openshift_skip_tls_verify=True
+./setup_openshift.sh -e openshift_host=https://api.crc.testing:6443 -e openshift_project=tower35 -e openshift_user=kubeadmin -e openshift_password=<password>  -e admin_password=admin -e secret_key=mysecret -e pg_username=postgresuser -e pg_password=postgrespwd -e rabbitmq_password=rabbitpwd -e rabbitmq_erlang_cookie=rabbiterlangpwd -e openshift_skip_tls_verify=True
 ----
 
 On your laptop,  add ansible-tower-web-svc-tower35.apps-crc.testing to /etc/hosts, pointing to 127.0.0.1.
-Then, sudo ssh root@<CRC server> -L 443:console-openshift-console.apps-crc.testing:443
+
+Then, 
+
+----
+sudo ssh root@<CRC server> -L 443:console-openshift-console.apps-crc.testing:443
+----
 
 Browse to https://ansible-tower-web-svc-tower35.apps-crc.testing
 
