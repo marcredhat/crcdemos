@@ -1,0 +1,222 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    openshift.io/scc: privileged
+  creationTimestamp: "2019-09-18T04:48:50Z"
+  generateName: ansible-tower-
+  labels:
+    app: ansible-tower
+    controller-revision-hash: ansible-tower-66b455f57b
+    name: ansible-tower-web-deploy
+    service: django
+    statefulset.kubernetes.io/pod-name: ansible-tower-0
+  name: ansible-tower-marc
+  namespace: tower35
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: ansible-tower
+    uid: 9b927dc7-d9cf-11e9-ac68-52fdfc072182
+  resourceVersion: "2239481"
+  selfLink: /api/v1/namespaces/tower35/pods/ansible-tower-0
+  uid: 9ba02f64-d9cf-11e9-ac68-52fdfc072182
+spec:
+  containers:
+  - image: registry.access.redhat.com/ansible-tower-35/ansible-tower:3.5.2
+    imagePullPolicy: Always
+    name: ansible-tower-web
+    ports:
+    - containerPort: 8052
+      protocol: TCP
+    resources:
+      requests:
+        cpu: 50m
+        memory: 1Gi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/tower/settings.py
+      name: ansible-tower-application-config
+      readOnly: true
+      subPath: settings.py
+    - mountPath: /etc/tower/conf.d/
+      name: ansible-tower-application-credentials
+      readOnly: true
+    - mountPath: /etc/tower/SECRET_KEY
+      name: ansible-tower-secret-key
+      readOnly: true
+      subPath: SECRET_KEY
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: awx-token-p8n9l
+      readOnly: true
+  - command:
+    - /usr/bin/launch_awx_task.sh
+    env:
+    - name: AWX_SKIP_MIGRATIONS
+      value: "1"
+    image: registry.access.redhat.com/ansible-tower-35/ansible-tower:3.5.2
+    imagePullPolicy: Always
+    name: ansible-tower-celery
+    resources:
+      requests:
+        cpu: 50m
+        memory: 2Gi
+    securityContext:
+      privileged: true
+      procMount: Default
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/tower/settings.py
+      name: ansible-tower-application-config
+      readOnly: true
+      subPath: settings.py
+    - mountPath: /etc/tower/conf.d/
+      name: ansible-tower-application-credentials
+      readOnly: true
+    - mountPath: /etc/tower/SECRET_KEY
+      name: ansible-tower-secret-key
+      readOnly: true
+      subPath: SECRET_KEY
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: awx-token-p8n9l
+      readOnly: true
+  - env:
+    - name: MY_POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    - name: RABBITMQ_USE_LONGNAME
+      value: "true"
+    - name: RABBITMQ_NODENAME
+      value: rabbit@$(MY_POD_IP)
+    - name: RABBITMQ_ERLANG_COOKIE
+      valueFrom:
+        secretKeyRef:
+          key: rabbitmq_erlang_cookie
+          name: ansible-tower-secrets
+    - name: K8S_SERVICE_NAME
+      value: rabbitmq
+    image: registry.access.redhat.com/ansible-tower-35/ansible-tower-messaging:3.7.4
+    imagePullPolicy: Always
+    livenessProbe:
+      exec:
+        command:
+        - rabbitmqctl
+        - status
+      failureThreshold: 3
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: ansible-tower-rabbit
+    ports:
+    - containerPort: 15672
+      name: http
+      protocol: TCP
+    - containerPort: 5672
+      name: amqp
+      protocol: TCP
+    readinessProbe:
+      exec:
+        command:
+        - rabbitmqctl
+        - status
+      failureThreshold: 3
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 10
+    resources:
+      requests:
+        cpu: 50m
+        memory: 2Gi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/rabbitmq
+      name: rabbitmq-config
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: awx-token-p8n9l
+      readOnly: true
+  - image: registry.access.redhat.com/ansible-tower-35/ansible-tower-memcached:latest
+    imagePullPolicy: Always
+    name: ansible-tower-memcached
+    resources:
+      requests:
+        cpu: 50m
+        memory: 1Gi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: awx-token-p8n9l
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: ansible-tower-0
+  imagePullSecrets:
+  - name: awx-dockercfg-j7lw7
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: awx
+  serviceAccountName: awx
+  subdomain: ansible-tower
+  terminationGracePeriodSeconds: 10
+  tolerations:
+  - effect: NoSchedule
+    key: node.kubernetes.io/memory-pressure
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: ansible-tower_settings
+        path: settings.py
+      name: ansible-tower-config
+    name: ansible-tower-application-config
+  - name: ansible-tower-application-credentials
+    secret:
+      defaultMode: 420
+      items:
+      - key: credentials_py
+        path: credentials.py
+      - key: environment_sh
+        path: environment.sh
+      secretName: ansible-tower-secrets
+  - name: ansible-tower-secret-key
+    secret:
+      defaultMode: 420
+      items:
+      - key: secret_key
+        path: SECRET_KEY
+      secretName: ansible-tower-secrets
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: rabbitmq.conf
+        path: rabbitmq.conf
+      - key: enabled_plugins
+        path: enabled_plugins
+      - key: rabbitmq_definitions.json
+        path: rabbitmq_definitions.json
+      name: rabbitmq-config
+    name: rabbitmq-config
+  - name: awx-token-p8n9l
+    secret:
+      defaultMode: 420
+      secretName: awx-token-p8n9l
