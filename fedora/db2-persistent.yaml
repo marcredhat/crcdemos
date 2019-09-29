@@ -1,0 +1,99 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: db2-persistent
+objects:
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: db2
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 10Gi
+  status: {}
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    labels:
+      app: db2
+    name: db2
+  spec:
+    replicas: 1
+    selector:
+      app: db2
+      deploymentconfig: db2
+    strategy:
+      activeDeadlineSeconds: 21600
+      recreateParams:
+        timeoutSeconds: 600
+      resources: {}
+      type: Recreate
+    template:
+      metadata:
+        labels:
+          app: db2
+          deploymentconfig: db2
+      spec:
+        containers:
+        - name: db2
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 50000
+            protocol: TCP
+          resources:
+            limits:
+              memory: 2Gi
+            requests:
+              memory: 2Gi
+          securityContext: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /db2
+            name: db2
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          fsGroup: 54321
+        serviceAccount: db2
+        serviceAccountName: db2
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: db2
+          persistentVolumeClaim:
+            claimName: db2
+    test: false
+    triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - db2
+        from:
+          kind: ImageStreamTag
+          name: db2
+          namespace: db2
+      type: ImageChange
+    - type: ConfigChange
+  status: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: db2
+    name: db2
+  spec:
+    ports:
+    - name: 50000-tcp
+      port: 50000
+      protocol: TCP
+      targetPort: 50000
+    selector:
+      deploymentconfig: db2
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
