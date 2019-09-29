@@ -74,7 +74,7 @@ objects:
         - db2
         from:
           kind: ImageStreamTag
-          name: db2
+          name: db2:11.5.0.0
           namespace: db2
       type: ImageChange
     - type: ConfigChange
