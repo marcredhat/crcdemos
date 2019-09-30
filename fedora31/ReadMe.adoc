@@ -1,4 +1,4 @@
-== CodeReady Containers on Fedora 31
+== CodeReady Containers on Fedora 31 physical server
 
 
 ----
