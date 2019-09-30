@@ -19,6 +19,13 @@ oc adm policy add-scc-to-user anyuid -z db2
 oc import-image db2:11.5.0.0 --confirm --reference-policy='local' --from=ibmcom/db2
 ----
 
+
+----
+oc edit scc
+:%s/allowPrivilegedContainer: false/allowPrivilegedContainer: true/g
+:wq
+----
+
 ----
 oc process -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/db2-persistent.yaml | oc create -f -
 ----
