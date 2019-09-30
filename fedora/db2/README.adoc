@@ -34,6 +34,23 @@ oc set  env dc/db2 SAMPLEDB=true
 ----
 
 
+[root@dell-per640-05 ~]# oc get pvc
+
+----
+NAME   STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+db2    Bound    pv0020   10Gi       RWO,ROX,RWX                   18h
+----
+
+
+[root@dell-per640-05 ~]# oc get pods
+
+----
+NAME           READY   STATUS      RESTARTS   AGE
+db2-3-deploy   0/1     Completed   0          18h
+db2-3-svcjn    1/1     Running     0          18h
+----
+
+
 oc rsh db2-3-svcjn bash -c "su - db2inst1"
 
 
@@ -115,7 +132,7 @@ oc rsh db2-3-svcjn bash -c "su - db2inst1"
 ----
 db2set db2comm=tcpip
 db2 "update dbm cfg using svcename 50000"
-db2stop
+db2stop force
 db2start
 ----
 
