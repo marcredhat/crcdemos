@@ -1,0 +1,144 @@
+
+oc new-project db2
+oc project db2
+oc create sa db2
+oc adm policy add-scc-to-user anyuid -z db2
+
+oc import-image db2:11.5.0.0 --confirm --reference-policy='local' --from=ibmcom/db2
+
+oc process -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/db2-persistent.yaml | oc create -f -
+
+oc set  env dc/db2  LICENSE=accept
+oc set  env dc/db2 DB2INST1_PASSWORD=test
+oc set  env dc/db2 DBNAME=testdb
+oc set  env dc/db2 SAMPLEDB=true
+
+
+oc rsh db2-3-svcjn bash -c "su - db2inst1"
+
+[db2inst1@db2-3-svcjn ~]$ db2start
+09/30/2019 06:32:21     0   0   SQL1063N  DB2START processing was successful.
+SQL1063N  DB2START processing was successful.
+
+
+ [db2inst1@db2-3-svcjn ~]$ db2 list db directory
+
+ System Database Directory
+
+ Number of entries in the directory = 1
+
+ Database 1 entry:
+
+ Database alias                       = SAMPLE
+ Database name                        = SAMPLE
+ Local database directory             = /database/data
+ Database release level               = 15.00
+ Comment                              =
+ Directory entry type                 = Indirect
+ Catalog database partition number    = 0
+ Alternate server hostname            =
+ Alternate server port number         =
+
+
+
+
+ [db2inst1@db2-3-svcjn ~]$ db2 connect to sample
+
+ Database Connection Information
+
+ Database server        = DB2/LINUXX8664 11.5.0.0
+ SQL authorization ID   = DB2INST1
+ Local database alias   = SAMPLE
+
+
+
+ [db2inst1@db2-3-svcjn ~]$  db2 "select * from dept"
+
+ DEPTNO DEPTNAME                             MGRNO  ADMRDEPT LOCATION
+ ------ ------------------------------------ ------ -------- ----------------
+ A00    SPIFFY COMPUTER SERVICE DIV.         000010 A00      -
+ B01    PLANNING                             000020 A00      -
+ C01    INFORMATION CENTER                   000030 A00      -
+ D01    DEVELOPMENT CENTER                   -      A00      -
+ D11    MANUFACTURING SYSTEMS                000060 D01      -
+ D21    ADMINISTRATION SYSTEMS               000070 D01      -
+ E01    SUPPORT SERVICES                     000050 A00      -
+ E11    OPERATIONS                           000090 E01      -
+ E21    SOFTWARE SUPPORT                     000100 E01      -
+ F22    BRANCH OFFICE F2                     -      E01      -
+ G22    BRANCH OFFICE G2                     -      E01      -
+ H22    BRANCH OFFICE H2                     -      E01      -
+ I22    BRANCH OFFICE I2                     -      E01      -
+ J22    BRANCH OFFICE J2                     -      E01      -
+
+   14 record(s) selected.
+
+
+ == DB2 opensource driver/client setup
+ dnf  -y install go git tar libpam*
+
+ go get -d github.com/ibmdb/go_ibm_db
+
+ cd /root/go/src/github.com/ibmdb/go_ibm_db/installer
+
+
+
+----
+ export DB2HOME=/root/go/src/github.com/ibmdb/go_ibm_db/installer/clidriver
+ export CGO_CFLAGS=-I$DB2HOME/include
+ export CGO_LDFLAGS=-L$DB2HOME/lib
+ export LD_LIBRARY_PATH=$DB2HOME/lib
+----
+
+ go run setup.go
+
+ oc rsh db2-3-svcjn bash -c "su - db2inst1"
+
+----
+db2set db2comm=tcpip
+db2 "update dbm cfg using svcename 50000"
+db2stop
+db2start
+----
+
+ Add user / password
+
+exit
+oc rsh db2-3-svcjn bash
+
+ ----
+ adduser user_name -g users -s /sbin/nologin
+ passwd user_name
+----
+
+exit
+oc rsh db2-3-svcjn bash -c "su - db2inst1"
+
+----
+db2 connect to sample
+db2 "GRANT CONNECT ON DATABASE TO USER user_name"
+----
+
+exit
+oc port-forward  db2-3-svcjn 50000:50000 &
+
+
+----
+ export DB2HOME=/root/go/src/github.com/ibmdb/go_ibm_db/installer/clidriver
+ export CGO_CFLAGS=-I$DB2HOME/include
+ export CGO_LDFLAGS=-L$DB2HOME/lib
+ export LD_LIBRARY_PATH=$DB2HOME/lib
+----
+
+wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/db2/db2clientexample.go
+
+
+[root@dell-per640-05 ~]# go run db2clientexample.go
+
+----
+Handling connection for 50000
+TABLE CREATED
+ID    NAME   LOCATION    POSITION
+-------------------------------------
+3242  mike   hyd         manager
+----
