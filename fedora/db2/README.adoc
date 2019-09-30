@@ -132,6 +132,7 @@ passwd user_name
 ----
 
 exit
+
 oc rsh db2-3-svcjn bash -c "su - db2inst1"
 
 ----
@@ -140,6 +141,7 @@ db2 "GRANT CONNECT ON DATABASE TO USER user_name"
 ----
 
 exit
+
 oc port-forward  db2-3-svcjn 50000:50000 &
 
 
