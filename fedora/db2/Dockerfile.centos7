@@ -1,0 +1,24 @@
+FROM centos:7
+
+# File Author / Maintainer
+MAINTAINER Marc Chisinevski
+
+RUN yum -y install dnf && dnf -y update && dnf -y install --nodocs tar gzip binutils* file  libaio* libpam* podman buildah skopeo && dnf clean all
+
+RUN curl -o /tmp/client.tar.gz -SL \
+    https://<........>ibm_data_server_client_linuxx64_v11.5.tar.gz?dl=1 \
+    --retry 2 --retry-max-time 0 -C - && \
+    tar xvfz /tmp/client.tar.gz -C /usr/bin && \
+    rm -f /tmp/client.tar.gz
+
+
+RUN rpm -ivh https://www.rpmfind.net/linux/fedora/linux/releases/30/Everything/x86_64/os/Packages/n/numactl-libs-2.0.12-2.fc30.x86_64.rpm
+
+WORKDIR /usr/bin/client
+
+
+RUN  curl -L  https://raw.githubusercontent.com/marcredhat/crcdemos/master/fedora/db2/marc.rsp -o marc.rsp && ./db2setup -r marc.rsp
+
+#RUN mv /opt/ibm/db2/V11.5/bin/db2 /usr/bin
+
+RUN su - db2inst1 -c "/bin/bash && db2start && db2 create db DMX"
