@@ -1,0 +1,85 @@
+== CodeReady Containers on Fedora 31
+
+
+----
+sudo adduser demouser
+
+sudo passwd demouser
+
+sudo usermod -aG wheel demouser
+----
+
+
+----
+sudo dnf -y update && dnf -y install git wget tar qemu-kvm NetworkManager jq  net-tools libvirt* libselinux*-python --skip-broken
+----
+
+
+----
+sudo systemctl start libvirtd
+
+sudo systemctl enable libvirtd
+
+sudo systemctl start NetworkManager
+----
+
+----
+su demouser
+cd /home/demouser
+----
+
+----
+wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/crc-linux-amd64.tar.xz
+tar -xvf crc-linux-amd64.tar.xz
+----
+
+----
+cd crc-linux-1.0.0-beta.5-amd64
+
+sudo mv ./crc /usr/bin
+
+sudo chmod +x /usr/bin/crc
+----
+
+
+----
+crc config set memory 64000
+----
+
+
+----
+crc setup
+----
+
+
+crc ip
+
+----
+192.168.130.11
+----
+
+
+Add to /etc/hosts on your Fedora 31 physical server
+
+
+----
+192.168.130.11 api.crc.testing  console-openshift-console.apps-crc.testing oauth-openshift.apps-crc.testing image-registry.openshift-image-registry.svc
+----
+
+
+You’ll need your pull secret from https://cloud.redhat.com/openshift/install/metal/user-provisioned
+
+
+----
+crc start
+----
+
+
+----
+sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+----
+
+
+----
+eval $(crc oc-env) && oc login -u kubeadmin -p BMLkR-NjA28-v7exC-8bwAk https://api.crc.testing:6443
+----
