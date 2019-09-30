@@ -54,11 +54,13 @@ objects:
           volumeMounts:
           - mountPath: /db2
             name: db2
+          securityContext:
+            privileged: true
         dnsPolicy: ClusterFirst
         restartPolicy: Always
         schedulerName: default-scheduler
         securityContext:
-          fsGroup: 54321
+          fsGroup: 1000
         serviceAccount: db2
         serviceAccountName: db2
         terminationGracePeriodSeconds: 30
