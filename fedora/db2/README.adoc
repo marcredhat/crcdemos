@@ -58,6 +58,20 @@ db2-3-svcjn    1/1     Running     0          18h
 ----
 
 
+oc logs db2-3-svcjn
+
+----
+......
+DB2 State : Operable
+DB2 has not been started
+Starting DB2...
+10/01/2019 01:57:04     0   0   SQL1063N  DB2START processing was successful.
+SQL1063N  DB2START processing was successful.
+(*) User chose to create a SAMPLE database
+Creating database "SAMPLE"...
+......
+----
+
 oc rsh db2-3-svcjn bash -c "su - db2inst1"
 
 
