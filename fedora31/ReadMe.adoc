@@ -81,5 +81,10 @@ sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
 
 
 ----
+mv /home/demouser/.crc/bin/oc /usr/bin/oc
+----
+
+
+----
 eval $(crc oc-env) && oc login -u kubeadmin -p BMLkR-NjA28-v7exC-8bwAk https://api.crc.testing:6443
 ----
