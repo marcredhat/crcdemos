@@ -69,7 +69,24 @@ Starting DB2...
 SQL1063N  DB2START processing was successful.
 (*) User chose to create a SAMPLE database
 Creating database "SAMPLE"...
+Connecting to database "SAMPLE"...
+Creating tables and data in schema "DB2INST1"...
+Creating tables with XML columns and XML data in schema "DB2INST1"...
+'db2sampl' processing complete.
 ......
+### Restarting DB2
+10/01/2019 02:31:22     0   0   SQL1064N  DB2STOP processing was successful.
+SQL1064N  DB2STOP processing was successful.
+10/01/2019 02:31:24     0   0   SQL1063N  DB2START processing was successful.
+SQL1063N  DB2START processing was successful.
+### Making backup directory and performing backup
+Backup successful. The timestamp for this backup image is : 20191001023127
+......
+10/01/2019 02:31:36     0   0   SQL1064N  DB2STOP processing was successful.
+SQL1064N  DB2STOP processing was successful.
+10/01/2019 02:31:38     0   0   SQL1063N  DB2START processing was successful.
+SQL1063N  DB2START processing was successful.
+
 ----
 
 oc rsh db2-3-svcjn bash -c "su - db2inst1"
