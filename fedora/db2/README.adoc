@@ -127,6 +127,8 @@ B01    PLANNING                             000020 A00      -
 On Fedora 31:
 
 ----
+sudo -i
+
 dnf  -y install go git tar libpam*
 
 go get -d github.com/ibmdb/go_ibm_db
