@@ -119,7 +119,7 @@ source .bashrc
 
 == Install CodeReady Containers
 
-wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/1.0.0-beta.3/crc-linux-amd64.tar.xz
+wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/crc-linux-amd64.tar.xz
 
 tar -xvf crc-linux-amd64.tar.xz
 
