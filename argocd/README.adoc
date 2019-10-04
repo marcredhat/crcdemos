@@ -58,3 +58,6 @@ repository 'git@github.com:marcredhat/rsvpapp-webinar4.git' added
 oc adm policy add-scc-to-group anyuid system:authenticated
 ----
 
+Configure your application in Argo CD:
+
+image:images/argo_cd_app.png[title="Configure your app in Argo CD"] 
