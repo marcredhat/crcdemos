@@ -4,6 +4,11 @@
 Inspired by https://www.digitalocean.com/community/tutorials/webinar-series-gitops-tool-sets-on-kubernetes-with-circleci-and-argo-cd
 
 
+See video no. 13 at http://bit.ly/marcredhatplaylist
+
+
+See also http://bit.ly/marcredhat
+
 ----
 oc new-project argocd
 oc apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/release-1.2/manifests/install.yaml
