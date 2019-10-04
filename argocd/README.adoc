@@ -1,5 +1,5 @@
 
-== GitOps with OpenShift 4.2 and ArgoCD 
+== GitOps with OpenShift 4.2 and Argo CD 
 
 Inspired by https://www.digitalocean.com/community/tutorials/webinar-series-gitops-tool-sets-on-kubernetes-with-circleci-and-argo-cd
 
