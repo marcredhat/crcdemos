@@ -1,0 +1,71 @@
+# ansible-playbook istio-install-playbook.yaml --tags=cleanmesh
+# ansible-playbook istio-install-playbook.yaml --tags=cleanbookinfo
+# ansible-playbook istio-install-playbook.yaml --tags=install
+# ansible-playbook istio-install-playbook.yaml --tags=bookinfo
+---
+- name: istio installation
+  hosts: localhost
+  tags: cleanbookinfo
+  tasks:
+    - name: delete bookinfo application
+      shell: oc delete -n bookinfo -f https://raw.githubusercontent.com/Maistra/bookinfo/maistra-1.0/bookinfo.yaml
+      ignore_errors: true
+    - name: delete the ingress gateway by applying the bookinfo-gateway.yaml
+      shell: oc delete -n bookinfo -f https://raw.githubusercontent.com/Maistra/bookinfo/maistra-1.0/bookinfo-gateway.yaml
+      ignore_errors: true
+    - name: delete default destination rules when mutual TLS is enabled
+      shell: oc delete -n bookinfo -f https://raw.githubusercontent.com/istio/istio/release-1.1/samples/bookinfo/networking/destination-rule-all-mtls.yaml
+      ignore_errors: true
+    - name: delete bookinfo project
+      shell: oc delete project bookinfo
+      ignore_errors: true
+    - name: delete testbookinfo project
+      shell: oc delete project testbookinfo
+      ignore_errors: true
+
+
+- name: clean istio installation
+  hosts: localhost
+  tags: cleanmesh
+  tasks:
+    - name: delete ServiceMeshMemberRoll
+      shell: oc delete -f istio-servicememberroll.yaml -n istio-system
+      ignore_errors: true
+    - name: delete ServiceMeshControlPlane
+     #shell: oc delete -f istio-install-playbook.yaml -n istio-system
+      shell: oc delete ServiceMeshControlPlane basic-install -n istio-system
+      ignore_errors: true
+    - name: delete project istio-system
+      shell: oc delete project istio-system
+      ignore_errors: true
+
+- name: istio installation
+  hosts: localhost
+  tags: install
+  tasks:
+    - name: create new project
+      shell: oc new-project istio-system
+      ignore_errors: true
+    - name: create ServiceMeshControlPlane
+      shell: oc apply -f istio-installation.yaml -n istio-system
+    - name: create ServiceMeshMemberRoll
+      shell: oc apply -f istio-servicememberroll.yaml -n istio-system
+
+
+- name: deploy sample book example
+  hosts: localhost
+  tags: bookinfo
+  tasks:
+    - name: create new bookinfo project
+      shell: oc new-project bookinfo
+    - name: create bookinfo application
+      shell: oc apply -n bookinfo -f https://raw.githubusercontent.com/Maistra/bookinfo/maistra-1.0/bookinfo.yaml
+    - name: Create the ingress gateway by applying the bookinfo-gateway.yaml
+      shell: oc apply -n bookinfo -f https://raw.githubusercontent.com/Maistra/bookinfo/maistra-1.0/bookinfo-gateway.yaml
+    - name: Adding default destination rules when mutual TLS is enabled
+      shell: oc apply -n bookinfo -f https://raw.githubusercontent.com/istio/istio/release-1.1/samples/bookinfo/networking/destination-rule-all-mtls.yaml
+    - name: get the http ingress gateway route
+      shell: oc get route istio-ingressgateway -n istio-system --template={% raw %}{{.spec.host}}{% endraw %}
+      register: gateway_url
+    - debug:
+        msg: curl http://{{gateway_url.stdout}}/productpage
