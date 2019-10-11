@@ -175,7 +175,6 @@ oc project istio-system
 
 oc get pods
 
-
 ----
 NAME                                      READY   STATUS      RESTARTS   AGE
 authservice-5d776954c6-ndnzg              1/1     Running     0          17m
@@ -259,4 +258,3 @@ tensorboard        tensorboard-kubeflow.apps-crc.testing               tensorboa
 
 Browse to http://centraldashboard-kubeflow.apps-crc.testing
 
-----
