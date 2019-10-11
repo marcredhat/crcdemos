@@ -150,16 +150,17 @@ oc get svc -n istio-system istio-ingressgateway -o jsonpath='{.status.loadBalanc
 172.30.165.3
 ----
 
-
-----
 oc project istio-system
 
 oc expose svc/istio-ingressgateway
 route.route.openshift.io/istio-ingressgateway exposed
 
 oc get route
+
+----
 NAME                   HOST/PORT                                            PATH   SERVICES               PORT        TERMINATION   WILDCARD
 istio-ingressgateway   istio-ingressgateway-istio-system.apps-crc.testing          istio-ingressgateway   https-dex                 None
+----
 
 
 oc logs istio-galley-699c74f6b7-vkt69
