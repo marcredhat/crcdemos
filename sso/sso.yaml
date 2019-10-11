@@ -1,0 +1,164 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  creationTimestamp: "2019-10-07T19:30:06Z"
+  generation: 5
+  labels:
+    application: sso
+    rhsso: 7.3.0.GA
+    template: sso73-x509-https
+  name: sso
+  namespace: sso
+  resourceVersion: "1379746"
+  selfLink: /apis/apps.openshift.io/v1/namespaces/sso/deploymentconfigs/sso
+  uid: de0b4009-e938-11e9-85af-0a580a8000a8
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    deploymentConfig: sso
+  strategy:
+    activeDeadlineSeconds: 21600
+    recreateParams:
+      timeoutSeconds: 600
+    resources: {}
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        application: sso
+        deploymentConfig: sso
+      name: sso
+    spec:
+      containers:
+      - env:
+        - name: SSO_HOSTNAME
+          value: sso.apps-crc.testing
+        - name: DB_MIN_POOL_SIZE
+        - name: DB_MAX_POOL_SIZE
+        - name: DB_TX_ISOLATION
+        - name: JGROUPS_PING_PROTOCOL
+          value: openshift.DNS_PING
+        - name: OPENSHIFT_DNS_PING_SERVICE_NAME
+          value: sso-ping
+        - name: OPENSHIFT_DNS_PING_SERVICE_PORT
+          value: "8888"
+        - name: X509_CA_BUNDLE
+          value: /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt
+        - name: JGROUPS_CLUSTER_PASSWORD
+          value: HOkMOodiPjFUIw4dXmqo4ORIXT7VnQqD
+        - name: SSO_ADMIN_USERNAME
+          value: admin
+        - name: SSO_ADMIN_PASSWORD
+          value: marc
+        - name: SSO_REALM
+          value: ocp
+        - name: SSO_SERVICE_USERNAME
+        - name: SSO_SERVICE_PASSWORD
+        - name: SSO_ENABLE_CORS
+          value: "true"
+        - name: CORS_ALLOWED_METHODS
+          value: POST, PUT, DELETE, GET
+        - name: CORS_EXPOSED_HEADERS
+          value: WWW-Authenticate, My-custom-exposed-Header
+        image: image-registry.openshift-image-registry.svc:5000/openshift/redhat-sso73-openshift@sha256:35740d1dbebbb4dc39ea9ce4736d5cc54675a984b1ec0f9bef67eb48e93ffe2d
+        imagePullPolicy: Always
+        livenessProbe:
+          exec:
+            command:
+            - /bin/bash
+            - -c
+            - /opt/eap/bin/livenessProbe.sh
+          failureThreshold: 3
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: sso
+        ports:
+        - containerPort: 8778
+          name: jolokia
+          protocol: TCP
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        - containerPort: 8443
+          name: https
+          protocol: TCP
+        - containerPort: 8888
+          name: ping
+          protocol: TCP
+        readinessProbe:
+          exec:
+            command:
+            - /bin/bash
+            - -c
+            - /opt/eap/bin/readinessProbe.sh
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 1Gi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/x509/https
+          name: sso-x509-https-volume
+          readOnly: true
+        - mountPath: /etc/x509/jgroups
+          name: sso-x509-jgroups-volume
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 75
+      volumes:
+      - name: sso-x509-https-volume
+        secret:
+          defaultMode: 420
+          secretName: sso-x509-https-secret
+      - name: sso-x509-jgroups-volume
+        secret:
+          defaultMode: 420
+          secretName: sso-x509-jgroups-secret
+  test: false
+  triggers:
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - sso
+      from:
+        kind: ImageStreamTag
+        name: redhat-sso73-openshift:1.0
+        namespace: openshift
+      lastTriggeredImage: image-registry.openshift-image-registry.svc:5000/openshift/redhat-sso73-openshift@sha256:35740d1dbebbb4dc39ea9ce4736d5cc54675a984b1ec0f9bef67eb48e93ffe2d
+    type: ImageChange
+  - type: ConfigChange
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2019-10-10T01:48:26Z"
+    lastUpdateTime: "2019-10-10T01:48:26Z"
+    message: Deployment config has minimum availability.
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2019-10-10T01:47:50Z"
+    lastUpdateTime: "2019-10-10T01:48:27Z"
+    message: replication controller "sso-3" successfully rolled out
+    reason: NewReplicationControllerAvailable
+    status: "True"
+    type: Progressing
+  details:
+    causes:
+    - type: ConfigChange
+    message: config change
+  latestVersion: 3
+  observedGeneration: 5
+  readyReplicas: 1
+  replicas: 1
+  unavailableReplicas: 0
+  updatedReplicas: 1
