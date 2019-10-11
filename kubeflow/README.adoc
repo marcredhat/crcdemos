@@ -1,0 +1,187 @@
+
+== Istio Kubeflow on OpenShift 4.2 / CodeReady Containers
+
+
+----
+oc login -u kubeadmin -p F44En-Xau6V-jQuyb-yuMXB https://api.crc.testing:6443
+----
+
+----
+oc new-project metallb-system
+
+oc adm policy add-scc-to-user privileged -n metallb-system -z speaker
+----
+
+
+----
+oc apply -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/kubeflow/metallb.yaml
+----
+
+
+cat cm.yaml
+
+----
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: metallb-system
+  name: config
+data:
+  config: |
+    address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      - 172.30.165.3-172.30.165.200
+----
+
+----
+oc create -f cm.yaml
+----
+
+Test that metallb works
+
+
+oc  create service loadbalancer nginx --tcp=80:80
+
+
+----
+service/nginx created
+----
+
+
+oc describe service nginx
+
+----
+      Name:                     nginx
+      Namespace:                metallb-system
+      Labels:                   app=nginx
+      Annotations:              <none>
+      Selector:                 app=nginx
+      Type:                     LoadBalancer
+      IP:                       172.30.125.171
+      LoadBalancer Ingress:     172.30.165.4
+      Port:                     80-80  80/TCP
+      TargetPort:               80/TCP
+      NodePort:                 80-80  32520/TCP
+      Endpoints:                <none>
+      Session Affinity:         None
+      External Traffic Policy:  Cluster
+      Events:
+        Type    Reason       Age   From                Message
+        ----    ------       ----  ----                -------
+        Normal  IPAllocated  5s    metallb-controller  Assigned IP "172.30.165.4"
+----
+
+
+oc project
+
+
+----
+Using project "metallb-system" on server "https://api.crc.testing:6443"
+----
+
+
+oc get pods
+
+----
+NAME                          READY   STATUS    RESTARTS   AGE
+controller-58ddcbdfbb-nqlmm   1/1     Running   0          26s
+speaker-bhwch                 1/1     Running   0          26s
+----
+
+
+https://www.kubeflow.org/docs/started/k8s/kfctl-existing-arrikto/
+
+https://github.com/kubeflow/website/pull/977
+
+
+----
+oc new-project kubeflow-anonymous
+----
+
+
+----
+oc adm policy add-scc-to-user anyuid -z istio-ingress-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z default -n istio-system
+oc adm policy add-scc-to-user anyuid -z grafana -n istio-system
+oc adm policy add-scc-to-user anyuid -z prometheus -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-egressgateway-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-citadel-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-ingressgateway-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-cleanup-old-ca-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-mixer-post-install-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-mixer-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-pilot-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-sidecar-injector-service-account -n istio-system
+----
+
+
+----
+export KFAPP="marckubeflow"
+export CONFIG="https://raw.githubusercontent.com/marcredhat/crcdemos/master/kubeflow/kubeflow.yaml"
+
+# Specify credentials for the default user.
+export KUBEFLOW_USER_EMAIL="mchisine@example.com"
+export KUBEFLOW_PASSWORD="marc"
+
+kfctl init ${KFAPP} --config=${CONFIG} -V
+cd ${KFAPP}
+kfctl generate all -V
+kfctl apply all -V
+----
+
+
+oc get svc -n istio-system istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+
+----
+172.30.165.3
+----
+
+
+----
+oc project istio-system
+
+oc expose svc/istio-ingressgateway
+route.route.openshift.io/istio-ingressgateway exposed
+
+oc get route
+NAME                   HOST/PORT                                            PATH   SERVICES               PORT        TERMINATION   WILDCARD
+istio-ingressgateway   istio-ingressgateway-istio-system.apps-crc.testing          istio-ingressgateway   https-dex                 None
+----
+
+----
+oc edit deploy istio-galley
+
+add
+
+securityContext:
+      capabilities:
+        add:
+        - NET_BIND_SERVICE
+----
+
+
+oc get pods
+
+
+----
+NAME                                      READY   STATUS      RESTARTS   AGE
+authservice-5d776954c6-ndnzg              1/1     Running     0          17m
+grafana-67c69bb567-kj4hv                  1/1     Running     0          18m
+istio-citadel-67697b6697-nrhf6            1/1     Running     0          18m
+istio-cleanup-secrets-1.1.6-np8j8         0/1     Completed   0          18m
+istio-egressgateway-7dbbb87698-jnv4r      0/1     Running     0          18m
+istio-galley-7474d97954-95jxv             0/1     Pending     0          31s
+istio-galley-767984c595-rngb6             0/1     Pending     0          31s
+istio-grafana-post-install-1.1.6-h8qlr    0/1     Completed   0          18m
+istio-ingressgateway-565b894b5f-hgbt7     0/1     Running     0          18m
+istio-pilot-6dd5b8f74c-xbhqr              1/2     Running     0          18m
+istio-policy-7f8bb87857-sxd9b             0/2     Pending     0          96s
+istio-security-post-install-1.1.6-hqtbg   0/1     Completed   0          18m
+istio-sidecar-injector-fd5875568-b5frt    1/1     Running     0          18m
+istio-telemetry-8759dc6b7-8mptx           0/2     Pending     0          77s
+istio-tracing-5d8f57c8ff-kz4zs            1/1     Running     0          18m
+kiali-d4d886dd7-k6lbx                     1/1     Running     0          18m
+prometheus-d8d46c5b5-kmhj9                1/1     Running     0          18m
+----
