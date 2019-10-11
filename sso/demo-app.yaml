@@ -1,0 +1,96 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: "2019-10-08T05:37:12Z"
+  generation: 6
+  labels:
+    app: demo-app2
+  name: demo-app2
+  namespace: sso
+  resourceVersion: "1393279"
+  selfLink: /apis/apps.openshift.io/v1/namespaces/sso/deploymentconfigs/demo-app2
+  uid: add030b2-e98d-11e9-85af-0a580a8000a8
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    app: demo-app2
+    deploymentconfig: demo-app2
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+      creationTimestamp: null
+      labels:
+        app: demo-app2
+        deploymentconfig: demo-app2
+    spec:
+      containers:
+      - env:
+        - name: KEYCLOAK_URL
+          value: https://sso.apps-crc.testing/auth
+        - name: SERVICE_URL
+          value: http://demo-service-sso.apps-crc.testing
+        image: quay.io/marcf5/demo-app2@sha256:7e654b4e6cf3e057515a844c6b1a2af0becc0d245b6ac8276eb43c75c4e850cc
+        imagePullPolicy: Always
+        name: demo-app2
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - demo-app2
+      from:
+        kind: ImageStreamTag
+        name: demo-app2:latest
+        namespace: sso
+      lastTriggeredImage: quay.io/marcf5/demo-app2@sha256:7e654b4e6cf3e057515a844c6b1a2af0becc0d245b6ac8276eb43c75c4e850cc
+    type: ImageChange
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2019-10-08T05:37:33Z"
+    lastUpdateTime: "2019-10-08T05:37:33Z"
+    message: Deployment config has minimum availability.
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2019-10-10T02:53:03Z"
+    lastUpdateTime: "2019-10-10T02:53:06Z"
+    message: replication controller "demo-app2-3" successfully rolled out
+    reason: NewReplicationControllerAvailable
+    status: "True"
+    type: Progressing
+  details:
+    causes:
+    - type: ConfigChange
+    message: config change
+  latestVersion: 3
+  observedGeneration: 6
+  readyReplicas: 1
+  replicas: 1
+  unavailableReplicas: 0
+  updatedReplicas: 1
