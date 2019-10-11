@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: "2019-10-11T22:29:53Z"
+  finalizers:
+  - kubernetes.io/pvc-protection
+  labels:
+    app: minio
+  name: minio-pv-claim
+  namespace: kubeflow
+  resourceVersion: "446493"
+  selfLink: /api/v1/namespaces/kubeflow/persistentvolumeclaims/minio-pv-claim
+  uid: a52677d1-ec76-11e9-859a-52fdfc072182
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Filesystem
