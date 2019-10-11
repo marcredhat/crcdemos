@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+
+#see videos at http://bit.ly/33ksKIP and http://bit.ly/marcredhatplaylist
+
+
 ########################
 # include the magic
 ########################
