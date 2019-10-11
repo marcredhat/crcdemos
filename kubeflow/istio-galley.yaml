@@ -1,0 +1,151 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+  creationTimestamp: "2019-10-11T20:48:01Z"
+  generation: 2
+  labels:
+    app: galley
+    chart: galley
+    heritage: Tiller
+    istio: galley
+    release: istio
+  name: istio-galley
+  namespace: istio-system
+  resourceVersion: "419265"
+  selfLink: /apis/extensions/v1beta1/namespaces/istio-system/deployments/istio-galley
+  uid: 6a107237-ec68-11e9-859a-52fdfc072182
+spec:
+  progressDeadlineSeconds: 2147483647
+  replicas: 1
+  revisionHistoryLimit: 2147483647
+  selector:
+    matchLabels:
+      app: galley
+      chart: galley
+      heritage: Tiller
+      istio: galley
+      release: istio
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
+      creationTimestamp: null
+      labels:
+        app: galley
+        chart: galley
+        heritage: Tiller
+        istio: galley
+        release: istio
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - preference:
+              matchExpressions:
+              - key: beta.kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+            weight: 2
+          - preference:
+              matchExpressions:
+              - key: beta.kubernetes.io/arch
+                operator: In
+                values:
+                - ppc64le
+            weight: 2
+          - preference:
+              matchExpressions:
+              - key: beta.kubernetes.io/arch
+                operator: In
+                values:
+                - s390x
+            weight: 2
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: beta.kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+                - ppc64le
+                - s390x
+      containers:
+      - command:
+        - /usr/local/bin/galley
+        - server
+        - --meshConfigFile=/etc/mesh-config/mesh
+        - --livenessProbeInterval=1s
+        - --livenessProbePath=/healthliveness
+        - --readinessProbePath=/healthready
+        - --readinessProbeInterval=1s
+        - --deployment-namespace=istio-system
+        - --insecure=true
+        - --validation-webhook-config-file
+        - /etc/config/validatingwebhookconfiguration.yaml
+        - --monitoringPort=15014
+        - --log_output_level=default:info
+        image: docker.io/istio/galley:1.1.6
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - /usr/local/bin/galley
+            - probe
+            - --probe-path=/healthliveness
+            - --interval=10s
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: galley
+        ports:
+        - containerPort: 443
+          protocol: TCP
+        - containerPort: 15014
+          protocol: TCP
+        - containerPort: 9901
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: istio-galley-service-account
+      serviceAccountName: istio-galley-service-account
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: certs
+        secret:
+          defaultMode: 420
+          secretName: istio.istio-galley-service-account
+      - configMap:
+          defaultMode: 420
+          name: istio-galley-configuration
+        name: config
+      - configMap:
+          defaultMode: 420
+          name: istio
+        name: mesh-config
+status:
+  conditions:
+  - lastTransitionTime: "2019-10-11T20:48:01Z"
+    lastUpdateTime: "2019-10-11T20:48:01Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  observedGeneration: 2
+  replicas: 2
+  unavailableReplicas: 2
+  updatedReplicas: 1
