@@ -245,15 +245,17 @@ katib-mysql      Bound    pv0009   10Gi       RWO,ROX,RWX                   70m
 metadata-mysql   Bound    pv0019   10Gi       RWO,ROX,RWX                   70m
 minio-pv-claim   Bound    pv0022   10Gi       RWO,ROX,RWX                   38m
 mysql-pv-claim   Bound    pv0028   10Gi       RWO,ROX,RWX                   36m
+----
 
+oc get route
 
-[demouser@dell-r730-027 samples]$ oc get route
+----
 NAME               HOST/PORT                                    PATH   SERVICES           PORT   TERMINATION   WILDCARD
 argo-ui            argo-ui-kubeflow.apps-crc.testing                   argo-ui            8001                 None
 centraldashboard   centraldashboard-kubeflow.apps-crc.testing          centraldashboard   8082                 None
 ml-pipeline-ui     ml-pipeline-ui-kubeflow.apps-crc.testing            ml-pipeline-ui     3000                 None
 tensorboard        tensorboard-kubeflow.apps-crc.testing               tensorboard        tb                   None
-
+----
 
 Browse to http://centraldashboard-kubeflow.apps-crc.testing
 
