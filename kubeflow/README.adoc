@@ -2,6 +2,18 @@
 == Istio Kubeflow on OpenShift 4.2 / CodeReady Containers
 
 
+crc version && oc version && kfctl version
+
+----
+version: 1.0.0-rc.0+34371d3
+OpenShift version: 4.2.0-0.nightly-2019-09-26-192831 (embedded in binary)
+Client Version: v4.3.0
+Server Version: 4.2.0-0.nightly-2019-09-26-192831
+Kubernetes Version: v1.14.6+73b5d76
+kfctl v0.6.2-0-g47a0e4c7
+----
+
+
 ----
 oc login -u kubeadmin -p F44En-Xau6V-jQuyb-yuMXB https://api.crc.testing:6443
 ----
@@ -148,19 +160,18 @@ route.route.openshift.io/istio-ingressgateway exposed
 oc get route
 NAME                   HOST/PORT                                            PATH   SERVICES               PORT        TERMINATION   WILDCARD
 istio-ingressgateway   istio-ingressgateway-istio-system.apps-crc.testing          istio-ingressgateway   https-dex                 None
-----
+
+
+oc logs istio-galley-699c74f6b7-vkt69
 
 ----
-oc edit deploy istio-galley
-
-add
-
-securityContext:
-      capabilities:
-        add:
-        - NET_BIND_SERVICE
+2019-10-11T23:25:28.239389Z	warn	Neither --kubeconfig nor --master was specified.  Using the inClusterConfig.  This might not work.
+2019-10-11T23:25:28.241994Z	info	validation	Checking if istio-system/istio-galley is ready before registering webhook configuration
+2019-10-11T23:25:28.242273Z	fatal	validation	admission webhook ListenAndServeTLS failed: listen tcp :443: bind: permission denied
 ----
 
+
+oc project istio-system
 
 oc get pods
 
@@ -184,4 +195,66 @@ istio-telemetry-8759dc6b7-8mptx           0/2     Pending     0          77s
 istio-tracing-5d8f57c8ff-kz4zs            1/1     Running     0          18m
 kiali-d4d886dd7-k6lbx                     1/1     Running     0          18m
 prometheus-d8d46c5b5-kmhj9                1/1     Running     0          18m
+----
+
+
+oc project kubeflow 
+
+oc get pods
+
+----
+NAME                                                       READY   STATUS             RESTARTS   AGE
+admission-webhook-bootstrap-stateful-set-0                 1/1     Running            0          69m
+application-controller-stateful-set-0                      1/1     Running            0          69m
+argo-ui-5dcf5d8b4f-m4r5k                                   1/1     Running            0          69m
+centraldashboard-b95d75fd9-mzkbq                           1/1     Running            0          69m
+dex-546994567f-2lkh9                                       1/1     Running            0          69m
+jupyter-web-app-deployment-799f46f44c-4dv8k                1/1     Running            0          69m
+katib-db-8598468fd8-xq288                                  0/1     Running            0          69m
+katib-suggestion-bayesianoptimization-65df4d7455-h5tj9     1/1     Running            0          69m
+katib-suggestion-grid-56bf69f597-87gcp                     1/1     Running            0          69m
+katib-suggestion-hyperband-7777b76cb9-mqgdv                1/1     Running            0          69m
+katib-suggestion-random-77b88b5c79-r8lzv                   1/1     Running            0          69m
+metacontroller-0                                           1/1     Running            0          69m
+metadata-db-5dd459cc-hwk4n                                 0/1     Running            0          69m
+metadata-deployment-6cf77db994-9d9nw                       1/1     Running            12         69m
+metadata-ui-78f5b59b56-zdvtx                               1/1     Running            0          69m
+ml-pipeline-persistenceagent-9b69ddd46-zjmbx               1/1     Running            5          23m
+ml-pipeline-scheduledworkflow-7b8d756c76-tg2t4             1/1     Running            0          69m
+ml-pipeline-ui-79ffd9c76-x9tz5                             1/1     Running            0          69m
+ml-pipeline-viewer-controller-deployment-5fdc87f58-7mqmx   1/1     Running            0          69m
+mysql-657f87857d-t9csl                                     1/1     Running            0          69m
+notebook-controller-deployment-56b4f59bbf-nlz2q            1/1     Running            0          69m
+profiles-deployment-77958685f-58vc2                        2/2     Running            0          69m
+pytorch-operator-77c97f4879-qhcrz                          1/1     Running            0          69m
+seldon-operator-controller-manager-0                       1/1     Running            1          69m
+spartakus-volunteer-5fdfddb779-f724f                       1/1     Running            0          69m
+tensorboard-6544748d94-f2jdn                               1/1     Running            0          69m
+tf-job-dashboard-5bf4f75875-srm9q                          1/1     Running            0          69m
+tf-job-operator-58ffbd9d56-q8ct5                           1/1     Running            0          69m
+workflow-controller-db644d554-2c86j                        1/1     Running            0          69m
+----
+
+Modified minio-pv-claim and mysql-pv-claim to request 10Gi
+
+oc get pvc
+
+----
+NAME             STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+katib-mysql      Bound    pv0009   10Gi       RWO,ROX,RWX                   70m
+metadata-mysql   Bound    pv0019   10Gi       RWO,ROX,RWX                   70m
+minio-pv-claim   Bound    pv0022   10Gi       RWO,ROX,RWX                   38m
+mysql-pv-claim   Bound    pv0028   10Gi       RWO,ROX,RWX                   36m
+
+
+[demouser@dell-r730-027 samples]$ oc get route
+NAME               HOST/PORT                                    PATH   SERVICES           PORT   TERMINATION   WILDCARD
+argo-ui            argo-ui-kubeflow.apps-crc.testing                   argo-ui            8001                 None
+centraldashboard   centraldashboard-kubeflow.apps-crc.testing          centraldashboard   8082                 None
+ml-pipeline-ui     ml-pipeline-ui-kubeflow.apps-crc.testing            ml-pipeline-ui     3000                 None
+tensorboard        tensorboard-kubeflow.apps-crc.testing               tensorboard        tb                   None
+
+
+Browse to http://centraldashboard-kubeflow.apps-crc.testing
+
 ----
