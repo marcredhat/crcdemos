@@ -32,11 +32,11 @@ AgnosticD is not an OpenShift Deployer, though it can and does that, it is howev
 
 The instructions below cover
 
-- installing Red Hat CodeReady Containers on a RHEL 8.1 *physical* server 
+- installing Red Hat CodeReady Containers on a RHEL 8.1 or 8.2  *physical* server 
 
 (You can also use Fedora 30, please https://github.com/marcredhat/crcdemos/blob/master/fedora/README.adoc)
 
-- using Ansible Agnostic Deployer to deploy OpenDataHub on OpenShift 4.1
+- using Ansible Agnostic Deployer to deploy OpenDataHub on OpenShift 4.1 or 4.2
 
 - configuring SSH tunneling / port forwarding to access the OpenShift console, OpenDataHub etc from your laptop.
 
@@ -157,6 +157,18 @@ sudo rm ${CRC_MACHINE_IMAGE}.ORIGINAL
 ./crc setup
 ./crc start
 ./crc status
+----
+
+
+Expected result
+
+----
+crc status
+CRC VM:          Running
+OpenShift:       Stopped
+Disk Usage:      33.88GB of 569.1GB (Inside the CRC VM)
+Cache Usage:     15.95GB
+Cache Directory: /home/demouser/.crc/cache
 ----
 
 
