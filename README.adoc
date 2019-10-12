@@ -137,6 +137,11 @@ I’m on a physical server with around 100G of memory so I allocate 80G to CRC a
 ----
 
 
+----
+./crc config set cpus <cpus>
+----
+
+
 [root@dell-per640-04 crc-linux-1.0.0-beta.3-amd64]# ./crc setup
 
 ----
