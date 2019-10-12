@@ -142,6 +142,11 @@ crc config set memory 81920
 
 
 ----
+crc config set cpus <cpus>
+----
+
+
+----
 crc setup
 ----
 
