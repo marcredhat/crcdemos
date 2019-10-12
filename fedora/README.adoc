@@ -163,6 +163,16 @@ crc start
 crc status
 ----
 
+Expected result
+
+----
+crc status
+CRC VM:          Running
+OpenShift:       Stopped
+Disk Usage:      33.88GB of 569.1GB (Inside the CRC VM)
+Cache Usage:     15.95GB
+Cache Directory: /home/demouser/.crc/cache
+----
 
 ----
 INFO Checking if NetworkManager is installed
