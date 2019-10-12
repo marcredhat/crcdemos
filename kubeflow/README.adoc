@@ -4,6 +4,11 @@
 
 Based on https://journal.arrikto.com/kubeflow-authentication-with-istio-dex-5eafdfac4782
 
+
+The above solution uses Dex as OIDC provider. It should be relatively straightforward to use RH-SSO/Keycloak,
+Please find labs and videos with RH-SSO on OpenShift 4.2 at http://bit.ly/33rjfry
+
+
 I'm currently testing this on bare metal clusters, using https://metallb.universe.tf/
 
 
