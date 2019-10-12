@@ -4,6 +4,8 @@
 
 Based on https://journal.arrikto.com/kubeflow-authentication-with-istio-dex-5eafdfac4782
 
+I'm currently testing this on bare metal clusters, using https://metallb.universe.tf/
+
 
 crc version && oc version && kfctl version
 
