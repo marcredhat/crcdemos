@@ -11,6 +11,11 @@ It should be relatively straightforward to use RH-SSO/Keycloak. Please find labs
 
 I'm currently testing this on bare metal clusters, using https://metallb.universe.tf/
 
+For detailed instructions and videos on setting up CodeReady Containers / OpenShift 4.2 on bare metal servers,
+please see:
+https://github.com/marcredhat/crcdemos/blob/master/fedora/README.adoc
+http://bit.ly/marcredhat
+http://bit.ly/marcredhatplaylist
 
 crc version && oc version && kfctl version
 
