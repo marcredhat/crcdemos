@@ -1,5 +1,8 @@
 
-== Istio Kubeflow on OpenShift 4.2 / CodeReady Containers
+== Istio, Kubeflow on OpenShift 4.2 / CodeReady Containers
+
+
+Based on https://journal.arrikto.com/kubeflow-authentication-with-istio-dex-5eafdfac4782
 
 
 crc version && oc version && kfctl version
