@@ -168,7 +168,7 @@ Expected result
 ----
 crc status
 CRC VM:          Running
-OpenShift:       Stopped
+OpenShift:       Running (v4.2.0-0.nightly-2019-09-26-192831)
 Disk Usage:      33.88GB of 569.1GB (Inside the CRC VM)
 Cache Usage:     15.95GB
 Cache Directory: /home/demouser/.crc/cache
