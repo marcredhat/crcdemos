@@ -1,0 +1,48 @@
+
+#https://www.eclipse.org/che/docs/che-7/making-a-workspace-portable-using-a-devfile/
+apiVersion: 1.0.0
+metadata:
+    name: MyDevfile
+projects:
+name: my-go-project
+source:
+    type: git
+    location: https://github.com/acme/my-go-project.git
+    clonePath: go/src/github.com/acme/my-go-project
+components:
+type: dockerimage
+image: golang
+memoryLimit: 512Mi
+mountSources: true
+command: ['sleep', 'infinity']
+env:
+    - name: GOPATH
+      value: $(CHE_PROJECTS_ROOT)/go
+    - name: GOCACHE
+      value: /tmp/go-cache
+endpoints:
+name: web
+    port: 8080
+    attributes:
+        discoverable: false
+        public: true
+        protocol: http
+type: dockerimage
+image: postgres
+memoryLimit: 512Mi
+env:
+name: POSTGRES_USER
+value: user
+name: POSTGRES_PASSWORD
+value: password
+name: POSTGRES_DB
+    value: database
+endpoints:
+name: postgres
+    port: 5432
+    attributes:
+        discoverable: true
+        public: false
+type: dockerimage
+image: docker.io/library/sonarqube:latest
+memoryLimit: 100Mi
