@@ -91,6 +91,9 @@ Install the requirements
 Step 7 - Run the openshift-cluster-seed.yml playbook
 
 ----
+
+cd roles/openshift-applier/
+
 [demouser@fedora30 openshift-applier]$ ansible-playbook -i inventory playbooks/openshift-cluster-seed.yml -e client=oc --connection=local
 ----
 
