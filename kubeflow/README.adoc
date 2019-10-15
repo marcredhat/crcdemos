@@ -306,7 +306,7 @@ The config you're going to use is under kfdef/kfctl_existing_arrikto.yaml.
 
 3. Change the manifests repo to point to the locally pulled PR folder. (file:///<path-to-manifests-folder>)
 
-4. Follow the procedure of the docs, specifying CONFIG="file://<path-to-existing-arrikto-config>"
+4. Follow the procedure at https://www.kubeflow.org/docs/started/k8s/kfctl-existing-arrikto/, specifying CONFIG="file://<path-to-existing-arrikto-config>"
 
 5. After this is all done, port forward the istio-ingressgateway service locally and access Kubeflow 
 (kubectl port-forward svc/istio-ingressgateway -n istio-system 8080:80).
