@@ -284,3 +284,27 @@ For some web applications, you need to configure the base URL on which the app i
 
 For example, if you deployed Kubeflow with an ingress serving at https://example.mydomain.com and configured an application to be served at the URL https://example.mydomain.com/myapp, then the app may not work when served on https://localhost:8080/myapp because the paths do not match.
 (see https://www.kubeflow.org/docs/other-guides/accessing-uis/)
+
+----
+NOTE: PR available to fix the issues above: https://github.com/kubeflow/manifests/pull/529
+
+My lab is currently using existing_arrikto 0.6.2.
+
+With existing_arrikto 0.7, the user to access Kubeflow any way they want (eg port-forward, LoadBalancer, NodePort, etc).
+
+The way we do that is by having Dex and Kubeflow in the same origin, utilizing relative URLs and internal URLs
+for the AuthService<->Dex communication.
+
+
+This is the aforementioned PR: https://github.com/kubeflow/manifests/pull/529
+
+In order to test it:
+1. Download the latest stable kfctl (https://github.com/kubeflow/kubeflow/releases/tag/v0.6.2)
+2. Pull the PR. The config you're going to use is under kfdef/kfctl_existing_arrikto.yaml.
+3. Change the manifests repo to point to the locally pulled PR folder. (file:///<path-to-manifests-folder>)
+4. Follow the procedure of the docs, specifying CONFIG="file://<path-to-existing-arrikto-config>"
+5. After this is all done, port forward the istio-ingressgateway service locally and access Kubeflow (kubectl port-forward svc/istio-ingressgateway -n istio-system 8080:80).
+    Login with the credentials "admin@kubeflow.org:12341234"
+6. In addition to port-forwarding, you can expose Kubeflow in any of the standard Kubernetes ways and authentication will still work.
+
+----
