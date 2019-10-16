@@ -1,6 +1,7 @@
 == Build the Sysdig Secure Jenkins plugin on RHEL 8 using podman
 
 
+== 1) Create the build container 
 ----
 [marc@rhel8ga ~]$ git clone https://github.com/jenkinsci/sysdig-secure-plugin.git
 
@@ -21,11 +22,21 @@ podman  login -u="marcf5" -p="<token>" quay.io
 
 sudo podman push localhost/jenkinssysdig quay.io/marcf5/jenkinssysdig
 
+
 [marc@rhel8ga sysdig-secure-plugin]$ sudo podman images
 REPOSITORY                                    TAG         IMAGE ID       CREATED        SIZE
 quay.io/marcf5/jenkinssysdig                  latest      ec0faa1eeaa3   9 hours ago    670 MB
 localhost/jenkinssysdig                       latest      fdf0fcd91be7   9 hours ago    670 MB
 ----
+
+== 2) Build the Sysdig Secure Jenkins plugin (.hpi file)
+
+----
+[marc@rhel8ga sysdig-secure-plugin]$  sudo podman run --rm -it localhost/jenkinssysdig /bin/bash
+root@ebe55d846d93:/usr/src/app# mvn install
+----
+
+== 3) Copy the Sysdig Secure Jenkins plugin from the container to the host 
 
 ----
 [marc@rhel8ga ~]$ sudo podman ps
@@ -35,9 +46,4 @@ CONTAINER ID  IMAGE                           COMMAND               CREATED     
 [marc@rhel8ga ~]$ sudo cp -R ${mnt} /tmp/sysdig
 [marc@rhel8ga ~]$ ls /tmp/sysdig/merged/usr/src/app/target/sysdig-secure.hpi
 /tmp/sysdig/merged/usr/src/app/target/sysdig-secure.hpi
-----
-
-----
-[marc@rhel8ga sysdig-secure-plugin]$  sudo podman run --rm -it localhost/jenkinssysdig /bin/bash
-root@ebe55d846d93:/usr/src/app# mvn install
 ----
