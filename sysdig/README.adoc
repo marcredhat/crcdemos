@@ -1,4 +1,4 @@
-== Build the Sysdig Secure Jenkins plugin on RHEL 8 using podman
+== Build the Jenkins plugin for Sysdig Secure on RHEL 8 using podman
 
 
 == 1) Create the build container 
@@ -36,7 +36,7 @@ localhost/jenkinssysdig                       latest      fdf0fcd91be7   9 hours
 root@ebe55d846d93:/usr/src/app# mvn install
 ----
 
-== 3) Copy the Sysdig Secure Jenkins plugin from the container to the host 
+== 3) Copy the Jenkins plugin for Sysdig Secure from the container to the host 
 
 ----
 [marc@rhel8ga ~]$ sudo podman ps
