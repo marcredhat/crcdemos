@@ -1,6 +1,31 @@
 == Build the Sysdig Secure Jenkins plugin on RHEL 8 using podman
 
 
+----
+[marc@rhel8ga ~]$ git clone https://github.com/jenkinsci/sysdig-secure-plugin.git
+
+[marc@rhel8ga ~]$ cd sysdig-secure-plugin/
+
+[marc@rhel8ga sysdig-secure-plugin]$ wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/sysdig/Dockerfile
+
+[marc@rhel8ga sysdig-secure-plugin]$ ls
+Dockerfile  Jenkinsfile  LICENSE  pom.xml  README.md  src
+
+[marc@rhel8ga sysdig-secure-plugin]$ sudo podman build -t jenkinssysdig .
+
+[marc@rhel8ga sysdig-secure-plugin]$ sudo podman images
+REPOSITORY                                    TAG         IMAGE ID       CREATED        SIZE
+localhost/jenkinssysdig                       latest      fdf0fcd91be7   9 hours ago    670 MB
+
+podman  login -u="marcf5" -p="<token>" quay.io
+
+sudo podman push localhost/jenkinssysdig quay.io/marcf5/jenkinssysdig
+
+[marc@rhel8ga sysdig-secure-plugin]$ sudo podman images
+REPOSITORY                                    TAG         IMAGE ID       CREATED        SIZE
+quay.io/marcf5/jenkinssysdig                  latest      ec0faa1eeaa3   9 hours ago    670 MB
+localhost/jenkinssysdig                       latest      fdf0fcd91be7   9 hours ago    670 MB
+----
 
 ----
 [marc@rhel8ga ~]$ sudo podman ps
