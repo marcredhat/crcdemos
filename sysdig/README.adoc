@@ -46,4 +46,5 @@ CONTAINER ID  IMAGE                           COMMAND               CREATED     
 [marc@rhel8ga ~]$ sudo cp -R ${mnt} /tmp/sysdig
 [marc@rhel8ga ~]$ ls /tmp/sysdig/merged/usr/src/app/target/sysdig-secure.hpi
 /tmp/sysdig/merged/usr/src/app/target/sysdig-secure.hpi
+sudo podman umount 0ea8fe888037
 ----
