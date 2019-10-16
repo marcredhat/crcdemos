@@ -1,0 +1,15 @@
+== Build the Sysdig Secure Jenkins plugin on RHEL 8 using podman
+
+
+
+----
+[marc@rhel8ga ~]$ sudo podman ps
+CONTAINER ID  IMAGE                           COMMAND               CREATED      STATUS          PORTS  NAMES
+0ea8fe888037  localhost/jenkinssysdig:latest  /usr/local/bin/mv...  5 hours ago  Up 5 hours ago         wonderful_snyder
+[marc@rhel8ga ~]$ mnt=$(sudo podman mount 0ea8fe888037)
+[marc@rhel8ga ~]$ sudo cp -R ${mnt} /tmp/sysdig
+[marc@rhel8ga ~]$ ls /tmp/sysdig/merged/usr/src/app/target/sysdig-secure.hpi
+/tmp/sysdig/merged/usr/src/app/target/sysdig-secure.hpi
+----
+
+
