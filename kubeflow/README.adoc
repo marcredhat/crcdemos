@@ -254,6 +254,11 @@ tf-job-operator-58ffbd9d56-q8ct5                           1/1     Running      
 workflow-controller-db644d554-2c86j                        1/1     Running            0          69m
 ----
 
+----
+Edit the ingressgateway, egressgateway and pilot deployments and edit requests and limits.
+A value of 256M for requests and 512M for limits would be a good place to start.
+----
+
 Modified minio-pv-claim and mysql-pv-claim to request 10Gi
 
 oc get pvc
