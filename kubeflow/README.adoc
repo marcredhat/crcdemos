@@ -9,7 +9,15 @@ The above solution uses Dex as OIDC provider.
 It should be relatively straightforward to use RH-SSO/Keycloak. Please find labs and videos with RH-SSO on OpenShift 4.2 at http://bit.ly/33rjfry
 
 
-I'm currently testing this on bare metal clusters, using https://metallb.universe.tf/
+
+
+1. Download the latest kfctl
+wget https://github.com/kubeflow/kubeflow/releases/download/v0.7.0-rc.4/kfctl_v0.7.0-rc.3-13-g32be850c_linux.tar.gz
+2. mkdir kfapp && cd kfapp
+3. wget 'https://raw.githubusercontent.com/kubeflow/manifests/master/kfdef/kfctl_existing_arrikto.yaml'
+4. kfctl apply -V -f kfctl_existing_arrikto.yaml
+
+
 
 For detailed instructions and videos on setting up CodeReady Containers / OpenShift 4.2 on bare metal servers,
 please see:
