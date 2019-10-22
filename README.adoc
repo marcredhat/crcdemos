@@ -142,6 +142,7 @@ I’m on a physical server with around 100G of memory so I allocate 80G to CRC a
 ----
 
 ----
+You’ll need your pull secret from https://cloud.redhat.com/openshift/install/metal/user-provisioned
 ./crc start
 ----
 
