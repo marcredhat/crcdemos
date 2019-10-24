@@ -99,6 +99,23 @@ image-scan-k8s-webhook-controller-manager-0   1/1     Running   1          9m30s
 ----
 
 
+oc describe pod  image-scan-k8s-webhook-controller-manager-0
+
+----
+.......
+Events:
+  Type     Reason           Age                   From                         Message
+  ----     ------           ----                  ----                         -------
+  Normal   Scheduled        24m                   default-scheduler            Successfully assigned image-scan-k8s-webhook-system/image-scan-k8s-webhook-controller-manager-0 to crc-847lc-master-0
+  Warning  BackOff          9m32s (x3 over 12m)   kubelet, crc-847lc-master-0  Back-off restarting failed container
+  Normal   Pulling          5m20s (x5 over 24m)   kubelet, crc-847lc-master-0  Pulling image "quay.io/sysdig/sysdig-image-scanning-trigger:latest"
+  Normal   Pulled           5m15s (x5 over 24m)   kubelet, crc-847lc-master-0  Successfully pulled image "quay.io/sysdig/sysdig-image-scanning-trigger:latest"
+  Normal   Created          5m13s (x5 over 24m)   kubelet, crc-847lc-master-0  Created container manager
+  Normal   Started          5m12s (x5 over 24m)   kubelet, crc-847lc-master-0  Started container manager
+  Warning  NetworkNotReady  5m8s (x3 over 5m11s)  kubelet, crc-847lc-master-0  network is not ready: runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:Network plugin returns error: Missing CNI default network
+----
+
+
 oc logs image-scan-k8s-webhook-controller-manager-0 --follow
 
 ----
