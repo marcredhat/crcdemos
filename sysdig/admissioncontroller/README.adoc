@@ -3,3 +3,12 @@ Based on https://sysdig.com/blog/kubernetes-admission-controllers/
 
 
 image:images/admissioncontrollerpolicy.png[title=Admission Controller Policy"]
+
+
+git clone https://github.com/sysdiglabs/image-scanning-admission-controller.git
+
+
+export ANCHORE_CLI_URL="https://api.sysdigcloud.com/api/scanning/v1/anchore"
+
+
+export ANCHORE_CLI_USER="xxxxxxx-xxxx-xxxxxx-xxxxxx-xxxxx"
