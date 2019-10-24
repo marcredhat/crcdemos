@@ -24,6 +24,13 @@ cp /usr/bin/oc /usr/bin/kubectl
 ----
 
 
+oc adm policy add-scc-to-user anyuid -z default
+
+----
+securitycontextconstraints.security.openshift.io/anyuid added to: ["system:serviceaccount:image-scan-k8s-webhook-system:default"]
+----
+
+
 ----
 git clone https://github.com/sysdiglabs/image-scanning-admission-controller.git
 
