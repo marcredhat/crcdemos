@@ -1,5 +1,9 @@
 
 ----
+
+curl -s https://s3.amazonaws.com/download.draios.com/stable/install-sysdig | sudo bash
+
+
 oc adm new-project sysdig-agent --node-selector='app=sysdig-agent'
 oc label node --all "app=sysdig-agent"
 oc project sysdig-agent
