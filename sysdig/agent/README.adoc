@@ -1,7 +1,10 @@
 
 
+== Sysdig runtime security on OpenShift 4.2+ 
+
 == Deploy the Sysdig Secure agent with eBPF on OpenShift 4.2+
 
+See short video showing Sysdig runtime security on OpenShift 4.2+ at https://youtu.be/dWmeZVLPlR0
 
 1) See https://sysdigdocs.atlassian.net/wiki/spaces/Platform/pages/256671843/OpenShift+Agent+Installation+Steps
 
