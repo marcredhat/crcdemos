@@ -1,5 +1,9 @@
 
-== Prerequisites: OpenShift 4.2+
+
+
+== Tekton Pipeline with Sysdig Secure image scans on OpenShift 4.2+
+
+Prerequisites: OpenShift 4.2+
 
 I'm using CodeReady Containers:
 
