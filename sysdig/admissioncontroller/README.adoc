@@ -113,3 +113,7 @@ autoscaling.openshift.io   2019-10-16T10:27:28Z
 multus.openshift.io        2019-10-16T10:14:17Z
 ----
 
+
+----
+make test
+----
