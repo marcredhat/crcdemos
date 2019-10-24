@@ -93,3 +93,13 @@ oc logs image-scan-k8s-webhook-controller-manager-0 --follow
 {"level":"info","ts":1571949653.8519502,"logger":"entrypoint","msg":"Starting the Cmd."}
 {"level":"info","ts":1571949653.9522786,"logger":"kubebuilder.webhook","msg":"installing webhook configuration in cluster"}
 ----
+
+
+oc get  ValidatingWebhookConfiguration --all-namespaces
+
+----
+NAME                       CREATED AT
+autoscaling.openshift.io   2019-10-16T10:27:28Z
+multus.openshift.io        2019-10-16T10:14:17Z
+----
+
