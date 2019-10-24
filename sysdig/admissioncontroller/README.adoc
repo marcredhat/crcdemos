@@ -5,32 +5,35 @@ Based on https://sysdig.com/blog/kubernetes-admission-controllers/
 image:images/admissioncontrollerpolicy.png[title=Admission Controller Policy"]
 
 
+
+As root:
+
+Ensure kubeconfig is available for root e.g.
+
+----
+cd /root
+mkdir .kube
+cp  /home/demouser/.kube/config /root/.kube/config
+----
+
+
+Ensure kubectl is available e.g.
+
+----
+cp /usr/bin/oc /usr/bin/kubectl
+----
+
+
+----
 git clone https://github.com/sysdiglabs/image-scanning-admission-controller.git
 
-
-sudo cp /usr/bin/oc  /usr/bin/kubectl
-
-
-As root,
+cd image-scanning-admission-controller
 
 export ANCHORE_CLI_URL="https://api.sysdigcloud.com/api/scanning/v1/anchore"
 
 export ANCHORE_CLI_USER="xxxxxxx-xxxx-xxxxxx-xxxxxx-xxxxx"
+----
 
-make deploy
-
-Ensure kubeconfig is available for root e.g.
-cd /root
-mkdir .kube
-cp  /home/demouser/.kube/config /root/.kube/config
-
-Ensure kubectl is available e.g.
-cp /usr/bin/oc /usr/bin/kubectl
-
-
-git clone https://github.com/sysdiglabs/image-scanning-admission-controller.git
-
-cd image-scanning-admission-controller
 
 make deploy
 
