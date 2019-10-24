@@ -1,0 +1,13 @@
+
+== Prerequisites: OpenShift 4.2+
+
+I'm using CodeReady Containers:
+
+----
+oc version && crc version
+Client Version: v4.3.0
+Server Version: 4.2.0
+Kubernetes Version: v1.14.6+2e5ed54
+crc version: 1.0.0+575079b
+OpenShift version: 4.2.0 (embedded in binary)
+----
