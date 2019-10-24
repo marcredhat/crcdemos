@@ -83,11 +83,18 @@ LAST SEEN   TYPE      REASON             OBJECT                                 
 ----
 
 
+
+oc get statefulset
+NAME                                        READY   AGE
+image-scan-k8s-webhook-controller-manager   1/1     9m
+
+
+
 oc get pods
 
 ----
-NAME                                          READY   STATUS             RESTARTS   AGE
-image-scan-k8s-webhook-controller-manager-0   0/1     CrashLoopBackOff   8          17m
+NAME                                          READY   STATUS    RESTARTS   AGE
+image-scan-k8s-webhook-controller-manager-0   1/1     Running   1          9m30s
 ----
 
 
@@ -116,4 +123,23 @@ multus.openshift.io        2019-10-16T10:14:17Z
 
 ----
 make test
+----
+
+
+Debug
+
+oc debug image-scan-k8s-webhook-controller-manager-0
+
+----
+Starting pod/image-scan-k8s-webhook-controller-manager-0-debug, command was: /root/manager
+Pod IP: 10.128.0.231
+# /root/manager
+{"level":"info","ts":1571953761.2107623,"logger":"entrypoint","msg":"setting up client for manager"}
+{"level":"info","ts":1571953761.2113204,"logger":"entrypoint","msg":"setting up manager"}
+{"level":"info","ts":1571953761.5284233,"logger":"entrypoint","msg":"Registering Components."}
+{"level":"info","ts":1571953761.6108737,"logger":"entrypoint","msg":"setting up scheme"}
+{"level":"info","ts":1571953761.6110525,"logger":"entrypoint","msg":"Setting up controller"}
+{"level":"info","ts":1571953761.61122,"logger":"entrypoint","msg":"setting up webhooks"}
+{"level":"info","ts":1571953761.6115313,"logger":"entrypoint","msg":"Starting the Cmd."}
+{"level":"info","ts":1571953761.7134192,"logger":"kubebuilder.webhook","msg":"installing webhook configuration in cluster"}
 ----
