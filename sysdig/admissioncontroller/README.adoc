@@ -83,11 +83,12 @@ LAST SEEN   TYPE      REASON             OBJECT                                 
 ----
 
 
-
 oc get statefulset
+
+----
 NAME                                        READY   AGE
 image-scan-k8s-webhook-controller-manager   1/1     9m
-
+----
 
 
 oc get pods
