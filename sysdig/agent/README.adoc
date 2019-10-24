@@ -17,6 +17,8 @@ oc adm policy add-cluster-role-to-user cluster-reader -n sysdig-agent -z sysdig-
 
 
 2) From the OpenShift console, deploy the Sysdig Operator
+
+
 See short video at https://youtu.be/HEEbqYtxkc0
 
 
