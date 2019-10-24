@@ -36,3 +36,6 @@ spec:
   sysdig:
     accessKey: <access key>
 ----
+
+
+See short video showing Sysdig runtime security on OpenShift 4.2+ at https://youtu.be/dWmeZVLPlR0
