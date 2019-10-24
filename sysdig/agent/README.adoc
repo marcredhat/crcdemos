@@ -1,5 +1,7 @@
 Create Sysdig Agent as follows:
 
+
+----
 apiVersion: sysdig.com/v1alpha1
 kind: SysdigAgent
 metadata:
@@ -11,3 +13,4 @@ spec:
     enabled: true
   sysdig:
     accessKey: <access key>
+ ----
