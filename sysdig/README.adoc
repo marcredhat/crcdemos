@@ -2,7 +2,7 @@
 
 == Use the Jenkins plugin for Sysdig Secure on OpenShift 4.2+
 
-See short video at https://www.youtube.com/watch?v=90lYxKA7b8g&list=PLg1pvyPzFye2UtQjZTSjoXhFdqkGK6exw
+See short video at https://youtu.be/90lYxKA7b8g
 
 
 
