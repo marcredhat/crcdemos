@@ -1,1 +1,5 @@
 Based on https://sysdig.com/blog/kubernetes-admission-controllers/
+
+
+
+image:images/admissioncontrollerpolicy.png[title=Admission Controller Policy"]
