@@ -1,0 +1,14 @@
+[marc@rhel8ga ~]$ lsb_release -a
+
+----
+LSB Version:	:core-4.1-amd64:core-4.1-noarch
+Distributor ID:	RedHatEnterprise
+Description:	Red Hat Enterprise Linux release 8.0 (Ootpa)
+Release:	8.0
+Codename:	Ootpa
+----
+
+
+[marc@rhel8ga ~]$ sudo  podman run -d -v /local/path/to/captures:/captures --net=host sysdig/sysdig-inspect:latest
+
+
