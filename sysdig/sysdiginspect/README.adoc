@@ -16,11 +16,14 @@ Codename:	Ootpa
 On my laptop:
 
 Configure the following port forwarding rule in VirtualBox:
+image:images/vboxportfwrule.png[title=VirtualBox port forwarding rule"]
 
 
 sudo ssh marc@localhost -p <port> -L 3000:localhost:3000
 
 On my laptop, browse to http://localhost:3000
+
+image:images/inspect.png[title=Sysdig Inspect"]
 
 
 
