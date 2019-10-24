@@ -27,7 +27,15 @@ cp  /home/demouser/.kube/config /root/.kube/config
 Ensure kubectl is available e.g.
 cp /usr/bin/oc /usr/bin/kubectl
 
-[root@dell-r730-027 image-scanning-admission-controller]# make deploy
+
+git clone https://github.com/sysdiglabs/image-scanning-admission-controller.git
+
+cd image-scanning-admission-controller
+
+
+# make deploy
+
+----
 + deploy
 ./scripts/deploy.sh
 namespace/image-scan-k8s-webhook-system created
@@ -47,3 +55,4 @@ service/image-scan-k8s-webhook-controller-manager-service   ClusterIP   172.30.9
 
 NAME                                                         READY   AGE
 statefulset.apps/image-scan-k8s-webhook-controller-manager   0/1     4s
+----
