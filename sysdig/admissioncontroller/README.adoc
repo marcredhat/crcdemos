@@ -73,3 +73,23 @@ LAST SEEN   TYPE      REASON             OBJECT                                 
 ----
 
 
+oc get pods
+
+---
+NAME                                          READY   STATUS             RESTARTS   AGE
+image-scan-k8s-webhook-controller-manager-0   0/1     CrashLoopBackOff   8          17m
+----
+
+
+oc logs image-scan-k8s-webhook-controller-manager-0 --follow
+
+----
+{"level":"info","ts":1571949653.5109758,"logger":"entrypoint","msg":"setting up client for manager"}
+{"level":"info","ts":1571949653.5113025,"logger":"entrypoint","msg":"setting up manager"}
+{"level":"info","ts":1571949653.8518302,"logger":"entrypoint","msg":"Registering Components."}
+{"level":"info","ts":1571949653.851867,"logger":"entrypoint","msg":"setting up scheme"}
+{"level":"info","ts":1571949653.8518825,"logger":"entrypoint","msg":"Setting up controller"}
+{"level":"info","ts":1571949653.8518891,"logger":"entrypoint","msg":"setting up webhooks"}
+{"level":"info","ts":1571949653.8519502,"logger":"entrypoint","msg":"Starting the Cmd."}
+{"level":"info","ts":1571949653.9522786,"logger":"kubebuilder.webhook","msg":"installing webhook configuration in cluster"}
+----
