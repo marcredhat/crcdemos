@@ -1,13 +1,53 @@
-
 ----
-https://sysdigdocs.atlassian.net/wiki/spaces/Platform/pages/256671843/OpenShift+Agent+Installation+Steps
+git clone https://github.com/marcredhat/sysdig-operator.git
+
+oc new-project sysdig-operator
+oc create serviceaccount sysdig-operator
+oc adm policy add-cluster-role-to-user cluster-admin -z sysdig-operator
+
+oc apply -f bundle.yaml
 
 
+apiVersion: sysdig.com/v1alpha1
+kind: SysdigAgent
+metadata:
+  name: agent-with-ebpf-and-secure
+spec:
+  ebpf:
+    enabled: true
+  secure:
+    enabled: true
+  sysdig:
+    accessKey: <access key>
+
+
+oc new-project sysdig-agent
 oc adm new-project sysdig-agent --node-selector='app=sysdig-agent'
 oc label node --all "app=sysdig-agent"
 oc project sysdig-agent
 oc create serviceaccount sysdig-agent
 oc adm policy add-scc-to-user privileged -n sysdig-agent -z sysdig-agent
 oc adm policy add-cluster-role-to-user cluster-reader -n sysdig-agent -z sysdig-agent
-----
+oc create secret generic sysdig-agent --from-literal=access-key=<access key> -n sysdig-agent
 
+FOR ON-PREM INSTALLATIONS ONLY: Edit configmap.yaml to add the collectoraddress and port, and SSL/TLS information :
+
+collector:
+collector_port: 443
+ssl: #true or false
+ssl_verify_certificate: #true or false
+
+FOR ON-PREM INSTALLATIONS ONLY: Edit configmap.yaml to add the collectoraddress and port, and SSL/TLS information :
+
+collector: 192.168.130.11
+collector_port: 443
+ssl: false
+ssl_verify_certificate: false
+
+
+oc apply -f https://raw.githubusercontent.com/marcredhat/sysdig-operator/master/sysdig-agent-configmap.yaml -n sysdig-agent
+
+oc apply -f https://raw.githubusercontent.com/marcredhat/sysdig-operator/master/sysdig-agent-daemonset-v2.yaml -n sysdig-agent
+
+
+----
