@@ -78,7 +78,7 @@ LAST SEEN   TYPE      REASON             OBJECT                                 
 
 oc get pods
 
----
+----
 NAME                                          READY   STATUS             RESTARTS   AGE
 image-scan-k8s-webhook-controller-manager-0   0/1     CrashLoopBackOff   8          17m
 ----
