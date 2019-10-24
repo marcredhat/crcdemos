@@ -11,9 +11,9 @@ git clone https://github.com/sysdiglabs/image-scanning-admission-controller.git
 sudo cp /usr/bin/oc  /usr/bin/kubectl
 
 
-sudo export ANCHORE_CLI_URL="https://api.sysdigcloud.com/api/scanning/v1/anchore"
+export ANCHORE_CLI_URL="https://api.sysdigcloud.com/api/scanning/v1/anchore"
 
 
-sudo export ANCHORE_CLI_USER="xxxxxxx-xxxx-xxxxxx-xxxxxx-xxxxx"
+export ANCHORE_CLI_USER="xxxxxxx-xxxx-xxxxxx-xxxxxx-xxxxx"
 
-sudo make deploy
+make deploy
