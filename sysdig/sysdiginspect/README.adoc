@@ -1,3 +1,5 @@
+
+On my VirtualBox virtual machine:
 [marc@rhel8ga ~]$ lsb_release -a
 
 ----
@@ -10,5 +12,16 @@ Codename:	Ootpa
 
 
 [marc@rhel8ga ~]$ sudo  podman run -d -v /local/path/to/captures:/captures --net=host sysdig/sysdig-inspect:latest
+
+On my laptop:
+
+Configure the following port forwarding rule in VirtualBox:
+
+
+sudo ssh marc@localhost -p <port> -L 3000:localhost:3000
+
+On my laptop, browse to http://localhost:3000
+
+
 
 
