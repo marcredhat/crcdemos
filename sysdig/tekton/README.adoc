@@ -28,3 +28,16 @@ NAME                                           READY   STATUS    RESTARTS   AGE
 tekton-pipelines-controller-669dfb5dd4-9vkvl   1/1     Running   0          11s
 tekton-pipelines-webhook-5669b89c9c-4nrhw      1/1     Running   0          11s
 ----
+
+Download the following Tekton Pipelines 
+
+Both include Sysdig Secure scan steps; the first for an image where no vulns should be found, the second one for an image with vulns
+
+Replace the value of SYSDIG_SECURE_TOKEN in both files
+
+----
+wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/sysdig/sysdigpipeline.yaml
+wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/sysdig/sysdigpipelineblock.yaml
+----
+
+
