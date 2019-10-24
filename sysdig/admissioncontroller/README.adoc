@@ -8,7 +8,12 @@ image:images/admissioncontrollerpolicy.png[title=Admission Controller Policy"]
 git clone https://github.com/sysdiglabs/image-scanning-admission-controller.git
 
 
-export ANCHORE_CLI_URL="https://api.sysdigcloud.com/api/scanning/v1/anchore"
+sudo cp /usr/bin/oc  /usr/bin/kubectl
 
 
-export ANCHORE_CLI_USER="xxxxxxx-xxxx-xxxxxx-xxxxxx-xxxxx"
+sudo export ANCHORE_CLI_URL="https://api.sysdigcloud.com/api/scanning/v1/anchore"
+
+
+sudo export ANCHORE_CLI_USER="xxxxxxx-xxxx-xxxxxx-xxxxxx-xxxxx"
+
+sudo make deploy
