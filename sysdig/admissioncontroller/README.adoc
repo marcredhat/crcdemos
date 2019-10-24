@@ -55,3 +55,21 @@ service/image-scan-k8s-webhook-controller-manager-service   ClusterIP   172.30.9
 NAME                                                         READY   AGE
 statefulset.apps/image-scan-k8s-webhook-controller-manager   0/1     4s
 ----
+
+
+oc project image-scan-k8s-webhook-system
+
+oc get ev
+
+----
+LAST SEEN   TYPE      REASON             OBJECT                                                  MESSAGE
+7m56s       Normal    Scheduled          pod/image-scan-k8s-webhook-controller-manager-0         Successfully assigned image-scan-k8s-webhook-system/image-scan-k8s-webhook-controller-manager-0 to crc-847lc-master-0
+5m36s       Normal    Pulling            pod/image-scan-k8s-webhook-controller-manager-0         Pulling image "quay.io/sysdig/sysdig-image-scanning-trigger:latest"
+5m34s       Normal    Pulled             pod/image-scan-k8s-webhook-controller-manager-0         Successfully pulled image "quay.io/sysdig/sysdig-image-scanning-trigger:latest"
+6m33s       Normal    Created            pod/image-scan-k8s-webhook-controller-manager-0         Created container manager
+6m33s       Normal    Started            pod/image-scan-k8s-webhook-controller-manager-0         Started container manager
+2m33s       Warning   BackOff            pod/image-scan-k8s-webhook-controller-manager-0         Back-off restarting failed container
+7m56s       Normal    SuccessfulCreate   statefulset/image-scan-k8s-webhook-controller-manager   create Pod image-scan-k8s-webhook-controller-manager-0 in StatefulSet image-scan-k8s-webhook-controller-manager successful
+----
+
+
