@@ -11,9 +11,39 @@ git clone https://github.com/sysdiglabs/image-scanning-admission-controller.git
 sudo cp /usr/bin/oc  /usr/bin/kubectl
 
 
-export ANCHORE_CLI_URL="https://api.sysdigcloud.com/api/scanning/v1/anchore"
+As root,
 
+export ANCHORE_CLI_URL="https://api.sysdigcloud.com/api/scanning/v1/anchore"
 
 export ANCHORE_CLI_USER="xxxxxxx-xxxx-xxxxxx-xxxxxx-xxxxx"
 
 make deploy
+
+Ensure kubeconfig is available for root e.g.
+cd /root
+mkdir .kube
+cp  /home/demouser/.kube/config /root/.kube/config
+
+Ensure kubectl is available e.g.
+cp /usr/bin/oc /usr/bin/kubectl
+
+[root@dell-r730-027 image-scanning-admission-controller]# make deploy
++ deploy
+./scripts/deploy.sh
+namespace/image-scan-k8s-webhook-system created
+clusterrole.rbac.authorization.k8s.io/image-scan-k8s-webhook-manager-role created
+clusterrolebinding.rbac.authorization.k8s.io/image-scan-k8s-webhook-manager-rolebinding created
+secret/image-scan-k8s-webhook-webhook-server-secret created
+secret/sysdig-secure-token created
+service/image-scan-k8s-webhook-controller-manager-service created
+statefulset.apps/image-scan-k8s-webhook-controller-manager created
++ sleep 3
++ kubectl get all -n image-scan-k8s-webhook-system
+NAME                                              READY   STATUS              RESTARTS   AGE
+pod/image-scan-k8s-webhook-controller-manager-0   0/1     ContainerCreating   0          4s
+
+NAME                                                        TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+service/image-scan-k8s-webhook-controller-manager-service   ClusterIP   172.30.9.115   <none>        443/TCP   4s
+
+NAME                                                         READY   AGE
+statefulset.apps/image-scan-k8s-webhook-controller-manager   0/1     4s
