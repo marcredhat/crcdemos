@@ -1,0 +1,150 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"labels":{"app":"sysdig-agent"},"name":"sysdig-agent","namespace":"sysdig-agent"},"spec":{"selector":{"matchLabels":{"app":"sysdig-agent"}},"template":{"metadata":{"labels":{"app":"sysdig-agent"}},"spec":{"containers":[{"image":"sysdig/agent","imagePullPolicy":"Always","name":"sysdig-agent","readinessProbe":{"exec":{"command":["test","-e","/opt/draios/logs/running"]},"initialDelaySeconds":10},"resources":{"limits":{"cpu":"2000m","memory":"1536Mi"},"requests":{"cpu":"600m","memory":"512Mi"}},"securityContext":{"privileged":true},"volumeMounts":[{"mountPath":"/host/dev","name":"dev-vol","readOnly":false},{"mountPath":"/host/proc","name":"proc-vol","readOnly":true},{"mountPath":"/host/boot","name":"boot-vol","readOnly":true},{"mountPath":"/host/lib/modules","name":"modules-vol","readOnly":true},{"mountPath":"/host/usr","name":"usr-vol","readOnly":true},{"mountPath":"/host/run","name":"run-vol"},{"mountPath":"/host/var/run","name":"varrun-vol"},{"mountPath":"/dev/shm","name":"dshm"},{"mountPath":"/opt/draios/etc/kubernetes/config","name":"sysdig-agent-config"},{"mountPath":"/opt/draios/etc/kubernetes/secrets","name":"sysdig-agent-secrets"},{"mountPath":"/host/etc/os-release","name":"osrel","readOnly":true}]}],"dnsPolicy":"ClusterFirstWithHostNet","hostNetwork":true,"hostPID":true,"serviceAccount":"sysdig-agent","terminationGracePeriodSeconds":5,"tolerations":[{"effect":"NoSchedule","key":"node-role.kubernetes.io/master"}],"volumes":[{"hostPath":{"path":"/etc/os-release","type":"FileOrCreate"},"name":"osrel"},{"emptyDir":{"medium":"Memory"},"name":"dshm"},{"hostPath":{"path":"/dev"},"name":"dev-vol"},{"hostPath":{"path":"/proc"},"name":"proc-vol"},{"hostPath":{"path":"/boot"},"name":"boot-vol"},{"hostPath":{"path":"/lib/modules"},"name":"modules-vol"},{"hostPath":{"path":"/usr"},"name":"usr-vol"},{"hostPath":{"path":"/run"},"name":"run-vol"},{"hostPath":{"path":"/var/run"},"name":"varrun-vol"},{"configMap":{"name":"sysdig-agent","optional":true},"name":"sysdig-agent-config"},{"name":"sysdig-agent-secrets","secret":{"secretName":"sysdig-agent"}}]}},"updateStrategy":{"type":"RollingUpdate"}}}
+  creationTimestamp: "2019-10-24T07:21:57Z"
+  generation: 1
+  labels:
+    app: sysdig-agent
+  name: sysdig-agent
+  namespace: sysdig-agent
+  resourceVersion: "3152061"
+  selfLink: /apis/extensions/v1beta1/namespaces/sysdig-agent/daemonsets/sysdig-agent
+  uid: f69d7d5f-f62e-11e9-8458-52fdfc072182
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: sysdig-agent
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: sysdig-agent
+    spec:
+      containers:
+      - image: sysdig/agent
+        imagePullPolicy: Always
+        name: sysdig-agent
+        readinessProbe:
+          exec:
+            command:
+            - test
+            - -e
+            - /opt/draios/logs/running
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1536Mi
+          requests:
+            cpu: 600m
+            memory: 512Mi
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /host/dev
+          name: dev-vol
+        - mountPath: /host/proc
+          name: proc-vol
+          readOnly: true
+        - mountPath: /host/boot
+          name: boot-vol
+          readOnly: true
+        - mountPath: /host/lib/modules
+          name: modules-vol
+          readOnly: true
+        - mountPath: /host/usr
+          name: usr-vol
+          readOnly: true
+        - mountPath: /host/run
+          name: run-vol
+        - mountPath: /host/var/run
+          name: varrun-vol
+        - mountPath: /dev/shm
+          name: dshm
+        - mountPath: /opt/draios/etc/kubernetes/config
+          name: sysdig-agent-config
+        - mountPath: /opt/draios/etc/kubernetes/secrets
+          name: sysdig-agent-secrets
+        - mountPath: /host/etc/os-release
+          name: osrel
+          readOnly: true
+      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      hostPID: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: sysdig-agent
+      serviceAccountName: sysdig-agent
+      terminationGracePeriodSeconds: 5
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+      volumes:
+      - hostPath:
+          path: /etc/os-release
+          type: FileOrCreate
+        name: osrel
+      - emptyDir:
+          medium: Memory
+        name: dshm
+      - hostPath:
+          path: /dev
+          type: ""
+        name: dev-vol
+      - hostPath:
+          path: /proc
+          type: ""
+        name: proc-vol
+      - hostPath:
+          path: /boot
+          type: ""
+        name: boot-vol
+      - hostPath:
+          path: /lib/modules
+          type: ""
+        name: modules-vol
+      - hostPath:
+          path: /usr
+          type: ""
+        name: usr-vol
+      - hostPath:
+          path: /run
+          type: ""
+        name: run-vol
+      - hostPath:
+          path: /var/run
+          type: ""
+        name: varrun-vol
+      - configMap:
+          defaultMode: 420
+          name: sysdig-agent
+          optional: true
+        name: sysdig-agent-config
+      - name: sysdig-agent-secrets
+        secret:
+          defaultMode: 420
+          secretName: sysdig-agent
+  templateGeneration: 1
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+status:
+  currentNumberScheduled: 1
+  desiredNumberScheduled: 1
+  numberAvailable: 1
+  numberMisscheduled: 0
+  numberReady: 1
+  observedGeneration: 1
+  updatedNumberScheduled: 1
