@@ -9,15 +9,7 @@ The above solution uses Dex as OIDC provider.
 It should be relatively straightforward to use RH-SSO/Keycloak. Please find labs and videos with RH-SSO on OpenShift 4.2 at http://bit.ly/33rjfry
 
 
-
-
-1. Download the latest kfctl
-wget https://github.com/kubeflow/kubeflow/releases/download/v0.7.0-rc.4/kfctl_v0.7.0-rc.3-13-g32be850c_linux.tar.gz
-2. mkdir kfapp && cd kfapp
-3. wget 'https://raw.githubusercontent.com/kubeflow/manifests/master/kfdef/kfctl_existing_arrikto.yaml'
-4. kfctl apply -V -f kfctl_existing_arrikto.yaml
-
-
+=== Preparation
 
 For detailed instructions and videos on setting up CodeReady Containers / OpenShift 4.2 on bare metal servers,
 please see:
@@ -32,150 +24,183 @@ http://bit.ly/marcredhatplaylist
 crc version && oc version && kfctl version
 
 ----
-version: 1.0.0-rc.0+34371d3
-OpenShift version: 4.2.0-0.nightly-2019-09-26-192831 (embedded in binary)
+version: 1.0.0+575079b
+OpenShift version:4.2.0 (embedded in binary)
 Client Version: v4.3.0
-Server Version: 4.2.0-0.nightly-2019-09-26-192831
-Kubernetes Version: v1.14.6+73b5d76
-kfctl v0.6.2-0-g47a0e4c7
+Server Version: 4.2.0
+Kubernetes Version: v1.14.6+2e5ed54
+kfctl v0.7.0-rc.5-7-gc66ebff3
 ----
 
+Before installing Kubeflow, we need to take some further actions.
+The disk space of the VM is too low, so we will expand it first:
+```console
+sudo dnf -y install libguestfs libguestfs-tools
+CRC_MACHINE_IMAGE=${HOME}/.crc/machines/crc/crc
+#example : CRC_MACHINE_IMAGE=/home/demouser/.crc/machines/crc/crc
+crc stop
+#adding 500G
+sudo qemu-img resize ${CRC_MACHINE_IMAGE} +500G
+sudo cp ${CRC_MACHINE_IMAGE} ${CRC_MACHINE_IMAGE}.ORIGINAL
+sudo virt-resize --expand /dev/sda3 ${CRC_MACHINE_IMAGE}.ORIGINAL ${CRC_MACHINE_IMAGE}
+sudo rm ${CRC_MACHINE_IMAGE}.ORIGINAL
+crc setup
+crc start
+crc status
+```
+
+Now login as kubeadmin:
 
 ----
 oc login -u kubeadmin -p F44En-Xau6V-jQuyb-yuMXB https://api.crc.testing:6443
 ----
 
-----
-oc new-project metallb-system
 
-oc adm policy add-scc-to-user privileged -n metallb-system -z speaker
-----
+After the VM starts, we need to take some actions to ensure everything runs correctly:
 
-
-----
-oc apply -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/kubeflow/metallb.yaml
-----
-
-
-cat cm.yaml
+* The PVs provided by CRC are 10Gi by default. We are going to need 2 20Gi PVs, so select 2 of them and expand them to 20Gi. 
+e.g.
 
 ----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: metallb-system
-  name: config
-data:
-  config: |
-    address-pools:
-    - name: default
-      protocol: layer2
-      addresses:
-      - 172.30.165.3-172.30.165.200
+oc edit pv pv0002
+oc edit pv pv0003
 ----
 
-----
-oc create -f cm.yaml
-----
-
-Test that metallb works
-
-
-oc  create service loadbalancer nginx --tcp=80:80
-
+* The PVs provided by CRC are of type hostPath. This means that securityContext settings like fsGroup won't work correctly, which is a problem for Jupyter Notebooks and the OIDC AuthService. To fix this, we ssh into the VM and make the PV folder read/writeable by all users:
 
 ----
-service/nginx created
+ssh -i ~/.crc/machines/crc/id_rsa core@api.crc.testing
+sudo chmod "0777" -R /mnt/pv-data/
 ----
 
-
-oc describe service nginx
+* Some of the Kubeflow Pods require higher permissions than what Openshift gives them. To remedy that, we are going to add certain ServiceAccounts to higher permissions [SCCs](https://blog.openshift.com/understanding-service-accounts-sccs/).
 
 ----
-      Name:                     nginx
-      Namespace:                metallb-system
-      Labels:                   app=nginx
-      Annotations:              <none>
-      Selector:                 app=nginx
-      Type:                     LoadBalancer
-      IP:                       172.30.125.171
-      LoadBalancer Ingress:     172.30.165.4
-      Port:                     80-80  80/TCP
-      TargetPort:               80/TCP
-      NodePort:                 80-80  32520/TCP
-      Endpoints:                <none>
-      Session Affinity:         None
-      External Traffic Policy:  Cluster
-      Events:
-        Type    Reason       Age   From                Message
-        ----    ------       ----  ----                -------
-        Normal  IPAllocated  5s    metallb-controller  Assigned IP "172.30.165.4"
+# istio-system
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:istio-ingress-service-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:default
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:grafana
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:prometheus
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:istio-egressgateway-service-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:istio-citadel-service-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:istio-ingressgateway-service-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:istio-cleanup-old-ca-service-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:istio-mixer-post-install-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:istio-mixer-service-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:isthttps://www.kubeflow.org/docs/started/k8s/kfctl-existing-arrikto/io-system:istio-pilot-service-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:istio-sidecar-injector-service-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:istio-galley-service-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:istio-multi
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:builder
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:deployer
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:istio-cleanup-secrets-service-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:istio-grafana-post-install-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:istio-security-post-install-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:istio-system:kiali-service-account
+# kubeflow
+oc adm policy add-scc-to-user anyuid system:serviceaccount:kubeflow:default
+oc adm policy add-scc-to-user anyuid system:serviceaccount:kubeflow:admission-webhook-service-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:kubeflow:katib-controller
+oc adm policy add-scc-to-user anyuid system:serviceaccount:kubeflow:katib-ui
 ----
 
 
-oc project
+=== Install Kubeflow
 
-
-----
-Using project "metallb-system" on server "https://api.crc.testing:6443"
-----
-
-
-oc get pods
+The instructions are available in the existing_arrikto config docs (https://www.kubeflow.org/docs/started/k8s/kfctl-existing-arrikto/).
+We copy them here for the sake of reproducibility.
 
 ----
-NAME                          READY   STATUS    RESTARTS   AGE
-controller-58ddcbdfbb-nqlmm   1/1     Running   0          26s
-speaker-bhwch                 1/1     Running   0          26s
-----
+# Download the kfctl binary
+wget 'https://github.com/kubeflow/kubeflow/releases/download/v0.7.0-rc.6/kfctl_v0.7.0-rc.5-7-gc66ebff3_linux.tar.gz'
+tar -xvf kfctl_v0.7.0-rc.5-7-gc66ebff3_linux.tar.gz
 
 
-https://www.kubeflow.org/docs/started/k8s/kfctl-existing-arrikto/
+# Add kfctl to PATH, to make the kfctl binary easier to use.
+# Use only alphanumeric characters or - in the directory name.
+export PATH=$PATH:"<path-to-kfctl>"
 
-https://github.com/kubeflow/website/pull/977
+# Set the following kfctl configuration file:
+export CONFIG_URI="https://raw.githubusercontent.com/kubeflow/manifests/v0.7-branch/kfdef/kfctl_existing_arrikto.0.7.0.yaml"
 
+# Set KF_NAME to the name of your Kubeflow deployment. You also use this
+# value as directory name when creating your configuration directory.
+# For example, your deployment name can be 'my-kubeflow' or 'kf-test'.
+export KF_NAME=<your choice of name for the Kubeflow deployment>
 
-----
-oc new-project kubeflow-anonymous
-----
+# Set the path to the base directory where you want to store one or more 
+# Kubeflow deployments. For example, /opt/.
+# Then set the Kubeflow application directory for this deployment.
+export BASE_DIR=<path to a base directory>
+export KF_DIR=${BASE_DIR}/${KF_NAME}
 
+mkdir -p ${KF_DIR}
+cd ${KF_DIR}
 
-----
-oc adm policy add-scc-to-user anyuid -z istio-ingress-service-account -n istio-system
-oc adm policy add-scc-to-user anyuid -z default -n istio-system
-oc adm policy add-scc-to-user anyuid -z grafana -n istio-system
-oc adm policy add-scc-to-user anyuid -z prometheus -n istio-system
-oc adm policy add-scc-to-user anyuid -z istio-egressgateway-service-account -n istio-system
-oc adm policy add-scc-to-user anyuid -z istio-citadel-service-account -n istio-system
-oc adm policy add-scc-to-user anyuid -z istio-ingressgateway-service-account -n istio-system
-oc adm policy add-scc-to-user anyuid -z istio-cleanup-old-ca-service-account -n istio-system
-oc adm policy add-scc-to-user anyuid -z istio-mixer-post-install-account -n istio-system
-oc adm policy add-scc-to-user anyuid -z istio-mixer-service-account -n istio-system
-oc adm policy add-scc-to-user anyuid -z istio-pilot-service-account -n istio-system
-oc adm policy add-scc-to-user anyuid -z istio-sidecar-injector-service-account -n istio-system
-----
+# Download the config file and change the default login credentials.
+wget -O kfctl_existing_arrikto.yaml $CONFIG_URI
+export CONFIG_FILE=${KF_DIR}/kfctl_existing_arrikto.yaml
 
+# Credentials for the default user are admin@kubeflow.org:12341234
+# To change them, please edit the dex-auth application parameters
+# inside the KfDef file.
+vim $CONFIG_FILE
 
-----
-export KFAPP="marckubeflow"
-export CONFIG="https://raw.githubusercontent.com/marcredhat/crcdemos/master/kubeflow/kubeflow.yaml"
-
-# Specify credentials for the default user.
-export KUBEFLOW_USER_EMAIL="mchisine@example.com"
-export KUBEFLOW_PASSWORD="marc"
-
-kfctl init ${KFAPP} --config=${CONFIG} -V
-cd ${KFAPP}
-kfctl generate all -V
-kfctl apply all -V
+kfctl apply -V -f ${CONFIG_FILE}
 ----
 
 
-oc get svc -n istio-system istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+=== Post-Install Fixes
+
+* Add permissions for notebooks/finalizers on `notebook-controller-role` ClusterRole.
 
 ----
-172.30.165.3
+oc edit clusterrole notebook-controller-role -n kubeflow
 ----
+
+* After installing, you may notice that some istio Pods are in CrashLoopBackoff.
+This happens when Istio Pods don't have enough memory and end up getting OOMKilled.
+To fix it, please allocate more RAM to those Pods by editing their deployments.
+A proposed value is 256Mi for requests and 512Mi for limits.
+
+----
+oc edit deployment istio-ingressgateway -n istio-system
+oc edit deployment istio-pilot -n istio-system
+...
+----
+
+* When creating a notebook, you may notice that it can't assign the fsGroup it desires. To give it the necessary permissions, add it to the nonroot scc:
+
+----
+NS=<ns>
+oc adm policy add-scc-to-user anyuid system:serviceaccount:${NS}:default-editor
+----
+
+=== Connect to Kubeflow
+
+After setting up everything, you can connect to Kubeflow by exposing the istio-ingressgateway Service.
+
+----
+oc expose service istio-ingressgateway --port 80 -n istio-system
+----
+
+Then you can access Kubeflow at: `http://istio-ingressgateway-istio-system.apps-crc.testing`
+
+
+You can also expose the ingressgateway via port-forward:
+
+----
+oc port-forward -n istio-system svc/istio-ingressgateway 8080:80
+----
+
+If you run CRC in a VM, you can use a SOCKS5 proxy to access the Kubeflow website:
+
+----
+ssh -D 127.0.0.1:12345 <user>@<public-ip>
+google-chrome --incognito --user-data-dir=/tmp/delme --proxy-server=socks5://127.0.0.1:12345 --dns-prefetch-disable
+----
+
+=== Debugging Notes
 
 oc project istio-system
 
@@ -297,35 +322,3 @@ For some web applications, you need to configure the base URL on which the app i
 
 For example, if you deployed Kubeflow with an ingress serving at https://example.mydomain.com and configured an application to be served at the URL https://example.mydomain.com/myapp, then the app may not work when served on https://localhost:8080/myapp because the paths do not match.
 (see https://www.kubeflow.org/docs/other-guides/accessing-uis/)
-
-----
-NOTE: PR available to fix the issues above: https://github.com/kubeflow/manifests/pull/529
-
-My lab is currently using existing_arrikto 0.6.2.
-
-With existing_arrikto 0.7, the user to access Kubeflow any way they want (eg port-forward, LoadBalancer, NodePort, etc).
-
-The way we do that is by having Dex and Kubeflow in the same origin, utilizing relative URLs and internal URLs
-for the AuthService<->Dex communication.
-
-
-This is the aforementioned PR: https://github.com/kubeflow/manifests/pull/529
-
-In order to test it:
-1. Download the latest stable kfctl (https://github.com/kubeflow/kubeflow/releases/tag/v0.6.2)
-
-2. Pull the PR (git fetch origin pull/529/head:529) 
-The config you're going to use is under kfdef/kfctl_existing_arrikto.yaml.
-
-3. Change the manifests repo to point to the locally pulled PR folder. (file:///<path-to-manifests-folder>)
-
-4. Follow the procedure at https://www.kubeflow.org/docs/started/k8s/kfctl-existing-arrikto/, specifying CONFIG="file://<path-to-existing-arrikto-config>"
-
-5. After this is all done, port forward the istio-ingressgateway service locally and access Kubeflow 
-(kubectl port-forward svc/istio-ingressgateway -n istio-system 8080:80).
-
-   Login with the credentials "admin@kubeflow.org:12341234"
-   
-6. In addition to port-forwarding, you can expose Kubeflow in any of the standard Kubernetes ways and authentication will still work.
-
-----
