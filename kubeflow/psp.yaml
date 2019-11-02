@@ -43,5 +43,5 @@ roleRef:
   name: istio
 subjects:
 - kind: ServiceAccount
-  name: default
+  name: default-editor
   namespace: marcredhat
