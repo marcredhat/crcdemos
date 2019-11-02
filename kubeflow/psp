@@ -1,0 +1,25 @@
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+    name: example
+spec:
+  allowedCapabilities:
+  - NET_ADMIN
+  - IPC_LOCK
+  allowedHostPaths:
+  - pathPrefix: /dev
+  - pathPrefix: /run
+  - pathPrefix: /
+  fsGroup:
+    rule: RunAsAny
+  hostNetwork: true
+  privileged: true
+  runAsUser:
+    rule: RunAsAny
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  volumes:
+  - hostPath
+  - secret
