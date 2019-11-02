@@ -175,6 +175,7 @@ A proposed value is 256Mi for requests and 512Mi for limits.
 
 ----
 oc edit deployment istio-ingressgateway -n istio-system
+oc edit deployment istio-egressgateway -n istio-system
 oc edit deployment istio-pilot -n istio-system
 ...
 ----
