@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  finalizers:
+  - kubernetes.io/pvc-protection
+  name: mypvc
+  namespace: kubeflow
+  resourceVersion: "245414"
+  selfLink: /api/v1/namespaces/kubeflow/persistentvolumeclaims/katib-mysql
+  uid: fbf8994a-fd32-11e9-abab-52fdfc072182
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Filesystem
+  volumeName: pv0022
+status:
+  accessModes:
+  - ReadWriteOnce
+  - ReadWriteMany
+  - ReadOnlyMany
+  capacity:
+    storage: 10Gi
