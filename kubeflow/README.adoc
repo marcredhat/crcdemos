@@ -260,6 +260,15 @@ google-chrome --incognito --user-data-dir=/tmp/delme --proxy-server=socks5://127
 ----
 
 
+=== Change the container runtime executor from docker to k8sapi
+
+
+----
+oc edit cm workflow-controller-configmap -n kubeflow 
+
+containerRuntimeExecutor: k8sapi
+----
+
 === Compile and deploy pipelines
 
 
