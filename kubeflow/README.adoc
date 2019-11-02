@@ -36,8 +36,8 @@ Before installing Kubeflow, we need to take some further actions.
 The disk space of the VM is too low, so we will expand it first:
 ```console
 sudo dnf -y install libguestfs libguestfs-tools
-CRC_MACHINE_IMAGE=${HOME}/.crc/machines/crc/crc
-#example : CRC_MACHINE_IMAGE=/home/demouser/.crc/machines/crc/crc
+export CRC_MACHINE_IMAGE=${HOME}/.crc/machines/crc/crc
+#example : export CRC_MACHINE_IMAGE=/home/demouser/.crc/machines/crc/crc
 crc stop
 #adding 500G
 sudo qemu-img resize ${CRC_MACHINE_IMAGE} +500G
