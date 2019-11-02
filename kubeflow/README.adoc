@@ -184,6 +184,8 @@ oc edit deployment istio-pilot -n istio-system
 ----
 NS=<ns>
 oc adm policy add-scc-to-user anyuid system:serviceaccount:${NS}:default-editor
+
+oc adm policy add-scc-to-user privileged -z default-editor  -n ${NS}
 ----
 
 === Connect to Kubeflow
