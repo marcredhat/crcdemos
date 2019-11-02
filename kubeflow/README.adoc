@@ -52,7 +52,7 @@ crc status
 Now login as kubeadmin:
 
 ----
-oc login -u kubeadmin -p F44En-Xau6V-jQuyb-yuMXB https://api.crc.testing:6443
+oc login -u kubeadmin -p wyozw-5ywAy-5yoap-7rj8q https://api.crc.testing:6443
 ----
 
 
