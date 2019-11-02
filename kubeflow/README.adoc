@@ -112,6 +112,52 @@ oc adm policy add-scc-to-user anyuid system:serviceaccount:kubeflow:default
 oc adm policy add-scc-to-user anyuid system:serviceaccount:kubeflow:admission-webhook-service-account
 oc adm policy add-scc-to-user anyuid system:serviceaccount:kubeflow:katib-controller
 oc adm policy add-scc-to-user anyuid system:serviceaccount:kubeflow:katib-ui
+
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:ml-pipeline
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:pipeline-runner
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:admission-webhook-service-account
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:application-controller-service-account
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:builder
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:centraldashboard
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:default
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:deployer
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:jupyter-web-app-service-account
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:argo
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:argo-ui
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:metadata-ui
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:ml-pipeline
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:ml-pipeline-persistenceagent
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:ml-pipeline-ui
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:ml-pipeline-viewer-crd-service-account
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:notebook-controller-service-account
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:profiles-controller-service-account
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:spartakus
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:tf-job-dashboard
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:tf-job-operator
+
+
+
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:ml-pipeline
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:pipeline-runner
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:admission-webhook-service-account
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:application-controller-service-account
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:builder
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:centraldashboard
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:default
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:deployer
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:jupyter-web-app-service-account
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:argo
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:argo-ui
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:metadata-ui
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:ml-pipeline
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:ml-pipeline-persistenceagent
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:ml-pipeline-ui
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:ml-pipeline-viewer-crd-service-account
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:notebook-controller-service-account
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:profiles-controller-service-account
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:spartakus
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:tf-job-dashboard
+oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:tf-job-operator
 ----
 
 
@@ -211,6 +257,28 @@ If you run CRC in a VM, you can use a SOCKS5 proxy to access the Kubeflow websit
 ----
 ssh -D 127.0.0.1:12345 <user>@<public-ip>
 google-chrome --incognito --user-data-dir=/tmp/delme --proxy-server=socks5://127.0.0.1:12345 --dns-prefetch-disable
+----
+
+
+=== Compile and deploy pipelines
+
+
+----
+On RHEL 8.2:
+yum install @python36
+sudo pip3 install https://storage.googleapis.com/ml-pipeline/release/latest/kfp.tar.gz --upgrade
+wget https://raw.githubusercontent.com/kubeflow/pipelines/master/samples/contrib/volume_ops/volumeop_sequential.py
+dsl-compile --py volumeop_sequential.py --output volumeop.tar.gz
+----
+
+----
+Upload the compiled pipeline (volumeop.tar.gz) to Kubeflow
+----
+
+----
+We also need to create the PVC for the pipeline
+
+oc create -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/kubeflow/marcpvc
 ----
 
 === Debugging Notes
