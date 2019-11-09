@@ -215,6 +215,13 @@ kfctl apply -V -f ${CONFIG_FILE}
 oc edit clusterrole notebook-controller-role -n kubeflow
 ----
 
+* Add permissions for  for workflow delete and workflows/finalizers on `argo` ClusterRole.
+
+----
+oc edit clusterrole argo -n kubeflow
+----
+
+
 * After installing, you may notice that some istio Pods are in CrashLoopBackoff.
 This happens when Istio Pods don't have enough memory and end up getting OOMKilled.
 To fix it, please allocate more RAM to those Pods by editing their deployments.
@@ -261,13 +268,13 @@ google-chrome --incognito --user-data-dir=/tmp/delme --proxy-server=socks5://127
 ----
 
 
-=== Change the container runtime executor from docker to k8sapi
+=== Change the container runtime executor from docker to pns
 
 
 ----
 oc edit cm workflow-controller-configmap -n kubeflow 
 
-containerRuntimeExecutor: k8sapi
+containerRuntimeExecutor: pns
 ----
 
 === Compile and deploy pipelines
