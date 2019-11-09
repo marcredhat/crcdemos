@@ -292,10 +292,38 @@ dsl-compile --py volumeop_sequential.py --output volumeop.tar.gz
 Upload the compiled pipeline (volumeop.tar.gz) to Kubeflow
 ----
 
-----
-We also need to create the PVC for the pipeline
 
-oc create -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/kubeflow/marcpvc
+----
+Run the volumeop pipeline and validate that everything works
+----
+
+----
+oc get pvc
+NAME                               STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+katib-mysql                        Bound    pv0014   10Gi       RWO,ROX,RWX                   5h43m
+metadata-mysql                     Bound    pv0015   10Gi       RWO,ROX,RWX                   5h43m
+minio-pv-claim                     Bound    pv0003   20Gi       RWO,ROX,RWX                   5h43m
+mypvc                              Bound    pv0024   10Gi       RWO,ROX,RWX                   110m
+mysql-pv-claim                     Bound    pv0002   20Gi       RWO,ROX,RWX                   5h43m
+newpvc                             Bound    pv0017   10Gi       RWO,ROX,RWX                   4h29m
+volumeop-sequential-2zz4q-newpvc   Bound    pv0022   10Gi       RWO,ROX,RWX                   5h17m
+volumeop-sequential-52whw-newpvc   Bound    pv0028   10Gi       RWO,ROX,RWX                   45m
+volumeop-sequential-k9tvz-newpvc   Bound    pv0016   10Gi       RWO,ROX,RWX                   13m
+volumeop-sequential-qls6g-newpvc   Bound    pv0018   10Gi       RWO,ROX,RWX                   33m
+----
+
+----
+$ ssh -i ~/.crc/machines/crc/id_rsa core@api.crc.testing
+Red Hat Enterprise Linux CoreOS 42.80.20191010.0
+[core@crc-847lc-master-0 ~]$ cd /mnt/pv-data/
+[core@crc-847lc-master-0 pv-data]$ ls
+pv0001  pv0003  pv0005  pv0007  pv0009  pv0011  pv0013  pv0015  pv0017  pv0019  pv0021  pv0023  pv0025  pv0027  pv0029
+pv0002  pv0004  pv0006  pv0008  pv0010  pv0012  pv0014  pv0016  pv0018  pv0020  pv0022  pv0024  pv0026  pv0028  pv0030
+[core@crc-847lc-master-0 pv-data]$ cd pv0016
+[core@crc-847lc-master-0 pv0016]$ ls
+file1  file2
+[core@crc-847lc-master-0 pv0016]$ cat file1
+1
 ----
 
 === Debugging Notes
