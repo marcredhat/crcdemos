@@ -15,7 +15,7 @@ spec:
     requests:
       storage: 10Gi
   volumeMode: Filesystem
-  volumeName: pv0022
+  #volumeName: pv0022
 status:
   accessModes:
   - ReadWriteOnce
