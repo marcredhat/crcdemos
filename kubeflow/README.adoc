@@ -215,7 +215,7 @@ kfctl apply -V -f ${CONFIG_FILE}
 oc edit clusterrole notebook-controller-role -n kubeflow
 ----
 
-* Add permissions for  for workflow delete and workflows/finalizers on `argo` ClusterRole.
+* Add permissions for workflow delete and workflows/finalizers on `argo` ClusterRole.
 
 ----
 oc edit clusterrole argo -n kubeflow
