@@ -71,6 +71,7 @@ oc edit pv pv0003
 ----
 ssh -i ~/.crc/machines/crc/id_rsa core@api.crc.testing
 sudo chmod "0777" -R /mnt/pv-data/
+exit
 ----
 
 * Some of the Kubeflow Pods require higher permissions than what Openshift gives them. To remedy that, we are going to add certain ServiceAccounts to higher permissions [SCCs](https://blog.openshift.com/understanding-service-accounts-sccs/).
