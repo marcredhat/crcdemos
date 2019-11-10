@@ -278,6 +278,8 @@ oc edit cm workflow-controller-configmap -n kubeflow
 containerRuntimeExecutor: pns
 ----
 
+See info on `PNS (Process Namespace Sharing)` at https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace
+
 === Compile and deploy pipelines
 
 
