@@ -329,7 +329,8 @@ file1  file2
 
 === Hyperparameter tuning with Katib
 
+----
 git clone https://github.com/kubeflow/katib.git
 cd katib/examples/v1alpha3
-
+----
 
