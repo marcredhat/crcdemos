@@ -47,6 +47,11 @@ The instructions below cover
 Fedora release 30 (Thirty)
 ----
 
+== If needed, increase fedora root partition size
+
+----
+https://gist.github.com/181192/cf7eb42a25538ccdb8d0bb7dd57cf236
+----
 
 
 == Install packages
