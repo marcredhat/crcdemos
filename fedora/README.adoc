@@ -145,6 +145,10 @@ crc config set memory 81920
 crc config set cpus <cpus>
 ----
 
+----
+crc setup
+crc start
+----
 
 Increase disk size available to CodeReady Containers (see https://github.com/code-ready/crc/issues/127)
 
