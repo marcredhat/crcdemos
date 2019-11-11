@@ -51,6 +51,7 @@ Fedora release 30 (Thirty)
 
 ----
 https://gist.github.com/181192/cf7eb42a25538ccdb8d0bb7dd57cf236
+Example: sudo lvresize -An -L +10G --resizefs /dev/mapper/fedora_dell--per415--03-root
 ----
 
 
