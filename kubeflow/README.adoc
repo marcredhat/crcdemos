@@ -59,14 +59,6 @@ oc login -u kubeadmin -p wyozw-5ywAy-5yoap-7rj8q https://api.crc.testing:6443
 
 After the VM starts, we need to take some actions to ensure everything runs correctly:
 
-* The PVs provided by CRC are 10Gi by default. We are going to need 2 20Gi PVs, so select 2 of them and expand them to 20Gi. 
-e.g.
-
-----
-oc edit pv pv0002
-oc edit pv pv0003
-----
-
 * The PVs provided by CRC are of type hostPath. This means that securityContext settings like fsGroup won't work correctly, which is a problem for Jupyter Notebooks and the OIDC AuthService. To fix this, we ssh into the VM and make the PV folder read/writeable by all users:
 
 ----
@@ -232,6 +224,7 @@ A proposed value is 256Mi for requests and 512Mi for limits.
 oc edit deployment istio-ingressgateway -n istio-system
 oc edit deployment istio-egressgateway -n istio-system
 oc edit deployment istio-pilot -n istio-system
+oc edit deployment istio-policy -n istio-system
 ...
 ----
 
