@@ -214,6 +214,11 @@ oc edit clusterrole notebook-controller-role -n kubeflow
 oc edit clusterrole argo -n kubeflow
 ----
 
+* Add permissions for experiments, trials and suggestions finalizers on `katib-controller` ClusterRole.
+
+----
+oc edit clusterrole katib-controller -n kubeflow
+----
 
 * After installing, you may notice that some istio Pods are in CrashLoopBackoff.
 This happens when Istio Pods don't have enough memory and end up getting OOMKilled.
@@ -321,4 +326,10 @@ file1  file2
 [core@crc-847lc-master-0 pv0016]$ cat file1
 1
 ----
+
+=== Hyperparameter tuning with Katib
+
+git clone https://github.com/kubeflow/katib.git
+cd katib/examples/v1alpha3
+
 
