@@ -11,7 +11,7 @@ sudo usermod -aG wheel demouser
 
 
 ----
-sudo dnf -y update && dnf -y install git wget tar qemu-kvm NetworkManager jq  net-tools libvirt* libselinux*-python --skip-broken
+sudo dnf -y update && sudo dnf -y install git wget tar qemu-kvm NetworkManager jq  net-tools libvirt* libselinux*-python 
 ----
 
 
