@@ -154,8 +154,8 @@ Increase disk size available to CodeReady Containers (see https://github.com/cod
 
 ----
 sudo dnf -y install libguestfs libguestfs-tools
-CRC_MACHINE_IMAGE=${HOME}/.crc/machines/crc/crc
-#example : CRC_MACHINE_IMAGE=/home/demouser/.crc/machines/crc/crc
+export CRC_MACHINE_IMAGE=${HOME}/.crc/machines/crc/crc
+#example : export CRC_MACHINE_IMAGE=/home/demouser/.crc/machines/crc/crc
 crc stop
 #adding 500G
 sudo qemu-img resize ${CRC_MACHINE_IMAGE} +500G
