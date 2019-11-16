@@ -220,6 +220,13 @@ oc edit clusterrole argo -n kubeflow
 oc edit clusterrole katib-controller -n kubeflow
 ----
 
+* Add pods, pods/status, pods/finalizers resources on `tf-job-operator` ClusterRole.
+
+----
+oc edit clusterrole tf-job-operator
+----
+
+
 * After installing, you may notice that some istio Pods are in CrashLoopBackoff.
 This happens when Istio Pods don't have enough memory and end up getting OOMKilled.
 To fix it, please allocate more RAM to those Pods by editing their deployments.
