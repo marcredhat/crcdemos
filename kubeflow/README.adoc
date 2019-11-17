@@ -343,3 +343,11 @@ git clone https://github.com/kubeflow/katib.git
 cd katib/examples/v1alpha3
 ----
 
+----
+oc logs pytorchjob-example-z6qzbgv6-master-0 -c metrics-collector
+....
+I1117 00:31:19.116058      23 main.go:78] Train Epoch: 1 [28160/60000 (47%)]	loss=0.0890
+I1117 00:31:25.963848      23 main.go:78] Train Epoch: 1 [28800/60000 (48%)]	loss=0.0514
+I1117 00:31:35.932306      23 main.go:78] Train Epoch: 1 [29440/60000 (49%)]	loss=0.1868
+....
+----
