@@ -128,6 +128,7 @@ oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:pro
 oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:spartakus
 oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:tf-job-dashboard
 oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:tf-job-operator
+oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:pytorch-operator
 
 
 
@@ -152,8 +153,6 @@ oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:profil
 oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:spartakus
 oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:tf-job-dashboard
 oc adm policy add-scc-to-user privileged   system:serviceaccount:kubeflow:tf-job-operator
-
-oc adm policy add-role-to-user cluster-admin  system:serviceaccount:kubeflow:pytorch-operator
 ----
 
 
