@@ -350,3 +350,9 @@ I1117 00:31:25.963848      23 main.go:78] Train Epoch: 1 [28800/60000 (48%)]	los
 I1117 00:31:35.932306      23 main.go:78] Train Epoch: 1 [29440/60000 (49%)]	loss=0.1868
 ....
 ----
+
+=== Modify existing examples to be configurable and run well in distributed mode
+
+----
+https://github.com/kubeflow/examples/tree/master/mnist#prepare-model
+----
