@@ -1,0 +1,97 @@
+Credits: https://github.com/IBM/cloud-native-starter
+
+OpenLiberty (https://openliberty.io/) is a lightweight open framework for building fast and efficient cloud-native Java microservices.
+
+The OperatorHub in OpenShift 4.2 includes the Open Liberty Community Operator, which install Jakarta EE / MicroProfile / Spring applications.
+
+image:images/OpenLibertyCommunityOperator.png[title="Open Liberty Community Operator"]
+
+
+----
+[demouser@rhel8 authors-java-jee]$ oc version && crc version
+Client Version: v4.3.0
+Server Version: 4.2.2
+Kubernetes Version: v1.14.6+868bc38
+crc version: 1.1.0+95966a9
+OpenShift version: 4.2.2 (embedded in binary)
+----
+
+----
+oc login -u kubeadmin -p <password> https://api.crc.testing:6443
+----
+
+----
+oc new-project marc-cloud-native-starter
+----
+
+----
+git clone https://github.com/marcredhat/cloud-native-starter.git
+cd cloud-native-starter/authors-java-jee
+----
+
+----
+buildah bud -t authors .
+----
+
+----
+[demouser@rhel8 authors-java-jee]$ sudo podman images
+REPOSITORY                        TAG              IMAGE ID       CREATED         SIZE
+localhost/authors                 latest           6d3bc1fe3a3e   2 minutes ago   401 MB
+----
+
+----
+podman  login -u="marcf5" -p="<token>" quay.io
+----
+
+----
+podman push localhost/authors quay.io/marcf5/authors
+----
+
+----
+oc create secret docker-registry staging-secret     --docker-server=quay.io     --docker-username=<email>  --docker-password=<password>     --docker-email=<email>     --dry-run -o yaml > staging-secret.yaml
+----
+
+----
+oc create -f ./staging-secret.yaml
+----
+
+----
+oc apply -f https://raw.githubusercontent.com/marcredhat/cloud-native-starter/master/authors-java-jee/deployment/deployment-os.yaml
+oc apply -f https://raw.githubusercontent.com/marcredhat/cloud-native-starter/master/authors-java-jee/deployment/service.yaml
+oc expose svc/authors
+----
+
+
+----
+[demouser@rhel8 authors-java-jee]$ oc get route
+NAME      HOST/PORT                                            PATH   SERVICES   PORT   TERMINATION   WILDCARD
+authors   authors-marc-cloud-native-starter.apps-crc.testing          authors    http                 None
+----
+
+----
+[demouser@rhel8 authors-java-jee]$ oc get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+authors-dcdff695f-kgpbq   0/1     Running   0          22s
+----
+
+----
+[demouser@rhel8 authors-java-jee]$ oc logs authors-dcdff695f-kgpbq
+Launching defaultServer (Open Liberty 19.0.0.11/wlp-1.0.34.cl191120191031-0300) on Eclipse OpenJ9 VM, version 1.8.0_232-b09 (en_US)
+[AUDIT   ] CWWKE0001I: The server defaultServer has been launched.
+[AUDIT   ] CWWKG0093A: Processing configuration drop-ins resource: /opt/ol/wlp/usr/servers/defaultServer/configDropins/defaults/keystore.xml
+[AUDIT   ] CWWKG0093A: Processing configuration drop-ins resource: /opt/ol/wlp/usr/servers/defaultServer/configDropins/defaults/open-default-port.xml
+[AUDIT   ] CWWKZ0058I: Monitoring dropins for applications.
+[AUDIT   ] CWWKT0016I: Web application available (default_host): http://authors-dcdff695f-kgpbq:3000/metrics/
+[AUDIT   ] CWWKT0016I: Web application available (default_host): http://authors-dcdff695f-kgpbq:3000/health/
+[AUDIT   ] CWWKT0016I: Web application available (default_host): http://authors-dcdff695f-kgpbq:3000/openapi/ui/
+[AUDIT   ] CWWKT0016I: Web application available (default_host): http://authors-dcdff695f-kgpbq:3000/jwt/
+[AUDIT   ] CWWKT0016I: Web application available (default_host): http://authors-dcdff695f-kgpbq:3000/ibm/api/
+[AUDIT   ] CWWKT0016I: Web application available (default_host): http://authors-dcdff695f-kgpbq:3000/openapi/
+[AUDIT   ] CWWKT0016I: Web application available (default_host): http://authors-dcdff695f-kgpbq:3000/api/
+[AUDIT   ] CWWKZ0001I: Application authors started in 3.727 seconds.
+[AUDIT   ] CWWKF0012I: The server installed the following features: [appSecurity-2.0, cdi-2.0, concurrent-1.0, distributedMap-1.0, jaxrs-2.1, jaxrsClient-2.1, jndi-1.0, json-1.0, jsonb-1.0, jsonp-1.1, jwt-1.0, microProfile-3.0, mpConfig-1.3, mpFaultTolerance-2.0, mpHealth-2.0, mpJwt-1.1, mpMetrics-2.0, mpOpenAPI-1.1, mpOpenTracing-1.3, mpRestClient-1.3, opentracing-1.3, servlet-4.0, ssl-1.0].
+[AUDIT   ] CWWKF0011I: The defaultServer server is ready to run a smarter planet. The defaultServer server started in 10.430 seconds.
+----
+
+
+image:images/OpenLibertyApplicationServer.png[title="Open Liberty on OpenShift"]
