@@ -40,7 +40,7 @@ buildah bud -t authors .
 ----
 
 ----
-[demouser@rhel8 authors-java-jee]$ sudo podman images
+[demouser@rhel8 authors-java-jee]$ podman images
 REPOSITORY                        TAG              IMAGE ID       CREATED         SIZE
 localhost/authors                 latest           6d3bc1fe3a3e   2 minutes ago   401 MB
 ----
