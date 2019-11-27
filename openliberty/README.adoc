@@ -1,5 +1,5 @@
 
-== Deploy `SpringBoot` and `Jakarta EE` with Open Liberty on OpenShift 4.2+ / CodeReady Containers
+== Deploy SpringBoot and Jakarta EE apps with Open Liberty on OpenShift 4.2+ / CodeReady Containers
 
 
 Credits: https://github.com/IBM/cloud-native-starter
@@ -9,6 +9,11 @@ This is a step-by-step guide to deploy `SpringBoot` and `Jakarta EE` apps on Ope
 Open Liberty is a lightweight, production-ready Java runtime for containerizing and deploying microservices to the cloud, and is now available as part of a Red Hat Runtimes subscription. If you are a Red Hat Runtimes subscriber, you can write your Eclipse MicroProfile and Jakarta EE apps on Open Liberty and then run them in containers on Red Hat OpenShift, with commercial support from Red Hat and IBM.
 
 (Source: See https://developers.redhat.com/blog/2019/11/14/open-liberty-java-runtime-now-available-to-red-hat-runtimes-subscribers/)
+
+The Jakarta EE 8 has the same set of specifications from Java EE 8 with no changes in its features. The only change is the new process to evolve these specifications. With this, Jakarta EE 8 is a milestone in Java enterprise history, as it inserts these specifications in a new process to boost the specifications to a cloud-native application approach.
+
+(Source: https://developers.redhat.com/blog/2019/09/12/jakarta-ee-8-the-new-era-of-java-ee-explained/)
+
 
 The OperatorHub in OpenShift 4.2 includes the Open Liberty Community Operator, which install Jakarta EE / MicroProfile / Spring applications.
 
