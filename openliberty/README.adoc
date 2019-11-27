@@ -101,3 +101,61 @@ Launching defaultServer (Open Liberty 19.0.0.11/wlp-1.0.34.cl191120191031-0300) 
 
 
 image:images/OpenLibertyApplicationServer.png[title="Open Liberty on OpenShift"]
+
+
+
+== Deploying a Spring Boot app on OpenShift 4.2 / CodeReady Containers / Open Liberty
+
+
+----
+oc project marc-cloud-native-starter
+----
+
+
+----
+git clone https://github.com/marcredhat/guide-spring-boot.git
+cd guide-spring-boot/finish 
+./mvnw package
+buildah bud -t guide-spring-boot .
+----
+
+----
+[demouser@rhel8 finish]$ podman images
+REPOSITORY                       TAG         IMAGE ID       CREATED         SIZE
+localhost/guide-spring-boot      latest      4d6328f2060a   2 minutes ago   413 MB
+----
+
+----
+podman  login -u="marcf5" -p="<token>" quay.io
+----
+
+----
+podman push localhost/guide-spring-boot quay.io/marcf5/guide-spring-boot
+----
+
+----
+oc create secret docker-registry staging-secret     --docker-server=quay.io     --docker-username=<email>  --docker-password=<password>     --docker-email=<email>     --dry-run -o yaml > staging-secret.yaml
+----
+
+----
+oc create -f ./staging-secret.yaml
+----
+
+----
+oc apply -f https://raw.githubusercontent.com/marcredhat/guide-spring-boot/master/finish/deployment/deployment-os.yaml
+oc apply -f https://raw.githubusercontent.com/marcredhat/guide-spring-boot/master/finish/deployment/service.yaml
+oc expose svc/guide-spring-boot
+----
+
+
+----
+[demouser@rhel8 finish]$ oc get route
+NAME                HOST/PORT                                                      PATH   SERVICES            PORT   TERMINATION   WILDCARD
+authors             authors-marc-cloud-native-starter.apps-crc.testing                    authors             http                 None
+guide-spring-boot   guide-spring-boot-marc-cloud-native-starter.apps-crc.testing          guide-spring-boot   http                 None
+----
+
+
+
+image:images/springboothello.png[title="Hello from Spring Boot"]
+
