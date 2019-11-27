@@ -20,6 +20,9 @@ The OperatorHub in OpenShift 4.2 includes the Open Liberty Community Operator, w
 image:images/OpenLibertyCommunityOperator.png[title="Open Liberty Community Operator"]
 
 
+== Deploying a Jakarta EE app on OpenShift 4.2 / CodeReady Containers / Open Liberty
+
+
 ----
 [demouser@rhel8 authors-java-jee]$ oc version && crc version
 Client Version: v4.3.0
