@@ -1,5 +1,5 @@
 
-== Open Liberty on OpenShift 4.2+ / CodeReady Containers
+== Deploy `SpringBoot` and `Jakarta EE` with Open Liberty on OpenShift 4.2+ / CodeReady Containers
 
 
 Credits: https://github.com/IBM/cloud-native-starter
