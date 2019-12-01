@@ -4,7 +4,7 @@
 
 
 ----
-export container=`sudo podman run -v /var/tmp/rhamt/:/home/rhamt:Z -it --detach --name=rhamt2  \
+export container=`sudo podman run -v /var/tmp/rhamt/:/home/rhamt:Z -it --detach --name=rhamtmarc  \
 windup3/windup-cli-openshift \
 sh -c 'while true ;do wait; done'`
 ----
