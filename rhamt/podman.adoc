@@ -11,14 +11,13 @@ sh -c 'while true ;do wait; done'`
 
 
 ----
-export folderonhost = `sudo podman mount $container`
-/var/lib/containers/storage/overlay/afd9a1ac58525504dd837ddd42f365f56723c5dbaf5ab33dab7c8451900b44d8/merged
+export folderonhost=`sudo podman mount ${container}`
 ----
 
 
 ----
-sudo mkdir /var/lib/containers/storage/overlay/afd9a1ac58525504dd837ddd42f365f56723c5dbaf5ab33dab7c8451900b44d8/merged/var/input
-sudo cp /var/input/marc.ear /var/lib/containers/storage/overlay/afd9a1ac58525504dd837ddd42f365f56723c5dbaf5ab33dab7c8451900b44d8/merged/var/input
+sudo mkdir ${folderonhost}/var/input
+sudo cp /var/input/marc.ear ${folderonhost}/var/input
 ----
 
 
