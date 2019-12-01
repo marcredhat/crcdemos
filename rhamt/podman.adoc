@@ -4,7 +4,8 @@
 
 
 ----
-sudo podman run -v /var/tmp/rhamt/:/home/rhamt:Z -it --detach --name=rhamt1  windup3/windup-cli-openshift \ 
+sudo podman run -v /var/tmp/rhamt/:/home/rhamt:Z -it --detach --name=rhamt1  \
+windup3/windup-cli-openshift \
 sh -c 'while true ;do wait; done'
 
 a0ddb718078d7db5ed3d63e531a9d58711476f9b69680f4b570c14b8c3053707
