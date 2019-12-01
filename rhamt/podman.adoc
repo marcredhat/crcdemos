@@ -15,6 +15,7 @@ export folderonhost=`sudo podman mount ${container}`
 
 ----
 sudo mkdir ${folderonhost}/var/input
+#curl -L https://github.com/marcredhat/crcdemos/raw/master/rhamt/marc.ear -o /var/input/marc.ear
 sudo cp /var/input/marc.ear ${folderonhost}/var/input
 ----
 
