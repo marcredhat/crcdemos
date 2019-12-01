@@ -5,7 +5,10 @@
 
 Red Hat Application Migration Toolkit enables `large-scale application migrations and modernizations`. 
 
-The migrations supported include application platform upgrades, migrations to a cloud-native deployment environment, and also migrations from several commercial products to the Red Hat JBoss Enterprise Application Platform.
+The migrations supported include:
+`application platform upgrades` 
+`migrations to a cloud-native deployment environment` 
+`migrations from several commercial products to the Red Hat JBoss Enterprise Application Platform`.
 
 Source: https://developers.redhat.com/products/rhamt/overview
 
