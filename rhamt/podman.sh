@@ -1,0 +1,1 @@
+sudo podman  run  -v /var/tmp/rhamt/:/home/rhamt:Z  -it windup3/windup-cli-openshift  /opt/migrationtoolkit/bin/rhamt-cli  --sourceMode --input /opt/migrationtoolkit/samples/jee-example-app-1.0.0.ear --output /home/rhamt --target eap7
