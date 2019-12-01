@@ -30,3 +30,9 @@ sudo podman exec $container   /opt/migrationtoolkit/bin/rhamt-cli  --sourceMode 
 sudo scp -r  demouser@<myRHEL8machine>:/var/tmp/rhamt ./Documents/
 ----
 
+
+----
+sudo podman pod stop 
+sudo podman pod rm   
+----
+
