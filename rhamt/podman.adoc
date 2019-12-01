@@ -4,7 +4,9 @@
 
 
 ----
-export container=`sudo podman run -v /var/tmp/rhamt/:/home/rhamt:Z -it --detach --name=rhamtmarc  windup3/windup-cli-openshift sh -c 'while true ;do wait; done'`
+export container=`sudo podman run -v /var/tmp/rhamt/:/home/rhamt:Z -it \
+--detach --name=rhamtmarc  windup3/windup-cli-openshift \
+sh -c 'while true ;do wait; done'`
 ----
 
 
@@ -15,7 +17,8 @@ export folderonhost=`sudo podman mount ${container}`
 
 ----
 sudo mkdir ${folderonhost}/var/input
-#curl -L https://github.com/marcredhat/crcdemos/raw/master/rhamt/marc.ear -o /var/input/marc.ear
+#curl -L https://github.com/marcredhat/crcdemos/raw/master/rhamt/marc.ear \
+#-o /var/input/marc.ear
 sudo cp /var/input/marc.ear ${folderonhost}/var/input
 ----
 
@@ -26,7 +29,8 @@ sudo chmod a+rw -R ${folderonhost}/home/rhamt
 ----
 
 ----
-sudo podman exec $container   /opt/migrationtoolkit/bin/rhamt-cli  --sourceMode --input /var/input/marc.ear --output /home/rhamt --target eap7
+sudo podman exec $container   /opt/migrationtoolkit/bin/rhamt-cli  \
+--sourceMode --input /var/input/marc.ear --output /home/rhamt --target eap7
 ----
 
 
