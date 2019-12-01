@@ -22,7 +22,7 @@ sudo cp /var/input/marc.ear ${folderonhost}/var/input
 
 
 ----
-sudo podman exec a0ddb718078d7db5ed3d63e531a9d58711476f9b69680f4b570c14b8c3053707   /opt/migrationtoolkit/bin/rhamt-cli  --sourceMode --input /var/input/marc.ear --output /home/rhamt --target eap7
+sudo podman exec $container   /opt/migrationtoolkit/bin/rhamt-cli  --sourceMode --input /var/input/marc.ear --output /home/rhamt --target eap7
 ----
 
 
