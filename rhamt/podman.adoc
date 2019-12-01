@@ -2,6 +2,14 @@
 
 == Run the Red Hat Application Migration Toolkit with podman 
 
+We'll use Windup (https://github.com/windup, the upstream project for Red Hat Application Migration Toolkit).
+
+
+----
+Use podman to run a container with the Windup CLI.
+Mount the folder that will be used for input (e.g. EAR files) and 
+output (Red Hat Application Migration Toolkit reports etc).
+----
 
 ----
 export container=`sudo podman run -v /var/tmp/rhamt/:/home/rhamt:Z -it \
@@ -11,31 +19,44 @@ sh -c 'while true ;do wait; done'`
 
 
 ----
+Copy the file to analyze (marc.ear below) to the mounted folder
+----
+
+
+----
 export folderonhost=`sudo podman mount ${container}`
-----
-
-
-----
 sudo mkdir ${folderonhost}/var/input
 #curl -L https://github.com/marcredhat/crcdemos/raw/master/rhamt/marc.ear \
 #-o /var/input/marc.ear
 sudo cp /var/input/marc.ear ${folderonhost}/var/input
 ----
 
+
+----
+Run Windup (Red Hat Application Migration Toolkit)
+----
+
 ----
 sudo rm -rf ${folderonhost}/home/rhamt
 sudo mkdir ${folderonhost}/home/rhamt
 sudo chmod a+rw -R ${folderonhost}/home/rhamt
-----
-
-----
 sudo podman exec $container   /opt/migrationtoolkit/bin/rhamt-cli  \
 --sourceMode --input /var/input/marc.ear --output /home/rhamt --target eap7
 ----
 
 
 ----
+Copy the reports to your laptop
+----
+
+
+----
 sudo scp -r  demouser@<myRHEL8machine>:/var/tmp/rhamt ./Documents/
+----
+
+
+----
+Clean up
 ----
 
 
