@@ -15,6 +15,9 @@ sudo cp /var/input/marc.ear /var/lib/containers/storage/overlay/afd9a1ac58525504
 
 sudo podman exec a0ddb718078d7db5ed3d63e531a9d58711476f9b69680f4b570c14b8c3053707   /opt/migrationtoolkit/bin/rhamt-cli  --sourceMode --input /var/input/marc.ear --output /home/rhamt --target eap7
 
+[demouser@rhel8 ~]$ cat /var/tmp/rhamt/index.html
+
+
 
 #sudo podman  run  -v /var/tmp/rhamt/:/home/rhamt:Z  -it windup3/windup-cli-openshift  /opt/migrationtoolkit/bin/rhamt-cli  --sourceMode --input /opt/migrationtoolkit/samples/jee-example-app-1.0.0.ear --output /home/rhamt --target eap7
 
