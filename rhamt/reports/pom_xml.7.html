@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Source Report for pom.xml</title>
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="resources/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="resources/css/windup.css" rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="resources/libraries/snippet/jquery.snippet.min.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/windup-source.css" />
+    <link rel="stylesheet" type="text/css" href="resources/libraries/sausage/sausage.css" />
+    <link rel="shortcut icon" href="resources/img/rhamt-icon-128.png" type="image/x-icon"/>
+</head>
+<body role="document" class="source-report">
+
+    <div class="navbar navbar-inverse navbar-fixed-top" id="main-navbar" style="display: none">
+        <div class="wu-navbar-header navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="wu-navbar-header">
+              <strong class="wu-navbar-header">Red Hat Application Migration Toolkit</strong>
+            </span>        </div>
+
+
+                <div class="navbar-collapse collapse navbar-responsive-collapse project-specific" data-project-id="237640">
+    <ul class="nav navbar-nav">
+            <li class="">
+                <a href="../index.html"><i class="glyphicon glyphicon-home"></i> All Applications</a>
+            </li>
+
+
+
+                <li class="">
+                    <a href="report_index_JEE_Example_App.html">
+                        <i class="glyphicon glyphicon-dashboard"></i>
+                      Dashboard
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="migration_issues.html">
+                        <i class="glyphicon glyphicon-warning-sign"></i>
+                      Issues
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="ApplicationDetails_JEE_Example_App.html">
+                        <i class="glyphicon glyphicon-th-list"></i>
+                      Application Details
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="techReport_JEE_Example_App.html">
+                        <i class="fa fa-rocket"></i>
+                      Technologies
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="dependency_report_JEE_Example_App.html">
+                        <i class="glyphicon glyphicon-retweet"></i>
+                      Dependencies
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="ejbreport_JEE_Example_App.html">
+                        <i class="glyphicon ejb-nav-logo"></i>
+                      EJBs
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="remotereport_JEE_Example_App.html">
+                        <i class="glyphicon service-nav-logo"></i>
+                      Remote Services
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="server_resources_JEE_Example_App.html">
+                        <i class="glyphicon server-resource-nav-logo"></i>
+                      Server Resources
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="tattletale_JEE_Example_App.html">
+                        <i class="glyphicon tattletale-nav-logo"></i>
+                      Tattletale
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="ignoredfiles_JEE_Example_App.html">
+                        <i class="glyphicon glyphicon-eye-close"></i>
+                      Ignored Files
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="about_JEE_Example_App.html">
+                        <i class="fa fa-question-circle"></i>
+                      About
+                    </a>
+                </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+<li>
+    <a href="#" class="feedback-nav-btn jiraFeedbackTrigger"><i class="glyphicon glyphicon-comment"></i> Send Feedback </a>
+</li>
+
+
+    <script type="text/javascript" src="https://issues.jboss.org/s/f215932e68571747ac58d0f5d554396f-T/en_US-r7luaf/6346/82/1.4.16/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&amp;collectorId=8b9e338b"></script>
+
+    <script type="text/javascript">
+
+    var FEEDBACK_JS_ADDED = false;
+    var FEEDBACK_FORM_TRIGGER = null;
+
+    function displayFeedbackForm() {
+        FEEDBACK_FORM_TRIGGER();
+    }
+
+    window.ATL_JQ_PAGE_PROPS = {
+        "triggerFunction": function(showCollectorDialog) {
+            FEEDBACK_FORM_TRIGGER = showCollectorDialog;
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+            jQuery(".jiraFeedbackTrigger").click(function(e) {
+                e.preventDefault();
+                displayFeedbackForm();
+            });
+    });
+    </script>
+    </ul>
+                </div><!-- /.nav-collapse -->
+    </div>
+
+
+    <div class="container-fluid" role="main">
+        <div class="row">
+            <div class="page-header page-header-no-border">
+                <h1>
+                    <div class="main">Source Report
+                    <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement=right title="This report displays what Red Hat Application Migration Toolkit found in individual files. Each item is shown below the line it was found on, and next to it, you may find a link to the rule which it was found by."></i></div>
+
+                        <div class="path project-specific" data-project-id="237640">
+                            marc.ear/jee-example-web.war/WEB-INF/lib/commons-lang-2.5.jar/META-INF/maven/commons-lang/commons-lang/pom.xml
+                        </div>
+                </h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="container-fluid theme-showcase" role="main">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Information</h3>
+                    </div>
+                    <div class="panel-body" style="overflow: auto;">
+
+                        <!--<div style="height: 120pt; float:left;"></div> Keeps the minimal height. -->
+                        <div class="points" style="text-align: center; color: #00254b; padding-bottom: 1ex;">
+                            <div class="number">0</div>
+                            <div>Story Points</div>
+                        </div>
+
+                        <div class="info" style="margin-left: 95pt;">
+
+
+                                <h4>Technologies</h4>
+                                <div class="technologies" style="overflow: auto"><!-- "auto" to contain all the tags. -->
+                                        <span class="label label-info" title="INFORMATIONAL">Maven XML</span>
+                                </div>
+
+                                <ul class="classifications">
+                                            <li>
+                                                <div class="title">
+                                                    <em>Maven POM (pom.xml)</em>
+<a title='View Rule: DiscoverMavenProjectsRuleProvider_1' href='windup_ruleproviders.html#DiscoverMavenProjectsRuleProvider_1'><span class='glyphicon glyphicon-link rule-link'></span></a>                                                </div>
+                                                <div class="desc">Maven Project Object Model (POM) File</div>
+                                            </li>
+                                </ul>
+
+
+                            <div style="clear: both;"/><!-- Snaps under the height keeper. Yes, the same effect could be achieved by a table. -->
+                        </div><!-- .info -->
+                    </div>
+                </div>
+
+
+
+                <pre id="source">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the &quot;License&quot;); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+--&gt;
+&lt;project
+    xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+  &lt;parent&gt;
+    &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-parent&lt;/artifactId&gt;
+    &lt;version&gt;12&lt;/version&gt;
+  &lt;/parent&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;commons-lang&lt;/groupId&gt;
+  &lt;artifactId&gt;commons-lang&lt;/artifactId&gt;
+  &lt;version&gt;2.5&lt;/version&gt;
+  &lt;name&gt;Commons Lang&lt;/name&gt;
+
+  &lt;inceptionYear&gt;2001&lt;/inceptionYear&gt;
+    &lt;description&gt;
+        Commons Lang, a package of Java utility classes for the
+        classes that are in java.lang&#39;s hierarchy, or are considered to be so
+        standard as to justify existence in java.lang.
+    &lt;/description&gt;
+
+  &lt;url&gt;http://commons.apache.org/lang/&lt;/url&gt;
+
+  &lt;issueManagement&gt;
+    &lt;system&gt;jira&lt;/system&gt;
+    &lt;url&gt;http://issues.apache.org/jira/browse/LANG&lt;/url&gt;
+  &lt;/issueManagement&gt;
+
+  &lt;scm&gt;
+    &lt;connection&gt;scm:svn:http://svn.apache.org/repos/asf/commons/proper/lang/trunk&lt;/connection&gt;
+    &lt;developerConnection&gt;scm:svn:https://svn.apache.org/repos/asf/commons/proper/lang/trunk&lt;/developerConnection&gt;
+    &lt;url&gt;http://svn.apache.org/viewvc/commons/proper/lang/trunk&lt;/url&gt;
+  &lt;/scm&gt;
+
+    &lt;developers&gt;
+        &lt;developer&gt;
+            &lt;name&gt;Daniel Rall&lt;/name&gt;
+            &lt;id&gt;dlr&lt;/id&gt;
+            &lt;email&gt;dlr@finemaltcoding.com&lt;/email&gt;
+            &lt;organization&gt;CollabNet, Inc.&lt;/organization&gt;
+            &lt;roles&gt;
+                &lt;role&gt;Java Developer&lt;/role&gt;
+            &lt;/roles&gt;
+        &lt;/developer&gt;
+        &lt;developer&gt;
+            &lt;name&gt;Stephen Colebourne&lt;/name&gt;
+            &lt;id&gt;scolebourne&lt;/id&gt;
+            &lt;email&gt;scolebourne@joda.org&lt;/email&gt;
+            &lt;organization&gt;SITA ATS Ltd&lt;/organization&gt;
+            &lt;timezone&gt;0&lt;/timezone&gt;
+            &lt;roles&gt;
+                &lt;role&gt;Java Developer&lt;/role&gt;
+            &lt;/roles&gt;
+        &lt;/developer&gt;
+        &lt;developer&gt;
+            &lt;name&gt;Henri Yandell&lt;/name&gt;
+            &lt;id&gt;bayard&lt;/id&gt;
+            &lt;email&gt;bayard@apache.org&lt;/email&gt;
+            &lt;organization/&gt;
+            &lt;roles&gt;
+                &lt;role&gt;Java Developer&lt;/role&gt;
+            &lt;/roles&gt;
+        &lt;/developer&gt;
+        &lt;developer&gt;
+            &lt;name&gt;Steven Caswell&lt;/name&gt;
+            &lt;id&gt;scaswell&lt;/id&gt;
+            &lt;email&gt;stevencaswell@apache.org&lt;/email&gt;
+            &lt;organization/&gt;
+            &lt;roles&gt;
+                &lt;role&gt;Java Developer&lt;/role&gt;
+            &lt;/roles&gt;
+            &lt;timezone&gt;-5&lt;/timezone&gt;
+        &lt;/developer&gt;
+        &lt;developer&gt;
+            &lt;name&gt;Robert Burrell Donkin&lt;/name&gt;
+            &lt;id&gt;rdonkin&lt;/id&gt;
+            &lt;email&gt;rdonkin@apache.org&lt;/email&gt;
+            &lt;organization/&gt;
+            &lt;roles&gt;
+                &lt;role&gt;Java Developer&lt;/role&gt;
+            &lt;/roles&gt;
+        &lt;/developer&gt;
+        &lt;developer&gt;
+            &lt;name&gt;Gary D. Gregory&lt;/name&gt;
+            &lt;id&gt;ggregory&lt;/id&gt;
+            &lt;email&gt;ggregory@seagullsw.com&lt;/email&gt;
+            &lt;organization&gt;Seagull Software&lt;/organization&gt;
+            &lt;timezone&gt;-8&lt;/timezone&gt;
+            &lt;roles&gt;
+                &lt;role&gt;Java Developer&lt;/role&gt;
+            &lt;/roles&gt;
+        &lt;/developer&gt;
+        &lt;developer&gt;
+            &lt;name&gt;Phil Steitz&lt;/name&gt;
+            &lt;id&gt;psteitz&lt;/id&gt;
+            &lt;email&gt;phil@steitz.com&lt;/email&gt;
+            &lt;organization/&gt;
+            &lt;roles&gt;
+                &lt;role&gt;Java Developer&lt;/role&gt;
+            &lt;/roles&gt;
+        &lt;/developer&gt;
+        &lt;developer&gt;
+            &lt;name&gt;Fredrik Westermarck&lt;/name&gt;
+            &lt;id&gt;fredrik&lt;/id&gt;
+            &lt;email/&gt;
+            &lt;organization/&gt;
+            &lt;roles&gt;
+                &lt;role&gt;Java Developer&lt;/role&gt;
+            &lt;/roles&gt;
+        &lt;/developer&gt;
+        &lt;developer&gt;
+            &lt;name&gt;James Carman&lt;/name&gt;
+            &lt;id&gt;jcarman&lt;/id&gt;
+            &lt;email&gt;jcarman@apache.org&lt;/email&gt;
+            &lt;organization&gt;Carman Consulting, Inc.&lt;/organization&gt;
+            &lt;roles&gt;
+                &lt;role&gt;Java Developer&lt;/role&gt;
+            &lt;/roles&gt;
+        &lt;/developer&gt;
+        &lt;developer&gt;
+            &lt;name&gt;Niall Pemberton&lt;/name&gt;
+            &lt;id&gt;niallp&lt;/id&gt;
+            &lt;roles&gt;
+                &lt;role&gt;Java Developer&lt;/role&gt;
+            &lt;/roles&gt;
+        &lt;/developer&gt;
+        &lt;developer&gt;
+            &lt;name&gt;Matt Benson&lt;/name&gt;
+            &lt;id&gt;mbenson&lt;/id&gt;
+            &lt;roles&gt;
+                &lt;role&gt;Java Developer&lt;/role&gt;
+            &lt;/roles&gt;
+        &lt;/developer&gt;
+        &lt;developer&gt;
+            &lt;name&gt;Joerg Schaible&lt;/name&gt;
+            &lt;id&gt;joehni&lt;/id&gt;
+            &lt;email&gt;joerg.schaible@gmx.de&lt;/email&gt;
+            &lt;roles&gt;
+                &lt;role&gt;Java Developer&lt;/role&gt;
+            &lt;/roles&gt;
+            &lt;timezone&gt;+1&lt;/timezone&gt;
+        &lt;/developer&gt;
+        &lt;developer&gt;
+          &lt;name&gt;Oliver Heger&lt;/name&gt;
+          &lt;id&gt;oheger&lt;/id&gt;
+          &lt;email&gt;oheger@apache.org&lt;/email&gt;
+          &lt;timezone&gt;+1&lt;/timezone&gt;
+          &lt;roles&gt;
+            &lt;role&gt;Java Developer&lt;/role&gt;
+          &lt;/roles&gt;
+        &lt;/developer&gt;
+        &lt;developer&gt;
+          &lt;name&gt;Paul Benedict&lt;/name&gt;
+          &lt;id&gt;pbenedict&lt;/id&gt;
+          &lt;email&gt;pbenedict@apache.org&lt;/email&gt;
+          &lt;roles&gt;
+            &lt;role&gt;Java Developer&lt;/role&gt;
+          &lt;/roles&gt;
+        &lt;/developer&gt;
+    &lt;/developers&gt;
+    &lt;contributors&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;C. Scott Ananian&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Chris Audley&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Stephane Bailliez&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Michael Becke&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Benjamin Bentmann&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Ola Berg&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Nathan Beyer&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Stefan Bodewig&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Janek Bogucki&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Mike Bowler&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Sean Brown&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Alexander Day Chaffee&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Al Chou&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Greg Coladonato&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Maarten Coene&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Justin Couch&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Michael Davey&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Norm Deane&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Ringo De Smet&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Russel Dittmar&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Steve Downey&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Matthias Eichel&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Christopher Elkins&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Chris Feldhacker&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Pete Gieser&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Jason Gritman&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Matthew Hawthorne&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Michael Heuer&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Chris Hyzer&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Marc Johnson&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Shaun Kalley&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Tetsuya Kaneuchi&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Nissim Karpenstein&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Ed Korthof&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Holger Krauth&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Rafal Krupinski&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Rafal Krzewski&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Craig R. McClanahan&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Rand McNeely&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Hendrik Maryns&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Dave Meikle&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Nikolay Metchev&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Kasper Nielsen&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Tim O&#39;Brien&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Brian S O&#39;Neill&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Andrew C. Oliver&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Alban Peignier&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Moritz Petersen&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Dmitri Plotnikov&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Neeme Praks&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Eric Pugh&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Stephen Putman&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Travis Reeder&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Antony Riley&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Scott Sanders&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Ralph Schaer&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Henning P. Schmiedehausen&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Sean Schofield&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Robert Scholte&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Reuben Sivan&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Ville Skytta&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Jan Sorensen&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Glen Stampoultzis&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Scott Stanchfield&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Jon S. Stevens&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Sean C. Sullivan&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Ashwin Suresh&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Helge Tesgaard&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Arun Mammen Thomas&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Masato Tezuka&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Jeff Varszegi&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Chris Webb&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Mario Winterer&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Stepan Koltsov&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Holger Hoffstatte&lt;/name&gt;
+        &lt;/contributor&gt;
+        &lt;contributor&gt;
+            &lt;name&gt;Derek C. Ashmore&lt;/name&gt;
+        &lt;/contributor&gt;
+    &lt;/contributors&gt;
+
+  &lt;!-- Lang should depend on very little --&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;
+      &lt;version&gt;3.8.1&lt;/version&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt; 
+
+  &lt;properties&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+    &lt;maven.compile.source&gt;1.3&lt;/maven.compile.source&gt;
+    &lt;maven.compile.target&gt;1.3&lt;/maven.compile.target&gt;
+    &lt;commons.componentid&gt;lang&lt;/commons.componentid&gt;
+    &lt;commons.release.version&gt;2.5&lt;/commons.release.version&gt;
+    &lt;commons.jira.id&gt;LANG&lt;/commons.jira.id&gt;
+    &lt;commons.jira.pid&gt;12310481&lt;/commons.jira.pid&gt;
+    &lt;random.exclude.test&gt;**/RandomUtilsFreqTest.java&lt;/random.exclude.test&gt;
+  &lt;/properties&gt; 
+
+
+  &lt;build&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+        &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+        &lt;configuration&gt;
+          &lt;includes&gt;
+            &lt;include&gt;**/*Test.java&lt;/include&gt;
+          &lt;/includes&gt;
+          &lt;excludes&gt;
+            &lt;exclude&gt;**/EntitiesPerformanceTest.java&lt;/exclude&gt;
+            &lt;exclude&gt;${random.exclude.test}&lt;/exclude&gt;
+          &lt;/excludes&gt;
+        &lt;/configuration&gt;
+      &lt;/plugin&gt;
+      &lt;plugin&gt;
+        &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;
+        &lt;configuration&gt;
+          &lt;descriptors&gt;
+            &lt;descriptor&gt;src/assembly/bin.xml&lt;/descriptor&gt;
+            &lt;descriptor&gt;src/assembly/src.xml&lt;/descriptor&gt;
+          &lt;/descriptors&gt;
+          &lt;tarLongFileMode&gt;gnu&lt;/tarLongFileMode&gt;
+        &lt;/configuration&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+
+  &lt;profiles&gt;
+      &lt;!--
+        RandomUtils frequency tests have been put in a separate test case which
+        is only run when using this profile because it fails too frequently.
+        See https://issues.apache.org/jira/browse/LANG-592
+        --&gt;
+      &lt;profile&gt;
+        &lt;id&gt;test-random-freq&lt;/id&gt;
+        &lt;properties&gt;
+          &lt;random.exclude.test/&gt;
+        &lt;/properties&gt; 
+        &lt;build&gt;
+          &lt;plugins&gt;
+            &lt;plugin&gt;
+              &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+              &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+              &lt;configuration&gt;
+                &lt;includes&gt;
+                  &lt;include&gt;**/RandomUtilsFreqTest.java&lt;/include&gt;
+                &lt;/includes&gt;
+              &lt;/configuration&gt;
+            &lt;/plugin&gt;
+          &lt;/plugins&gt;
+        &lt;/build&gt;
+      &lt;/profile&gt;
+  &lt;/profiles&gt;
+
+  &lt;reporting&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+          &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+          &lt;artifactId&gt;maven-changes-plugin&lt;/artifactId&gt;
+          &lt;version&gt;2.3&lt;/version&gt;
+          &lt;configuration&gt;
+            &lt;xmlPath&gt;${basedir}/src/site/changes/changes.xml&lt;/xmlPath&gt;
+            &lt;issueLinkTemplate&gt;%URL%/%ISSUE%&lt;/issueLinkTemplate&gt;
+          &lt;/configuration&gt;
+          &lt;reportSets&gt;
+            &lt;reportSet&gt;
+              &lt;reports&gt;
+                 &lt;report&gt;changes-report&lt;/report&gt;
+              &lt;/reports&gt;
+            &lt;/reportSet&gt;
+          &lt;/reportSets&gt;
+        &lt;/plugin&gt;
+      &lt;plugin&gt;
+        &lt;artifactId&gt;maven-checkstyle-plugin&lt;/artifactId&gt;
+        &lt;version&gt;2.3&lt;/version&gt;
+        &lt;configuration&gt;
+          &lt;configLocation&gt;${basedir}/checkstyle.xml&lt;/configLocation&gt;
+          &lt;enableRulesSummary&gt;false&lt;/enableRulesSummary&gt;
+        &lt;/configuration&gt;
+      &lt;/plugin&gt;
+      &lt;!--
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+        &lt;artifactId&gt;findbugs-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;1.2&lt;/version&gt;
+        &lt;configuration&gt;
+          &lt;threshold&gt;Normal&lt;/threshold&gt;
+          &lt;effort&gt;Default&lt;/effort&gt;
+       &lt;/configuration&gt;
+      &lt;/plugin&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+        &lt;artifactId&gt;cobertura-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;2.3&lt;/version&gt;
+      &lt;/plugin&gt;
+      --&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+        &lt;artifactId&gt;clirr-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;2.2.2&lt;/version&gt;
+        &lt;configuration&gt;
+          &lt;comparisonVersion&gt;2.4&lt;/comparisonVersion&gt;
+          &lt;minSeverity&gt;info&lt;/minSeverity&gt;
+        &lt;/configuration&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/reporting&gt;
+
+&lt;/project&gt;
+</pre>
+            </div> <!-- /container -->
+        </div><!-- /row-->
+    </div><!-- /container main-->
+
+
+<div style="text-align: left; font-size: small; color: gray; font-style: italic;">Page generated: Dec 1, 2019 7:09:51 AM</div>
+    <script src="resources/js/jquery-3.3.1.min.js"></script>
+    <script src="resources/js/jquery-migrate-1.4.1.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="resources/libraries/jquery-ui/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="resources/libraries/snippet/jquery.snippet.min.js"></script>
+    <script type="text/javascript" src="resources/libraries/snippet/jquery.snippet.java-properties.js"></script>
+    <script type="text/javascript" src="resources/libraries/snippet/jquery.snippet.java-manifest.js"></script>
+    <script type="text/javascript" src="resources/libraries/sausage/jquery.sausage.min.js"></script>
+
+    <script type="text/javascript">
+        var script   = document.createElement("script");
+        script.type  = "text/javascript";
+            script.src   = "resources/js/navbar.js";
+        document.body.appendChild(script);
+    </script>
+
+    <script type="text/javascript">
+        $(window).on("hashchange", function () {
+            window.scrollTo(window.scrollX, window.scrollY - 50);
+        });
+        function offsetAnchor() {
+            if(location.hash.length !== 0) {
+                window.scrollTo(window.scrollX, window.scrollY - 50);
+            }
+        }
+        window.setTimeout(function() {
+            offsetAnchor();
+        }, 1);
+        $(document).ready(function(){
+            $("pre").snippet("xml",{style:"ide-eclipse", showNum:true,boxFill:"#ffeeb9", box: "" });
+
+
+
+
+            $('code[class]').each(function(){
+                 var codeSyntax = ($(this).attr('class'));
+                 if(codeSyntax) {
+                    $(this).parent().snippet(codeSyntax,{style:'ide-eclipse', menu:false, showNum:false});
+                 }
+            });
+            $(window).sausage({ page: 'li.box' });
+            $(window).resize(function () {
+                $('div.sausage-set').css('top', parseInt($('#main-navbar').css("height")));
+            });
+
+            // Deprecated
+            // $(window).load(function () {
+            //     $('div.sausage-set').css('top', parseInt($('#main-navbar').css("height")));
+            // });
+            $(window).on('load', function () {
+                $('div.sausage-set').css('top', parseInt($('#main-navbar').css("height")));
+            });
+        });
+
+        function qs(key) {
+            key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+            var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+            return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+        }
+
+        $(document).ready(function() {
+            var defaultProjectID = 237640;
+            var selectedProject = qs("project");
+            if (!selectedProject)
+                selectedProject = defaultProjectID;
+
+            $(".project-specific").each(function(index, element) {
+                var currentProject = $(element).data("project-id");
+
+                if (currentProject == selectedProject)
+                    $(element).show();
+                else
+                    $(element).remove();
+            });
+            $("#main-navbar").show();
+        });
+    </script>
+    <script>$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});</script>
+</body>
+</html>

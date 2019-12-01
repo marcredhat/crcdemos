@@ -1,0 +1,455 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+        Technologies
+    </title>
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="resources/css/windup.css" rel="stylesheet" media="screen">
+    <link href="resources/css/windup.java.css" rel="stylesheet" media="screen">
+    <link href="resources/css/jquery-ui.min.css" rel="stylesheet" media="screen">
+    <link href="resources/img/rhamt-icon-128.png" rel="shortcut icon" type="image/x-icon"/>
+    <link href="resources/css/tech-report-punchcard.css" rel="stylesheet">
+</head>
+<body role="document">
+    <div id="main-navbar" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="wu-navbar-header navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="wu-navbar-header">
+              <strong class="wu-navbar-header">Red Hat Application Migration Toolkit</strong>
+            </span>        </div>
+
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav">
+            <li class="">
+                <a href="../index.html"><i class="glyphicon glyphicon-home"></i> All Applications</a>
+            </li>
+
+
+
+                <li class="active">
+                    <a href="#">
+                        <i class="fa fa-rocket"></i>
+                      Technologies
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="about_global.html">
+                        <i class="fa fa-question-circle"></i>
+                      About
+                    </a>
+                </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+<li>
+    <a href="#" class="feedback-nav-btn jiraFeedbackTrigger"><i class="glyphicon glyphicon-comment"></i> Send Feedback </a>
+</li>
+
+
+    <script type="text/javascript" src="https://issues.jboss.org/s/f215932e68571747ac58d0f5d554396f-T/en_US-r7luaf/6346/82/1.4.16/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&amp;collectorId=8b9e338b"></script>
+
+    <script type="text/javascript">
+
+    var FEEDBACK_JS_ADDED = false;
+    var FEEDBACK_FORM_TRIGGER = null;
+
+    function displayFeedbackForm() {
+        FEEDBACK_FORM_TRIGGER();
+    }
+
+    window.ATL_JQ_PAGE_PROPS = {
+        "triggerFunction": function(showCollectorDialog) {
+            FEEDBACK_FORM_TRIGGER = showCollectorDialog;
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+            jQuery(".jiraFeedbackTrigger").click(function(e) {
+                e.preventDefault();
+                displayFeedbackForm();
+            });
+    });
+    </script>
+    </ul>
+    <script type="text/javascript">
+        var script   = document.createElement("script");
+        script.type  = "text/javascript";
+            script.src   = "resources/js/navbar.js";
+        document.body.appendChild(script);
+    </script>
+            </div><!-- /.nav-collapse -->
+    </div>
+
+    <div class="container-fluid" role="main">
+        <div class="row">
+            <div class="page-header page-header-no-border">
+                <h1>
+                    <div class="main">Technologies
+                    <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement=right title="This report is a statistic of technologies occurrences in the input applications. It shows how the technologies are distributed and is mostly useful when analysing many applications."></i></div>
+                </h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="container-fluid theme-showcase" role="main">
+
+
+
+                <table class="technologiesPunchCard">
+                    <thead>
+                        <tr class="headersSector">
+                            <td></td>
+                            <td colspan="4" class="sectorHeader sectorView"><div>View</div></td>
+                            <td colspan="7" class="sectorHeader sectorConnect"><div>Connect</div></td>
+                            <td colspan="6" class="sectorHeader sectorStore"><div>Store</div></td>
+                            <td colspan="5" class="sectorHeader sectorSustain"><div>Sustain</div></td>
+                            <td colspan="5" class="sectorHeader sectorExecute"><div>Execute</div></td>
+                            <td colspan="3" class="sectorStats">Stats</td>
+                            <td class="scrollbar-padding"></td>
+                        </tr>
+                        <tr class="headersGroup">
+                            <td class="sector"><div>Name</div></td>
+                                    <td class="sector sectorView"><div style="width: 100%">Markup</div></td>
+                                    <td class="sector sectorView"><div style="width: 100%">MVC</div></td>
+                                    <td class="sector sectorView"><div style="width: 100%">Rich</div></td>
+                                    <td class="sector sectorView"><div style="width: 100%">Web</div></td>
+                                    <td class="sector sectorConnect"><div style="width: 100%">Binding</div></td>
+                                    <td class="sector sectorConnect"><div style="width: 100%">EJB</div></td>
+                                    <td class="sector sectorConnect"><div style="width: 100%">HTTP</div></td>
+                                    <td class="sector sectorConnect"><div style="width: 100%">Messaging</div></td>
+                                    <td class="sector sectorConnect"><div style="width: 100%">Other</div></td>
+                                    <td class="sector sectorConnect"><div style="width: 100%">REST</div></td>
+                                    <td class="sector sectorConnect"><div style="width: 100%">WebService</div></td>
+                                    <td class="sector sectorStore"><div style="width: 100%">Caching</div></td>
+                                    <td class="sector sectorStore"><div style="width: 100%">Database</div></td>
+                                    <td class="sector sectorStore"><div style="width: 100%">Database Driver</div></td>
+                                    <td class="sector sectorStore"><div style="width: 100%">Object Mapping</div></td>
+                                    <td class="sector sectorStore"><div style="width: 100%">Persistence</div></td>
+                                    <td class="sector sectorStore"><div style="width: 100%">Validation</div></td>
+                                    <td class="sector sectorSustain"><div style="width: 100%">Clustering</div></td>
+                                    <td class="sector sectorSustain"><div style="width: 100%">Logging</div></td>
+                                    <td class="sector sectorSustain"><div style="width: 100%">Security</div></td>
+                                    <td class="sector sectorSustain"><div style="width: 100%">Test</div></td>
+                                    <td class="sector sectorSustain"><div style="width: 100%">Transactions</div></td>
+                                    <td class="sector sectorExecute"><div style="width: 100%">3rd party</div></td>
+                                    <td class="sector sectorExecute"><div style="width: 100%">Integration</div></td>
+                                    <td class="sector sectorExecute"><div style="width: 100%">Inversion of Control</div></td>
+                                    <td class="sector sectorExecute"><div style="width: 100%">Processing</div></td>
+                                    <td class="sector sectorExecute"><div style="width: 100%">Rules &amp; Processes</div></td>
+                            <td class="sector sectorStats sizeMB"><div>Size (MB)</div></td>
+                            <td class="sector sectorStats libsCount"><div>Libraries</div></td>
+                            <td class="sector sectorStats storyPoints"><div>Mandatory (SP)</div></td>
+                            <td class="sector sectorStats storyPoints"><div>Cloud Mandatory (SP)</div></td>
+                            <td class="sector sectorStats storyPoints"><div>Potential (Count)</div></td>
+                            <td class="scrollbar-padding"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                         
+                        <tr class="app">
+                            <td class="name sector sectorSummary">
+                                <a href="techReport_JEE_Example_App.html">
+                                    marc.ear
+                                </a>
+                            </td>
+
+                                        <td class="circle size0 sector sectorView table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size0 sector sectorView table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size0 sector sectorView table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size2 sector sectorView table-tooltip" data-count="1">
+                                                <div class="table-tooltiptext">
+                                                                    <div class="row">
+                                                                        <div class="tooltiptext-tech-name-header col-md-9">Total</div><div class="tooltiptext-tech-count-header col-md-3">1</div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="tooltiptext-tech-name col-md-9">Web XML File</div><div class="tooltiptext-tech-count col-md-3">1</div>
+                                                                    </div>
+                                                </div>
+                                        </td>
+                            <td class="sectorViewSummary sectorSummary" data-count="1" hidden></td>
+
+                                        <td class="circle size0 sector sectorConnect table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size3 sector sectorConnect table-tooltip" data-count="3">
+                                                <div class="table-tooltiptext">
+                                                                    <div class="row">
+                                                                        <div class="tooltiptext-tech-name-header col-md-9">Total</div><div class="tooltiptext-tech-count-header col-md-3">3</div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="tooltiptext-tech-name col-md-9">Stateless (SLSB)</div><div class="tooltiptext-tech-count col-md-3">2</div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="tooltiptext-tech-name col-md-9">Message (MDB)</div><div class="tooltiptext-tech-count col-md-3">1</div>
+                                                                    </div>
+                                                </div>
+                                        </td>
+                                        <td class="circle size0 sector sectorConnect table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size0 sector sectorConnect table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size2 sector sectorConnect table-tooltip" data-count="1">
+                                                <div class="table-tooltiptext">
+                                                                    <div class="row">
+                                                                        <div class="tooltiptext-tech-name-header col-md-9">Total</div><div class="tooltiptext-tech-count-header col-md-3">1</div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="tooltiptext-tech-name col-md-9">EAR Deployment</div><div class="tooltiptext-tech-count col-md-3">1</div>
+                                                                    </div>
+                                                </div>
+                                        </td>
+                                        <td class="circle size0 sector sectorConnect table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size0 sector sectorConnect table-tooltip" data-count="0">
+                                        </td>
+                            <td class="sectorConnectSummary sectorSummary" data-count="4" hidden></td>
+
+                                        <td class="circle size0 sector sectorStore table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size0 sector sectorStore table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size0 sector sectorStore table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size0 sector sectorStore table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size0 sector sectorStore table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size0 sector sectorStore table-tooltip" data-count="0">
+                                        </td>
+                            <td class="sectorStoreSummary sectorSummary" data-count="0" hidden></td>
+
+                                        <td class="circle size0 sector sectorSustain table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size2 sector sectorSustain table-tooltip" data-count="2">
+                                                <div class="table-tooltiptext">
+                                                                    <div class="row">
+                                                                        <div class="tooltiptext-tech-name-header col-md-9">Total</div><div class="tooltiptext-tech-count-header col-md-3">2</div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="tooltiptext-tech-name col-md-9">Log4J</div><div class="tooltiptext-tech-count col-md-3">2</div>
+                                                                    </div>
+                                                </div>
+                                        </td>
+                                        <td class="circle size0 sector sectorSustain table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size0 sector sectorSustain table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size2 sector sectorSustain table-tooltip" data-count="2">
+                                                <div class="table-tooltiptext">
+                                                                    <div class="row">
+                                                                        <div class="tooltiptext-tech-name-header col-md-9">Total</div><div class="tooltiptext-tech-count-header col-md-3">2</div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="tooltiptext-tech-name col-md-9">JTA</div><div class="tooltiptext-tech-count col-md-3">2</div>
+                                                                    </div>
+                                                </div>
+                                        </td>
+                            <td class="sectorSustainSummary sectorSummary" data-count="4" hidden></td>
+
+                                        <td class="circle size0 sector sectorExecute table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size0 sector sectorExecute table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size0 sector sectorExecute table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size0 sector sectorExecute table-tooltip" data-count="0">
+                                        </td>
+                                        <td class="circle size0 sector sectorExecute table-tooltip" data-count="0">
+                                        </td>
+                            <td class="sectorExecuteSummary sectorSummary" data-count="0" hidden></td>
+                            <td class="sectorStats sector sizeMB" data-count="938828">
+                                0.9
+                            </td>
+                            <td class="sectorStats libsCount" data-count="7">
+                                7
+                            </td>
+
+                            <td class="sectorStats storyPoints" data-count="16">
+                                16
+                            </td>
+
+                            <td class="sectorStats storyPoints" data-count="0">
+                                0
+                            </td>
+
+                                <td class="sectorStats storyPoints" data-count="0">
+                                    0
+                                </td>
+
+                            <td class="scrollbar-padding"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <script src="resources/js/jquery-3.3.1.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
+    <script>$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});</script>
+    <script>
+        var currentSortColumn = null;
+        var currentSortSector = null;
+        var reverse = false;
+        var reverseSector = false;
+
+        function sortTableByColumn(column) {
+            // cleanup the previous sort classes
+            var groupedHeaderColumns = $('.headersGroup td').get();
+            groupedHeaderColumns.forEach(function(columnHeaderElement) {
+                $(columnHeaderElement).removeClass("sectorSorted");
+                $(columnHeaderElement).removeClass("sort_asc");
+                $(columnHeaderElement).removeClass("sort_desc");
+            });
+
+            var groupedSectors = $('.headersSector .sectorHeader').get();
+            groupedSectors.forEach(function(sectorHeaderElement) {
+                $(sectorHeaderElement).removeClass("sectorSorted");
+                $(sectorHeaderElement).removeClass("sort_asc");
+                $(sectorHeaderElement).removeClass("sort_desc");
+            });
+
+            if (column == currentSortColumn) {
+                reverse = !reverse;
+            } else {
+                reverse = false;
+                currentSortColumn = column;
+            }
+            var reverseSortFactor = reverse ? 1 : -1;
+
+            $(groupedHeaderColumns[column]).addClass("sectorSorted");
+            $(groupedHeaderColumns[column]).addClass(reverse ? "sort_asc" : "sort_desc");
+
+            var rows = $('.technologiesPunchCard tbody tr').get();
+
+            rows.sort(function(a, b) {
+
+                var A = getVal(a);
+                var B = getVal(b);
+                if (!$.isNumeric(A) || !$.isNumeric(B)) {
+                    return B.localeCompare(A) * reverseSortFactor;
+                }
+
+                if(A < B) {
+                    return -1*reverseSortFactor;
+                }
+                if(A > B) {
+                    return 1*reverseSortFactor;
+                }
+                return 0;
+            });
+
+            function getVal(elm) {
+                var v = $(elm).children('.sector').eq(column).data("count");
+                if (v == null) {
+                    v = $(elm).children('.sector').eq(column).text().trim();
+                } else if($.isNumeric(v)) {
+                    v = parseInt(v,10);
+                }
+                return v;
+            }
+
+            $.each(rows, function(index, row) {
+                $('.technologiesPunchCard').children('tbody').append(row);
+            });
+        }
+
+        function sortTableBySector(sector) {
+            // cleanup the previous sort classes
+            var groupedHeaders = $('.headersGroup td').get();
+            groupedHeaders.forEach(function(columnHeaderElement) {
+                $(columnHeaderElement).removeClass("sectorSorted");
+                $(columnHeaderElement).removeClass("sort_asc");
+                $(columnHeaderElement).removeClass("sort_desc");
+            });
+
+            var groupedSectors = $('.headersSector td').get();
+            groupedSectors.forEach(function(sectorHeaderElement) {
+                $(sectorHeaderElement).removeClass("sectorSorted");
+                $(sectorHeaderElement).removeClass("sort_asc");
+                $(sectorHeaderElement).removeClass("sort_desc");
+            });
+
+            if (sector == currentSortSector) {
+                reverseSector = !reverseSector;
+            } else {
+                reverseSector = false;
+                currentSortSector = sector;
+            }
+            var reverseSortFactor = reverseSector ? 1 : -1;
+
+            $(groupedSectors[sector]).addClass("sectorSorted");
+            $(groupedSectors[sector]).addClass(reverseSector ? "sort_asc" : "sort_desc");
+
+            var rows = $('.technologiesPunchCard tbody tr').get();
+
+            rows.sort(function(a, b) {
+
+                var A = getVal(a);
+                var B = getVal(b);
+                if (!$.isNumeric(A) || !$.isNumeric(B)) {
+                    return B.localeCompare(A) * reverseSortFactor;
+                }
+
+                if(A < B) {
+                    return -1*reverseSortFactor;
+                }
+                if(A > B) {
+                    return 1*reverseSortFactor;
+                }
+                return 0;
+            });
+
+            function getVal(elm) {
+                var v = $(elm).children('.sectorSummary').eq(sector).data("count");
+                if (v == null) {
+                    v = $(elm).children('.sectorSummary').eq(sector).text().trim();
+                } else if($.isNumeric(v)) {
+                    v = parseInt(v,10);
+                }
+                return v;
+            }
+
+            $.each(rows, function(index, row) {
+                $('.technologiesPunchCard').children('tbody').append(row);
+            });
+        }
+
+        $().ready(function () {
+            $(".headersGroup .sector").click(function (event) {
+                var td = event.target.parentNode;
+                var index = $(td).index();
+                sortTableByColumn(index);
+            });
+            reverse = true;
+            currentSortColumn = 0;
+            sortTableByColumn(0);
+        });
+
+        $().ready(function () {
+            $(".headersSector .sectorHeader").click(function (event) {
+                var td = event.target.parentNode;
+                var index = $(td).index();
+                sortTableBySector(index);
+            });
+            reverseSector = true;
+            currentSortSector = 0;
+            sortTableBySector(0);
+        });
+    </script>
+</body>
+</html>

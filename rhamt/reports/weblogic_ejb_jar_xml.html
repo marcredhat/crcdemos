@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Source Report for weblogic-ejb-jar.xml</title>
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="resources/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="resources/css/windup.css" rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="resources/libraries/snippet/jquery.snippet.min.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/windup-source.css" />
+    <link rel="stylesheet" type="text/css" href="resources/libraries/sausage/sausage.css" />
+    <link rel="shortcut icon" href="resources/img/rhamt-icon-128.png" type="image/x-icon"/>
+</head>
+<body role="document" class="source-report">
+
+    <div class="navbar navbar-inverse navbar-fixed-top" id="main-navbar" style="display: none">
+        <div class="wu-navbar-header navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="wu-navbar-header">
+              <strong class="wu-navbar-header">Red Hat Application Migration Toolkit</strong>
+            </span>        </div>
+
+
+                <div class="navbar-collapse collapse navbar-responsive-collapse project-specific" data-project-id="237640">
+    <ul class="nav navbar-nav">
+            <li class="">
+                <a href="../index.html"><i class="glyphicon glyphicon-home"></i> All Applications</a>
+            </li>
+
+
+
+                <li class="">
+                    <a href="report_index_JEE_Example_App.html">
+                        <i class="glyphicon glyphicon-dashboard"></i>
+                      Dashboard
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="migration_issues.html">
+                        <i class="glyphicon glyphicon-warning-sign"></i>
+                      Issues
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="ApplicationDetails_JEE_Example_App.html">
+                        <i class="glyphicon glyphicon-th-list"></i>
+                      Application Details
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="techReport_JEE_Example_App.html">
+                        <i class="fa fa-rocket"></i>
+                      Technologies
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="dependency_report_JEE_Example_App.html">
+                        <i class="glyphicon glyphicon-retweet"></i>
+                      Dependencies
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="ejbreport_JEE_Example_App.html">
+                        <i class="glyphicon ejb-nav-logo"></i>
+                      EJBs
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="remotereport_JEE_Example_App.html">
+                        <i class="glyphicon service-nav-logo"></i>
+                      Remote Services
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="server_resources_JEE_Example_App.html">
+                        <i class="glyphicon server-resource-nav-logo"></i>
+                      Server Resources
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="tattletale_JEE_Example_App.html">
+                        <i class="glyphicon tattletale-nav-logo"></i>
+                      Tattletale
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="ignoredfiles_JEE_Example_App.html">
+                        <i class="glyphicon glyphicon-eye-close"></i>
+                      Ignored Files
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="about_JEE_Example_App.html">
+                        <i class="fa fa-question-circle"></i>
+                      About
+                    </a>
+                </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+<li>
+    <a href="#" class="feedback-nav-btn jiraFeedbackTrigger"><i class="glyphicon glyphicon-comment"></i> Send Feedback </a>
+</li>
+
+
+    <script type="text/javascript" src="https://issues.jboss.org/s/f215932e68571747ac58d0f5d554396f-T/en_US-r7luaf/6346/82/1.4.16/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&amp;collectorId=8b9e338b"></script>
+
+    <script type="text/javascript">
+
+    var FEEDBACK_JS_ADDED = false;
+    var FEEDBACK_FORM_TRIGGER = null;
+
+    function displayFeedbackForm() {
+        FEEDBACK_FORM_TRIGGER();
+    }
+
+    window.ATL_JQ_PAGE_PROPS = {
+        "triggerFunction": function(showCollectorDialog) {
+            FEEDBACK_FORM_TRIGGER = showCollectorDialog;
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+            jQuery(".jiraFeedbackTrigger").click(function(e) {
+                e.preventDefault();
+                displayFeedbackForm();
+            });
+    });
+    </script>
+    </ul>
+                </div><!-- /.nav-collapse -->
+    </div>
+
+
+    <div class="container-fluid" role="main">
+        <div class="row">
+            <div class="page-header page-header-no-border">
+                <h1>
+                    <div class="main">Source Report
+                    <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement=right title="This report displays what Red Hat Application Migration Toolkit found in individual files. Each item is shown below the line it was found on, and next to it, you may find a link to the rule which it was found by."></i></div>
+
+                        <div class="path project-specific" data-project-id="237640">
+                            marc.ear/jee-example-services.jar/META-INF/weblogic-ejb-jar.xml
+                        </div>
+                </h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="container-fluid theme-showcase" role="main">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Information</h3>
+                    </div>
+                    <div class="panel-body" style="overflow: auto;">
+
+                        <!--<div style="height: 120pt; float:left;"></div> Keeps the minimal height. -->
+                        <div class="points" style="text-align: center; color: #00254b; padding-bottom: 1ex;">
+                            <div class="number">9</div>
+                            <div>Story Points</div>
+                        </div>
+
+                        <div class="info" style="margin-left: 95pt;">
+
+
+                                <h4>Technologies</h4>
+                                <div class="technologies" style="overflow: auto"><!-- "auto" to contain all the tags. -->
+                                        <span class="label label-danger" title="IMPORTANT">WebLogic EJB XML</span>
+                                        <span class="label label-info" title="database">database</span>
+                                        <span class="label label-info" title="configuration">configuration</span>
+                                        <span class="label label-info" title="weblogic">weblogic</span>
+                                        <span class="label label-info" title="ejb">ejb</span>
+                                </div>
+
+
+                            <h4>Automatically Translated Files</h4>
+                            <ul>
+                                    <li><a href="JEE_Example_App/JEE_Example_EJB_Services/jboss-ejb3.xml">JBoss EJB XML Descriptor - Generated by Red Hat Application Migration Toolkit</a></li>
+                            </ul>
+
+                            <div style="clear: both;"/><!-- Snaps under the height keeper. Yes, the same effect could be achieved by a table. -->
+                        </div><!-- .info -->
+                    </div>
+                </div>
+
+
+
+                <pre id="source">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;weblogic-ejb-jar xmlns=&quot;http://www.bea.com/ns/weblogic/90&quot; xmlns:j2ee=&quot;http://java.sun.com/xml/ns/j2ee&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+	xsi:schemaLocation=&quot;http://www.bea.com/ns/weblogic/90 http://www.bea.com/ns/weblogic/90/weblogic-ejb-jar.xsd&quot;&gt;
+	&lt;weblogic-enterprise-bean&gt;
+		&lt;ejb-name&gt;ItemLookupBean&lt;/ejb-name&gt;
+		&lt;stateless-session-descriptor&gt;
+		&lt;/stateless-session-descriptor&gt;
+		&lt;transaction-descriptor&gt;
+			&lt;trans-timeout-seconds&gt;180&lt;/trans-timeout-seconds&gt;
+		&lt;/transaction-descriptor&gt;
+		&lt;enable-call-by-reference&gt;true&lt;/enable-call-by-reference&gt;
+		&lt;run-as-principal-name&gt;Admin&lt;/run-as-principal-name&gt;
+		&lt;jndi-name&gt;ejb/ItemLookupBean&lt;/jndi-name&gt;
+	&lt;/weblogic-enterprise-bean&gt;
+
+	&lt;weblogic-enterprise-bean&gt;
+		&lt;ejb-name&gt;ProductCatalogBean&lt;/ejb-name&gt;
+		&lt;stateless-session-descriptor&gt;
+		&lt;/stateless-session-descriptor&gt;
+		&lt;transaction-descriptor&gt;
+			&lt;trans-timeout-seconds&gt;180&lt;/trans-timeout-seconds&gt;
+		&lt;/transaction-descriptor&gt;
+		&lt;enable-call-by-reference&gt;true&lt;/enable-call-by-reference&gt;
+		&lt;run-as-principal-name&gt;Admin&lt;/run-as-principal-name&gt;
+		&lt;jndi-name&gt;ejb/ProductCatalogBean&lt;/jndi-name&gt;
+	&lt;/weblogic-enterprise-bean&gt;
+	
+	&lt;weblogic-enterprise-bean&gt;
+		&lt;ejb-name&gt;LogEventSubscriber&lt;/ejb-name&gt;
+		&lt;message-driven-descriptor&gt;
+			&lt;destination-jndi-name&gt;jms/LogEventQueue&lt;/destination-jndi-name&gt;
+		&lt;/message-driven-descriptor&gt;
+		&lt;run-as-principal-name&gt;admin_user&lt;/run-as-principal-name&gt;
+	&lt;/weblogic-enterprise-bean&gt;
+
+	&lt;security-role-assignment&gt;
+		&lt;role-name&gt;acme_user&lt;/role-name&gt;
+		&lt;principal-name&gt;AnvilUser&lt;/principal-name&gt;
+		&lt;principal-name&gt;Admin&lt;/principal-name&gt;
+	&lt;/security-role-assignment&gt;
+
+	&lt;!-- http://docs.oracle.com/cd/E15051_01/wls/docs103/ejb/DDreference-ejb-jar.html#wp1114299 --&gt;
+	&lt;idempotent-methods&gt;
+		&lt;method&gt;
+			&lt;ejb-name&gt;ItemLookupBean&lt;/ejb-name&gt;
+			&lt;method-name&gt;lookupItem&lt;/method-name&gt;
+			&lt;method-params&gt;
+				&lt;method-param&gt;java.lang.Long&lt;/method-param&gt;
+			&lt;/method-params&gt;
+		&lt;/method&gt;
+		&lt;method&gt;
+			&lt;ejb-name&gt;ProductCatalogBean&lt;/ejb-name&gt;
+			&lt;method-name&gt;populateCatalog&lt;/method-name&gt;
+		&lt;/method&gt;
+	&lt;/idempotent-methods&gt;
+&lt;/weblogic-ejb-jar&gt;
+</pre>
+            </div> <!-- /container -->
+        </div><!-- /row-->
+    </div><!-- /container main-->
+
+
+<div style="text-align: left; font-size: small; color: gray; font-style: italic;">Page generated: Dec 1, 2019 7:09:51 AM</div>
+    <script src="resources/js/jquery-3.3.1.min.js"></script>
+    <script src="resources/js/jquery-migrate-1.4.1.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="resources/libraries/jquery-ui/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="resources/libraries/snippet/jquery.snippet.min.js"></script>
+    <script type="text/javascript" src="resources/libraries/snippet/jquery.snippet.java-properties.js"></script>
+    <script type="text/javascript" src="resources/libraries/snippet/jquery.snippet.java-manifest.js"></script>
+    <script type="text/javascript" src="resources/libraries/sausage/jquery.sausage.min.js"></script>
+
+    <script type="text/javascript">
+        var script   = document.createElement("script");
+        script.type  = "text/javascript";
+            script.src   = "resources/js/navbar.js";
+        document.body.appendChild(script);
+    </script>
+
+    <script type="text/javascript">
+        $(window).on("hashchange", function () {
+            window.scrollTo(window.scrollX, window.scrollY - 50);
+        });
+        function offsetAnchor() {
+            if(location.hash.length !== 0) {
+                window.scrollTo(window.scrollX, window.scrollY - 50);
+            }
+        }
+        window.setTimeout(function() {
+            offsetAnchor();
+        }, 1);
+        $(document).ready(function(){
+            $("pre").snippet("xml",{style:"ide-eclipse", showNum:true,boxFill:"#ffeeb9", box: "9,3,21" });
+
+            $("<div id='9-inlines' class='inline-source-hint-group'/>").appendTo('ol.snippet-num li:nth-child(9)');
+            $("<div id='3-inlines' class='inline-source-hint-group'/>").appendTo('ol.snippet-num li:nth-child(3)');
+            $("<div id='21-inlines' class='inline-source-hint-group'/>").appendTo('ol.snippet-num li:nth-child(21)');
+
+
+$("<a name='205008' class='windup-file-location'></a><div class='inline-source-comment green tag-database tag-weblogic tag-ejb'><div class='inline-comment'><div class='inline-comment-heading'><strong class='notification warning'>WebLogic EJB XML (weblogic-ejb-jar.xml) trans-timeout-seconds</strong><a title='View Rule: weblogic-xml-descriptor-19000' href='windup_ruleproviders.html#weblogic-xml-descriptor-19000'><span class='glyphicon glyphicon-link rule-link floatRight'></span></a></div><div class='inline-comment-body'><p>The WebLogic <code>&lt;trans-timeout-seconds&gt;<\/code> configuration element sets the maximum duration for an EJB\'s container-initiated transactions, in seconds, after which the transaction is rolled back. <\/p><p>In JBoss EAP 6+, you can achieve the same behavior by using the <code>TransactionTimeout<\/code> annotation.<\/p><ul><li><a href='https://docs.oracle.com/middleware/1221/wls/WLMDB/summary.htm#r35c1-t4' target='_blank'>WebLogic Server Deployment Elements</a></li><li><a href='https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/6.4/html-single/administration_and_configuration_guide/#Session_Bean_Transaction_Timeout' target='_blank'>JBoss EAP 6 - Session Bean Transaction Timeout</a></li><li><a href='https://access.redhat.com/solutions/90553' target='_blank'>How to set EJB transaction timeout in JBoss EAP 6</a></li></ul></div></div></div>").appendTo('#9-inlines');
+
+$("<a name='409768' class='windup-file-location'></a><div class='inline-source-comment green tag-configuration tag-weblogic tag-ejb'><div class='inline-comment'><div class='inline-comment-heading'><strong class='notification warning'>WebLogic EJB XML (weblogic-ejb-jar.xml)</strong><a title='View Rule: weblogic-xml-descriptor-eap7-04000' href='windup_ruleproviders.html#weblogic-xml-descriptor-eap7-04000'><span class='glyphicon glyphicon-link rule-link floatRight'></span></a></div><div class='inline-comment-body'><p>The elements of proprietary <code>weblogic-ejb-jar.xml<\/code> descriptor need to be mapped to the <code>jboss-ejb3.xml<\/code> one according to the attached knowledge article.<\/p><ul><li><a href='https://access.redhat.com/articles/1326823' target='_blank'>Migrate the weblogic-ejb-jar.xml</a></li></ul></div></div></div>").appendTo('#3-inlines');
+
+$("<a name='454824' class='windup-file-location'></a><div class='inline-source-comment green tag-database tag-weblogic tag-ejb'><div class='inline-comment'><div class='inline-comment-heading'><strong class='notification warning'>WebLogic EJB XML (weblogic-ejb-jar.xml) trans-timeout-seconds</strong><a title='View Rule: weblogic-xml-descriptor-19000' href='windup_ruleproviders.html#weblogic-xml-descriptor-19000'><span class='glyphicon glyphicon-link rule-link floatRight'></span></a></div><div class='inline-comment-body'><p>The WebLogic <code>&lt;trans-timeout-seconds&gt;<\/code> configuration element sets the maximum duration for an EJB\'s container-initiated transactions, in seconds, after which the transaction is rolled back. <\/p><p>In JBoss EAP 6+, you can achieve the same behavior by using the <code>TransactionTimeout<\/code> annotation.<\/p><ul><li><a href='https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/6.4/html-single/administration_and_configuration_guide/#Session_Bean_Transaction_Timeout' target='_blank'>JBoss EAP 6 - Session Bean Transaction Timeout</a></li><li><a href='https://access.redhat.com/solutions/90553' target='_blank'>How to set EJB transaction timeout in JBoss EAP 6</a></li><li><a href='https://docs.oracle.com/middleware/1221/wls/WLMDB/summary.htm#r35c1-t4' target='_blank'>WebLogic Server Deployment Elements</a></li></ul></div></div></div>").appendTo('#21-inlines');
+
+
+            $('code[class]').each(function(){
+                 var codeSyntax = ($(this).attr('class'));
+                 if(codeSyntax) {
+                    $(this).parent().snippet(codeSyntax,{style:'ide-eclipse', menu:false, showNum:false});
+                 }
+            });
+            $(window).sausage({ page: 'li.box' });
+            $(window).resize(function () {
+                $('div.sausage-set').css('top', parseInt($('#main-navbar').css("height")));
+            });
+
+            // Deprecated
+            // $(window).load(function () {
+            //     $('div.sausage-set').css('top', parseInt($('#main-navbar').css("height")));
+            // });
+            $(window).on('load', function () {
+                $('div.sausage-set').css('top', parseInt($('#main-navbar').css("height")));
+            });
+        });
+
+        function qs(key) {
+            key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+            var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+            return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+        }
+
+        $(document).ready(function() {
+            var defaultProjectID = 237640;
+            var selectedProject = qs("project");
+            if (!selectedProject)
+                selectedProject = defaultProjectID;
+
+            $(".project-specific").each(function(index, element) {
+                var currentProject = $(element).data("project-id");
+
+                if (currentProject == selectedProject)
+                    $(element).show();
+                else
+                    $(element).remove();
+            });
+            $("#main-navbar").show();
+        });
+    </script>
+    <script>$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});</script>
+</body>
+</html>

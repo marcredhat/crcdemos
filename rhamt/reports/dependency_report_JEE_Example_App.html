@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+            JEE Example App -
+        Dependencies
+    </title>
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="resources/css/windup.css" rel="stylesheet" media="screen">
+    <link href="resources/img/rhamt-icon-128.png" rel="shortcut icon" type="image/x-icon"/>
+
+</head>
+<body role="document">
+
+    <!-- Navbar -->
+    <div id="main-navbar" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="wu-navbar-header navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="wu-navbar-header">
+              <strong class="wu-navbar-header">Red Hat Application Migration Toolkit</strong>
+            </span>        </div>
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav">
+            <li class="">
+                <a href="../index.html"><i class="glyphicon glyphicon-home"></i> All Applications</a>
+            </li>
+
+
+
+                <li class="">
+                    <a href="report_index_JEE_Example_App.html">
+                        <i class="glyphicon glyphicon-dashboard"></i>
+                      Dashboard
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="migration_issues.html">
+                        <i class="glyphicon glyphicon-warning-sign"></i>
+                      Issues
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="ApplicationDetails_JEE_Example_App.html">
+                        <i class="glyphicon glyphicon-th-list"></i>
+                      Application Details
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="techReport_JEE_Example_App.html">
+                        <i class="fa fa-rocket"></i>
+                      Technologies
+                    </a>
+                </li>
+
+
+                <li class="active">
+                    <a href="#">
+                        <i class="glyphicon glyphicon-retweet"></i>
+                      Dependencies
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="ejbreport_JEE_Example_App.html">
+                        <i class="glyphicon ejb-nav-logo"></i>
+                      EJBs
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="remotereport_JEE_Example_App.html">
+                        <i class="glyphicon service-nav-logo"></i>
+                      Remote Services
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="server_resources_JEE_Example_App.html">
+                        <i class="glyphicon server-resource-nav-logo"></i>
+                      Server Resources
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="tattletale_JEE_Example_App.html">
+                        <i class="glyphicon tattletale-nav-logo"></i>
+                      Tattletale
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="ignoredfiles_JEE_Example_App.html">
+                        <i class="glyphicon glyphicon-eye-close"></i>
+                      Ignored Files
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="about_JEE_Example_App.html">
+                        <i class="fa fa-question-circle"></i>
+                      About
+                    </a>
+                </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+<li>
+    <a href="#" class="feedback-nav-btn jiraFeedbackTrigger"><i class="glyphicon glyphicon-comment"></i> Send Feedback </a>
+</li>
+
+
+    <script type="text/javascript" src="https://issues.jboss.org/s/f215932e68571747ac58d0f5d554396f-T/en_US-r7luaf/6346/82/1.4.16/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&amp;collectorId=8b9e338b"></script>
+
+    <script type="text/javascript">
+
+    var FEEDBACK_JS_ADDED = false;
+    var FEEDBACK_FORM_TRIGGER = null;
+
+    function displayFeedbackForm() {
+        FEEDBACK_FORM_TRIGGER();
+    }
+
+    window.ATL_JQ_PAGE_PROPS = {
+        "triggerFunction": function(showCollectorDialog) {
+            FEEDBACK_FORM_TRIGGER = showCollectorDialog;
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+            jQuery(".jiraFeedbackTrigger").click(function(e) {
+                e.preventDefault();
+                displayFeedbackForm();
+            });
+    });
+    </script>
+    </ul>
+    <script type="text/javascript">
+        var script   = document.createElement("script");
+        script.type  = "text/javascript";
+            script.src   = "resources/js/navbar.js";
+        document.body.appendChild(script);
+    </script>
+        </div><!-- /.nav-collapse -->
+    </div>
+    <!-- / Navbar -->
+
+    <div class="container-fluid" role="main">
+        <div class="row">
+            <div class="page-header page-header-no-border">
+                <h1>
+                    <div class="main">Dependencies
+                    <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement=right title="This report lists all found Java libraries embedded within the analyzed application."></i></div>
+                        <div class="path">marc.ear</div>
+                </h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="container-fluid theme-showcase" role="main">
+
+            <div class="dependencies">
+                    <div class="panel panel-default panel-primary dependency">
+                        <div id="commons-lang-2.5.jar" class="panel-heading">
+                            <h3 class="panel-title">commons-lang-2.5.jar</h3>
+                        </div>
+                        <div class="panel-body">
+                            <dl class="traits dl-horizontal">
+                                    <dt class="trait">Maven coordinates:</dt>
+                                    <dd id="commons-lang-2.5.jar-maven">
+                                            <a id="commons-lang-2.5.jar-gav" href="http://search.maven.org/#search|ga|1|1:&quot;b0236b252e86419eef20c31a44579d2aee2f0a69&quot;" target="_blank">commons-lang:commons-lang:2.5</a>
+                                    </dd>
+                                    <dt class="trait">SHA1 hash:</dt>
+                                    <dd id="commons-lang-2.5.jar-hash">b0236b252e86419eef20c31a44579d2aee2f0a69</dd>
+                                    <dt class="trait">Version:</dt>
+                                    <dd id="commons-lang-2.5.jar-version">2.5</dd>
+                                    <dt class="trait">Organization:</dt>
+                                    <dd id="commons-lang-2.5.jar-org">The Apache Software Foundation</dd>
+                                <dt class="trait">Found at path:</dt>
+                                <dd>
+                                    <ul id="commons-lang-2.5.jar-paths" class="list-unstyled">
+                                            <li>marc.ear/jee-example-web.war/WEB-INF/lib/commons-lang-2.5.jar</li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="panel panel-default panel-primary dependency">
+                        <div id="jee-example-services.jar" class="panel-heading">
+                            <h3 class="panel-title">jee-example-services.jar</h3>
+                        </div>
+                        <div class="panel-body">
+                            <dl class="traits dl-horizontal">
+                                    <dt class="trait">Maven coordinates:</dt>
+                                    <dd id="jee-example-services.jar-maven">
+                                            <a id="jee-example-services.jar-gav" href="http://search.maven.org/#search|ga|1|1:&quot;86b82b5a2bbe8b38b360d01de5a4b43248b407cf&quot;" target="_blank">org.windup.example:jee-example-services:1.0.0</a>
+                                    </dd>
+                                    <dt class="trait">SHA1 hash:</dt>
+                                    <dd id="jee-example-services.jar-hash">86b82b5a2bbe8b38b360d01de5a4b43248b407cf</dd>
+                                    <dt class="trait">Version:</dt>
+                                    <dd id="jee-example-services.jar-version">1.0.0</dd>
+                                <dt class="trait">Found at path:</dt>
+                                <dd>
+                                    <ul id="jee-example-services.jar-paths" class="list-unstyled">
+                                            <li>marc.ear/jee-example-services.jar</li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="panel panel-default panel-primary dependency">
+                        <div id="jee-example-web.war" class="panel-heading">
+                            <h3 class="panel-title">jee-example-web.war</h3>
+                        </div>
+                        <div class="panel-body">
+                            <dl class="traits dl-horizontal">
+                                    <dt class="trait">Maven coordinates:</dt>
+                                    <dd id="jee-example-web.war-maven">
+                                            <a id="jee-example-web.war-gav" href="http://search.maven.org/#search|ga|1|1:&quot;8a72a375ca7feba49ea5cab492e52e64cee41dc6&quot;" target="_blank">org.windup.example:jee-example-web:1.0.0</a>
+                                    </dd>
+                                    <dt class="trait">SHA1 hash:</dt>
+                                    <dd id="jee-example-web.war-hash">8a72a375ca7feba49ea5cab492e52e64cee41dc6</dd>
+                                    <dt class="trait">Version:</dt>
+                                    <dd id="jee-example-web.war-version">1.0.0</dd>
+                                <dt class="trait">Found at path:</dt>
+                                <dd>
+                                    <ul id="jee-example-web.war-paths" class="list-unstyled">
+                                            <li>marc.ear/jee-example-web.war</li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="panel panel-default panel-primary dependency">
+                        <div id="migration-support-1.0.0.jar" class="panel-heading">
+                            <h3 class="panel-title">migration-support-1.0.0.jar</h3>
+                        </div>
+                        <div class="panel-body">
+                            <dl class="traits dl-horizontal">
+                                    <dt class="trait">Maven coordinates:</dt>
+                                    <dd id="migration-support-1.0.0.jar-maven">
+                                            <a id="migration-support-1.0.0.jar-gav" href="http://search.maven.org/#search|ga|1|1:&quot;fcd7e575a79694b5068c061e272391969c8ea18c&quot;" target="_blank">org.migration.support:migration-support:1.0.0</a>
+                                    </dd>
+                                    <dt class="trait">SHA1 hash:</dt>
+                                    <dd id="migration-support-1.0.0.jar-hash">fcd7e575a79694b5068c061e272391969c8ea18c</dd>
+                                    <dt class="trait">Version:</dt>
+                                    <dd id="migration-support-1.0.0.jar-version">1.0.0</dd>
+                                <dt class="trait">Found at path:</dt>
+                                <dd>
+                                    <ul id="migration-support-1.0.0.jar-paths" class="list-unstyled">
+                                            <li>marc.ear/migration-support-1.0.0.jar</li>
+                                            <li>marc.ear/jee-example-web.war/WEB-INF/lib/migration-support-1.0.0.jar</li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="panel panel-default panel-primary dependency">
+                        <div id="log4j-1.2.6.jar" class="panel-heading">
+                            <h3 class="panel-title">log4j-1.2.6.jar</h3>
+                        </div>
+                        <div class="panel-body">
+                            <dl class="traits dl-horizontal">
+                                    <dt class="trait">SHA1 hash:</dt>
+                                    <dd id="log4j-1.2.6.jar-hash">4bf32b10f459a4ecd4df234ae2ccb32b9d9ba9b7</dd>
+                                    <dt class="trait">Version:</dt>
+                                    <dd id="log4j-1.2.6.jar-version">1.2.6</dd>
+                                <dt class="trait">Found at path:</dt>
+                                <dd>
+                                    <ul id="log4j-1.2.6.jar-paths" class="list-unstyled">
+                                            <li>marc.ear/log4j-1.2.6.jar</li>
+                                            <li>marc.ear/jee-example-web.war/WEB-INF/lib/log4j-1.2.6.jar</li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+            </div>
+
+        </div> <!-- /container -->
+    </div><!--/row-->
+
+
+<div style="text-align: left; font-size: small; color: gray; font-style: italic;">Page generated: Dec 1, 2019 7:09:51 AM</div>    </div><!-- /container main-->
+
+    <script src="resources/js/jquery-3.3.1.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
+    <script>$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});</script>
+</body>
+</html>
