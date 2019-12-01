@@ -18,6 +18,11 @@ sudo mkdir ${folderonhost}/var/input
 sudo cp /var/input/marc.ear ${folderonhost}/var/input
 ----
 
+----
+sudo rm -rf ${folderonhost}/home/rhamt
+sudo mkdir ${folderonhost}/home/rhamt
+sudo chmod a+rw -R ${folderonhost}/home/rhamt
+----
 
 ----
 sudo podman exec $container   /opt/migrationtoolkit/bin/rhamt-cli  --sourceMode --input /var/input/marc.ear --output /home/rhamt --target eap7
