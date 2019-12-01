@@ -32,7 +32,7 @@ sudo scp -r  demouser@<myRHEL8machine>:/var/tmp/rhamt ./Documents/
 
 
 ----
-sudo podman pod stop 
-sudo podman pod rm   
+sudo podman container stop 
+sudo podman container rm   
 ----
 
