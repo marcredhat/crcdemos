@@ -2,6 +2,16 @@
 
 == Run the Red Hat Application Migration Toolkit with podman 
 
+
+Red Hat Application Migration Toolkit enables `large-scale application migrations and modernizations`. 
+
+The migrations supported include application platform upgrades, migrations to a cloud-native deployment environment, and also migrations from several commercial products to the Red Hat JBoss Enterprise Application Platform.
+
+Source: https://developers.redhat.com/products/rhamt/overview
+
+
+
+
 We'll use Windup (https://github.com/windup, the upstream project for Red Hat Application Migration Toolkit).
 
 
