@@ -139,6 +139,10 @@ There are 2 programs which provide 'java'.
 ----
 
 
+----
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.232.b09-2.el8_1.x86_64
+----
+
 
 ----
 git clone https://github.com/marcredhat/guide-spring-boot.git
