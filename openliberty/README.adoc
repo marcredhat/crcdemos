@@ -170,8 +170,12 @@ oc create -f ./staging-secret.yaml
 ----
 
 ----
-oc apply -f https://raw.githubusercontent.com/marcredhat/guide-spring-boot/master/finish/deployment/deployment-os.yaml
-oc apply -f https://raw.githubusercontent.com/marcredhat/guide-spring-boot/master/finish/deployment/service.yaml
+oc apply -f \
+https://raw.githubusercontent.com/marcredhat/guide-spring-boot/master/finish/deployment/deployment-os.yaml
+
+oc apply -f \
+https://raw.githubusercontent.com/marcredhat/guide-spring-boot/master/finish/deployment/service.yaml
+
 oc expose svc/guide-spring-boot
 ----
 
