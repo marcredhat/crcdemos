@@ -53,3 +53,23 @@ sudo dnf -y  install xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
 
 Install XQuartz on Mac
 ----
+
+
+----
+Install Maven
+dnf install maven -y
+----
+
+----
+You must add the following repositories both to the dependency repositories section 
+as well as the plug-in repositories section of your settings.xml file 
+(/etc/maven/settings.xml in my case)
+
+Maven central: https://repo1.maven.org/maven2
+Red Hat GA repository: https://maven.repository.redhat.com/ga
+Red Hat EA repository: https://maven.repository.redhat.com/earlyaccess/all
+
+Activate the profiles you defined under <activeProfiles> in your setting.xml
+
+As an example, see my settings.xml at 
+----
