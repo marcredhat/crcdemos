@@ -1,0 +1,18 @@
+
+== Set up RHEL 8 dev environment with Red Hat Fuse / SpringBoot / AtlasMap / VSCode.
+(based on https://gitlab.com/rh-emea-ssa-fuse-tutorial/fuse-tooling-atlasmap)
+
+
+----
+Video showing how to use Red Hat's VSCode tooling and AtlasMap (data mapping solution with interactive web UI)
+to create simple and composed data mappings:
+----
+
+
+----
+Simple data mappings cover scenarios where for instance you're invoking a backend system, 
+and you'd like to apply some data transformation before you respond.
+
+Composed data mappings cover scenarios where you interact with multiple backend systems and you need to 
+aggregate the data in a single data structure.
+----
