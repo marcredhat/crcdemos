@@ -4,7 +4,8 @@
 
 
 ----
-Video showing how to use Red Hat's VSCode tooling and AtlasMap (data mapping solution with interactive web UI)
+Video showing how to use Red Hat's VSCode tooling and AtlasMap 
+(data mapping solution with interactive web UI)
 to create simple and composed data mappings:
 ----
 
@@ -13,8 +14,8 @@ to create simple and composed data mappings:
 Simple data mappings cover scenarios where for instance you're invoking a backend system, 
 and you'd like to apply some data transformation before you respond.
 
-Composed data mappings cover scenarios where you interact with multiple backend systems and you need to 
-aggregate the data in a single data structure.
+Composed data mappings cover scenarios where you interact with multiple backend systems and
+you need to aggregate the data in a single data structure.
 ----
 
 
@@ -71,7 +72,8 @@ Red Hat EA repository: https://maven.repository.redhat.com/earlyaccess/all
 
 Activate the profiles you defined under <activeProfiles> in your settings.xml
 
-As an example, see my settings.xml at https://github.com/marcredhat/crcdemos/blob/master/fusetools/settings.xml
+As an example, see my settings.xml at 
+https://github.com/marcredhat/crcdemos/blob/master/fusetools/settings.xml
 ----
 
 
