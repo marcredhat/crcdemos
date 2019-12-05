@@ -77,4 +77,6 @@ https://github.com/marcredhat/crcdemos/blob/master/fusetools/settings.xml
 ----
 
 
-
+----
+You're now ready to enjoy the labs at https://gitlab.com/rh-emea-ssa-fuse-tutorial/fuse-tooling-atlasmap
+----
