@@ -6,7 +6,8 @@
 ----
 Video showing how to use Red Hat's VSCode tooling and AtlasMap 
 (data mapping solution with interactive web UI)
-to create simple and composed data mappings:
+to create simple and composed data mappings: 
+http://bit.ly/marcredhatplaylist (video no. 25)
 ----
 
 
