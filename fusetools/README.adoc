@@ -69,7 +69,10 @@ Maven central: https://repo1.maven.org/maven2
 Red Hat GA repository: https://maven.repository.redhat.com/ga
 Red Hat EA repository: https://maven.repository.redhat.com/earlyaccess/all
 
-Activate the profiles you defined under <activeProfiles> in your setting.xml
+Activate the profiles you defined under <activeProfiles> in your settings.xml
 
-As an example, see my settings.xml at 
+As an example, see my settings.xml at https://github.com/marcredhat/crcdemos/blob/master/fusetools/settings.xml
 ----
+
+
+
