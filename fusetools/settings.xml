@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+
+ <profiles>
+    <profile>
+      <id>jboss-public-repository</id>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>jboss-public-repository-group</id>
+          <name>JBoss Public Maven Repository Group</name>
+          <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+          <layout>default</layout>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </snapshots>
+        </pluginRepository>
+
+        <pluginRepository>
+          <id>Maven Central</id>
+          <name>Maven Central</name>
+          <url>https://repo1.maven.org/maven2</url>
+          <layout>default</layout>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </snapshots>
+  </pluginRepository>
+
+
+<pluginRepository>
+          <id>GA</id>
+          <name>GA</name>
+          <url>https://maven.repository.redhat.com/ga</url>
+          <layout>default</layout>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </snapshots>
+  </pluginRepository>
+
+</pluginRepositories>
+
+
+    </profile>
+ <profile>
+      <id>marc</id>
+
+
+      <repositories>
+   <repository>
+          <id>mit</id>
+          <name>mit</name>
+          <url>http://maven.mit.edu/nexus/content/repositories/public/</url>
+          <layout>default</layout>
+  </repository>
+  <repository>
+      <id>apache.snapshots</id>
+      <name>Apache Development Snapshot Repository</name>
+      <url>https://repository.apache.org/content/repositories/snapshots/</url>
+      <releases>
+          <enabled>false</enabled>
+      </releases>
+      <snapshots>
+          <enabled>true</enabled>
+      </snapshots>
+  </repository>
+<repository>
+   <id>maven2</id>
+   <url>http://repo1.maven.org/maven2</url>
+  </repository>
+  <repository>
+    <id>com.springsource.repository.bundles.release</id>
+    <name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+    <url>http://repository.springsource.com/maven/bundles/release</url>
+</repository>
+<repository>
+    <id>com.springsource.repository.bundles.external</id>
+    <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+    <url>http://repository.springsource.com/maven/bundles/external</url>
+</repository>
+
+ <repository>
+    <id>GA</id>
+    <name>GA</name>
+    <url>https://maven.repository.redhat.com/ga</url>
+</repository>
+ <repository>
+    <id>Maven Central</id>
+    <name>Maven Central</name>
+    <url>https://repo1.maven.org/maven2</url>
+</repository>
+
+      </repositories>
+    </profile>
+    </profiles>
+<activeProfiles>
+	<activeProfile>jboss-public-repository</activeProfile>
+	<activeProfile>marc</activeProfile>
+  </activeProfiles>
+</settings>
