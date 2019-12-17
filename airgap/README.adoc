@@ -1,5 +1,5 @@
 
-== Using skopeo to mirror registry for airgap environments
+== Using skopeo to create local registry for airgap environments
 
 
 ----
