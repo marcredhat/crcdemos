@@ -3,6 +3,11 @@
 
 
 ----
+We will show how to:
+1. Create a local registry on a RHEL 8 (virtual) machine
+2. Copy images from the Red Hat registry to local filesystem (so that they can be transferred to the airgap environment)
+3. Copy images from local filesystem to local registry
+
 See http://bit.ly/marcredhatairgap
 ----
 
@@ -22,7 +27,7 @@ sudo htpasswd -bBc /opt/registry/auth/htpasswd marc marc
 
 ----
 Run local registry as follows
------
+----
 
 
 ----
@@ -96,7 +101,7 @@ cat target/index.json
 
 
 ----
-Copy images fron local filesystem to local registry
+Copy images from local filesystem to local registry
 ----
 
 
@@ -117,7 +122,7 @@ curl --cacert /opt/registry/certs/domain.crt -u marc:marc -k https://localhost:5
 
 
 ----
-Check that we can pull the nes images from the local registry
+Check that we can pull the new images from the local registry
 ----
 
 
