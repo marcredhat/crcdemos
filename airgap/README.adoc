@@ -18,6 +18,7 @@ You can use the Ansible playbook at http://bit.ly/marcredhatairgap
 
 ----
 Create local registry as follows
+Replace marc/marc with your creds
 ----
 
 ----
