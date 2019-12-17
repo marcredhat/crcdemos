@@ -84,7 +84,8 @@ sudo skopeo copy docker://registry.access.redhat.com/ubi8/ubi-minimal   oci:./ta
 
 ----
 Check what is created on the local filesystem
-In index.json, look for org.opencontainers.image.ref.name and check that we have both 
+In index.json, look for org.opencontainers.image.ref.name and 
+check that we have the marcubi7 and marcubi8 images we just copied above
 ----
 
 
