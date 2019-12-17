@@ -1,0 +1,126 @@
+
+== Using skopeo to mirror registry for airgap environments
+
+
+----
+See http://bit.ly/marcredhatairgap
+----
+
+
+----
+Create local registry as follows
+----
+
+----
+sudo dnf  -y install podman skopeo httpd-tools
+sudo  mkdir -p /opt/registry/{auth,certs,data}
+cd /opt/registry/certs
+sudo openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days 365 -out domain.crt
+sudo htpasswd -bBc /opt/registry/auth/htpasswd marc marc
+----
+
+
+----
+Run local registry as follows
+-----
+
+
+----
+sudo podman run --name mirror-registry -p 5555:5000 -v /opt/registry/data:/var/lib/registry:z -v /opt/registry/auth:/auth:z \
+    -e "REGISTRY_AUTH=htpasswd" \
+    -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
+    -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
+    -v /opt/registry/certs:/certs:z \
+    -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
+    -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
+    -d docker.io/library/registry:2
+----
+
+
+----
+sudo firewall-cmd --add-port=5000/tcp --zone=internal --permanent
+sudo firewall-cmd --add-port=5000/tcp --zone=public   --permanent
+sudo firewall-cmd --reload
+----
+
+
+----
+cp /opt/registry/certs/domain.crt /etc/pki/ca-trust/source/anchors/
+sudo update-ca-trust
+----
+
+
+---- 
+Test that you can access the local registry as follows
+Note that the local registry is currently empty
+----
+
+
+----
+curl --cacert /opt/registry/certs/domain.crt -u marc:marc -k https://localhost:5555/v2/_catalog
+{"repositories":[]}
+----
+
+
+----
+Copy images from the Red Hat registry to the local filesystem
+----
+
+
+----
+sudo skopeo copy docker://registry.access.redhat.com/ubi7/ubi-minimal   oci:./target:marcubi7
+sudo skopeo copy docker://registry.access.redhat.com/ubi8/ubi-minimal   oci:./target:marcubi8
+----
+
+
+----
+Check what is created on the local filesystem
+In index.json, look for org.opencontainers.image.ref.name and check that we have both 
+----
+
+
+----
+ls target/
+blobs  index.json  oci-layout
+----
+
+
+----
+cat target/index.json
+....
+"annotations":{"org.opencontainers.image.ref.name":"marcubi7"},"platform":{"architecture":"amd64","os":"linux"}}
+....
+"annotations":{"org.opencontainers.image.ref.name":"marcubi8"},"platform":{"architecture":"amd64","os":"linux"}}
+....
+----
+
+
+----
+Copy images fron local filesystem to local registry
+----
+
+
+----
+sudo skopeo copy --dest-creds=marc:marc  --dest-tls-verify=false   oci:./target:marcubi8 docker://rhel8ga:5555/ubi8/ubi-minimal
+----
+
+
+----
+Check that we see the new images in the local registry
+----
+
+
+----
+curl --cacert /opt/registry/certs/domain.crt -u marc:marc -k https://localhost:5555/v2/_catalog
+{"repositories":["ubi8/ubi-minimal"]}
+----
+
+
+----
+Check that we can pull the nes images from the local registry
+----
+
+
+----
+sudo podman pull --creds marc:marc  --tls-verify=false docker://rhel8ga:5555/ubi8/ubi-minimal
+----
