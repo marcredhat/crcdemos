@@ -4,12 +4,15 @@
 
 ----
 We will show how to:
-1. Create a local registry on a RHEL 8 (virtual) machine
-2. Copy images from the Red Hat registry to local filesystem 
-(so that they can be transferred to the airgap environment)
-3. Copy images from local filesystem to local registry
 
-See http://bit.ly/marcredhatairgap
+1. Create a local registry on a RHEL 8 (virtual) machine
+
+2. Copy images from the Red Hat registry to local filesystem 
+(so that they can be transferred to the airgap environment).
+
+You can use the Ansible playbook at http://bit.ly/marcredhatairgap
+
+3. Copy images from local filesystem to local registry
 ----
 
 
