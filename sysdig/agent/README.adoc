@@ -27,15 +27,18 @@ See short video at https://youtu.be/HEEbqYtxkc0
 
 3) From the OpenShift console, deploy the Sysdig Secure agent with eBPF
 ----
+#https://github.com/sysdiglabs/sysdig-operator
 apiVersion: sysdig.com/v1alpha1
 kind: SysdigAgent
 metadata:
   name: agent-with-ebpf-and-secure
 spec:
   ebpf:
-    enabled: true
+    enabled: false
   secure:
     enabled: true
+  image:
+    tag: latest
   sysdig:
     accessKey: <access key>
 ----
