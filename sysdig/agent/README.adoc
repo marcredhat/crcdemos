@@ -39,9 +39,14 @@ image:./images/5sysdig.png[title="Generated diagram"]
 
 image:./images/6sysdig.png[title="Generated diagram"]
 
-image:./images/7sysdig.png[title="Generated diagram"]
+
+----
+Get your access key from secure.sysdig.com (Settings / Agent Installation)
+----
 
 image:./images/8sysdig.png[title="Generated diagram"]
+
+image:./images/7sysdig.png[title="Generated diagram"]
 
 
 
