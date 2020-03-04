@@ -108,4 +108,5 @@ listening on any, link-type LINUX_SLL (Linux cooked), capture size 262144 bytes
 ----
 
 
+image:./images/16sysdigcommandaudit.png[title="Generated diagram"]
 
