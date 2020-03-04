@@ -44,8 +44,11 @@ spec:
     accessKey: <access key>
 ----
 
+image:./images/9sysdig.png[title="Generated diagram"]
 
-image:./images/7sysdig.png[title="Generated diagram"]
+
+
+
 
 
 
