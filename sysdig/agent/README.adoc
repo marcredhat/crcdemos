@@ -3,28 +3,7 @@
 == Sysdig runtime security on OpenShift 4.3.1+ 
 
 
-From the OpenShift console, deploy the Sysdig Operator
-
-
-
-From the OpenShift console, deploy the Sysdig Secure agent 
-----
-#https://github.com/sysdiglabs/sysdig-operator
-apiVersion: sysdig.com/v1alpha1
-kind: SysdigAgent
-metadata:
-  name: agent-with-ebpf-and-secure
-spec:
-  ebpf:
-    enabled: false
-  secure:
-    enabled: true
-  image:
-    tag: latest
-  sysdig:
-    accessKey: <access key>
-----
-
+From the OpenShift console, go to OperatorHub and deploy the Sysdig Agent Operator
 
 
 image:./images/1sysdig.png[title="Generated diagram"]
@@ -45,6 +24,26 @@ Get your access key from secure.sysdig.com (Settings / Agent Installation)
 ----
 
 image:./images/8sysdig.png[title="Generated diagram"]
+
+
+
+----
+#https://github.com/sysdiglabs/sysdig-operator
+apiVersion: sysdig.com/v1alpha1
+kind: SysdigAgent
+metadata:
+  name: agent-with-ebpf-and-secure
+spec:
+  ebpf:
+    enabled: false
+  secure:
+    enabled: true
+  image:
+    tag: latest
+  sysdig:
+    accessKey: <access key>
+----
+
 
 image:./images/7sysdig.png[title="Generated diagram"]
 
