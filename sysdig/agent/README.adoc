@@ -49,8 +49,16 @@ image:./images/9sysdig.png[title="Generated diagram"]
 
 image:./images/10sysdig.png[title="Generated diagram"]
 
+== Monitoring OpenShift 4.3.1+ with Sysdig
+
+image:./images/11sysdig.png[title="Generated diagram"]
+
+image:./images/12sysdig.png[title="Generated diagram"]
+
+image:./images/13sysdig.png[title="Generated diagram"]
 
 
+== Runtime security for OpenShift 4.3.1+ with Sysdig
 
 
 
