@@ -47,7 +47,7 @@ spec:
 image:./images/9sysdig.png[title="Generated diagram"]
 
 
-
+image:./images/10sysdig.png[title="Generated diagram"]
 
 
 
