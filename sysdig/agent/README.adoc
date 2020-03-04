@@ -60,6 +60,6 @@ image:./images/13sysdig.png[title="Generated diagram"]
 
 == Runtime security for OpenShift 4.3.1+ with Sysdig
 
-
+image:./images/14sysdig.png[title="Generated diagram"]
 
 See short video showing Sysdig runtime security on OpenShift 4.2+ at https://youtu.be/dWmeZVLPlR0
