@@ -20,6 +20,31 @@ crc version: 1.0.0+575079b
 OpenShift version: 4.2.0 (embedded in binary)
 ----
 
+
+== Create registy secrets
+
+
+----
+For docker.io,
+oc create secret docker-registry marcsecretdockerio --docker-server=docker.io --docker-username="<user>" --docker-password="<password>" --docker-email="<email>"
+
+oc secrets link default marcsecretdockerio --for=pull
+
+oc secrets link builder marcsecretdockerio
+
+
+For registry.redhat.io, please see https://access.redhat.com/terms-based-registry/
+
+Example: my username is 11111111|marcsecret
+
+oc create secret docker-registry marcsecret \
+    --docker-server=registry.redhat.io \
+    --docker-username="11111111|marcsecret" \
+    --docker-password="" \
+    --docker-email=<email>
+----
+
+
 == Install Tekton Pipelines
 
 ----
