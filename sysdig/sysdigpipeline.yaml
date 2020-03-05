@@ -103,7 +103,7 @@ spec:
     # specifying DOCKER_CONFIG is required to allow kaniko to detect docker credential
     env:
     - name: "DOCKER_CONFIG"
-      value: "/builder/home/.docker/"
+      value: "/tekton/home/.docker/"
     command:
     - /kaniko/executor
     args:
@@ -253,7 +253,7 @@ metadata:
 spec:
   pipelineRef:
     name: demo-pipeline
-  serviceAccount: 'default'
+  serviceAccountName: 'default'
   resources:
   - name: source-repo
     resourceRef:

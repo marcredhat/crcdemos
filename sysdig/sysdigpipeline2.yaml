@@ -1,53 +1,66 @@
----
-apiVersion: tekton.dev/v1alpha1
-kind: PipelineResource
+apiVersion: v1
+kind: Secret
 metadata:
-  name: skaffold-image-leeroy-app
-spec:
-  type: image
-  params:
-  - name: url
-    value: gcr.io/christiewilson-catfactory/leeroy-app
+  name: docker-auth-for-tekton
+  annotations:
+    tekton.dev/docker-0: https://index.docker.io
+    tekton.dev/docker-1: https://gcr.io
+type: kubernetes.io/basic-auth
+stringData:
+  username: <username>
+  password: <password>
 ---
-# This demo modifies the cluster (deploys to it) you must use a service
-# account with permission to admin the cluster (or make your default user an admin
-# of the `default` namespace with default-cluster-admin.
-
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: build-bot
+secrets:
+  - name: docker-auth-for-tekton
+---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
+kind: RoleBinding
 metadata:
-  generateName: default-cluster-admin-
+  name: build-bot-tekton-pipelines-admin
+  namespace: tekton-pipelines
 subjects:
-  - kind: ServiceAccount
-    name: default
-    namespace: default
+- kind: User
+  name: build-bot
+  apiGroup: rbac.authorization.k8s.io
 roleRef:
-  kind: ClusterRole
-  name: cluster-admin
+  kind: Role
+  name: tekton-pipelines-admin
   apiGroup: rbac.authorization.k8s.io
 ---
-apiVersion: tekton.dev/v1alpha1
-kind: PipelineResource
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
 metadata:
-  name: skaffold-image-leeroy-web-pipelinerun
-spec:
-  type: image
-  params:
-  - name: url
-    value: gcr.io/christiewilson-catfactory/leeroy-web
+  name: build-bot-deploy-role
+  namespace: tekton-pipelines
+rules:
+- apiGroups: ["extensions", "apps"]
+  resources: ["deployments"]
+  verbs: ["get", "create", "update", "patch"]
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "create", "update", "patch"]
 ---
-apiVersion: tekton.dev/v1alpha1
-kind: PipelineResource
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
-  name: skaffold-git-pipelinerun
-spec:
-  type: git
-  params:
-  - name: revision
-    value: v0.32.0
-  - name: url
-    value: https://github.com/GoogleContainerTools/skaffold
+  name: build-bot-deploy-binding
+  namespace: tekton-pipelines
+subjects:
+- kind: ServiceAccount
+  name: build-bot
+  namespace: tekton-pipelines
+roleRef:
+  kind: Role
+  name: build-bot-deploy-role
+  apiGroup: rbac.authorization.k8s.io
 ---
+
+# ===================================================
+
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
@@ -69,13 +82,6 @@ spec:
     - echo
     args:
     - "pass"
-  - name: scan
-    image: sysdiglabs/secure-image-scanning:latest
-    env:
-    - name: IMAGE_TO_SCAN
-      value: quay.io/marcf5/mltitanic
-    - name: SYSDIG_SECURE_TOKEN
-      value: <REPLACE WITH YOUR TOKEN>
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: Task
@@ -110,6 +116,24 @@ spec:
     - --dockerfile=$(inputs.params.pathToDockerFile)
     - --destination=$(outputs.resources.builtImage.url)
     - --context=$(inputs.params.pathToContext)
+---
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: scan-image
+spec:
+  inputs:
+    resources:
+    - name: image
+      type: image
+  steps:
+  - name: scan-image-step
+    image: sysdiglabs/secure-image-scanning:latest
+    env:
+    - name: IMAGE_TO_SCAN
+      value: $(inputs.resources.image.url)
+    - name: SYSDIG_SECURE_TOKEN
+      value: <your_sysdig_secure_token>
 ---
 #This task deploys with kubectl apply -f <filename>
 apiVersion: tekton.dev/v1alpha1
@@ -209,7 +233,28 @@ spec:
       outputs:
       - name: builtImage
         resource: app-image
+  - name: scan-image-web
+    runAfter: [build-skaffold-web]
+    taskRef:
+      name: scan-image
+    resources:
+      inputs:
+      - name: image
+        resource: web-image
+        from:
+        - build-skaffold-web
+  - name: scan-image-app
+    runAfter: [build-skaffold-app]
+    taskRef:
+      name: scan-image
+    resources:
+      inputs:
+      - name: image
+        resource: app-image
+        from:
+        - build-skaffold-app
   - name: deploy-app
+    runAfter: [scan-image-app]
     taskRef:
       name: demo-deploy-kubectl
     resources:
@@ -228,6 +273,7 @@ spec:
     - name: yamlPathToImage
       value: "spec.template.spec.containers[0].image"
   - name: deploy-web
+    runAfter: [scan-image-web]
     taskRef:
       name: demo-deploy-kubectl
     resources:
@@ -246,6 +292,41 @@ spec:
     - name: yamlPathToImage
       value: "spec.template.spec.containers[0].image"
 ---
+
+# =================================================
+
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: skaffold-image-leeroy-app
+spec:
+  type: image
+  params:
+  - name: url
+    value: gcr.io/christiewilson-catfactory/leeroy-app
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: skaffold-image-leeroy-web-pipelinerun
+spec:
+  type: image
+  params:
+  - name: url
+    value: gcr.io/christiewilson-catfactory/leeroy-web
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: skaffold-git-pipelinerun
+spec:
+  type: git
+  params:
+  - name: revision
+    value: v0.32.0
+  - name: url
+    value: https://github.com/GoogleContainerTools/skaffold
+---
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineRun
 metadata:
@@ -253,7 +334,7 @@ metadata:
 spec:
   pipelineRef:
     name: demo-pipeline
-  serviceAccountName: 'default'
+  serviceAccountName: build-bot
   resources:
   - name: source-repo
     resourceRef:
