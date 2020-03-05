@@ -28,6 +28,14 @@ oc adm policy add-scc-to-user anyuid -z tekton-pipelines-controller
 oc apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.notags.yaml
 ----
 
+
+== Install Tekton dashboard
+
+----
+oc apply -f https://storage.googleapis.com/tekton-releases-nightly/dashboard/latest/openshift-tekton-dashboard-release.yaml --validate=false
+----
+
+
 == Check Tekton is successfully installed
 
 ----
