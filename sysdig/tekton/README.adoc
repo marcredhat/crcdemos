@@ -21,7 +21,7 @@ OpenShift version: 4.2.0 (embedded in binary)
 ----
 
 
-== Create registy secrets
+== Create registry secrets
 
 
 ----
