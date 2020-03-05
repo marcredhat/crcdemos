@@ -106,6 +106,45 @@ Last Eval: 2019-10-23T23:32:53Z
 Policy ID: default
 ----
 
+== Example scanning after building image
+
+For an example that uses a service account with specific permissions to deploy to the namespace, and a pipeline that first builds and pushes the image to registry, and then scan each image using Sysdig Secure, use sysdigpipeline2.yaml and sysdigpipeline2block.yaml.
+
+You will need to do some modifications to the files:
+
+* At the beginning, replace `<username>` and `<password>` with your Docker Hub or Google Registry credentials.
+* Replace `<your_sysdig_secure_token>` with your Sysdig API token
+* Replace the destination url of the built images to one available in your registry, at:
+  * `gcr.io/christiewilson-catfactory/leeroy-web`
+  * `gcr.io/christiewilson-catfactory/leeroy-web`
+If you use docker for those registries, start the URL with `index.docker.io`
+
+oc create   -f sysdigpipeline2.yaml
+
+Wait until the pipeline finishes running.
+
+oc get pods
+
+```
+NAME                                                      READY   STATUS      RESTARTS   AGE
+demo-pipeline-run-1-build-skaffold-app-nf42x-pod-fwxrs    0/4     Completed   0          14m
+demo-pipeline-run-1-build-skaffold-web-gz6cm-pod-wrd47    0/4     Completed   0          14m
+demo-pipeline-run-1-deploy-app-nzv88-pod-9c2mw            0/3     Completed   0          10m
+demo-pipeline-run-1-deploy-web-xgmmw-pod-6b4ml            0/3     Completed   0          10m
+demo-pipeline-run-1-scan-image-app-cbc2r-pod-qfj6x        0/1     Completed   0          12m
+demo-pipeline-run-1-scan-image-web-c97ct-pod-hmfl7        0/1     Completed   0          12m
+demo-pipeline-run-1-skaffold-unit-tests-qrf2j-pod-5l8qh   0/2     Completed   0          16m
+leeroy-app-7564dffd66-vdgjm                               1/1     Running     0          10m
+leeroy-web-546778548d-5th9c                               1/1     Running     0          10m
+tekton-pipelines-controller-dcf84f645-rtvcg               1/1     Running     0          59m
+tekton-pipelines-webhook-74d55ccdcf-bmhww                 1/1     Running     0          59m
+```
+
+
+
+
+
+
 
 
 
