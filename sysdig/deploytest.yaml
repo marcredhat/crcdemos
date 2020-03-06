@@ -1,0 +1,163 @@
+apiVersion: v1
+items:
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"controller","app.kubernetes.io/name":"tekton-pipelines"},"name":"tekton-pipelines-controller","namespace":"tekton-pipelines"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"tekton-pipelines-controller"}},"template":{"metadata":{"annotations":{"cluster-autoscaler.kubernetes.io/safe-to-evict":"false"},"labels":{"app":"tekton-pipelines-controller","app.kubernetes.io/component":"controller","app.kubernetes.io/name":"tekton-pipelines"}},"spec":{"containers":[{"args":["-kubeconfig-writer-image","gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/kubeconfigwriter:v0.9.2@","-creds-image","gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/creds-init:v0.9.2","-git-image","gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.9.2@sha256","-nop-image","tianon/true","-shell-image","busybox","-gsutil-image","google/cloud-sdk","-entrypoint-image","gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/entrypoint:v0.9.2@sha256:83b4e08d7117fb1eae593d4f79ea7a0b548ce8dd8dca7029d554b3fbf9610274","-imagedigest-exporter-image","gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/imagedigestexporter:v0.9.2@sha256:10cc6e64fbb28ad87c1a95d7300caa4545fba7903996128198077cd65ca45f0e","-pr-image","gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/pullrequest-init:v0.9.2@sha256:e48df08c8b6a8b2ae57a0afff9190b2dcc59423c2e0bf49e2c69c4d5dab25df6","-build-gcs-fetcher-image","gcr.io/tekton-releases/github.com/tektoncd/pipeline/vendor/github.com/googlecloudplatform/cloud-builders/gcs-fetcher/cmd/gcs-fetcher:v0.9.2@sha256:8a5227733cec9506389cadccbdd54eaf50dbdfd86fbc49c78309741c70bd358c"],"env":[{"name":"SYSTEM_NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}},{"name":"CONFIG_LOGGING_NAME","value":"config-logging"},{"name":"CONFIG_OBSERVABILITY_NAME","value":"config-observability"},{"name":"METRICS_DOMAIN","value":"tekton.dev/pipeline"}],"image":"gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:v0.9.2","name":"tekton-pipelines-controller","volumeMounts":[{"mountPath":"/etc/config-logging","name":"config-logging"}]}],"serviceAccountName":"tekton-pipelines-controller","volumes":[{"configMap":{"name":"config-logging"},"name":"config-logging"}]}}}}
+    creationTimestamp: "2020-03-06T16:33:47Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/name: tekton-pipelines
+    name: tekton-pipelines-controller
+    namespace: tekton-pipelines
+    resourceVersion: "17131716"
+    selfLink: /apis/extensions/v1beta1/namespaces/tekton-pipelines/deployments/tekton-pipelines-controller
+    uid: dbc742f1-9618-4d6e-a545-09a33c7d1c21
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: tekton-pipelines-controller
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+        creationTimestamp: null
+        labels:
+          app: tekton-pipelines-controller
+          app.kubernetes.io/component: controller
+          app.kubernetes.io/name: tekton-pipelines
+      spec:
+        containers:
+        - args:
+          - -kubeconfig-writer-image
+          - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/kubeconfigwriter:v0.9.2
+          - -creds-image
+          - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/creds-init:v0.9.2
+          - -git-image
+          - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.9.2
+          - tianon/true
+          - -shell-image
+          - busybox
+          - -gsutil-image
+          - google/cloud-sdk
+          - -entrypoint-image
+          - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/entrypoint:v0.9.2
+          - -imagedigest-exporter-image
+          - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/imagedigestexporter:v0.9.2
+          - -pr-image
+          - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/pullrequest-init:v0.9.2
+          - -build-gcs-fetcher-image
+          - gcr.io/tekton-releases/github.com/tektoncd/pipeline/vendor/github.com/googlecloudplatform/cloud-builders/gcs-fetcher/cmd/gcs-fetcher:v0.9.2
+          env:
+          - name: SYSTEM_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: CONFIG_LOGGING_NAME
+            value: config-logging
+          - name: CONFIG_OBSERVABILITY_NAME
+            value: config-observability
+          - name: METRICS_DOMAIN
+            value: tekton.dev/pipeline
+          image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:v0.9.2
+          imagePullPolicy: IfNotPresent
+          name: tekton-pipelines-controller
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/config-logging
+            name: config-logging
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: tekton-pipelines-controller
+        serviceAccountName: tekton-pipelines-controller
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: config-logging
+          name: config-logging
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"webhook-controller","app.kubernetes.io/name":"tekton-pipelines"},"name":"tekton-pipelines-webhook","namespace":"tekton-pipelines"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"tekton-pipelines-webhook"}},"template":{"metadata":{"annotations":{"cluster-autoscaler.kubernetes.io/safe-to-evict":"false"},"labels":{"app":"tekton-pipelines-webhook","app.kubernetes.io/component":"webhook-controller","app.kubernetes.io/name":"tekton-pipelines"}},"spec":{"containers":[{"env":[{"name":"SYSTEM_NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}}],"image":"gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/webhook:v0.9.2@sha256:3bb305e8a2fbacc43c69b9e5de37fe357ca21fcf00e75bb4fb9e36fcf6da28d9","name":"webhook","volumeMounts":[{"mountPath":"/etc/config-logging","name":"config-logging"}]}],"serviceAccountName":"tekton-pipelines-controller","volumes":[{"configMap":{"name":"config-logging"},"name":"config-logging"}]}}}}
+    creationTimestamp: "2020-03-06T16:33:47Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: webhook-controller
+      app.kubernetes.io/name: tekton-pipelines
+    name: tekton-pipelines-webhook
+    namespace: tekton-pipelines
+    resourceVersion: "17131722"
+    selfLink: /apis/extensions/v1beta1/namespaces/tekton-pipelines/deployments/tekton-pipelines-webhook
+    uid: 7fad64b8-0934-492b-98e5-b78e3fcdbb64
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: tekton-pipelines-webhook
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+        creationTimestamp: null
+        labels:
+          app: tekton-pipelines-webhook
+          app.kubernetes.io/component: webhook-controller
+          app.kubernetes.io/name: tekton-pipelines
+      spec:
+        containers:
+        - env:
+          - name: SYSTEM_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/webhook:v0.9.2
+          imagePullPolicy: IfNotPresent
+          name: webhook
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/config-logging
+            name: config-logging
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: tekton-pipelines-controller
+        serviceAccountName: tekton-pipelines-controller
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: config-logging
+          name: config-logging
+  
