@@ -87,14 +87,14 @@ spec:
       - name: workspace
         type: git
     params:
-      - name: pathToDockerFile
-        default: /workspace/workspace/Dockerfile
-      - name: pathToContext
-        default: /workspace/workspace
+      #- name: pathToDockerFile
+      #  default: /workspace/workspace/Dockerfile
+      #- name: pathToContext
+      #  default: /workspace/workspace
       - name: registryHost
         default: "quay.io/marcf5"
-      - name: imageTag
-        default: cicd-demo
+      #- name: imageTag
+      #  default: cicd-demo
   outputs:
     resources:
       - name: docker-image
