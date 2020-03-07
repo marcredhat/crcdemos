@@ -45,6 +45,11 @@ oc create secret docker-registry marcsecret \
 ----
 
 
+----
+oc patch serviceaccount <service account used for your taskrun or pipelinerun>  -p '{"imagePullSecrets": [{"name": "marcsecretquay"}]}'
+----
+
+
 == Install Tekton Pipelines
 
 ----
