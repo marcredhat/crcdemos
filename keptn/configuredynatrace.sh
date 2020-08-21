@@ -1,5 +1,5 @@
 #we'll use the route we create by exposing the api-gateway-nginx service.
-KEPTN_API_TOKEN=$(kubectl get secret keptn-api-token -n keptn -ojsonpath={.data.keptn-api-token} | base64 --decode)I
+KEPTN_API_TOKEN=$(kubectl get secret keptn-api-token -n keptn -ojsonpath={.data.keptn-api-token} | base64 --decode)
 DT_API_TOKEN=<Dynatrace API token>
 KEPTN_PROJECT=marc-crc-keptn-4
 oc -n keptn create secret generic dynatrace --from-literal="DT_API_TOKEN=<Dynatrace API token>" \
