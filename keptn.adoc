@@ -172,7 +172,7 @@ mongodb-datastore-cd457f886-nw2bq                                 2/2     Runnin
 openshift-route-service-7f57d79955-7f8vn                          2/2     Running   3          33m
 remediation-service-5f44c6779c-bx8pf                              2/2     Running   3          33m
 shipyard-service-6c989977d5-8mxp9                                 2/2     Running   3          33m
------
+----
 
 
 ----
