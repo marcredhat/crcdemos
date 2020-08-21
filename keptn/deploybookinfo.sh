@@ -25,6 +25,8 @@ cd istio/samples/bookinfo/platform/kube
 oc project marc-bookinfo
 oc create -f bookinfo.yaml
 
+sleep 30
+
 oc delete -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/productpageinject.yaml
 oc create -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/productpageinject.yaml
 
