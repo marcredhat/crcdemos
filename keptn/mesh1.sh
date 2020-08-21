@@ -26,10 +26,20 @@ eval $(crc oc-env)
 oc version
 oc new-project istio-system
 
-#oc delete -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/opgroup.yaml
-#oc delete -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/subjaeger.yaml
-#oc delete -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/subkiali.yaml
-#oc delete -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/submesh.yaml
+oc delete -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/opgroup.yaml
+
+oc delete -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/subjaeger.yaml
+
+oc delete -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/subkiali.yaml
+
+oc delete -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/submesh.yaml
+
+
+oc delete -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/meshcontrolplane.yaml
+
+oc delete -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/meshmemberroll.yaml
+
+
 
 oc apply -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/opgroup.yaml
 
