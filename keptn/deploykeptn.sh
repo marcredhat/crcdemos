@@ -10,11 +10,13 @@ oc get pods
 
 sleep 60
 
-#for deploy in `oc get deploy -n keptn |awk '{ print $1 }'`
-#do
-#  oc set resources deployment $deploy  --limits=cpu=10m,memory=128Mi --requests=cpu=10m,memory=64Mi
-#  oc delete pods --all -n keptn
-#done
+
+for deploy in `oc get deploy -n keptn |awk '{ print $1 }'`
+do
+  oc -n keptn set resources deployment $deploy  --limits=cpu=10m,memory=128Mi --requests=cpu=10m,memory=64Mi
+done
+oc delete pods --all -n keptn
+
 
 #expected result:
 #oc get pods
