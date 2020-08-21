@@ -345,6 +345,13 @@ shipyard-service-6c989977d5-8mxp9                                 2/2     Runnin
 
 == Keptn bridge
 
+
+----
+Configure the bridge credentials
+keptn configure bridge expose --user=<user> --password=<password>
+----
+
+
 ----
 oc port-forward svc/bridge -n keptn 9000:8080
 ----
