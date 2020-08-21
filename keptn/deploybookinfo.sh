@@ -34,4 +34,4 @@ GATEWAY_URL=istio-ingressgateway-istio-system.apps-crc.testing
 sleep 5 
 
 oc get pods -n marc-bookinfo
-printf "\n\n => Browse to http://istio-ingressgateway-istio-system.apps-crc.testing/productpage"
+printf "\n\n => Browse to \n\n => http://istio-ingressgateway-istio-system.apps-crc.testing/productpage \n\n"
