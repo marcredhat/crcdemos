@@ -38,4 +38,4 @@ Login as kubeadmin with the password displayed by the previous command
 ----
 
 
-image:./images/marc1.png [title="CRC1"]
+image:images/marc1.png[title="CRC1"]
