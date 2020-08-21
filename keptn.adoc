@@ -192,6 +192,15 @@ DhjTx-8gIJC-2h2tK-eksGY
 
 
 ----
+oc expose svc api-gateway-nginx
+route.route.openshift.io/api-gateway-nginx exposed
+MacBook-Pro:~ marcchisinevski$ oc get route
+NAME                HOST/PORT                                  PATH   SERVICES            PORT   TERMINATION   WILDCARD
+api-gateway-nginx   api-gateway-nginx-keptn.apps-crc.testing          api-gateway-nginx   http                 None
+bridge              bridge-keptn.apps-crc.testing                     bridge              3000                 None
+----
+
+----
 KEPTN_ENDPOINT=http://api-gateway-nginx-keptn.apps-crc.testing/api
 KEPTN_API_TOKEN=$(kubectl get secret keptn-api-token -n keptn -ojsonpath={.data.keptn-api-token} | base64 --decode)
 echo $KEPTN_API_TOKEN
