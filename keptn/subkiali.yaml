@@ -1,0 +1,126 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  creationTimestamp: "2020-08-21T17:23:37Z"
+  generation: 1
+  managedFields:
+  - apiVersion: operators.coreos.com/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        .: {}
+        f:channel: {}
+        f:installPlanApproval: {}
+        f:name: {}
+        f:source: {}
+        f:sourceNamespace: {}
+        f:startingCSV: {}
+    manager: Mozilla
+    operation: Update
+    time: "2020-08-21T17:23:37Z"
+  - apiVersion: operators.coreos.com/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:config:
+          .: {}
+          f:resources: {}
+      f:status:
+        .: {}
+        f:catalogHealth: {}
+        f:conditions: {}
+        f:currentCSV: {}
+        f:installPlanGeneration: {}
+        f:installPlanRef:
+          .: {}
+          f:apiVersion: {}
+          f:kind: {}
+          f:name: {}
+          f:namespace: {}
+          f:resourceVersion: {}
+          f:uid: {}
+        f:installedCSV: {}
+        f:installplan:
+          .: {}
+          f:apiVersion: {}
+          f:kind: {}
+          f:name: {}
+          f:uuid: {}
+        f:lastUpdated: {}
+        f:state: {}
+    manager: catalog
+    operation: Update
+    time: "2020-08-21T17:23:43Z"
+  name: kiali-ossm
+  namespace: openshift-operators
+  resourceVersion: "292859"
+  selfLink: /apis/operators.coreos.com/v1alpha1/namespaces/openshift-operators/subscriptions/kiali-ossm
+  uid: 938ab8d5-02e3-449c-8a4e-553e63407ac5
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: kiali-ossm
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: kiali-operator.v1.12.14
+status:
+  catalogHealth:
+  - catalogSourceRef:
+      apiVersion: operators.coreos.com/v1alpha1
+      kind: CatalogSource
+      name: certified-operators
+      namespace: openshift-marketplace
+      resourceVersion: "290282"
+      uid: 4c2defbc-482c-4947-87f0-b8198452c19f
+    healthy: true
+    lastUpdated: "2020-08-21T17:23:37Z"
+  - catalogSourceRef:
+      apiVersion: operators.coreos.com/v1alpha1
+      kind: CatalogSource
+      name: community-operators
+      namespace: openshift-marketplace
+      resourceVersion: "290278"
+      uid: a32685b9-b608-4973-a821-ab5655ccf38a
+    healthy: true
+    lastUpdated: "2020-08-21T17:23:37Z"
+  - catalogSourceRef:
+      apiVersion: operators.coreos.com/v1alpha1
+      kind: CatalogSource
+      name: redhat-marketplace
+      namespace: openshift-marketplace
+      resourceVersion: "290279"
+      uid: 377993d6-4a9d-48d3-9382-50e81537163d
+    healthy: true
+    lastUpdated: "2020-08-21T17:23:37Z"
+  - catalogSourceRef:
+      apiVersion: operators.coreos.com/v1alpha1
+      kind: CatalogSource
+      name: redhat-operators
+      namespace: openshift-marketplace
+      resourceVersion: "290280"
+      uid: 238ad191-96fa-45f9-9b87-fc20ea8eedca
+    healthy: true
+    lastUpdated: "2020-08-21T17:23:37Z"
+  conditions:
+  - lastTransitionTime: "2020-08-21T17:23:37Z"
+    message: all available catalogsources are healthy
+    reason: AllCatalogSourcesHealthy
+    status: "False"
+    type: CatalogSourcesUnhealthy
+  currentCSV: kiali-operator.v1.12.14
+  installPlanGeneration: 1
+  installPlanRef:
+    apiVersion: operators.coreos.com/v1alpha1
+    kind: InstallPlan
+    name: install-g2nfv
+    namespace: openshift-operators
+    resourceVersion: "292719"
+    uid: 33fa2a59-2474-4d89-88c0-1cbfd5d8da03
+  installedCSV: kiali-operator.v1.12.14
+  installplan:
+    apiVersion: operators.coreos.com/v1alpha1
+    kind: InstallPlan
+    name: install-g2nfv
+    uuid: 33fa2a59-2474-4d89-88c0-1cbfd5d8da03
+  lastUpdated: "2020-08-21T17:23:43Z"
+  state: AtLatestKnown
