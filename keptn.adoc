@@ -298,6 +298,32 @@ keptn get event evaluation-done --keptn-context=9c212870-0113-4399-ae65-ca7def5d
 ----
 
 ----
+oc get pods -n keptn
+NAME                                                              READY   STATUS    RESTARTS   AGE
+api-gateway-nginx-5bc6f54d4b-kxdgh                                1/1     Running   0          4h26m
+api-service-55d4c499fd-5s7hz                                      1/1     Running   0          4h26m
+bridge-559f9988c7-qxtd2                                           1/1     Running   0          4h26m
+configuration-service-865d89f78f-8v7lz                            2/2     Running   3          4h26m
+dynatrace-service-5c7c777bdb-pz46k                                1/1     Running   2          3m18s
+dynatrace-service-distributor-56957bb598-k8plv                    1/1     Running   0          3h38m
+dynatrace-sli-service-598584bf5d-jk2w8                            1/1     Running   0          2m26s
+dynatrace-sli-service-monitoring-configure-distributor-7b84f5zg   1/1     Running   0          82s
+eventbroker-go-dcf997974-kw765                                    1/1     Running   0          4h26m
+gatekeeper-service-678f556955-rgdgp                               2/2     Running   4          4h26m
+helm-service-6946fb9b8d-8kjqf                                     2/2     Running   3          4h26m
+helm-service-continuous-deployment-distributor-567cc995bd-pzgsg   1/1     Running   3          4h26m
+jmeter-service-669848d4f8-mccb6                                   2/2     Running   3          4h26m
+keptn-nats-cluster-0                                              3/3     Running   0          4h26m
+lighthouse-service-5bb8698f9-h4tpt                                2/2     Running   3          4h26m
+mongodb-datastore-cd457f886-nw2bq                                 2/2     Running   2          4h26m
+mongodb-dbff8b66c-wxrq6                                           1/1     Running   0          3h45m
+openshift-route-service-7f57d79955-7f8vn                          2/2     Running   3          4h26m
+remediation-service-5f44c6779c-bx8pf                              2/2     Running   3          4h26m
+shipyard-service-6c989977d5-8mxp9                                 2/2     Running   3          4h26m
+----
+
+
+----
 kubectl set image deployment/mongodb mongodb=keptn/mongodb-privileged:latest -n keptn
 keptn generate support-archive --dir=
 ----
