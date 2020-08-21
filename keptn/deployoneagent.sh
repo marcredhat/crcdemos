@@ -18,3 +18,10 @@ https://github.com/Dynatrace/dynatrace-oneagent-operator/releases/download/v0.8.
 
 oc apply -f \
 https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/oneagentcr.yaml
+
+#expected result:
+#oc get pods -n dynatrace
+#NAME                                          READY   STATUS    RESTARTS   AGE
+#dynatrace-oneagent-operator-b6bf98cfd-58g8w   1/1     Running   0          14m
+#dynatrace-oneagent-webhook-67b79d8b7f-lqcml   2/2     Running   0          14m
+#oneagent-7smh6                                1/1     Running   0          11m
