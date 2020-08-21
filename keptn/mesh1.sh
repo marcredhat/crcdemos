@@ -49,6 +49,7 @@ oc apply -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/s
 
 oc apply -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/submesh.yaml
 
+sleep 30
 
 oc apply -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/keptn/meshcontrolplane.yaml
 
