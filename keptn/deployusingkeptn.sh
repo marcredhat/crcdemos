@@ -4,6 +4,12 @@ KEPTN_API_TOKEN=$(kubectl get secret keptn-api-token -n keptn -ojsonpath={.data.
 echo $KEPTN_API_TOKEN
 keptn auth --endpoint=$KEPTN_ENDPOINT --api-token=$KEPTN_API_TOKEN
 
+keptn status
+#expected result:
+#Starting to authenticate
+#Successfully authenticated
+#CLI is authenticated against the Keptn cluster http://api-gateway-nginx-keptn.apps-crc.testing/api
+
 #Create github repo and initialize with a README
 
 #git clone https://github.com/keptn/examples.git
