@@ -343,6 +343,16 @@ shipyard-service-6c989977d5-8mxp9                                 2/2     Runnin
 ----
 
 
+== Keptn bridge
+
+----
+oc port-forward svc/bridge -n keptn 9000:8080
+----
+
+Browse to http://localhost:9000/dashboard
+
+
+
 ----
 kubectl set image deployment/mongodb mongodb=keptn/mongodb-privileged:latest -n keptn
 keptn generate support-archive --dir=
