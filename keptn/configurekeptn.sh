@@ -13,7 +13,7 @@ keptn auth --endpoint=$KEPTN_ENDPOINT --api-token=$KEPTN_API_TOKEN
 
 keptn configure bridge --output
 
-keptn configure bridge expose --user=marc --password=marc
+keptn configure bridge expose --user=marc --password=changeme
 #Bridge credentials configured successfully
 
 oc port-forward svc/bridge -n keptn 9000:8080
