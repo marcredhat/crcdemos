@@ -1,5 +1,9 @@
 == Deploy OpenShift 4.5, Service Mesh and Keptn on your laptop or virtual machine using CodeReady Containers 
 
+
+
+image:images/crc1.png[title="crc1"]
+
 ----
 tar -xvzf crc-macos-amd64.tar.xz
 sudo cp /Users/marcchisinevski/crc/crc-macos-1.14.0-amd64/crc /usr/local/bin
@@ -81,6 +85,11 @@ Kubernetes Version: v1.18.3+012b3ec
 oc new-project istio-system
 ----
 
+image:images/crc2.png[title="crc2"]
+
+image:images/crc3.png[title="crc3"]
+
+image:images/crc4.png[title="crc4"]
 
 ----
 ServiceMeshMemberRoll: marc-keptn-staging, marc-keptn-production, marc-bookinfo
