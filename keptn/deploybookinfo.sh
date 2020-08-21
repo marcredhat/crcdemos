@@ -1,6 +1,9 @@
 
 
 #https://github.com/marcredhat/crcdemos/tree/master/keptn
+
+#https://haralduebele.blog/2019/09/17/openshift-service-mesh-aka-istio-on-codeready-containers/
+
 #!/bin/bash
 
 set -e
