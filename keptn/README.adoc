@@ -39,3 +39,37 @@ Login as kubeadmin with the password displayed by the previous command
 
 
 image:images/marc1.png[title="CRC1"]
+
+
+== Install OpenShift Service Mesh
+
+./mesh1.sh
+
+----
+....
+operatorgroup.operators.coreos.com/global-operators created
+subscription.operators.coreos.com/jaeger-product created
+subscription.operators.coreos.com/kiali-ossm created
+subscription.operators.coreos.com/servicemeshoperator created
+servicemeshcontrolplane.maistra.io/basic-install created
+servicemeshmemberroll.maistra.io/default created
+No resources found in istio-system namespace.
+----
+
+----
+oc get pods
+NAME                                      READY   STATUS    RESTARTS   AGE
+grafana-6787dc695-b9srg                   2/2     Running   0          56s
+istio-citadel-6f9b74b754-2npp9            1/1     Running   0          3m43s
+istio-egressgateway-64ffbdb8c8-kbqbl      1/1     Running   0          91s
+istio-galley-7c6fb78655-ntbd2             1/1     Running   0          2m31s
+istio-ingressgateway-6c77fdbbd4-hxtch     1/1     Running   0          90s
+istio-pilot-7bf87fc66c-h5kmd              2/2     Running   0          109s
+istio-policy-55b9c86c8c-24szc             2/2     Running   0          2m16s
+istio-sidecar-injector-66fd9459d9-2qk5s   1/1     Running   0          83s
+istio-telemetry-859854d88b-2p9tb          2/2     Running   0          2m15s
+jaeger-64d858c8c5-44cfj                   2/2     Running   0          2m30s
+prometheus-6864b4b755-tk7q2               2/2     Running   0          3m24s
+----
+
+
