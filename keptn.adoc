@@ -298,6 +298,26 @@ keptn get event evaluation-done --keptn-context=9c212870-0113-4399-ae65-ca7def5d
 ----
 
 ----
+oc logs dynatrace-service-675bb59f6b-l9789
+##########
+branch: 0.8.0
+repository: https://github.com/keptn-contrib/dynatrace-service
+commitlink: https://github.com/keptn-contrib/dynatrace-service/commit/72d11a24357fd4d6529d9c8608b62a961698dd30
+repolink: https://github.com/keptn-contrib/dynatrace-service/tree/72d11a24357fd4d6529d9c8608b62a961698dd30
+timestamp: 20200723.1120
+version: 0.8.0
+##########
+2020/08/21 04:31:18 Port = 8080; Path=/
+{"timestamp":"2020-08-21T04:31:48.681738955Z","logLevel":"DEBUG","message":"Received event: sh.keptn.event.start-evaluation"}
+{"timestamp":"2020-08-21T04:31:53.481618684Z","logLevel":"INFO","message":"Check if event of type sh.keptn.event.start-evaluation should be sent to Dynatrace."}
+{"timestamp":"2020-08-21T04:31:53.482334705Z","logLevel":"INFO","message":"Ignoring event."}
+{"timestamp":"2020-08-21T04:31:54.0818858Z","logLevel":"DEBUG","message":"Received event: sh.keptn.internal.event.get-sli"}
+{"timestamp":"2020-08-21T04:31:54.486262178Z","logLevel":"INFO","message":"Check if event of type sh.keptn.internal.event.get-sli should be sent to Dynatrace."}
+{"timestamp":"2020-08-21T04:31:54.486318382Z","logLevel":"INFO","message":"Ignoring event."}
+----
+
+
+----
 oc get pods -n keptn
 NAME                                                              READY   STATUS    RESTARTS   AGE
 api-gateway-nginx-5bc6f54d4b-kxdgh                                1/1     Running   0          4h26m
