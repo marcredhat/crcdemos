@@ -1,0 +1,22 @@
+
+----
+git clone https://github.com/marcredhat/crcdemos.git
+cd crcdemos/keptn
+sudo chmod +x ./*.sh
+----
+
+----
+sudo ./cleanup.sh
+----
+
+----
+From https://developers.redhat.com/products/codeready-containers/download:
+
+1. Download CodeReady Container in the current folder, in my case crc-macos-amd64.tar.xz
+
+2. Copy  your pull secret to the current folder in a file called pullsecret.txt
+----
+
+----
+./crc.sh
+----
