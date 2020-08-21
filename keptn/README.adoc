@@ -43,7 +43,9 @@ image:images/marc1.png[title="CRC1"]
 
 == Install OpenShift Service Mesh
 
+----
 ./mesh1.sh
+----
 
 ----
 ....
@@ -73,3 +75,47 @@ prometheus-6864b4b755-tk7q2               2/2     Running   0          3m24s
 ----
 
 
+== Deploy the BookInfo app to validate that we have a fully functional Service Mesh
+
+----
+./deploybookinfo.sh
+----
+
+----
+Already on project "marc-bookinfo" on server "https://api.crc.testing:6443".
+service/details created
+serviceaccount/bookinfo-details created
+deployment.apps/details-v1 created
+service/ratings created
+serviceaccount/bookinfo-ratings created
+deployment.apps/ratings-v1 created
+service/reviews created
+serviceaccount/bookinfo-reviews created
+deployment.apps/reviews-v1 created
+deployment.apps/reviews-v2 created
+deployment.apps/reviews-v3 created
+service/productpage created
+serviceaccount/bookinfo-productpage created
+deployment.apps/productpage-v1 created
+deployment.apps "productpage-v1" deleted
+deployment.apps/productpage-v1 created
+
+gateway.networking.istio.io/bookinfo-gateway created
+virtualservice.networking.istio.io/bookinfo created
+virtualservice.networking.istio.io/reviews created
+GATEWAY_URL=istio-ingressgateway-istio-system.apps-crc.testing
+NAME                              READY   STATUS              RESTARTS   AGE
+details-v1-558b8b4b76-6zg28       0/1     ContainerCreating   0          43s
+productpage-v1-5d68f47ff4-hpzd2   0/2     ContainerCreating   0          11s
+ratings-v1-7dc98c7588-7hbzr       0/1     ContainerCreating   0          43s
+reviews-v1-7f99cc4496-9lqqd       0/1     ContainerCreating   0          43s
+reviews-v2-7d79d5bd5d-f45pv       0/1     ContainerCreating   0          43s
+reviews-v3-7dbcdcbc56-5stlz       0/1     ContainerCreating   0          44s
+
+
+ => Browse to
+
+ => http://istio-ingressgateway-istio-system.apps-crc.testing/productpage
+ ----
+ 
+ 
