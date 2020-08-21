@@ -49,3 +49,26 @@ keptn send event new-artifact --project=marc-crc-keptn-3 --service=carts --image
 #Start updating chart carts of stage dev
 #Finished updating chart carts of stage dev
 #Start upgrading chart marc-crc-keptn-3-dev-carts in namespace marc-crc-keptn-3-dev
+
+
+
+#oc project marc-crc-keptn-3-dev
+#Now using project "marc-crc-keptn-3-dev" on server "https://api.crc.testing:6443".
+#oc get pods
+#NAME                     READY   STATUS    RESTARTS   AGE
+#carts-59cdb6bb78-h2j5n   0/1     Running   0          81s
+
+
+#oc get svc
+#NAME    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+#carts   ClusterIP   172.25.220.128   <none>        80/TCP    2m22s
+
+#oc expose svc carts
+#route.route.openshift.io/carts exposed
+
+#oc get route
+#NAME    HOST/PORT                                     PATH   SERVICES   PORT   TERMINATION   WILDCARD
+#carts   carts-marc-crc-keptn-3-dev.apps-crc.testing          carts      http                 None
+
+
+#Browse to http://carts-marc-crc-keptn-3-dev.apps-crc.testing
