@@ -20,3 +20,6 @@ From https://developers.redhat.com/products/codeready-containers/download:
 ----
 ./crc.sh
 ----
+
+
+image:images/crc1.png [title="CRC1"]
