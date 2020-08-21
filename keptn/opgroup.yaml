@@ -1,0 +1,17 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  annotations:
+    olm.providedAPIs: Jaeger.v1.jaegertracing.io,Kiali.v1alpha1.kiali.io,MonitoringDashboard.v1alpha1.monitoring.kiali.io,ServiceMeshControlPlane.v1.maistra.io,ServiceMeshMember.v1.maistra.io,ServiceMeshMemberRoll.v1.maistra.io
+  creationTimestamp: "2020-07-29T04:45:57Z"
+  generation: 2
+  name: global-operators
+  namespace: openshift-operators
+  resourceVersion: "296920"
+  selfLink: /apis/operators.coreos.com/v1/namespaces/openshift-operators/operatorgroups/global-operators
+  uid: fc8b403d-e4f0-4d3f-96ee-0ead95946dc0
+spec: {}
+status:
+  lastUpdated: "2020-07-29T04:52:45Z"
+  namespaces:
+  - ""
