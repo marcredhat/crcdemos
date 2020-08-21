@@ -21,5 +21,21 @@ From https://developers.redhat.com/products/codeready-containers/download:
 ./crc.sh
 ----
 
+----
+This will install OpenShift 4.5, display the login info and open a browser windows with the OpenShift console.
+INFO To access the cluster, first set up your environment by following 'crc oc-env' instructions
+INFO Then you can access it by running 'oc login -u developer -p developer https://api.crc.testing:6443'
+INFO To login as an admin, run 'oc login -u kubeadmin -p DhjTx-8gIJC-2h2tK-eksGY https://api.crc.testing:6443'
+INFO
+INFO You can now run 'crc console' and use these credentials to access the OpenShift web console
+Started the OpenShift cluster
+WARN The cluster might report a degraded or error state. This is expected since several operators have been disabled to lower the resource usage. For more information, please consult the documentation
+Opening the OpenShift Web Console in the default browser...
+----
+
+----
+Login as kubeadmin with the password displayed by the previous command 
+----
+
 
 image:images/crc1.png [title="CRC1"]
