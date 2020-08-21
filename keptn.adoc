@@ -364,3 +364,10 @@ Browse to http://localhost:9000/dashboard
 kubectl set image deployment/mongodb mongodb=keptn/mongodb-privileged:latest -n keptn
 keptn generate support-archive --dir=
 ----
+
+
+== Cleanup
+oc delete project keptn
+oc delete ClusterRole keptn-keptn-securitycontextconstraints
+oc delete ClusterRoleBinding keptn-keptn-securitycontextconstraints
+oc delete ClusterRoleBinding keptn-keptn-helm-service-cluster-admin
