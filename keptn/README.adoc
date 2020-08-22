@@ -382,6 +382,9 @@ keptn send event new-artifact --project=marc-crc-keptn-7 --service=carts --image
 
 == Onboard unleash and unleash-db
 
+----
+cd ../unleash-server
+----
 
 ----
 keptn onboard service unleash-db --project=unleashcrc --chart=./unleash-db
