@@ -154,3 +154,19 @@ dynatrace-oneagent-webhook-67b79d8b7f-qjmls   2/2     Running   0          3m49s
 oneagent-7s7jm                                0/1     Running   0          58s
 ----
 
+----
+Check the OneAgent logs
+----
+
+----
+oc logs oneagent-7s7jm
+----
+
+----
+....
+00:15:54 User 'dtuser' added successfully.
+00:16:02 Non-privileged mode is enabled.
+00:16:02 Storing SELinux policy sources in /opt/dynatrace/oneagent/agent.
+00:16:02 Installing SELinux Dynatrace module. This may take a while...
+00:16:51 dynatrace_oneagent module was successfully installed
+----
