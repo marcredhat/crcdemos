@@ -378,11 +378,28 @@ Finished creating service carts in project marc-crc-keptn-7
 
 ----
 keptn onboard service carts-db --project=marc-crc-keptn-7 --chart=./carts-db
+Starting to onboard service
+ID of Keptn context: 36c053dc-e4fa-47a2-9d50-cb2718b16a69
+Creating new Keptn service carts-db in stage dev
+
+Creating new Keptn service carts-db in stage staging
+Inject Istio to the marc-crc-keptn-7-staging namespace for blue-green deployments
+Creating new Keptn service carts-db in stage production
+Inject Istio to the marc-crc-keptn-7-production namespace for blue-green deployments
+Finished creating service carts-db in project marc-crc-keptn-7
 ----
 
 ----
 keptn send event new-artifact --project=marc-crc-keptn-7 --service=carts --image=docker.io/keptnexamples/carts --tag=0.11.2
+----
+
+----
 keptn send event new-artifact --project=marc-crc-keptn-7 --service=carts-db --image=docker.io/mongo --tag=4.2.2
+Starting to send a new-artifact-event to deploy the service carts-db in project marc-crc-keptn-7 in version docker.io/mongo:4.2.2
+ID of Keptn context: 78f7ab92-de64-4963-8a42-fa97f9201bc7
+Start updating chart carts-db of stage dev
+Finished updating chart carts-db of stage dev
+Start upgrading chart marc-crc-keptn-7-dev-carts-db in namespace marc-crc-keptn-7-dev
 ----
 
 == Onboard unleash and unleash-db
