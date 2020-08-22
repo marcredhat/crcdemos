@@ -227,3 +227,35 @@ openshift-route-service-7f57d79955-p75qf                          2/2     Runnin
 remediation-service-5f44c6779c-2hc5s                              2/2     Running   2          10m
 shipyard-service-6c989977d5-wfsfp                                 2/2     Running   2          10m
 ----
+
+
+== Configure Keptn
+
+----
+./configurekeptn.sh
+Starting to authenticate
+Successfully authenticated
+user: keptn
+password: hKegdDbWwfOYch6c
+Bridge credentials configured successfully
+Forwarding from 127.0.0.1:9000 -> 3000
+Forwarding from [::1]:9000 -> 3000
+----
+
+== Configure Dynatrace monitor for our to-be-deployed Keptn project
+
+----
+./configuredynatrace.sh
+Now using project "keptn" on server "https://api.crc.testing:6443".
+secret/dynatrace configured
+Now using project "dynatrace" on server "https://api.crc.testing:6443".
+serviceaccount/keptn-dynatrace-service unchanged
+role.rbac.authorization.k8s.io/keptn-dynatrace-service-secrets unchanged
+role.rbac.authorization.k8s.io/keptn-dynatrace-service-namespace unchanged
+rolebinding.rbac.authorization.k8s.io/keptn-dynatrace-service-namespace unchanged
+rolebinding.rbac.authorization.k8s.io/keptn-dynatrace-service-secrets unchanged
+deployment.apps/dynatrace-service unchanged
+service/dynatrace-service unchanged
+deployment.apps/dynatrace-service-distributor unchanged
+ID of Keptn context: 7010c0b4-0a0d-47cc-a40f-175e2664b932
+----
