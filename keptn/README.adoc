@@ -111,11 +111,21 @@ ratings-v1-7dc98c7588-7hbzr       0/1     ContainerCreating   0          43s
 reviews-v1-7f99cc4496-9lqqd       0/1     ContainerCreating   0          43s
 reviews-v2-7d79d5bd5d-f45pv       0/1     ContainerCreating   0          43s
 reviews-v3-7dbcdcbc56-5stlz       0/1     ContainerCreating   0          44s
+----
+
+----
+Wait until all pods are ready:
+oc get pods
+NAME                              READY   STATUS    RESTARTS   AGE
+details-v1-558b8b4b76-6zg28       1/1     Running   0          4m41s
+productpage-v1-5d68f47ff4-hpzd2   2/2     Running   0          4m9s
+ratings-v1-7dc98c7588-7hbzr       1/1     Running   0          4m41s
+reviews-v1-7f99cc4496-9lqqd       1/1     Running   0          4m41s
+reviews-v2-7d79d5bd5d-f45pv       1/1     Running   0          4m41s
+reviews-v3-7dbcdcbc56-5stlz       1/1     Running   0          4m42s
+----
+
+Browse to http://istio-ingressgateway-istio-system.apps-crc.testing/productpage
 
 
- => Browse to
-
- => http://istio-ingressgateway-istio-system.apps-crc.testing/productpage
- ----
- 
  
