@@ -455,3 +455,11 @@ Browse to http://unleash-marc-crc-keptn-7-dev.apps-crc.testing
 
 
 image:images/unleash.png[title="unleash"]
+
+----
+You might need to tweak the limits and requests for the carts and unleash deployments.
+
+Here is what worked for me:
+----
+
+https://github.com/marcredhat/crcdemos/blob/master/keptn/carts_and_unleash_deployments.yaml
