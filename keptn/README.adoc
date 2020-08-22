@@ -259,3 +259,26 @@ service/dynatrace-service unchanged
 deployment.apps/dynatrace-service-distributor unchanged
 ID of Keptn context: 7010c0b4-0a0d-47cc-a40f-175e2664b932
 ----
+
+
+== Deploy using Keptn
+
+----
+./deployusingkeptn.sh
+24p4v4ClxeEGUXmJ6nhE
+Starting to authenticate
+Successfully authenticated
+Starting to authenticate
+Successfully authenticated
+CLI is authenticated against the Keptn cluster http://api-gateway-nginx-keptn.apps-crc.testing/api
+Cloning into 'examples'...
+remote: Enumerating objects: 43, done.
+remote: Counting objects: 100% (43/43), done.
+remote: Compressing objects: 100% (31/31), done.
+remote: Total 1515 (delta 17), reused 23 (delta 8), pack-reused 1472
+Receiving objects: 100% (1515/1515), 40.86 MiB | 4.28 MiB/s, done.
+Resolving deltas: 100% (776/776), done.
+Starting to create project
+ID of Keptn context: 9c6d1c7d-36ba-422d-a080-9891f03545c2
+....
+----
