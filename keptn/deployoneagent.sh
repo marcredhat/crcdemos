@@ -4,6 +4,8 @@ DT_PAAS_TOKEN=<Dynatrace PAAS token>
 oc -n dynatrace create secret generic oneagent \
 --from-literal="apiToken=$DT_API_TOKEN" --from-literal="paasToken=$DT_PAAS_TOKEN"
 
+oc new-project dynatrace
+
 oc apply -f \
 https://github.com/Dynatrace/dynatrace-oneagent-operator/releases/download/v0.8.0/openshift.yaml
 
