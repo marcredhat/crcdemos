@@ -485,3 +485,8 @@ Here is what worked for me:
 ----
 
 https://github.com/marcredhat/crcdemos/blob/master/keptn/carts_and_unleash_deployments.yaml
+
+
+== Dynatrace dashboard for projects deployed by Keptn
+
+image:images/dashdyna.png[title="dashdyna"]
