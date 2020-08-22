@@ -125,7 +125,13 @@ reviews-v2-7d79d5bd5d-f45pv       1/1     Running   0          4m41s
 reviews-v3-7dbcdcbc56-5stlz       1/1     Running   0          4m42s
 ----
 
+----
+The BookInfo app is now deployed on OpenShift Service Mesh. 
+
+All running on CodeReady Containers on my laptop.
+----
+
 Browse to http://istio-ingressgateway-istio-system.apps-crc.testing/productpage
 
-
+image:images/marc2.png[title="BookInfo app deployed on OpenShift Service Mesh. All running on CodeReady Containers on my laptop."]
  
