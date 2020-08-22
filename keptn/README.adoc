@@ -490,3 +490,11 @@ https://github.com/marcredhat/crcdemos/blob/master/keptn/carts_and_unleash_deplo
 == Dynatrace dashboard for projects deployed by Keptn
 
 image:images/dashdyna.png[title="dashdyna"]
+
+image:images/dashdyna2.png[title="dashdyna"]
+
+image:images/dashdyna3.png[title="dashdyna"]
+
+image:images/dashdyna4.png[title="dashdyna"]
+
+image:images/dashdyna5.png[title="dashdyna"]
