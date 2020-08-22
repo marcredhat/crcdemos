@@ -208,3 +208,22 @@ Start upgrading Helm Chart keptn in namespace: keptn
 ....
 ----
 
+----
+oc get pods
+NAME                                                              READY   STATUS    RESTARTS   AGE
+api-gateway-nginx-5bc6f54d4b-p7d6b                                1/1     Running   0          10m
+api-service-55d4c499fd-smdcr                                      1/1     Running   0          10m
+bridge-559f9988c7-qmvmr                                           1/1     Running   0          10m
+configuration-service-865d89f78f-c5h6n                            2/2     Running   2          10m
+eventbroker-go-dcf997974-46v75                                    1/1     Running   0          10m
+gatekeeper-service-678f556955-fr28n                               2/2     Running   2          10m
+helm-service-6946fb9b8d-nvqnh                                     2/2     Running   3          10m
+helm-service-continuous-deployment-distributor-567cc995bd-5gfgc   1/1     Running   3          10m
+jmeter-service-669848d4f8-jkj44                                   2/2     Running   2          10m
+keptn-nats-cluster-0                                              3/3     Running   0          9m59s
+lighthouse-service-5bb8698f9-fbz25                                2/2     Running   3          10m
+mongodb-datastore-cd457f886-27z6w                                 2/2     Running   2          10m
+openshift-route-service-7f57d79955-p75qf                          2/2     Running   3          10m
+remediation-service-5f44c6779c-2hc5s                              2/2     Running   2          10m
+shipyard-service-6c989977d5-wfsfp                                 2/2     Running   2          10m
+----
