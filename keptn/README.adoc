@@ -135,3 +135,18 @@ Browse to http://istio-ingressgateway-istio-system.apps-crc.testing/productpage
 
 image:images/marc2.png[title="BookInfo app deployed on OpenShift Service Mesh. All running on CodeReady Containers on my laptop."]
  
+
+== Deploy Dynatrace OneAgent Operator 
+
+----
+Add your Dynatrace API and PAAS token to ./deployoneagent.sh and run it 
+----
+
+----
+oc get pods
+NAME                                          READY   STATUS    RESTARTS   AGE
+dynatrace-oneagent-operator-b6bf98cfd-rd8dd   1/1     Running   0          3m49s
+dynatrace-oneagent-webhook-67b79d8b7f-qjmls   2/2     Running   0          3m49s
+oneagent-7s7jm                                0/1     Running   0          58s
+----
+
