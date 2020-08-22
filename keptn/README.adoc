@@ -399,7 +399,11 @@ Finished creating service unleash-db in project marc-crc-keptn-7
 ----
 
 ----
-keptn onboard service unleash --project=marc-crc-keptn-7 --chart=./unleash
+keptn onboard service unleash --project=marc-crc-keptn-7  --chart=./unleash
+Starting to onboard service
+ID of Keptn context: 44586416-cdc6-460f-babf-84f0c228ea94
+Creating new Keptn service unleash in stage dev
+Service already exists
 ----
 
 ----
@@ -410,4 +414,11 @@ keptn send event new-artifact --project=marc-crc-keptn-7 --service=unleash --ima
 ----
 keptn send event start-evaluation --project=marc-crc-keptn-7  --stage=dev --service=unleash --timeframe=2m
 keptn get event evaluation-done --keptn-context=9c212870-0113-4399-ae65-ca7def5d1244
+----
+
+----
+oc get pods -n marc-crc-keptn-7-dev
+NAME                       READY   STATUS              RESTARTS   AGE
+carts-56cff87fb7-7fxts     0/1     ContainerCreating   0          3m2s
+unleash-6f7794f8b4-6svbz   1/1     Running             2          11m
 ----
