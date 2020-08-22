@@ -13,9 +13,9 @@ keptn status
 
 #Create github repo and initialize with a README
 
-#git clone https://github.com/keptn/examples.git
+git clone https://github.com/keptn/examples.git
 
-#cd examples/onboarding-carts/
+cd examples/onboarding-carts/
 
 keptn create project marc-crc-keptn-3 --shipyard ./shipyard.yaml --git-user=marcredhat --git-token=$GIT_TOKEN \
 --git-remote-url=https://github.com/marcredhat/marc-crc-keptn-3.git
