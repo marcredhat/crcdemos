@@ -1,7 +1,6 @@
 
 == Install OpenShift 4.5, Service Mesh, Dynatrace OneAgent Operator and Keptn 
-on your laptop or virtual machine
-using CodeReady Containers
+== on your laptop or virtual machine using CodeReady Containers
 
 ----
 git clone https://github.com/marcredhat/crcdemos.git
