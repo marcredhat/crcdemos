@@ -311,4 +311,6 @@ ID of Keptn context: c2a4832b-4466-4c5d-bdfc-52bc3f41f7d0
 Create umbrella Helm Chart for project marc-crc-keptn-6
 ----
 
-
+----
+keptn send event new-artifact --project=marc-crc-keptn-6 --service=carts --image=docker.io/keptnexamples/carts --tag=0.11.2
+----
