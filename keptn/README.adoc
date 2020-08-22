@@ -451,4 +451,4 @@ carts     carts-marc-crc-keptn-7-dev.apps-crc.testing            carts      http
 unleash   unleash-marc-crc-keptn-7-dev.apps-crc.testing          unleash    http-port                 None
 ----
 
-Browse to http://nleash-marc-crc-keptn-7-dev.apps-crc.testing 
+Browse to http://unleash-marc-crc-keptn-7-dev.apps-crc.testing 
