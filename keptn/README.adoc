@@ -422,3 +422,19 @@ NAME                       READY   STATUS              RESTARTS   AGE
 carts-56cff87fb7-7fxts     0/1     ContainerCreating   0          3m2s
 unleash-6f7794f8b4-6svbz   1/1     Running             2          11m
 ----
+
+----
+oc get svc  -n marc-crc-keptn-7-dev
+NAME      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+carts     ClusterIP   172.25.218.5     <none>        80/TCP         45m
+unleash   NodePort    172.25.180.123   <none>        80:31719/TCP   14m
+
+oc expose svc carts -n marc-crc-keptn-7-dev
+route.route.openshift.io/carts exposed
+
+oc get route   -n marc-crc-keptn-7-dev
+NAME    HOST/PORT                                     PATH   SERVICES   PORT   TERMINATION   WILDCARD
+carts   carts-marc-crc-keptn-7-dev.apps-crc.testing          carts      http                 None
+----
+
+Browse to http://carts-marc-crc-keptn-7-dev.apps-crc.testing
