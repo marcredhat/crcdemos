@@ -491,10 +491,27 @@ https://github.com/marcredhat/crcdemos/blob/master/keptn/carts_and_unleash_deplo
 
 image:images/dashdyna.png[title="dashdyna"]
 
+----
+click on "Services:dev"
+----
+
 image:images/dashdyna2.png[title="dashdyna"]
+
+----
+Click on the service for our "carts" SpringBoot app 
+----
 
 image:images/dashdyna3.png[title="dashdyna"]
 
+----
+click on "Analyze backtrace"
+----
+
 image:images/dashdyna4.png[title="dashdyna"]
+
+----
+Under "Actions", click on "PurePaths"
+Select a PurePath then click on its name 
+----
 
 image:images/dashdyna5.png[title="dashdyna"]
