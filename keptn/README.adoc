@@ -377,7 +377,12 @@ Finished creating service carts in project marc-crc-keptn-7
 ----
 
 ----
+keptn onboard service carts-db --project=marc-crc-keptn-7 --chart=./carts-db
+----
+
+----
 keptn send event new-artifact --project=marc-crc-keptn-7 --service=carts --image=docker.io/keptnexamples/carts --tag=0.11.2
+keptn send event new-artifact --project=marc-crc-keptn-7 --service=carts-db --image=docker.io/mongo --tag=4.2.2
 ----
 
 == Onboard unleash and unleash-db
