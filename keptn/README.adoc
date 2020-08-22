@@ -438,3 +438,17 @@ carts   carts-marc-crc-keptn-7-dev.apps-crc.testing          carts      http    
 ----
 
 Browse to http://carts-marc-crc-keptn-7-dev.apps-crc.testing
+
+----
+oc expose svc unleash -n marc-crc-keptn-7-dev
+route.route.openshift.io/unleash exposed
+----
+
+----
+oc get route -n marc-crc-keptn-7-dev
+NAME      HOST/PORT                                       PATH   SERVICES   PORT        TERMINATION   WILDCARD
+carts     carts-marc-crc-keptn-7-dev.apps-crc.testing            carts      http                      None
+unleash   unleash-marc-crc-keptn-7-dev.apps-crc.testing          unleash    http-port                 None
+----
+
+Browse to http://nleash-marc-crc-keptn-7-dev.apps-crc.testing 
