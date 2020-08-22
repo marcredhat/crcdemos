@@ -11,7 +11,7 @@ KEPTN_PROJECT=marc-crc-keptn-4
 oc -n keptn create secret generic dynatrace --from-literal="DT_API_TOKEN=$DT_API_TOKEN" \
       --from-literal="DT_TENANT=$DT_TENANT" \
       --from-literal="KEPTN_API_URL=http://api-gateway-nginx-keptn.apps-crc.testing/api" \
-      --from-literal="KEPTN_API_TOKEN=<Keptn API token>" -o yaml --dry-run=client | oc apply -f -
+      --from-literal="KEPTN_API_TOKEN=$KEPTN_API_TOKEN" -o yaml --dry-run=client | oc apply -f -
 oc project dynatrace
 kubectl apply -f https://raw.githubusercontent.com/keptn-contrib/dynatrace-service/0.8.0/deploy/service.yaml
 keptn configure monitoring dynatrace --project=$KEPTN_PROJECT --service=carts --suppress-websocket
