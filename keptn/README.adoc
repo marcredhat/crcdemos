@@ -264,6 +264,14 @@ ID of Keptn context: 7010c0b4-0a0d-47cc-a40f-175e2664b932
 == Deploy using Keptn
 
 ----
+Create a github repo and initialize it with a README file 
+----
+
+
+image:images/gitrepo.png[title="gitrepo"]
+
+
+----
 ./deployusingkeptn.sh
 24p4v4ClxeEGUXmJ6nhE
 Starting to authenticate
@@ -282,3 +290,25 @@ Starting to create project
 ID of Keptn context: 9c6d1c7d-36ba-422d-a080-9891f03545c2
 ....
 ----
+
+
+----
+keptn create project marc-crc-keptn-6 --shipyard ./shipyard.yaml --git-user=marcredhat --git-token=$GIT_TOKEN --git-remote-url=https://github.com/marcredhat/marc-crc-keptn-6.git
+Starting to create project
+ID of Keptn context: 15652494-1a0e-4771-b6c1-e28b3f9165a8
+Project marc-crc-keptn-6 created
+Stage dev created
+Stage staging created
+Stage production created
+Shipyard successfully processed
+----
+
+
+----
+keptn onboard service carts --project=marc-crc-keptn-6 --chart=./carts
+Starting to onboard service
+ID of Keptn context: c2a4832b-4466-4c5d-bdfc-52bc3f41f7d0
+Create umbrella Helm Chart for project marc-crc-keptn-6
+----
+
+
