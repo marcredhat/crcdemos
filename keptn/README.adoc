@@ -50,8 +50,11 @@ image:images/marc1.png[title="CRC1"]
 
 
 NOTE: The script below will:
+
       1. Install Kiali, Jaeger and Service Mesh Operators
+      
       2. Deploy the Service Mesh control plane in istio-system.
+      
       3. Create the Service Mesh member roll. 
 
 ----
