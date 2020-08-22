@@ -112,6 +112,20 @@ prometheus-6864b4b755-tk7q2               2/2     Running   0          3m24s
 
 == Deploy the BookInfo app to validate that we have a fully functional Service Mesh
 
+NOTE: The upstream Istio community installation automatically injects the sidecar into pods within the projects you have labeled.
+
+NOTE: Red Hat OpenShift Service Mesh does not automatically inject the sidecar to any pods, but 
+      requires you to specify the sidecar.istio.io/inject annotation as illustrated in the Automatic sidecar injection section.
+      
+The script below uses https://github.com/marcredhat/crcdemos/blob/master/keptn/productpageinject.yaml
+which includes
+----
+annotations:
+      sidecar.istio.io/inject: "true"
+      
+so that OpenShift Service Mesh injects the sidecar into the productpage pods      
+----
+
 ----
 ./deploybookinfo.sh
 ----
