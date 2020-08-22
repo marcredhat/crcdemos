@@ -2,7 +2,7 @@
 == Install OpenShift 4.5, Service Mesh, Dynatrace OneAgent Operator and Keptn 
 == on your laptop or virtual machine using CodeReady Containers
 
-NOTE: You'll neeed 16GB of RAM. 
+NOTE: You'll need 16GB of RAM. 
 
 ----
 git clone https://github.com/marcredhat/crcdemos.git
