@@ -170,3 +170,36 @@ oc logs oneagent-7s7jm
 00:16:02 Installing SELinux Dynatrace module. This may take a while...
 00:16:51 dynatrace_oneagent module was successfully installed
 ----
+
+
+== Install Keptn
+
+
+----
+./deploykeptn.sh
+----
+
+----
+Moving keptn binary to /usr/local/bin/keptn
+Keptn is now ready
+Helm Chart used for Keptn installation: https://storage.googleapis.com/keptn-installer/keptn-0.7.0.tgz
+Installing Keptn ...
+Please enter the following information or press enter to keep the old value:
+Openshift Server URL [https://api.crc.testing:6443]:
+Openshift User [kubeadmin]:
+Openshift Password [DhjTx-8gIJC-2h2tK-eksGY]:
+
+Please confirm that the provided cluster information is correct:
+Openshift Server URL: https://api.crc.testing:6443
+Openshift User: kubeadmin
+
+Is this all correct? (y/n)
+y
+Existing Keptn installation found in namespace keptn
+
+Do you want to overwrite this installation? (y/n)
+y
+Start upgrading Helm Chart keptn in namespace: keptn
+....
+----
+
