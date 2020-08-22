@@ -48,6 +48,33 @@ image:images/marc1.png[title="CRC1"]
 
 == Install OpenShift Service Mesh
 
+
+NOTE: The script below will:
+      1. Install Kiali, Jaeger and Service Mesh Operators
+      2. Deploy the Service Mesh control plane in istio-system.
+      3. Create the Service Mesh member roll. 
+
+----
+The ServiceMeshMemberRoll lists the projects belonging to the control plane. 
+Only projects listed in the ServiceMeshMemberRoll are affected by the control plane. 
+A project does not belong to a service mesh until you add it to the member roll for a particular control plane deployment.
+
+So you'll want to edit the ServiceMeshMemberRoll.
+----
+
+The ServiceMeshMemberRoll created by the script below can be found at:
+https://github.com/marcredhat/crcdemos/blob/master/keptn/meshmemberroll.yaml
+
+NOTE: Keptn requires OpenShift Service Mesh for doing a blue/green deployment.  
+      
+      Two CRDs are required: DestinationRule and VirtualService
+      
+NOTE: With OpenShift Service Mesh, you can have multiple control planes each managing multiple namespaces.
+      However, Keptn expects Service Mesh to be deployed in istio-system.
+      
+      So, we'll deploy OpenShift Service Mesh in the istio-system project.
+
+
 ----
 ./mesh1.sh
 ----
