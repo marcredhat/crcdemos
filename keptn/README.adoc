@@ -139,7 +139,11 @@ image:images/marc2.png[title="BookInfo app deployed on OpenShift Service Mesh. A
 == Deploy Dynatrace OneAgent Operator 
 
 ----
-Add your Dynatrace API and PAAS token to ./deployoneagent.sh and run it 
+Add your Dynatrace tenant, API and PAAS token to ./deployoneagent.sh and run it 
+----
+
+----
+./deployoneagent.sh 
 ----
 
 ----
