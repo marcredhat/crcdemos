@@ -28,7 +28,7 @@ From https://developers.redhat.com/products/codeready-containers/download:
 ----
 
 ----
-This will install OpenShift 4.5, display the login info and open a browser windows with the OpenShift console.
+This will install OpenShift 4.5, display the login info and open a browser window with the OpenShift console.
 INFO To access the cluster, first set up your environment by following 'crc oc-env' instructions
 INFO Then you can access it by running 'oc login -u developer -p developer https://api.crc.testing:6443'
 INFO To login as an admin, run 'oc login -u kubeadmin -p DhjTx-8gIJC-2h2tK-eksGY https://api.crc.testing:6443'
