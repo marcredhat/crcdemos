@@ -311,7 +311,8 @@ ID of Keptn context: 7010c0b4-0a0d-47cc-a40f-175e2664b932
 NOTE: I encountered a situation where the limits set in https://github.com/marcredhat/crcdemos/blob/master/keptn/deploykeptn.sh
       were not enough for Keptn's api-gateway-nginx pod to run properly.
       
-      
+NOTE: If you want to automatically set resource limits, please see https://learnk8s.io/setting-cpu-memory-limits-requests
+
 ----
 So I increased them as follows:
 
