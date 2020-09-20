@@ -12,9 +12,6 @@ cd crcdemos/keptn
 sudo chmod +x ./*.sh
 ----
 
-----
-sudo ./cleanup.sh
-----
 
 ----
 From https://developers.redhat.com/products/codeready-containers/download:
