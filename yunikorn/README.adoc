@@ -23,7 +23,7 @@ From https://developers.redhat.com/products/codeready-containers/download:
 ----
 
 ----
-Edit crc.sh if you want to configure the memory and CPU cores available to CodeReady Containers.
+Edit crc.sh to configure the memory and CPU cores available to CodeReady Containers.
 ----
 
 ----
