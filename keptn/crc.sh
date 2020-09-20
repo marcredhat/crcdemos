@@ -20,6 +20,7 @@ tar -xvzf crc-macos-amd64.tar.xz
 #export PATH=$PATH:`pwd`/crc-macos-$CRCVERSION-amd64/
 sudo cp `pwd`/crc-macos-$CRCVERSION-amd64/crc /usr/local/bin
 crc config set memory 16000
+#crc config set cpus 12
 crc setup
 crc start --pull-secret-file pullsecret.txt
 #eval $(crc oc-env)
