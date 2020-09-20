@@ -49,3 +49,19 @@ Opening the OpenShift Web Console in the default browser...
 Login as kubeadmin with the password displayed by the previous command 
 ----
 
+----
+alias kubectl=oc
+helm repo add yunikorn  https://apache.github.io/incubator-yunikorn-release
+helm repo update
+kubectl create namespace yunikorn
+helm install yunikorn yunikorn/yunikorn --namespace yunikorn
+----
+
+----
+I had to add 
+serviceAccount: yunikorn-admin 
+serviceAccountName: yunikorn-admin to 
+the yunikorn-admission-controller Deployment:
+
+oc create -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/yunikorn/yunikorn-admission-controller.yaml
+----
