@@ -73,7 +73,7 @@ Deploy the Spark Operator
 image:images/spark1.png[title="Spark1"]
 
 ----
-Click on "SparkApplication" under "Provided API"
+Click on "SparkApplication" under "Provided APIs"
 Replace the 2.4.0 with 2.4.5 under "sparkVersion" and "image"
 ----
 
