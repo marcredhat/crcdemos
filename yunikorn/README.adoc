@@ -79,3 +79,8 @@ Replace the 2.4.0 with 2.4.5 under "sparkVersion" and "image"
 
 image:images/spark2.png[title="Spark2"]
 
+----
+Check the YuniKorn Scheduler logs:
+oc logs yunikorn-scheduler-65485b8d97-76s2q -c yunikorn-scheduler-k8s --follow
+----
+
