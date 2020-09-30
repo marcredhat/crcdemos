@@ -60,6 +60,11 @@ crc config set cpus 32 (for 32 logical cores)
 Please edit crc.sh it to 
 make sure it uses the correct archive for your system (Mac or Linux)
 
+Also write down the latest CodeReady Containers from https://github.com/code-ready/crc/branches
+(currently 1.16.0)
+and update CRCVERSION  in crc.sh e.g.
+export CRCVERSION=1.16.0
+
 Running the following command will install OpenShift 4.5, 
 display the login info and 
 open a browser window with the OpenShift console:
