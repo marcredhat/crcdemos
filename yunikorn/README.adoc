@@ -37,7 +37,8 @@ cd crcdemos/keptn
 sudo chmod +x ./*.sh
 
 In the current folder (keptn), 
-edit crc.sh to configure the memory e.g. 
+edit crc.sh to configure the memory and logical cores e.g. 
+
 crc config set memory 16000 (for 16GB of RAM)
 crc config set cpus 32 (for 32 logical cores)
 ----
