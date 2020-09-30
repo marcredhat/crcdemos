@@ -28,6 +28,8 @@ image:images/pullsecret.png[title="pullsecret"]
 
 
 ----
+2. Fork/clone the following repo
+
 git clone https://github.com/marcredhat/crcdemos.git
 
 cd crcdemos/keptn
@@ -55,7 +57,10 @@ crc config set cpus 32 (for 32 logical cores)
 ./crc.sh will extract the CodeReady archive so please edit it to 
 make sure it uses the correct archive for your system (Mac or Linux)
 
-Running the following will install OpenShift 4.5, display the login info and open a browser window with the OpenShift console
+Running the following command will install OpenShift 4.5, 
+display the login info and 
+open a browser window with the OpenShift console:
+
 ./crc.sh
 ----
 
