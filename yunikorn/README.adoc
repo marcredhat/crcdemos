@@ -114,6 +114,23 @@ Login as kubeadmin with the password displayed by the previous command
 NOTE: You can use `crc console --credentials` to display your credentials
 
 ----
+If you are installing CodeReady Containers on a remote baremetal server, 
+you'll need to do the following in order to connect from your laptop:
+
+On your laptop, edit /etc/hosts to point  
+console-openshift-console.apps-crc.testing and 
+oauth-openshift.apps-crc.testing
+to 127.0.0.1
+
+Then, use SSH port forwarding e.g.
+sudo ssh root@<baremetal server with CodeReady Containers> -L 7180:localhost:7180 -L 4443:console-openshift-console.apps-crc.testing:443 -L 443:oauth-openshift.apps-crc.testing:443
+
+From your laptop, you can now connect to the remotee OpenShift console at https://console-openshift-console.apps-crc.testing
+----
+
+
+
+----
 alias kubectl=oc
 helm repo add yunikorn  https://apache.github.io/incubator-yunikorn-release
 helm repo update
