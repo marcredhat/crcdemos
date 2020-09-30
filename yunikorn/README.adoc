@@ -55,7 +55,9 @@ crc config set cpus 32 (for 32 logical cores)
 
 
 ----
-./crc.sh will extract the CodeReady Containers archive so please edit it to 
+./crc.sh (in the current folder) will extract the CodeReady Containers archive.
+
+Please edit crc.sh it to 
 make sure it uses the correct archive for your system (Mac or Linux)
 
 Running the following command will install OpenShift 4.5, 
