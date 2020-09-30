@@ -65,7 +65,24 @@ from https://github.com/code-ready/crc/branches
 (currently 1.16.0)
 and update CRCVERSION  in crc.sh e.g.
 export CRCVERSION=1.16.0
+----
 
+
+----
+Here is a crc.sh I'm using to install CodeReady Container on a baremetal server with RHEL 8.4:
+export CRCVERSION=1.16.0
+#if installing on a MacOS, you'd use crc-macos-amd64.tar.xz; I'm on Linux so I'm using crc-linux-amd64.tar.xz
+tar -xvf crc-linux-amd64.tar.xz
+sudo cp `pwd`/crc-linux-$CRCVERSION-amd64/crc /usr/local/bin
+crc config set memory 30000
+crc config set cpus 32
+crc setup
+crc start --pull-secret-file pullsecret.txt
+crc console
+----
+
+
+----
 Running the following command will install OpenShift 4.5, 
 display the login info and 
 open a browser window with the OpenShift console:
