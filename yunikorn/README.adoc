@@ -130,6 +130,7 @@ From your laptop, you can now connect to the remote OpenShift console at
 https://console-openshift-console.apps-crc.testing:4443
 ----
 
+image:images/crc.png[title="crc"]
 
 
 ----
