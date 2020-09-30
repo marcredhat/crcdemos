@@ -111,6 +111,8 @@ NOTE: On a Linux system, you'll need to add the folder where the "oc" binary is 
 Login as kubeadmin with the password displayed by the previous command 
 ----
 
+NOTE: You can use `crc console --credentials` to display your credentials
+
 ----
 alias kubectl=oc
 helm repo add yunikorn  https://apache.github.io/incubator-yunikorn-release
