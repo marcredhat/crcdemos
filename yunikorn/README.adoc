@@ -6,12 +6,6 @@ NOTE: You'll need 16GB of RAM.
 
 See https://yunikorn.apache.org/
 
-----
-git clone https://github.com/marcredhat/crcdemos.git
-cd crcdemos/keptn
-sudo chmod +x ./*.sh
-----
-
 
 ----
 From https://developers.redhat.com/products/codeready-containers/download:
@@ -30,16 +24,34 @@ image:images/pullsecret.png[title="pullsecret"]
 
 
 ----
-2. Copy  your pull secret to the current folder in a file called pullsecret.txt
+git clone https://github.com/marcredhat/crcdemos.git
+
+cd crcdemos/keptn
+
+sudo chmod +x ./*.sh
+
+In the current folder (keptn), 
+edit crc.sh to configure the memory e.g. 
+crc config set memory 16000 (for 16GB of RAM)
+crc config set cpus 32 (for 32 logical cores)
 ----
 
 
+----
+3. Copy  your pull secret to the current folder in a file called pullsecret.txt
+----
 
 ----
-Edit crc.sh to configure the memory and CPU cores available to CodeReady Containers.
+4. Copy the CodeReady Containers archive that you downloaded in step 1 to the current folder
+   e.g. crc-macos-amd64.tar.xz if you are on a Mac.
 ----
 
+
 ----
+./crc.sh will extract the CodeReady archive so please edit it to 
+make sure it uses the correct archive for your system (Mac or Linux)
+
+Running the following will install OpenShift 4.5, display the login info and open a browser window with the OpenShift console
 ./crc.sh
 ----
 
