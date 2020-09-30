@@ -7,9 +7,10 @@ NOTE: You'll need 16GB of RAM.
 See https://yunikorn.apache.org/
 
 
-----
-From https://developers.redhat.com/products/codeready-containers/download:
 
+From https://developers.redhat.com/products/codeready-containers/download
+
+----
 1. Download CodeReady Containers in the current folder. I'm on a Mac so I'm using crc-macos-amd64.tar.xz.
    CodeReady Containers is also available for Linux and Windows.
    
