@@ -22,8 +22,8 @@ From https://developers.redhat.com/products/codeready-containers/download:
    Click on "Download". You'll be asked to connect using your Red Hat login. 
    If you don't have one, just click on "Create one now". You do NOT need a Red Hat subscription for this.
 
-Once logged in, the following page will be displayed to 
-allow you to download CodeReady Containers AND the pull secret.
+   Once logged in, the following page will be displayed to 
+   allow you to download CodeReady Containers AND the pull secret.
 ----
 
 image:images/pullsecret.png[title="pullsecret"]
