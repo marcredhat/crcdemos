@@ -60,7 +60,8 @@ crc config set cpus 32 (for 32 logical cores)
 Please edit crc.sh it to 
 make sure it uses the correct archive for your system (Mac or Linux)
 
-Also write down the latest CodeReady Containers from https://github.com/code-ready/crc/branches
+Also write down the latest CodeReady Containers version 
+from https://github.com/code-ready/crc/branches
 (currently 1.16.0)
 and update CRCVERSION  in crc.sh e.g.
 export CRCVERSION=1.16.0
