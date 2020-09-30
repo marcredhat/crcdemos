@@ -13,7 +13,10 @@ From https://developers.redhat.com/products/codeready-containers/download:
 1. Download CodeReady Containers in the current folder. I'm on a Mac so I'm using crc-macos-amd64.tar.xz.
    CodeReady Containers is also available for Linux and Windows.
    
-   Click on "Download". You'll be asked to connect using your Red Hat login. 
+   Select your OS from the dropdown list then Click on "Download". 
+   
+   You'll be asked to connect using your Red Hat login. 
+   
    If you don't have one, just click on "Create one now". You do NOT need a Red Hat subscription for this.
 
    Once logged in, the following page will be displayed to 
