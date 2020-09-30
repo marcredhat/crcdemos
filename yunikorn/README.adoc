@@ -104,7 +104,7 @@ Opening the OpenShift Web Console in the default browser...
 ----
 
 
-NOTE: On a Linux system, you'll need to add the folder where the "oc" binary is to $PATH or `sudo cp /home/marc/.crc/bin/oc/oc /usr/bin`
+NOTE: On a Linux system, you'll need to add the folder where the "oc" binary is to $PATH or `sudo cp /home/<user>/.crc/bin/oc/oc /usr/bin`
 
 
 ----
