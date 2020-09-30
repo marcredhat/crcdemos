@@ -81,6 +81,7 @@ crc start --pull-secret-file pullsecret.txt
 crc console
 ----
 
+NOTE: On a Linux system, do not install as root. 
 
 ----
 Running the following command will install OpenShift 4.5, 
@@ -101,6 +102,10 @@ Started the OpenShift cluster
 WARN The cluster might report a degraded or error state. This is expected since several operators have been disabled to lower the resource usage. For more information, please consult the documentation
 Opening the OpenShift Web Console in the default browser...
 ----
+
+
+NOTE: On a Linux system, you'll need to add the folder where the "oc" binary is to $PATH or `sudo cp /home/marc/.crc/bin/oc/oc /usr/bin`
+
 
 ----
 Login as kubeadmin with the password displayed by the previous command 
