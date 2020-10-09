@@ -194,7 +194,15 @@ See https://blog.turbonomic.com/how-we-used-red-hat-ubi8-to-secure-our-container
 From https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image
 
 ----
-"With the release of the Red Hat Universal Base Image (UBI), you can now take advantage of the greater reliability, security, and performance of official Red Hat container images where OCI-compliant Linux containers run - whether you’re a customer or not. This means you can build a containerized application on UBI, push it to a container registry server of your choosing, and share it. The Red Hat Universal Base Image can allow you to build, share and collaborate on your containerized application where you want."
+"With the release of the Red Hat Universal Base Image (UBI), you can now take advantage of the 
+greater reliability, security, and performance of official Red Hat container images 
+where OCI-compliant Linux containers run - whether you’re a customer or not. 
+
+This means you can build a containerized application on UBI, 
+push it to a container registry server of your choosing, and share it. 
+
+The Red Hat Universal Base Image can allow you to build, share and 
+collaborate on your containerized application where you want."
 ----
 
 See https://access.redhat.com/RegistryAuthentication
