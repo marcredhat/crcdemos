@@ -125,6 +125,7 @@ serviceAccount: yunikorn-admin
 serviceAccountName: yunikorn-admin to 
 the yunikorn-admission-controller Deployment:
 
+oc delete -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/yunikorn/yunikorn-admission-controller.yaml
 oc create -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/yunikorn/yunikorn-admission-controller.yaml
 ----
 
