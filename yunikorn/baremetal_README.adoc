@@ -163,6 +163,12 @@ In the Makefile, replace docker with podman
 ----
 
 ----
-sudo make clean image REGISTRY=default-route-openshift-image-registry.apps-crc.testing/yunikorn/
+sudo make clean image 
 ----
 
+----
+sudo podman images
+REPOSITORY                 TAG                 IMAGE ID      CREATED             SIZE
+localhost/apache/yunikorn  admission-latest    19eb41241d64  About a minute ago  53.5 MB
+localhost/apache/yunikorn  scheduler-latest    e60e09b424d9  About a minute ago  543 MB
+----
