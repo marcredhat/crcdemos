@@ -2,7 +2,7 @@
 == Automated install of OpenShift 4.5 with YuniKorn scheduler for BigData and ML 
 == on a Linux baremetal server using CodeReady Containers
 
-NOTE: Tested on RHEL 8.4
+NOTE: Tested on a baremetal server with RHEL 8.4
 
 NOTE: You'll need 16GB of RAM. 
 
