@@ -40,7 +40,7 @@ sudo cp `pwd`/crc-linux-$CRCVERSION-amd64/crc /usr/local/bin
 crc config set memory $CRCMEM
 crc config set cpus $CRCCPUS
 crc setup
-crc start --pull-secret-file pullsecret.txt
+crc start --pull-secret-file pull-secret.txt
 crc config get memory
 crc config get cpus
 eval $(crc oc-env)
