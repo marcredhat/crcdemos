@@ -157,3 +157,12 @@ podman login --tls-verify=false -u kubeadmin -p $(oc whoami -t) default-route-op
 git clone https://github.com/apache/incubator-yunikorn-k8shim.git
 cd incubator-yunikorn-k8shim
 ----
+
+----
+In the Makefile, replace docker with podman
+----
+
+----
+sudo make clean image REGISTRY=default-route-openshift-image-registry.apps-crc.testing/yunikorn/
+----
+
