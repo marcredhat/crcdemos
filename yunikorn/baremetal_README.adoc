@@ -234,3 +234,12 @@ sed -i 's/docker/podman/g' Makefile
 ----
 sudo make clean image
 ----
+
+----
+sudo podman images
+REPOSITORY                                TAG                 IMAGE ID      CREATED         SIZE
+localhost/apache/yunikorn                 admission-latest    3056a67ccebc  14 seconds ago  462 MB
+localhost/apache/yunikorn                 scheduler-latest    2f1023907d27  42 seconds ago  1.31 GB
+registry.access.redhat.com/ubi8/s2i-base  latest              839700fac57f  5 weeks ago     639 MB
+registry.access.redhat.com/ubi8/ubi       latest              ecbc6f53bba0  5 weeks ago     211 MB
+----
