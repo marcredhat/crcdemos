@@ -78,12 +78,9 @@ INFO To login as an admin, run 'oc login -u kubeadmin -p DhjTx-8gIJC-2h2tK-eksGY
 INFO
 INFO You can now run 'crc console' and use these credentials to access the OpenShift web console
 Started the OpenShift cluster
-WARN The cluster might report a degraded or error state. This is expected since several operators have been disabled to lower the resource usage. For more information, please consult the documentation
-Opening the OpenShift Web Console in the default browser...
 ----
 
-
-NOTE: On a Linux system, you'll need to add the folder where the "oc" binary is to $PATH or `sudo cp /home/<user>/.crc/bin/oc/oc /usr/bin`
+NOTE: The cluster might report a degraded or error state. This is expected since several operators have been disabled to lower the resource usage. 
 
 
 ----
@@ -102,11 +99,10 @@ oauth-openshift.apps-crc.testing
 to 127.0.0.1
 
 Then, use SSH port forwarding e.g.
-sudo ssh root@<baremetal server with CodeReady Containers> -L 7180:localhost:7180 \
--L 4443:console-openshift-console.apps-crc.testing:443 -L 443:oauth-openshift.apps-crc.testing:443
+sudo ssh root@<remote baremetal server> -L 7180:localhost:7180 -L 443:console-openshift-console.apps-crc.testing:443 -L 443:oauth-openshift.apps-crc.testing:443
 
 From your laptop, you can now connect to the remote OpenShift console at 
-https://console-openshift-console.apps-crc.testing:4443
+https://console-openshift-console.apps-crc.testing
 ----
 
 image:images/crc.png[title="crc"]
