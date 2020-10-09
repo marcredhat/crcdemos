@@ -170,6 +170,8 @@ cd incubator-yunikorn-k8shim
 
 ----
 In the Makefile, replace docker with podman
+
+sed -i 's/docker/podman/g' Makefile
 ----
 
 ----
@@ -221,5 +223,14 @@ wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/yunikorn/confi
 
 ----
 cd ../../..
+----
+
+----
+In the Makefile, replace docker with podman
+
+sed -i 's/docker/podman/g' Makefile
+----
+
+----
 sudo make clean image
 ----
