@@ -132,6 +132,16 @@ oc create -f https://raw.githubusercontent.com/marcredhat/crcdemos/master/yuniko
 ----
 
 ----
+oc project yunikorn
+Already on project "yunikorn" on server "https://api.crc.testing:6443".
+
+oc get pods
+NAME                                            READY   STATUS    RESTARTS   AGE
+yunikorn-admission-controller-7d7674c88-s7p8w   1/1     Running   0          51m
+yunikorn-scheduler-65485b8d97-gvpv4             2/2     Running   0          54m
+----
+
+----
 Deploy the Spark Operator
 ----
 
