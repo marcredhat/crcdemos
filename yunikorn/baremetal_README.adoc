@@ -205,7 +205,7 @@ git clone https://github.com/apache/incubator-yunikorn-k8shim.git
 
 cd incubator-yunikorn-k8shim/deployments/image/admission
 
-rm -rf Dockefile
+rm -f Dockerfile
 
 wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/yunikorn/admission/Dockerfile
 ----
@@ -213,7 +213,7 @@ wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/yunikorn/admis
 ----
 cd ../configmap
 
-rm -rf Dockefile
+rm -f Dockerfile
 
 wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/yunikorn/configmap/Dockerfile
 ----
