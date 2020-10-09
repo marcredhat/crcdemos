@@ -182,3 +182,28 @@ REPOSITORY                 TAG                 IMAGE ID      CREATED            
 localhost/apache/yunikorn  admission-latest    19eb41241d64  About a minute ago  53.5 MB
 localhost/apache/yunikorn  scheduler-latest    e60e09b424d9  About a minute ago  543 MB
 ----
+
+
+== Move from alpine to ubi-8
+
+See https://blog.turbonomic.com/how-we-used-red-hat-ubi8-to-secure-our-containers
+
+See https://access.redhat.com/RegistryAuthentication
+
+sudo podman login registry.redhat.io --username <username>
+
+sudo podman login --tls-verify=false -u kubeadmin -p $(oc whoami -t) default-route-openshift-image-registry.apps-crc.testing
+
+git clone https://github.com/apache/incubator-yunikorn-k8shim.git
+
+cd incubator-yunikorn-k8shim/deployments/image/admission
+
+rm -rf Dockefile
+
+wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/yunikorn/admission/Dockerfile
+
+cd ../configmap
+
+rm -rf Dockefile
+
+wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/yunikorn/configmap/Dockerfile
