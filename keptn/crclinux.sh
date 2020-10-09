@@ -28,7 +28,7 @@ test -z "$CRCMEM" && CRCMEM="16000"
 test -z "$CRCCPUS" && CRCCPUS="8"
 
 
-sudo yum -y install wget tar git podman buildah skopeo
+sudo yum -y install wget tar git podman buildah skopeo golang
 
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 chmod 700 get_helm.sh
