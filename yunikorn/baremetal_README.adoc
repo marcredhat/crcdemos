@@ -1,5 +1,5 @@
 
-== Automated install of OpenShift 4.5 with Yunikorn scheduler for BigData and ML 
+== Automated install of OpenShift 4.5 with YuniKorn scheduler for BigData and ML 
 == on a Linux baremetal server using CodeReady Containers
 
 NOTE: Tested on RHEL 8.4
@@ -64,7 +64,7 @@ export CRCCPUS=128
 
 
 ----
-The following scripts will download, install and configure the latest version 
+The following script will download, install and configure the latest version 
 of CodeReady Containers
 
 ./crclinux.sh
