@@ -2,6 +2,8 @@
 == Automated install of OpenShift 4.5 with Yunikorn scheduler for BigData and ML 
 == on a Linux baremetal server using CodeReady Containers
 
+NOTE: Tested on RHEL 8.4
+
 NOTE: You'll need 16GB of RAM. 
 
 See https://yunikorn.apache.org/
@@ -147,3 +149,11 @@ Check the YuniKorn Scheduler logs:
 oc logs yunikorn-scheduler-65485b8d97-76s2q -c yunikorn-scheduler-k8s --follow
 ----
 
+
+== Build and push your own YuniKorn images to the local registry using podman
+
+----
+podman login --tls-verify=false -u kubeadmin -p $(oc whoami -t) default-route-openshift-image-registry.apps-crc.testing
+git clone https://github.com/apache/incubator-yunikorn-k8shim.git
+cd incubator-yunikorn-k8shim
+----
