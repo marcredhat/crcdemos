@@ -29,6 +29,12 @@ test -z "$CRCCPUS" && CRCCPUS="8"
 
 
 sudo yum -y install wget tar git podman buildah skopeo
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+
+
 sudo rm -rf ./crc-linux-amd64.tar.xz
 wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/crc-linux-amd64.tar.xz
 tar -xvf crc-linux-amd64.tar.xz
