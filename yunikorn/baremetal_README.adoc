@@ -84,8 +84,11 @@ NOTE: The cluster might report a degraded or error state. This is expected since
 
 
 ----
-Login as kubeadmin with the password displayed by the previous command 
+Login as kubeadmin with the password displayed by the previous command e.g.
+oc login -u kubeadmin -p DhjTx-8gIJC-2h2tK-eksGY https://api.crc.testing:6443
 ----
+
+== OpenShift console access
 
 NOTE: You can use `crc console --credentials` to display your credentials
 
