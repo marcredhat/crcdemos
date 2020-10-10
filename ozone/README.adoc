@@ -93,8 +93,13 @@ statefulset.apps/scm created
 
 ----
 oc get pods
-NAME    READY   STATUS    RESTARTS   AGE
-s3g-0   1/1     Running   0          7s
+NAME         READY   STATUS    RESTARTS   AGE
+datanode-0   1/1     Running   0          63s
+datanode-1   1/1     Running   0          59s
+datanode-2   1/1     Running   0          54s
+om-0         1/1     Running   0          63s
+s3g-0        1/1     Running   0          63s
+scm-0        1/1     Running   0          63s
 ----
 
 ----
