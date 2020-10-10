@@ -5,6 +5,10 @@ https://github.com/apache/hadoop-ozone/tree/master/hadoop-ozone/dist/src/main/k8
 
 
 ----
+Tested on Red Hat Enterprise Linux release 8.4 Beta (Ootpa)
+----
+
+----
 git clone https://github.com/apache/hadoop-ozone.git
 cd hadoop-ozone/hadoop-ozone
 mvn clean install package -DskipShade -DskipRecon -DskipTests -Pdist -Dtar
