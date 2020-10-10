@@ -106,3 +106,8 @@ scm-public        NodePort    172.25.159.197   <none>        9876:30766/TCP   13
 sed -i 's/kubectl/oc/g' ../testlib.sh
 ----
 
+----
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+----
