@@ -1,7 +1,14 @@
 
 
 https://cwiki.apache.org/confluence/display/HADOOP/How+To+Contribute+to+Ozone
+
+
 https://github.com/apache/hadoop-ozone/tree/master/hadoop-ozone/dist/src/main/k8s/examples/getting-started
+
+
+https://github.com/marcredhat/crcdemos/blob/master/yunikorn/baremetal_README.adoc
+
+
 
 
 ----
@@ -72,4 +79,10 @@ statefulset.apps/s3g created
 service/scm-public created
 service/scm created
 statefulset.apps/scm created
+----
+
+
+----
+sed -i 's/kubectl/oc/g' ../testlib.sh
+
 ----
