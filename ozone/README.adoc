@@ -48,9 +48,24 @@ oc login -u kubeadmin -p <password>  https://api.crc.testing:6443
 
 
 ----
-
 alias kubectl=oc
 cd dist/src/main/k8s/examples/getting-started/
 kubectl apply -f .
+----
 
+----
+Expected result:
+configmap/config created
+service/datanode-public created
+service/datanode created
+statefulset.apps/datanode created
+service/om-public created
+service/om created
+statefulset.apps/om created
+service/s3g-public created
+service/s3g created
+statefulset.apps/s3g created
+service/scm-public created
+service/scm created
+statefulset.apps/scm created
 ----
