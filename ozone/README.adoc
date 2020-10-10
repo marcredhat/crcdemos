@@ -81,8 +81,28 @@ service/scm created
 statefulset.apps/scm created
 ----
 
+----
+oc get pods
+NAME    READY   STATUS    RESTARTS   AGE
+s3g-0   1/1     Running   0          7s
+----
+
+----
+oc get svc
+NAME              TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+datanode          ClusterIP   None             <none>        9870/TCP         13s
+datanode-public   NodePort    172.25.187.102   <none>        9870:30026/TCP   13s
+om                ClusterIP   None             <none>        9874/TCP         13s
+om-public         NodePort    172.25.135.25    <none>        9874:32137/TCP   13s
+s3g               ClusterIP   None             <none>        9878/TCP         13s
+s3g-public        NodePort    172.25.187.111   <none>        9878:32231/TCP   13s
+scm               ClusterIP   None             <none>        9876/TCP         13s
+scm-public        NodePort    172.25.159.197   <none>        9876:30766/TCP   13s
+----
+
+
 
 ----
 sed -i 's/kubectl/oc/g' ../testlib.sh
-
 ----
+
