@@ -56,7 +56,7 @@ spec:
           mountPath: /data
       containers:
       - name: scm
-        image: 'apache/ozone"'
+        image: 'apache/ozone'
         args:
         - ozone
         - scm
