@@ -48,9 +48,9 @@ oc login -u kubeadmin -p <password>  https://api.crc.testing:6443
 
 
 ----
-git clone https://github.com/apache/hadoop-ozone.git
+
 alias kubectl=oc
-cd hadoop-ozone/hadoop-ozone/dist/src/main/k8s/examples/getting-started/
+cd dist/src/main/k8s/examples/getting-started/
 kubectl apply -f .
 
 ----
