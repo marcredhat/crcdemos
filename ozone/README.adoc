@@ -12,7 +12,8 @@ Tested on Red Hat Enterprise Linux release 8.4 Beta (Ootpa)
 git clone https://github.com/apache/hadoop-ozone.git
 cd hadoop-ozone/hadoop-ozone
 
-
+mv pom.xml pom.xml.orig
+wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/ozone/pom.xml
 
 mvn clean install package -DskipShade -DskipRecon -DskipTests -Pdist -Dtar
 ----
