@@ -1,3 +1,15 @@
+
+
+https://cwiki.apache.org/confluence/display/HADOOP/How+To+Contribute+to+Ozone
+https://github.com/apache/hadoop-ozone/tree/master/hadoop-ozone/dist/src/main/k8s/examples/getting-started
+
+
+----
+git clone https://github.com/apache/hadoop-ozone.git
+cd hadoop-ozone
+mvn clean install package -DskipShade -DskipRecon -DskipTests -Pdist -Dtar
+----
+
 ----
 crc console --credentials
 oc login -u kubeadmin -p <password>  https://api.crc.testing:6443
@@ -7,7 +19,7 @@ oc login -u kubeadmin -p <password>  https://api.crc.testing:6443
 ----
 git clone https://github.com/apache/hadoop-ozone.git
 alias kubectl=oc
-cd hadoop-ozone/hadoop-ozone/kubernetes/examples/ozone
+cd hadoop-ozone/hadoop-ozone/dist/src/main/k8s/examples/getting-started/
 kubectl apply -f .
 
 ----
