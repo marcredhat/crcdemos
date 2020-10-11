@@ -122,12 +122,18 @@ to 127.0.0.1
 Then, use SSH port forwarding e.g.
 sudo ssh user@<remote baremetal server> -L 80:om-public-yunikorn.apps-crc.testing:80 -L 443:console-openshift-console.apps-crc.testing:443
 
+
+You can now connect to the Ozone Manager at http://om-public-yunikorn.apps-crc.testing/
+
 image:images/om.png[title="Ozone Manager"] 
 
 
-----
-sed -i 's/kubectl/oc/g' ../testlib.sh
-----
+You can also connect to the OpenShift console at https://console-openshift-console.apps-crc.testing/
+
+Go to the namespace/project that you created ("yunikorn").
+
+
+image:images/ocp.png[title="OpenShift console"] 
 
 
 == Create buckets using AWS CLI
