@@ -198,6 +198,10 @@ aws s3api --endpoint http://s3g-yunikorn.apps-crc.testing list-buckets
 }
 ----
 
+== Check the Ozone Manager metrics
+
+image:images/ommetrics.png[title="Ozone Manager metrics"] 
+
 
 == Build the Ozone/Hadoop Distribute Data Store subprojects on RHEL 8.4
 
