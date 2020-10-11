@@ -161,6 +161,8 @@ om-public    om-public-yunikorn.apps-crc.testing           om-public    ui      
 s3g          s3g-yunikorn.apps-crc.testing                 s3g          rest                 None
 ----
 
+== Install the AWS CLI that we'll use for Ozone operations
+
 ----
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
@@ -168,13 +170,39 @@ sudo ./aws/install
 ----
 
 
+== Configure the AWS CLI that we'll use for Ozone operations
 
 ----
-aws s3api --endpoint http://s3g-yunikorn.apps-crc.testing create-bucket --bucket=marcbucket
+You can set the AWS Access Key ID and AWS Secret Access Key to any value 
+as security is not configured by default.
+
+This is an on-prem environment so 
+the AWS region specified below will not be used  
+but should be specified according to the AWS region format e.g. us-west-1
+
+Use json as default output format 
+
+aws configure
+AWS Access Key ID [****************0]: 0
+AWS Secret Access Key [****************0]: 0
+Default region name [us-west-1]: us-west-1
+Default output format [0]: json
 ----
 
 ----
-In other terminal window:
+aws s3api --endpoint http://s3g-yunikorn.apps-crc.testing create-bucket --bucket=ozonemarcbucket
+----
+
+----
+Expected result:
+aws s3api --endpoint http://s3g-yunikorn.apps-crc.testing create-bucket --bucket=ozonemarcbucket
+{
+    "Location": "http://s3g-yunikorn.apps-crc.testing/ozonemarcbucket"
+}
+----
+
+----
+In another terminal window:
 
 oc logs s3g-0 --follow
 ----
@@ -186,7 +214,28 @@ Expected result:
 2020-10-10 23:55:57 INFO  AbstractConnector:330 - Started ServerConnector@81d9a72{HTTP/1.1,[http/1.1]}{0.0.0.0:9878}
 2020-10-10 23:55:57 INFO  Server:399 - Started @4634ms
 2020-10-10 23:55:57 INFO  BaseHttpServer:327 - HTTP server of s3gateway listening at http://0.0.0.0:9878
-....
-2020-10-11 00:44:09 INFO  RpcClient:459 - Creating Bucket: s3v/marcbucket, with Versioning false and Storage Type set to DISK and Encryption set to false
-2020-10-11 00:44:09 INFO  BucketEndpoint:205 - Location is /marcbucket
+.....
+2020-10-11 01:08:42 INFO  RpcClient:459 - Creating Bucket: s3v/ozonemarcbucket, with Versioning false and Storage Type set to DISK and Encryption set to false
+2020-10-11 01:08:42 INFO  BucketEndpoint:205 - Location is /ozonemarcbucket
 ----
+
+
+----
+aws s3api --endpoint http://s3g-yunikorn.apps-crc.testing list-buckets
+{
+    "Buckets": [
+        {
+            "Name": "ozonemarcbucket",
+            "CreationDate": "2020-10-11T01:08:42.914000+00:00"
+        },
+        {
+            "Name": "test",
+            "CreationDate": "2020-10-11T00:24:08.291000+00:00"
+        },
+        .....
+    ]
+}
+----
+
+
+
