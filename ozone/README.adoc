@@ -2,6 +2,17 @@
 == Ozone on OpenShift 4.5+ / CodeReady Containers
 
 
+See https://hadoop.apache.org/ozone/
+
+----
+Ozone is a scalable, redundant, and distributed object store for Hadoop. Apart from scaling to billions of objects of varying sizes, Ozone can function effectively in containerized environments such as Kubernetes and YARN.
+
+Applications using frameworks like Apache Spark, YARN and Hive work natively without any modifications.
+
+Ozone is built on a highly available, replicated block storage layer called Hadoop Distributed Data Store (HDDS).
+----
+
+
 
 == Install CodeReady Containers on a baremetal server with RHEL 8.4
 
