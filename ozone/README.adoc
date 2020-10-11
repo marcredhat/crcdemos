@@ -147,6 +147,20 @@ image:images/om.png[title="Ozone Manager"]
 sed -i 's/kubectl/oc/g' ../testlib.sh
 ----
 
+
+== Create buckets using AWS CLI
+
+----
+oc expose svc s3g
+----
+
+----
+oc get route
+NAME         HOST/PORT                              PATH   SERVICES     PORT   TERMINATION   WILDCARD
+om-public    om-public-yunikorn.apps-crc.testing           om-public    ui                   None
+s3g          s3g-yunikorn.apps-crc.testing                 s3g          rest                 None
+----
+
 ----
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
