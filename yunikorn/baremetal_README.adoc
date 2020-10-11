@@ -137,7 +137,7 @@ image:images/crc.png[title="crc"]
 
 ----
 Now that we have a functional OpenShift 4.5+ cluster, 
-we can proceed to install Yunikorn 
+we are ready to install YuniKorn 
 ----
 
 See https://yunikorn.apache.org
