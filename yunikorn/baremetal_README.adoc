@@ -100,6 +100,10 @@ NOTE: The cluster might report a degraded or error state. This is expected since
 
 
 ----
+sudo cp /home/user/.crc/bin/oc/oc /usr/local/bin
+----
+
+----
 Login as kubeadmin with the password displayed by the previous command e.g.
 oc login -u kubeadmin -p DhjTx-8gIJC-2h2tK-eksGY https://api.crc.testing:6443
 ----
