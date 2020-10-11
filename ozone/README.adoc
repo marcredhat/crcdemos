@@ -29,6 +29,9 @@ NOTE: CodeReady Containers is an "all-in-one" virtual machine with OpenShift 4. 
 
 ----
 export PATH=$PATH:/home/user/.crc/bin/oc
+
+Also add the above line to your .bashrc
+
 crc console --credentials
 oc login -u kubeadmin -p <password>  https://api.crc.testing:6443
 ----
