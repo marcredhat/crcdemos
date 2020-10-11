@@ -25,9 +25,7 @@ as shown at https://github.com/marcredhat/crcdemos/blob/master/yunikorn/baremeta
 
 NOTE: CodeReady Containers is an "all-in-one" virtual machine with OpenShift 4. If you'd like more flexibility to configure the number of masters, workers etc, then another option is to fully automate the installation of OpenShift 4.5+ (for lab/test purposes) on a baremetal server with KVM/libvirt; please see https://github.com/marcredhat/z/blob/master/zdt.adoc, starting at the "Install OpenShift 4" paragraph.
 
-----
-git clone https://github.com/apache/hadoop-ozone.git
-----
+
 
 ----
 export PATH=$PATH:/home/user/.crc/bin/oc
@@ -35,6 +33,15 @@ crc console --credentials
 oc login -u kubeadmin -p <password>  https://api.crc.testing:6443
 ----
 
+
+----
+oc new-project yunikorn
+----
+
+
+----
+git clone https://github.com/apache/hadoop-ozone.git
+----
 
 ----
 alias kubectl=oc
