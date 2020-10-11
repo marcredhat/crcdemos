@@ -152,3 +152,27 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip awscliv2.zip
 sudo ./aws/install
 ----
+
+
+
+----
+aws s3api --endpoint http://s3g-yunikorn.apps-crc.testing create-bucket --bucket=marcbucket
+----
+
+----
+In other terminal window:
+
+oc logs s3g-0 --follow
+----
+
+
+----
+Expected result:
+2020-10-10 23:55:57 INFO  ContextHandler:825 - Started o.e.j.w.WebAppContext@531ec978{s3gateway,/,file:///tmp/jetty-0_0_0_0-9878-hadoop-ozone-s3gateway-1_0_0_jar-_-any-17246356189179812948.dir/webapp/,AVAILABLE}{jar:file:/opt/hadoop/share/ozone/lib/hadoop-ozone-s3gateway-1.0.0.jar!/webapps/s3gateway}
+2020-10-10 23:55:57 INFO  AbstractConnector:330 - Started ServerConnector@81d9a72{HTTP/1.1,[http/1.1]}{0.0.0.0:9878}
+2020-10-10 23:55:57 INFO  Server:399 - Started @4634ms
+2020-10-10 23:55:57 INFO  BaseHttpServer:327 - HTTP server of s3gateway listening at http://0.0.0.0:9878
+....
+2020-10-11 00:44:09 INFO  RpcClient:459 - Creating Bucket: s3v/marcbucket, with Versioning false and Storage Type set to DISK and Encryption set to false
+2020-10-11 00:44:09 INFO  BucketEndpoint:205 - Location is /marcbucket
+----
