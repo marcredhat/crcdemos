@@ -30,6 +30,7 @@ git clone https://github.com/apache/hadoop-ozone.git
 ----
 
 ----
+export PATH=$PATH:/home/user/.crc/bin/oc
 crc console --credentials
 oc login -u kubeadmin -p <password>  https://api.crc.testing:6443
 ----
