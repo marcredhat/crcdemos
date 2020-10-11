@@ -94,12 +94,11 @@ om-public    om-public-yunikorn.apps-crc.testing           om-public    ui      
 
 
 On your laptop, edit /etc/hosts to point
-console-openshift-console.apps-crc.testing and
-oauth-openshift.apps-crc.testing
+om-public-yunikorn.apps-crc.testing
 to 127.0.0.1
 
 Then, use SSH port forwarding e.g.
-sudo ssh root@<remote baremetal server>  -L 80:om-public-yunikorn.apps-crc.testing:80
+sudo ssh root@<remote baremetal server>  -L 80:om-public-yunikorn.apps-crc.testing:80 -L 443:console-openshift-console.apps.ocp4.local:443
 
 image:images/om.png[title="Ozone Manager"] 
 
