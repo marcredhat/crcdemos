@@ -5,7 +5,10 @@
 See https://hadoop.apache.org/ozone/
 
 ----
-Ozone is a scalable, redundant, and distributed object store for Hadoop. Apart from scaling to billions of objects of varying sizes, Ozone can function effectively in containerized environments such as Kubernetes and YARN.
+Ozone is a scalable, redundant, and distributed object store for Hadoop. 
+
+Apart from scaling to billions of objects of varying sizes, 
+Ozone can function effectively in containerized environments such as Kubernetes and YARN.
 
 Applications using frameworks like Apache Spark, YARN and Hive work natively without any modifications.
 
