@@ -15,6 +15,15 @@ Applications using frameworks like Apache Spark, YARN and Hive work natively wit
 Ozone is built on a highly available, replicated block storage layer called Hadoop Distributed Data Store (HDDS).
 ----
 
+----
+Ozone provides S3 compatible REST interface to use the object store data with any S3 compatible tools.
+----
+
+----
+In this lab, we will deploy Ozone on OpenShift 4.5 and 
+use the AWS CLI to create and list buckets etc.
+----
+
 
 DISCLAIMER : lab only, unsupported, bleeding edge.
 
