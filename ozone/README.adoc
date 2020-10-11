@@ -16,6 +16,8 @@ Ozone is built on a highly available, replicated block storage layer called Hado
 ----
 
 
+DISCLAIMER : lab only, unsupported, bleeding edge.
+
 
 == Install CodeReady Containers on a baremetal server with RHEL 8.4
 
