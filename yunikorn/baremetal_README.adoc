@@ -23,6 +23,7 @@ sudo subscription-manager register --user <Red Hat subscription username>
 sudo subscription-manager list --available | more
 sudo subscription-manager attach --pool=<pool>
 sudo dnf -y update 
+sudo dnf -y install tar unzip git maven net-tools
 ----
 
 
