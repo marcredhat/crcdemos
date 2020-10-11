@@ -1,4 +1,10 @@
 
+== Ozone on OpenShift 4.5+ / CodeReady Containers
+
+
+Install CodeReady Container on a baremetal server with CentOS 8
+as shown at https://github.com/marcredhat/crcdemos/blob/master/yunikorn/baremetal_README.adoc
+
 
 https://cwiki.apache.org/confluence/display/HADOOP/How+To+Contribute+to+Ozone
 
@@ -115,6 +121,26 @@ scm               ClusterIP   None             <none>        9876/TCP         13
 scm-public        NodePort    172.25.159.197   <none>        9876:30766/TCP   13s
 ----
 
+----
+oc expose svc om-public
+----
+
+----
+oc get route
+NAME         HOST/PORT                              PATH   SERVICES     PORT   TERMINATION   WILDCARD
+om-public    om-public-yunikorn.apps-crc.testing           om-public    ui                   None
+----
+
+
+On your laptop, edit /etc/hosts to point
+console-openshift-console.apps-crc.testing and
+oauth-openshift.apps-crc.testing
+to 127.0.0.1
+
+Then, use SSH port forwarding e.g.
+sudo ssh root@<remote baremetal server>  -L 80:om-public-yunikorn.apps-crc.testing:80
+
+image:images/om.png[title="Ozone Manager"] 
 
 
 ----
