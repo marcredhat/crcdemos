@@ -2,7 +2,8 @@
 == Ozone on OpenShift 4.5+ / CodeReady Containers
 
 
-== Install CodeReady Container on a baremetal server with RHEL 8.4
+
+== Install CodeReady Containers on a baremetal server with RHEL 8.4
 
 ----
 Install CodeReady Container on a baremetal server with RHEL 8.4
