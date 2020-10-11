@@ -2,56 +2,16 @@
 == Ozone on OpenShift 4.5+ / CodeReady Containers
 
 
+== Install CodeReady Container on a baremetal server with RHEL 8.4
+
+----
 Install CodeReady Container on a baremetal server with RHEL 8.4
 as shown at https://github.com/marcredhat/crcdemos/blob/master/yunikorn/baremetal_README.adoc
-
-
-https://cwiki.apache.org/confluence/display/HADOOP/How+To+Contribute+to+Ozone
-
-
-https://github.com/apache/hadoop-ozone/tree/master/hadoop-ozone/dist/src/main/k8s/examples/getting-started
-
-
-https://github.com/marcredhat/crcdemos/blob/master/yunikorn/baremetal_README.adoc
-
-
-
-
 ----
-Tested on Red Hat Enterprise Linux release 8.4 Beta (Ootpa)
-----
+
 
 ----
 git clone https://github.com/apache/hadoop-ozone.git
-cd hadoop-ozone/hadoop-ozone
-
-mv pom.xml pom.xml.orig
-wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/ozone/pom.xml
-
-mvn clean install package -DskipShade -DskipRecon -DskipTests -Pdist -Dtar
-----
-
-----
-Expected result:
-[INFO] Reactor Summary:
-[INFO]
-[INFO] Apache Hadoop HDDS ................................. SUCCESS [  2.454 s]
-[INFO] Apache Hadoop HDDS Hadoop Client dependencies ...... SUCCESS [  1.923 s]
-[INFO] Apache Hadoop HDDS Hadoop Test dependencies ........ SUCCESS [  3.432 s]
-[INFO] Apache Hadoop HDDS Hadoop Server dependencies ...... SUCCESS [  2.954 s]
-[INFO] Apache Hadoop HDDS Client Interface ................ SUCCESS [ 27.502 s]
-[INFO] Apache Hadoop HDDS Admin Interface ................. SUCCESS [ 15.173 s]
-[INFO] Apache Hadoop HDDS Server Interface ................ SUCCESS [ 19.835 s]
-[INFO] Apache Hadoop HDDS Test Utils ...................... SUCCESS [  4.173 s]
-[INFO] Apache Hadoop HDDS Config .......................... SUCCESS [  3.674 s]
-[INFO] Apache Hadoop HDDS Common .......................... SUCCESS [ 13.256 s]
-[INFO] Apache Hadoop HDDS Client .......................... SUCCESS [  8.462 s]
-[INFO] Apache Hadoop HDDS Server Framework ................ SUCCESS [ 13.622 s]
-[INFO] Apache Hadoop HDDS/Ozone Documentation ............. SUCCESS [  0.944 s]
-[INFO] Apache Hadoop HDDS Container Service ............... SUCCESS [ 14.801 s]
-[INFO] Apache Hadoop HDDS SCM Server ...................... SUCCESS [ 13.698 s]
-[INFO] Apache Hadoop HDDS Tools ........................... SUCCESS [  6.900 s]
-[INFO] Apache Hadoop Ozone 1.1.0-SNAPSHOT ................. SUCCESS [  1.135 s]
 ----
 
 ----
@@ -62,7 +22,7 @@ oc login -u kubeadmin -p <password>  https://api.crc.testing:6443
 
 ----
 alias kubectl=oc
-cd dist/src/main/k8s/examples/getting-started/
+cd hadoop-ozone/hadoop-ozone/dist/src/main/k8s/examples/getting-started/
 
 mv s3g-statefulset.yaml s3g-statefulset.yaml.orig
 wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/ozone/s3g-statefulset.yaml
@@ -237,5 +197,55 @@ aws s3api --endpoint http://s3g-yunikorn.apps-crc.testing list-buckets
 }
 ----
 
+
+== Build the Ozone/Hadoop Distribute Data Store subprojects on RHEL 8.4
+
+See https://cwiki.apache.org/confluence/display/HADOOP/How+To+Contribute+to+Ozone
+
+----
+git clone https://github.com/apache/hadoop-ozone.git
+cd hadoop-ozone/hadoop-ozone
+
+mv pom.xml pom.xml.orig
+wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/ozone/pom.xml
+
+mvn clean install package -DskipShade -DskipRecon -DskipTests -Pdist -Dtar
+----
+
+----
+Expected result:
+[INFO] Reactor Summary:
+[INFO]
+[INFO] Apache Hadoop HDDS ................................. SUCCESS [  2.454 s]
+[INFO] Apache Hadoop HDDS Hadoop Client dependencies ...... SUCCESS [  1.923 s]
+[INFO] Apache Hadoop HDDS Hadoop Test dependencies ........ SUCCESS [  3.432 s]
+[INFO] Apache Hadoop HDDS Hadoop Server dependencies ...... SUCCESS [  2.954 s]
+[INFO] Apache Hadoop HDDS Client Interface ................ SUCCESS [ 27.502 s]
+[INFO] Apache Hadoop HDDS Admin Interface ................. SUCCESS [ 15.173 s]
+[INFO] Apache Hadoop HDDS Server Interface ................ SUCCESS [ 19.835 s]
+[INFO] Apache Hadoop HDDS Test Utils ...................... SUCCESS [  4.173 s]
+[INFO] Apache Hadoop HDDS Config .......................... SUCCESS [  3.674 s]
+[INFO] Apache Hadoop HDDS Common .......................... SUCCESS [ 13.256 s]
+[INFO] Apache Hadoop HDDS Client .......................... SUCCESS [  8.462 s]
+[INFO] Apache Hadoop HDDS Server Framework ................ SUCCESS [ 13.622 s]
+[INFO] Apache Hadoop HDDS/Ozone Documentation ............. SUCCESS [  0.944 s]
+[INFO] Apache Hadoop HDDS Container Service ............... SUCCESS [ 14.801 s]
+[INFO] Apache Hadoop HDDS SCM Server ...................... SUCCESS [ 13.698 s]
+[INFO] Apache Hadoop HDDS Tools ........................... SUCCESS [  6.900 s]
+[INFO] Apache Hadoop Ozone 1.1.0-SNAPSHOT ................. SUCCESS [  1.135 s]
+----
+
+
+
+== Useful links
+
+
+https://cwiki.apache.org/confluence/display/HADOOP/How+To+Contribute+to+Ozone
+
+
+https://github.com/apache/hadoop-ozone/tree/master/hadoop-ozone/dist/src/main/k8s/examples/getting-started
+
+
+https://github.com/marcredhat/crcdemos/blob/master/yunikorn/baremetal_README.adoc
 
 
