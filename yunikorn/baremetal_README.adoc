@@ -101,6 +101,7 @@ NOTE: The cluster might report a degraded or error state. This is expected since
 
 ----
 sudo cp /home/user/.crc/bin/oc/oc /usr/local/bin
+export PATH=$PATH:/home/user/.crc/bin/oc
 ----
 
 ----
