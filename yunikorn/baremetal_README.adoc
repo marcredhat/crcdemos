@@ -132,6 +132,30 @@ https://console-openshift-console.apps-crc.testing
 image:images/crc.png[title="crc"]
 
 
+
+== Install YuniKorn
+
+----
+Now that we have a functional OpenShift 4.5+ cluster, 
+we can proceed to install Yunikorn 
+----
+
+See https://yunikorn.apache.org
+
+----
+The main features of YuniKorn include:
+App-aware scheduling
+Hierarchy Resource Queues
+Job Ordering and Queuing
+Resource fairness
+Resource reservation
+Throughput
+----
+
+See https://yunikorn.apache.org/docs/get_started/core_features
+
+Let's get stared!
+
 ----
 alias kubectl=oc
 helm repo add yunikorn  https://apache.github.io/incubator-yunikorn-release
