@@ -12,6 +12,19 @@ See https://yunikorn.apache.org/
 
 NOTE: On a Linux system, do not install CodeReady Containers as root. 
 
+----
+useradd user --home /home/user -G wheel
+passwd user
+su - user
+----
+
+----
+sudo subscription-manager register --user <Red Hat subscription username>
+sudo subscription-manager list --available | more
+sudo subscription-manager attach --pool=<pool>
+sudo dnf -y update 
+----
+
 
 ----
 Get your pull secret
