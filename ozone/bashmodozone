@@ -3,7 +3,7 @@
 # from https://github.com/pmarkham/writing-ansible-modules-in-bash.git
 function create_bucket
     {
-    echo  $(aws s3api --endpoint http://s3g-yunikorn.apps-crc.testing list-buckets) > buckets.json
+    echo  $(aws s3api --endpoint $s3groute list-buckets) > buckets.json
     #cat buckets.json
     #{ "Buckets": [ { "Name": "openshiftozonebucket", "CreationDate": "2020-10-11T05:09:01.397000+00:00" } ] }
     if [jq -r '.Buckets[] | select(.Name == "$bucket")' buckets.json]; then
