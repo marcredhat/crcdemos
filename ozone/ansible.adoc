@@ -60,7 +60,8 @@ export PATH=$PATH:`pwd`
 
 ----
 cd /home/user
-test-module -m /usr/share/ansible/plugins/modules/writing-ansible-modules-in-bash/bashmodozone 
-\ -a 's3groute=http://s3g-yunikorn.apps-crc.testing bucket=marbucket state=present'
+
+test-module -m /usr/share/ansible/plugins/modules/writing-ansible-modules-in-bash/bashmodozone \
+-a 's3groute=http://s3g-yunikorn.apps-crc.testing bucket=marbucket state=present'
 ----
 
