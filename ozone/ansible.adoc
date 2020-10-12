@@ -2,8 +2,16 @@
 
 
 ----
-This module currently just deals with Ozone buckets.
-However, it is written in bash and very easy to extend.
+This module currently just deals with Ozone buckets. However, it is written in bash and very easy to extend.
+
+It takes the following parameters:
+1) OpenShift route to the Ozone S3 Gateway
+2) Name of the Ozone bucket
+3) State 
+
+For example,
+test-module -m /usr/share/ansible/plugins/modules/writing-ansible-modules-in-bash/bashmodozone \ 
+-a 's3groute=http://s3g-yunikorn.apps-crc.testing bucket=marbucket state=present'
 ----
 
 It is inspired by https://github.com/pmarkham/writing-ansible-modules-in-bash/blob/master/ansible_bash_modules.md
@@ -12,6 +20,11 @@ It is inspired by https://github.com/pmarkham/writing-ansible-modules-in-bash/bl
 ----
 Tested on Red Hat Enterprise Linux release 8.4 Beta (Ootpa)
 ----
+
+
+== Install Ozone on OpenShift 4.5+ / CodeReady Containers
+
+See https://github.com/marcredhat/crcdemos/tree/master/ozone
 
 
 ----
