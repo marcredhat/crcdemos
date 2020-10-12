@@ -1,0 +1,52 @@
+== Ansible module for Ozone operations
+
+
+----
+This module currently just deals with Ozone buckets.
+However, it is written in bash and very easy to extend.
+----
+
+It is inspired by https://github.com/pmarkham/writing-ansible-modules-in-bash/blob/master/ansible_bash_modules.md
+
+
+----
+Tested on Red Hat Enterprise Linux release 8.4 Beta (Ootpa)
+----
+
+
+----
+sudo dnf -y install python38 jq
+sudo ln -s /usr/bin/python3 /usr/bin/python
+sudo pip3 install --upgrade pip
+sudo pip3 install packaging
+----
+
+----
+git clone https://github.com/ansible/ansible.git
+cd ansible
+sudo make install
+----
+
+
+See https://docs.ansible.com/ansible/latest/dev_guide/developing_locally.html
+
+
+----
+cd /usr/share/ansible/plugins/modules/
+sudo git clone https://github.com/pmarkham/writing-ansible-modules-in-bash.git
+cd ~/ansible/hacking/
+. env-setup .
+export PATH=$PATH:`pwd`
+----
+
+----
+cd /usr/share/ansible/plugins/modules/writing-ansible-modules-in-bash
+sudo wget https://raw.githubusercontent.com/marcredhat/crcdemos/master/ozone/bashmodozone
+export PATH=$PATH:`pwd`
+----
+
+----
+cd /home/user
+test-module -m /usr/share/ansible/plugins/modules/writing-ansible-modules-in-bash/bashmodozone -a 's3groute=http://s3g-yunikorn.apps-crc.testing bucket=marbucket state=present'
+----
+
