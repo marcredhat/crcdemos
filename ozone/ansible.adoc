@@ -19,7 +19,7 @@ It is inspired by https://github.com/pmarkham/writing-ansible-modules-in-bash/bl
 
 
 ----
-Tested on Red Hat Enterprise Linux release 8.4 Beta (Ootpa)
+Tested on RHEL 8 baremetal server running Ozone in OpenShift 4.5
 ----
 
 
