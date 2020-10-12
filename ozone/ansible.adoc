@@ -1,5 +1,6 @@
 == Ansible module for Ozone operations
 
+Video: https://studio.youtube.com/video/YR17lhDf5Uw
 
 ----
 This module currently just deals with Ozone buckets. However, it is written in bash and very easy to extend.
@@ -27,6 +28,8 @@ Tested on Red Hat Enterprise Linux release 8.4 Beta (Ootpa)
 See https://github.com/marcredhat/crcdemos/tree/master/ozone
 
 
+== Install Ansible
+
 ----
 sudo dnf -y install python38 jq
 sudo ln -s /usr/bin/python3 /usr/bin/python
@@ -43,6 +46,7 @@ sudo make install
 
 See https://docs.ansible.com/ansible/latest/dev_guide/developing_locally.html
 
+== Install the Ansible module for Ozone
 
 ----
 cd /usr/share/ansible/plugins/modules/
