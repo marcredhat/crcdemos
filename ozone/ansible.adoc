@@ -1,6 +1,6 @@
 == Ansible module for Ozone operations
 
-Video: https://studio.youtube.com/video/YR17lhDf5Uw
+Video: https://www.youtube.com/watch?v=YR17lhDf5Uw
 
 ----
 This module currently just deals with Ozone buckets. However, it is written in bash and very easy to extend.
