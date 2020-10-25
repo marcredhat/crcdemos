@@ -53,3 +53,5 @@ eval $(crc oc-env)
 oc version
 crc console
 
+#sudo cp /Users/<user>/.crc/bin/oc/oc /usr/local/bin
+#sudo chmod +x /usr/local/bin/oc
