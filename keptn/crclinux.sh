@@ -30,7 +30,7 @@ export CRCVERSION=$(ls -latr `pwd` | awk FNR==2' {print $0}' | awk -F " " '{prin
 #export CRCMEM=128000
 #export CRCCPUS=128
 
-#or use the minimum p;ossible values (configured as default values below)
+#or use the minimum possible values (configured as default values below)
 #test -z "$CRCVERSION" && CRCVERSION="1.17.0"
 test -z "$CRCMEM" && CRCMEM="16000"
 test -z "$CRCCPUS" && CRCCPUS="8"
