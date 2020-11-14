@@ -1,5 +1,6 @@
 #!/bin/bash
-
+#run this script from an empty directory
+#before you run, configure pull secret and default values as shown below
 set -e
 START_TS=$(date +%s)
 SINV="${0} ${@}"
@@ -29,7 +30,7 @@ export CRCVERSION=$(ls -latr `pwd` | awk FNR==2' {print $0}' | awk -F " " '{prin
 #export CRCMEM=128000
 #export CRCCPUS=128
 
-#or use the minimum possible values (configured as default values below)
+#or use the minimum p;ossible values (configured as default values below)
 #test -z "$CRCVERSION" && CRCVERSION="1.17.0"
 test -z "$CRCMEM" && CRCMEM="16000"
 test -z "$CRCCPUS" && CRCCPUS="8"
@@ -40,7 +41,7 @@ sudo yum -y install wget tar git podman buildah skopeo golang
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
-cp /usr/local/bin/helm /usr/bin
+cp /usr//bin/helm /usr/bin
 
 
 sudo rm -rf ./crc-linux-amd64.tar.xz
@@ -49,7 +50,7 @@ tar -xvf crc-linux-amd64.tar.xz
 #export PATH=$PATH:`pwd`/crc-macos-$CRCVERSION-amd64/
 #sudo cp `pwd`/crc-linux-$CRCVERSION-amd64/crc /usr/local/bin
 
-sudo cp `pwd`/crc-linux-$CRCVERSION-amd64/crc /usr/local/bin
+sudo cp `pwd`/crc-linux-$CRCVERSION-amd64/crc /usr/bin
 
 crc config set memory $CRCMEM
 crc config set cpus $CRCCPUS
