@@ -25,12 +25,9 @@ err() {
 sudo rm -rf ./crc-linux-amd64.tar.xz
 wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/crc-linux-amd64.tar.xz
 tar -xvf crc-linux-amd64.tar.xz
-#export PATH=$PATH:`pwd`/crc-macos-$CRCVERSION-amd64/
-#sudo cp `pwd`/crc-linux-$CRCVERSION-amd64/crc /usr/local/bin
-
+export CRCVERSION=$(ls -latr `pwd` | awk FNR==2' {print $0}' | awk -F " " '{print $NF}' | awk  -F "-" '{print $3}')
 sudo cp `pwd`/crc-linux-$CRCVERSION-amd64/crc /usr/bin
 
-export CRCVERSION=$(ls -latr `pwd` | awk FNR==2' {print $0}' | awk -F " " '{print $NF}' | awk  -F "-" '{print $3}')
 
 #or configure a specific CodeReady Containers versions as shown below
 #export CRCVERSION=1.17.0
