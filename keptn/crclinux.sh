@@ -21,6 +21,15 @@ err() {
 #copy the pull secret from https://cloud.redhat.com/openshift/install/pull-secret to /root/pull-secret
 
 #get the latest CodeReady Containers version from https://github.com/code-ready/crc/branches
+
+sudo rm -rf ./crc-linux-amd64.tar.xz
+wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/crc-linux-amd64.tar.xz
+tar -xvf crc-linux-amd64.tar.xz
+#export PATH=$PATH:`pwd`/crc-macos-$CRCVERSION-amd64/
+#sudo cp `pwd`/crc-linux-$CRCVERSION-amd64/crc /usr/local/bin
+
+sudo cp `pwd`/crc-linux-$CRCVERSION-amd64/crc /usr/bin
+
 export CRCVERSION=$(ls -latr `pwd` | awk FNR==2' {print $0}' | awk -F " " '{print $NF}' | awk  -F "-" '{print $3}')
 
 #or configure a specific CodeReady Containers versions as shown below
@@ -44,13 +53,6 @@ chmod 700 get_helm.sh
 cp /usr/local/bin/helm /usr/bin
 
 
-sudo rm -rf ./crc-linux-amd64.tar.xz
-wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/crc-linux-amd64.tar.xz
-tar -xvf crc-linux-amd64.tar.xz
-#export PATH=$PATH:`pwd`/crc-macos-$CRCVERSION-amd64/
-#sudo cp `pwd`/crc-linux-$CRCVERSION-amd64/crc /usr/local/bin
-
-sudo cp `pwd`/crc-linux-$CRCVERSION-amd64/crc /usr/bin
 
 crc config set memory $CRCMEM
 crc config set cpus $CRCCPUS
