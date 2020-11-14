@@ -18,7 +18,7 @@ err() {
 #test "$(whoami)" = "root" || err "Not running as root"
 
 
-#copy the pull secret from https://cloud.redhat.com/openshift/install/pull-secret to /root/pull-secret
+#copy the pull secret from https://cloud.redhat.com/openshift/install/pull-secret to ./pull-secret
 
 #get the latest CodeReady Containers version from https://github.com/code-ready/crc/branches
 
@@ -54,7 +54,7 @@ sudo cp /usr/local/bin/helm /usr/bin
 crc config set memory $CRCMEM
 crc config set cpus $CRCCPUS
 crc setup
-crc start --pull-secret-file /root/pull-secret
+crc start --pull-secret-file ./pull-secret
 crc config get memory
 crc config get cpus
 eval $(crc oc-env)
