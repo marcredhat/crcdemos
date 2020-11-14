@@ -16,13 +16,20 @@ err() {
 # Checking if we are root
 #test "$(whoami)" = "root" || err "Not running as root"
 
+
+#copy the pull secret from https://cloud.redhat.com/openshift/install/pull-secret to /root/pull-secret
+
 #get the latest CodeReady Containers version from https://github.com/code-ready/crc/branches
+export CRCVERSION=$(ls -latr `pwd` | awk FNR==2' {print $0}' | awk -F " " '{print $NF}' | awk  -F "-" '{print $3}')
+
+#or configure a specific CodeReady Containers versions as shown below
 #export CRCVERSION=1.17.0
+
+#configure the memory and cores that CodeReady Containers can use
 #export CRCMEM=128000
 #export CRCCPUS=128
 
-
-
+#or use the minimum possible values (configured as default values below)
 #test -z "$CRCVERSION" && CRCVERSION="1.17.0"
 test -z "$CRCMEM" && CRCMEM="16000"
 test -z "$CRCCPUS" && CRCCPUS="8"
@@ -41,13 +48,13 @@ wget https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/crc-linux-
 tar -xvf crc-linux-amd64.tar.xz
 #export PATH=$PATH:`pwd`/crc-macos-$CRCVERSION-amd64/
 #sudo cp `pwd`/crc-linux-$CRCVERSION-amd64/crc /usr/local/bin
-export CRCVERSION=$(ls -latr `pwd` | awk FNR==2' {print $0}' | awk -F " " '{print $NF}' | awk  -F "-" '{print $3}')
+
 sudo cp `pwd`/crc-linux-$CRCVERSION-amd64/crc /usr/local/bin
 
 crc config set memory $CRCMEM
 crc config set cpus $CRCCPUS
 crc setup
-crc start --pull-secret-file pull-secret.txt
+crc start --pull-secret-file /root/pull-secret
 crc config get memory
 crc config get cpus
 eval $(crc oc-env)
