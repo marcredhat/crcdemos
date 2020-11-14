@@ -64,3 +64,14 @@ crc console --credentials
 
 #Get your credentials using
 #crc console --credentials
+
+#On your laptop:
+#Configure /etc/hosts so that oauth-openshift* and console-openshift-console* point to 127.0.0.1
+#Example:
+#127.0.0.1	localhost oauth-openshift.apps-crc.testing console-openshift-console.apps-crc.testing default-route-openshift-image-registry.apps-crc.testing console-openshift-console.apps.ocp4.local oauth-openshift.apps.ocp4.local
+#255.255.255.255	broadcasthost
+#::1             localhost
+
+#sudo ssh -i ./.ssh/id_rsa user@<remote CRC server> -L  443:console-openshift-console.apps-crc.testing:443
+
+#On your laptop, browse to https://console-openshift-console.apps-crc.testing
