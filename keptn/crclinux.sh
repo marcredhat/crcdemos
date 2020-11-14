@@ -60,4 +60,7 @@ crc config get cpus
 eval $(crc oc-env)
 oc version
 crc console
+crc console --credentials
 
+#Get your credentials using
+#crc console --credentials
